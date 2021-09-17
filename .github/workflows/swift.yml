@@ -22,7 +22,7 @@ jobs:
     - name: Download and Prepare DMG Kit
       run: |
         curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
-        unzip RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
+        unzip ~/RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
         mkdir ~/RNGToolDMGKit/RNGTool
         mv build/Release/RNGTool.app ~/RNGToolDMGKit/RNGTool
     - name: Build DMG From Kit
