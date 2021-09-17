@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild -project "RNGTool.xcodeproj/" -scheme "RNGTool" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
     - name: Pack Build Files
       run: |
         mkdir ~/RNGTool
