@@ -1,5 +1,7 @@
 # RNGTool
 The best way to generate random numbers on macOS 11.3+
+
+![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
 ## Modes:
 - Numbers only
 - Dice
