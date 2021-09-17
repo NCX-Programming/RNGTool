@@ -13,15 +13,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Get Tools
+      run: |
+        brew update && \
+        brew install create-dmg
     - name: Build
       run: xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
-    - name: Pack Build Files
+    - name: Download and Prepare DMG Kit
       run: |
-        mkdir ~/RNGTool
-        mv build/Release/RNGTool.app ~/RNGTool
-        zip -vr ~/RNGTool/RNGTool.zip ~/RNGTool/RNGTool.app
+        curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
+        unzip RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
+        mkdir ~/RNGToolDMGKit/RNGTool
+        mv build/Release/RNGTool.app ~/RNGToolDMGKit/RNGTool
+    - name: Build DMG From Kit
+      run: |
+        cd ~/RNGToolDMGKit/RNGTool
+        ./../create-dmg.sh
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
       with:
-        path: ~/RNGTool/RNGTool.zip
-        name: RNGTool-latest
+        path: ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg
+        name: RNGTool-Installer-latest.dmg
