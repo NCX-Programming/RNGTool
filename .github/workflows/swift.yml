@@ -17,10 +17,11 @@ jobs:
       run: xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
     - name: Pack Build Files
       run: |
-        mkdir ~/RNGTool-latest
+        mkdir ~/RNGTool
         mv build/Release/RNGTool.app ~/RNGTool
+        zip -vr ~/RNGTool/RNGTool.zip ~/RNGTool/RNGTool.app
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
       with:
-        path: ~/RNGTool-latest
+        path: ~/RNGTool/RNGTool.zip
         name: RNGTool-latest
