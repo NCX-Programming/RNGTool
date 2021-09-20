@@ -15,4 +15,4 @@ Generate up to 5 random numbers using cards. You can display the numbers, cards 
 ## System Requirements
 - At least macOS 11.3 or higher
 ## Installation
-GitHub Actions automatically builds RNGTool and then creates a DMG installer for it every time we push a commit. You can access those from [here](https://github.com/NCX-Programming/RNGTool/actions). You will have to Right Click > Open the first time you try and run the program in order to get past Gatekeeper, as unfortunately these binaries are not signed.
+GitHub Actions automatically builds RNGTool and then creates a DMG installer for it every time we push a commit. You can access those from [here](https://github.com/NCX-Programming/RNGTool/actions). You will have to Right Click > Open the first time you try and run the program in order to get past Gatekeeper, as unfortunately these binaries are not signed. An auto-generated checksum is also available if you'd like to verify the file before installing it.
