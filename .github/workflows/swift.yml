@@ -37,8 +37,8 @@ jobs:
     - name: Generate DMG Checksums
       run: |
         mkdir ~/RNGTool-Checksums
-        shasum -a 256 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg > ~/RNGTool-Checksums/RNGTool-Installer.dmg.sha256
-        openssl md5 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg > ~/RNGTool-Checksums/RNGTool-Installer.dmg.md5
+        shasum -a 256 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg | sed 's/ .*//g' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.sha256
+        openssl md5 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg | sed 's/.* //' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.md5
     - name: Publish DMG Checksums
       uses: actions/upload-artifact@v2
       with:
