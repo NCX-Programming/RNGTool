@@ -34,11 +34,11 @@ jobs:
       with:
         path: ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg
         name: RNGTool-Installer-latest.dmg
-    - name: Generate MD5 Checksum
+    - name: Generate SHA256 Checksum
       run: |
-        openssl md5 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg > ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg.md5
-    - name: Publish MD5 Checksum
+        shasum -a 256 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg > ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg.sha256
+    - name: Publish SHA256 Checksum
       uses: actions/upload-artifact@v2
       with:
-        path: ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg.md5
-        name: RNGTool-Installer-latest.dmg.md5
+        path: ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg.sha256
+        name: RNGTool-Installer-latest.dmg.sha256
