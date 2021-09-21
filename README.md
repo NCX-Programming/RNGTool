@@ -2,6 +2,10 @@
 The best way to generate random numbers on macOS 11.3+
 
 ![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
+
+<image src="https://cdn.ncxprogramming.com/file/image/screenshots/rngtool/repoimage.png" hight=400 width=640/>
+
+Image taken in v1.4
 ## Modes:
 - Numbers only
 - Dice
