@@ -17,7 +17,7 @@ struct DiceSettings: View {
                 .foregroundColor(.secondary)
         }
         .padding(20)
-        .frame(width: 350, height: 100)
+        .frame(width: 350, height: 300)
     }
 }
 

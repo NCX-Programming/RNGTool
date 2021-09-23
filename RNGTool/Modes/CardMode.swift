@@ -10,6 +10,7 @@ import SwiftUI
 struct CardMode: View {
     @AppStorage("showPoints") private var showPoints = false
     @AppStorage("aceValue") private var aceValue = 1
+    @AppStorage("useFaces") private var useFaces = true
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
@@ -17,7 +18,6 @@ struct CardMode: View {
     @State private var showCopy = false
     @State private var showCards = false
     @State private var numOfCards = 1
-    @State private var useFaces = true
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var cardImages = ["c1","c1","c1","c1","c1"]
@@ -33,7 +33,7 @@ struct CardMode: View {
                     Text("Generate multiple numbers using cards")
                         .font(.title3)
                         .foregroundColor(.secondary)
-                    Text("Looking for point value options? They're now in Preferences")
+                    Text("Looking for more options? They're now in Preferences.")
                         .foregroundColor(.secondary)
                     Divider()
                 }
@@ -48,20 +48,6 @@ struct CardMode: View {
                         Text("5").tag(5)
                     }
                     .frame(width: 250)
-                }
-                Divider()
-                Group{
-                    Group{
-                        Text("Card type:")
-                            .font(.title3)
-                        Text("Changes whether the card graphics will only use numbers or will include face cards.")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Picker("", selection: $useFaces) {
-                            Text("Faces").tag(true)
-                            Text("Numbers Only").tag(false)
-                        }.pickerStyle(RadioGroupPickerStyle())
-                    }
                 }
                 Divider()
                 HStack() {
