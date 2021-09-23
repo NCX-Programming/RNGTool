@@ -27,9 +27,12 @@ struct CardSettings: View {
             Toggle(isOn: $showPoints) {
                 Text("Show card point values")
             }
-            .padding(.bottom, 12)
+            Text("This will show what the point value of a card is in most card games.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
             Text("Ace value:")
                 .font(.title3)
+                .padding(.top, 12)
             Text("Changes whether the Ace card is worth 1 or 11 points. This setting is ignored if \"Show card point values\" is off.")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
@@ -40,7 +43,7 @@ struct CardSettings: View {
             .disabled(!showPoints)
         }
         .padding(20)
-        .frame(width: 350, height: 600)
+        .frame(width: 350, height: 350)
     }
 }
 

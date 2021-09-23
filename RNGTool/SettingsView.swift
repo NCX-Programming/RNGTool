@@ -9,23 +9,28 @@ import SwiftUI
 
 struct SettingsView: View {
     private enum Tabs: Hashable {
-            case general, advanced
+            case number, dice, card
     }
     var body: some View {
         TabView {
+            NumberSettings()
+                .tabItem {
+                    Label("Number Mode", systemImage: "number")
+                }
+                .tag(Tabs.number)
             DiceSettings()
                 .tabItem {
                     Label("Dice Mode", image: "dice")
                 }
-                .tag(Tabs.general)
+                .tag(Tabs.dice)
             CardSettings()
                 .tabItem {
                     Label("Card Mode", systemImage: "rectangle.grid.3x2")
                 }
-                .tag(Tabs.advanced)
+                .tag(Tabs.card)
         }
         .padding(20)
-        .frame(width: 375, height: 300)
+        .frame(width: 375, height: 350)
     }
 }
 

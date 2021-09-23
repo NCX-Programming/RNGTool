@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NumberMode: View {
+    @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
+    @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @State private var confirmReset = false
     @State private var showCopy = false
     @State private var randomNumber = 0
@@ -44,20 +46,20 @@ struct NumberMode: View {
                 .padding(.bottom, 10)
                 Divider()
             }
-            Text("Maximum Number (Default: 100)")
+            Text("Maximum Number (Default: \(maxNumberDefault))")
                 .font(.subheadline)
                 .padding(.top, 10)
             TextField("Enter a number", text: $maxNumberInput)
                 .frame(width: 300)
-            Text("Minimum Number (Default: 0, must be less than maximum number)")
+            Text("Minimum Number (Default: \(minNumberDefault), must be less than maximum number)")
                 .font(.subheadline)
                 .padding(.top, 10)
             TextField("Enter a number", text: $minNumberInput)
                 .frame(width: 300)
             HStack {
                 Button(action:{
-                    maxNumber = Int(maxNumberInput) ?? 100
-                    minNumber = Int(minNumberInput) ?? 0
+                    maxNumber = Int(maxNumberInput) ?? maxNumberDefault
+                    minNumber = Int(minNumberInput) ?? minNumberDefault
                     randomNumber = Int.random(in: minNumber..<maxNumber)
                     withAnimation (.easeInOut(duration: 0.5)) {
                         self.randomNumberStr = "Your random number: \(randomNumber)"
