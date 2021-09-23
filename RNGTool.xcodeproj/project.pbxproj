@@ -13,6 +13,9 @@
 		3700F28726DD2573001BEE7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28626DD2573001BEE7A /* Preview Assets.xcassets */; };
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
 		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
+		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
+		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
+		37DB700626FC04420079F3E7 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700526FC04420079F3E7 /* CardSettings.swift */; };
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
@@ -28,6 +31,9 @@
 		3700F28926DD2573001BEE7A /* RNGTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RNGTool.entitlements; sourceTree = "<group>"; };
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
+		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
+		37DB700526FC04420079F3E7 /* CardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardSettings.swift; path = RNGTool/CardSettings.swift; sourceTree = SOURCE_ROOT; };
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
@@ -48,6 +54,8 @@
 			isa = PBXGroup;
 			children = (
 				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
+				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
+				37DB700426FC03FE0079F3E7 /* Settings */,
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				3700F28D26DD26C5001BEE7A /* ModeList.swift */,
 				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
@@ -84,6 +92,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		37DB700426FC03FE0079F3E7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				37DB700526FC04420079F3E7 /* CardSettings.swift */,
+				37DB700226FC03F90079F3E7 /* DiceSettings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		37E97B9926DD71A2000BF61B /* Modes */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +121,6 @@
 				3700F27926DD256D001BEE7A /* Sources */,
 				3700F27A26DD256D001BEE7A /* Frameworks */,
 				3700F27B26DD256D001BEE7A /* Resources */,
-				373AF4E426FAA14E00E57523 /* Increment Build Number */,
 			);
 			buildRules = (
 			);
@@ -159,36 +175,18 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		373AF4E426FAA14E00E57523 /* Increment Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Increment Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(xcodebuild -showBuildSettings | grep CURRENT_PROJECT_VERSION | tr -d 'CURRENT_PROJECT_VERSION =')\nbuildNumber=`echo $buildNumber +1|bc`\nxcrun agvtool new-version $buildNumber\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		3700F27926DD256D001BEE7A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3700F28226DD256D001BEE7A /* ContentView.swift in Sources */,
+				37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */,
 				37D7771626E56F31005B2C45 /* CardMode.swift in Sources */,
 				37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */,
+				37DB700626FC04420079F3E7 /* CardSettings.swift in Sources */,
 				37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */,
+				37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */,
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
 				3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */,
 				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
@@ -207,7 +205,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 101;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -234,7 +232,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 89;
+				CURRENT_PROJECT_VERSION = 101;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;

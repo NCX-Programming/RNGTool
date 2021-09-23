@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CardMode: View {
+    @AppStorage("showPoints") private var showPoints = false
+    @AppStorage("aceValue") private var aceValue = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
@@ -21,8 +23,6 @@ struct CardMode: View {
     @State private var cardImages = ["c1","c1","c1","c1","c1"]
     @State private var n = 0
     @State private var nn = 0
-    @State private var aceValue = 1
-    @State private var showPoints = false
     
     var body: some View {
         ScrollView{
@@ -32,6 +32,8 @@ struct CardMode: View {
                         .font(.title)
                     Text("Generate multiple numbers using cards")
                         .font(.title3)
+                        .foregroundColor(.secondary)
+                    Text("Looking for point value options? They're now in Preferences")
                         .foregroundColor(.secondary)
                     Divider()
                 }
@@ -59,21 +61,6 @@ struct CardMode: View {
                             Text("Faces").tag(true)
                             Text("Numbers Only").tag(false)
                         }.pickerStyle(RadioGroupPickerStyle())
-                    }
-                    Group{
-                        Text("Ace value:")
-                            .font(.title3)
-                        Text("Changes whether the Ace card is worth 1 or 11 points. This setting is ignored if \"Show card point values\" is off.")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        Picker("", selection: $aceValue){
-                            Text("1 Point").tag(1)
-                            Text("11 Points").tag(11)
-                        }.pickerStyle(RadioGroupPickerStyle())
-                        .disabled(!showPoints)
-                    }
-                    Toggle(isOn: $showPoints) {
-                        Text("Show card point values")
                     }
                 }
                 Divider()

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DiceMode: View {
+    @AppStorage("forceSixSides") private var forceSixSides = false
     @State private var numOfDice = 1
     @State private var selectedOption = 0
     @State private var numOfSides = 6
@@ -108,6 +109,8 @@ struct DiceMode: View {
                         Text("Sides on each die: \(numOfSides)")
                             .font(.title3)
                     }
+                    .disabled(forceSixSides)
+                    .help(forceSixSides ? "This option is disabled by \"Force 6 sides per die\" in settings": "")
                     Text("Maximum of 20, minimum of 6")
                         .font(.subheadline)
                         .foregroundColor(.secondary)

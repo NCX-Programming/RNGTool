@@ -16,5 +16,8 @@ struct RNGToolApp: App {
         .commands {
             RNGToolCommands()
         }
+        Settings {
+            SettingsView()
+        }
     }
 }
