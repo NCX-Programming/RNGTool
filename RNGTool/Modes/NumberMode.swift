@@ -86,30 +86,37 @@ struct NumberMode: View {
                 }
                 .help("Reset custom values and output")
                 .sheet(isPresented: $confirmReset) {
-                    Text("Are you sure that you want to reset the generator?")
-                        .font(.title3)
-                        .padding(.horizontal, 10)
-                        .padding(.top, 10)
-                    Button(action:{
-                        maxNumber = 0
-                        maxNumberInput = ""
-                        minNumber = 0
-                        minNumberInput = ""
-                        randomNumber = 0
-                        withAnimation (.easeInOut(duration: 0.5)) {
-                            randomNumberStr = ""
+                    VStack(alignment: .center) {
+                        Image("sheeticon")
+                            .resizable()
+                            .frame(width: 72, height: 72)
+                        Text("Confirm Reset")
+                            .font(.title2)
+                        Text("Are you sure you want to reset the generator?")
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 4)
+                        Button(action:{
+                            maxNumber = 0
+                            maxNumberInput = ""
+                            minNumber = 0
+                            minNumberInput = ""
+                            randomNumber = 0
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomNumberStr = ""
+                            }
+                            confirmReset = false
+                        }) {
+                            Text("Confirm")
                         }
-                        confirmReset = false
-                    }) {
-                        Text("Reset")
+                        .controlSize(.large)
+                        Button(action:{
+                            confirmReset = false
+                        }) {
+                            Text("Cancel")
+                        }
+                        .controlSize(.large)
                     }
-                    .foregroundColor(.red)
-                    Button(action:{
-                        confirmReset = false
-                    }) {
-                        Text("Cancel")
-                    }
-                    .padding(.bottom, 10)
+                    .frame(width: 250, height: 250)
                 }
             }
         }
