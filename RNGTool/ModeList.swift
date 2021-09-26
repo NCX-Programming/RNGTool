@@ -50,6 +50,18 @@ struct ModeList: View {
                     }
                     .padding(.vertical, 4)
                 }
+                NavigationLink(destination: MarbleMode()) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Marbles")
+                                .bold()
+                                .padding(.leading, 5)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 4)
+                }
             }
             .navigationTitle("RNGTool")
             .frame(minWidth: 200)
