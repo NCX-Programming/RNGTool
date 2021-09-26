@@ -2,7 +2,7 @@
 //  DiceSettings.swift
 //  RNGTool
 //
-//  Created by Campbell Bagley on 9/22/21.
+//  Created by Campbell on 9/22/21.
 //
 
 import SwiftUI

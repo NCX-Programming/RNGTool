@@ -2,7 +2,7 @@
 //  NumberSettings.swift
 //  RNGTool
 //
-//  Created by Campbell Bagley on 9/23/21.
+//  Created by Campbell on 9/23/21.
 //
 
 import SwiftUI
