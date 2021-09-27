@@ -10,7 +10,6 @@ import SwiftUI
 struct DiceMode: View {
     @AppStorage("forceSixSides") private var forceSixSides = false
     @State private var numOfDice = 1
-    @State private var selectedOption = 0
     @State private var numOfSides = 6
     @State private var confirmReset = false
     @State private var randomNumbers = [0]
