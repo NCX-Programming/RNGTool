@@ -14,7 +14,6 @@
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
-		374B0EEA2700197B006CCD69 /* MarbleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE92700197B006CCD69 /* MarbleImage.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
 		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
@@ -35,7 +34,6 @@
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
-		374B0EE92700197B006CCD69 /* MarbleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleImage.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				3700F28D26DD26C5001BEE7A /* ModeList.swift */,
 				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
-				374B0EE82700193E006CCD69 /* ReturnViews */,
 				37E97B9926DD71A2000BF61B /* Modes */,
 				3700F28326DD2573001BEE7A /* Assets.xcassets */,
 				3700F28826DD2573001BEE7A /* Info.plist */,
@@ -81,14 +78,6 @@
 				3700F28626DD2573001BEE7A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		374B0EE82700193E006CCD69 /* ReturnViews */ = {
-			isa = PBXGroup;
-			children = (
-				374B0EE92700197B006CCD69 /* MarbleImage.swift */,
-			);
-			path = ReturnViews;
 			sourceTree = "<group>";
 		};
 		3794432826D912B500900842 = {
@@ -208,7 +197,6 @@
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
 				374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */,
 				3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */,
-				374B0EEA2700197B006CCD69 /* MarbleImage.swift in Sources */,
 				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +213,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 133;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -252,7 +240,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 133;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
