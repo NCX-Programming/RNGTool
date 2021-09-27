@@ -13,7 +13,7 @@ struct DiceSettings: View {
     var body: some View {
         Form {
             Toggle("Force 6 sides per die", isOn: $forceSixSides)
-            Text("This will make it so that the dice images will always be shown")
+            Text("This will make it so that the dice images will always be shown.")
                 .foregroundColor(.secondary)
         }
         .padding(20)

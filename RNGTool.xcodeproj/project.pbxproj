@@ -12,6 +12,7 @@
 		3700F28426DD2573001BEE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		3700F28726DD2573001BEE7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28626DD2573001BEE7A /* Preview Assets.xcassets */; };
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
+		37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
@@ -32,6 +33,7 @@
 		3700F28826DD2573001BEE7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3700F28926DD2573001BEE7A /* RNGTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RNGTool.entitlements; sourceTree = "<group>"; };
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
+		37010B962702697B00E32C35 /* MarbleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleSettings.swift; sourceTree = "<group>"; };
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		37DB700426FC03FE0079F3E7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				37010B962702697B00E32C35 /* MarbleSettings.swift */,
 				374B0EE627001761006CCD69 /* NumberSettings.swift */,
 				374B0EE427001749006CCD69 /* CardSettings.swift */,
 				37DB700226FC03F90079F3E7 /* DiceSettings.swift */,
@@ -196,6 +199,7 @@
 				374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */,
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
 				374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */,
+				37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */,
 				3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */,
 				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
 			);
@@ -213,7 +217,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 140;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -240,7 +244,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 140;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;

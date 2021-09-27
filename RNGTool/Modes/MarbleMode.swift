@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct MarbleMode: View {
+    @AppStorage("showLetterList") private var showLetterList = false
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
+    @State private var randomLetterStr = ""
+    @State private var randomLetters: [String] = [""]
     @State private var showCopy = false
     @State private var showMarbles = false
     @State private var confirmReset = false
-    @State private var removeCharacters: Set<Character> = ["[", "]"]
+    @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     var body: some View {
@@ -77,6 +80,11 @@ struct MarbleMode: View {
                     if(showMarbles==false){
                         Spacer()
                     }
+                    if (showLetterList) {
+                        Text(randomLetterStr)
+                            .font(.title2)
+                            .padding(.bottom, 5)
+                    }
                     Text(randomNumberStr)
                         .font(.title2)
                         .padding(.bottom, 5)
@@ -113,12 +121,20 @@ struct MarbleMode: View {
                     Button(action: {
                         showCopy = true
                         randomNumbers.removeAll()
+                        randomLetters.removeAll()
                         for _ in 1..<numOfMarbles+1{
                             randomNumbers.append(Int.random(in: 0..<26))
                         }
                         withAnimation (.easeInOut(duration: 0.5)) {
-                            self.randomNumberStr = "Your random number(s): \(randomNumbers)"
+                            randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+                        }
+                        for i in 0..<numOfMarbles {
+                            randomLetters.append(letters[randomNumbers[i]])
+                        }
+                        withAnimation (.easeInOut(duration: 0.5)) {
+                            randomLetterStr = "Your random letter(s): \(randomLetters)"
+                            randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                         showMarbles = true
                     }) {
@@ -145,8 +161,12 @@ struct MarbleMode: View {
                                 showCopy = false
                                 numOfMarbles = 1
                                 randomNumbers.removeAll()
+                                randomLetters.removeAll()
                                 withAnimation (.easeInOut(duration: 0.5)) {
                                     randomNumberStr = ""
+                                }
+                                withAnimation (.easeInOut(duration: 0.5)) {
+                                    randomLetterStr = ""
                                 }
                                 confirmReset = false
                             }) {
