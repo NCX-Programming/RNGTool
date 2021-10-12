@@ -14,6 +14,7 @@ struct MarbleMode: View {
     @State private var randomNumbers = [0]
     @State private var randomLetterStr = ""
     @State private var randomLetters: [String] = [""]
+    @State private var randomLetterCopyStr = ""
     @State private var showCopy = false
     @State private var showMarbles = false
     @State private var confirmReset = false
@@ -76,6 +77,7 @@ struct MarbleMode: View {
                                 }
                             }
                         }
+                        Spacer()
                     }
                     if(showMarbles==false){
                         Spacer()
@@ -90,9 +92,12 @@ struct MarbleMode: View {
                         .padding(.bottom, 5)
                     if(showCopy){
                         Button(action:{
+                            randomLetterCopyStr = ""
+                            randomLetterCopyStr = "\(randomLetters)"
+                            randomLetterCopyStr.removeAll(where: { removeCharacters.contains($0) } )
                             let pasteboard = NSPasteboard.general
                             pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-                            pasteboard.setString("\(randomNumbers)", forType: NSPasteboard.PasteboardType.string)
+                            pasteboard.setString(randomLetterCopyStr, forType: NSPasteboard.PasteboardType.string)
                             var clipboardItems: [String] = []
                             for element in pasteboard.pasteboardItems! {
                                 if let str = element.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
