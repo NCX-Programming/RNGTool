@@ -139,15 +139,17 @@ struct CardMode: View {
                                     randomNumberStr = ""
                                     pointValueStr = ""
                                 }
-                                confirmReset = false
                                 showCopy = false
                                 showCards = false
+                                confirmReset = false
+                                NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                             }) {
                                 Text("Confirm")
                             }
                             .controlSize(.large)
                             Button(action:{
                                 confirmReset = false
+                                NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                             }) {
                                 Text("Cancel")
                             }

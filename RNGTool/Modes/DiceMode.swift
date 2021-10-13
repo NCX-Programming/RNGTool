@@ -164,15 +164,17 @@ struct DiceMode: View {
                                 withAnimation (.easeInOut(duration: 0.5)) {
                                     randomNumberStr = ""
                                 }
-                                confirmReset = false
                                 showCopy = false
                                 showDice = false
+                                confirmReset = false
+                                NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                             }) {
                                 Text("Confirm")
                             }
                             .controlSize(.large)
                             Button(action:{
                                 confirmReset = false
+                                NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                             }) {
                                 Text("Cancel")
                             }

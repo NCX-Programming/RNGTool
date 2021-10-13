@@ -105,12 +105,14 @@ struct NumberMode: View {
                                 randomNumberStr = ""
                             }
                             confirmReset = false
+                            NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                         }) {
                             Text("Confirm")
                         }
                         .controlSize(.large)
                         Button(action:{
                             confirmReset = false
+                            NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
                         }) {
                             Text("Cancel")
                         }
