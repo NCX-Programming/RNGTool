@@ -33,34 +33,19 @@ struct NumberSettings: View {
                 }) {
                     Text("Reset")
                 }
-                .sheet(isPresented: $showResetPrompt) {
-                    VStack(alignment: .center) {
-                        Image("sheeticon")
-                            .resizable()
-                            .frame(width: 72, height: 72)
-                        Text("Confirm Reset")
-                            .font(.title2)
-                        Text("Are you sure you want to reset the minimum and maximum numbers to their defaults?")
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 4)
-                        Button(action:{
+                .alert(isPresented: $showResetPrompt){
+                    Alert(
+                        title: Text("Confirm Reset"),
+                        message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
+                        primaryButton: .default(Text("Confirm")){
                             minNumberInput = ""
                             maxNumberInput = ""
                             maxNumberDefault = 100
                             minNumberDefault = 0
                             showResetPrompt = false
-                        }) {
-                            Text("Confirm")
-                        }
-                        .controlSize(.large)
-                        Button(action:{
-                            showResetPrompt = false
-                        }) {
-                            Text("Cancel")
-                        }
-                        .controlSize(.large)
-                    }
-                    .frame(width: 250, height: 275)
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
                 Button(action:{
                     if(maxNumberInput != "" && minNumberInput != ""){
@@ -73,23 +58,12 @@ struct NumberSettings: View {
                 }) {
                     Text("Save")
                 }
-                .sheet(isPresented: $showInputError) {
-                    VStack(alignment: .center) {
-                        Image("sheeticon")
-                            .resizable()
-                            .frame(width: 72, height: 72)
-                        Text("Missing numbers!")
-                            .font(.title2)
-                        Text("You must specify a minimum and maximum number!")
-                            .multilineTextAlignment(.center)
-                        Button(action:{
-                            showInputError = false
-                        }) {
-                            Text("Ok")
-                        }
-                        .controlSize(.large)
-                    }
-                    .frame(width: 250, height: 200)
+                .alert(isPresented: $showInputError){
+                    Alert(
+                        title: Text("Missing numbers!"),
+                        message: Text("You must specify a minimum and maximum number!"),
+                        dismissButton: .default(Text("Ok"))
+                    )
                 }
             }
             .padding(.top, 5)

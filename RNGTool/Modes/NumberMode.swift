@@ -85,17 +85,11 @@ struct NumberMode: View {
                     Image(systemName: "clear.fill")
                 }
                 .help("Reset custom values and output")
-                .sheet(isPresented: $confirmReset) {
-                    VStack(alignment: .center) {
-                        Image("sheeticon")
-                            .resizable()
-                            .frame(width: 72, height: 72)
-                        Text("Confirm Reset")
-                            .font(.title2)
-                        Text("Are you sure you want to reset the generator?")
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 4)
-                        Button(action:{
+                .alert(isPresented: $confirmReset){
+                    Alert(
+                        title: Text("Confirm Reset"),
+                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
+                        primaryButton: .default(Text("Confirm")){
                             maxNumber = 0
                             maxNumberInput = ""
                             minNumber = 0
@@ -105,20 +99,9 @@ struct NumberMode: View {
                                 randomNumberStr = ""
                             }
                             confirmReset = false
-                            NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
-                        }) {
-                            Text("Confirm")
-                        }
-                        .controlSize(.large)
-                        Button(action:{
-                            confirmReset = false
-                            NSApp.mainWindow?.endSheet(NSApp.keyWindow!)
-                        }) {
-                            Text("Cancel")
-                        }
-                        .controlSize(.large)
-                    }
-                    .frame(width: 250, height: 250)
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
         }
