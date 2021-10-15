@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DiceMode: View {
     @AppStorage("forceSixSides") private var forceSixSides = false
+    @AppStorage("allowDiceImages") private var allowDiceImages = true
     @State private var numOfDice = 1
     @State private var numOfSides = 6
     @State private var confirmReset = false
@@ -42,7 +43,7 @@ struct DiceMode: View {
                         .foregroundColor(.secondary)
                     Divider()
                     HStack(){
-                        if(showDice){
+                        if(showDice && allowDiceImages){
                             Image(diceImages[0]).resizable()
                                 .frame(width: 64, height: 64)
                             if(numOfDice>1){
@@ -67,7 +68,7 @@ struct DiceMode: View {
                             }
                         }
                     }
-                    if(showDice==false){
+                    if(!showDice || !allowDiceImages){
                         Spacer()
                     }
                     Text(randomNumberStr)
@@ -108,7 +109,7 @@ struct DiceMode: View {
                         Text("Sides on each die: \(numOfSides)")
                             .font(.title3)
                     }
-                    .disabled(forceSixSides)
+                    .disabled(forceSixSides && allowDiceImages)
                     .help(forceSixSides ? "This option is disabled by \"Force 6 sides per die\" in settings": "")
                     Text("Maximum of 20, minimum of 6")
                         .font(.subheadline)
