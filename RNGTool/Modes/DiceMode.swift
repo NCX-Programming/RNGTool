@@ -68,9 +68,6 @@ struct DiceMode: View {
                             }
                         }
                     }
-                    if(!showDice || !allowDiceImages){
-                        Spacer()
-                    }
                     Text(randomNumberStr)
                         .font(.title2)
                         .padding(.bottom, 5)
@@ -111,7 +108,7 @@ struct DiceMode: View {
                     }
                     .disabled(forceSixSides && allowDiceImages)
                     .help(forceSixSides ? "This option is disabled by \"Force 6 sides per die\" in settings": "")
-                    Text("Maximum of 20, minimum of 6")
+                    Text("Maximum of 20, minimum of 6. Images are only shown for 6-sided dice.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -140,7 +137,7 @@ struct DiceMode: View {
                             showDice = false
                         }
                     }) {
-                        Text("Roll!")
+                        Image(systemName: "play.fill")
                     }
                     Button(action:{
                         confirmReset = true

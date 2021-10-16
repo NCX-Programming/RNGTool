@@ -141,7 +141,9 @@ struct CardMode: View {
                         )
                     }
                 }
-                Divider()
+                if(showCards) {
+                    Divider()
+                }
                 Group {
                     Text(randomNumberStr)
                         .font(.title2)

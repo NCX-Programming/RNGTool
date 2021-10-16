@@ -77,12 +77,8 @@ struct MarbleMode: View {
                                 }
                             }
                         }
-                        Spacer()
                     }
-                    if(showMarbles==false){
-                        Spacer()
-                    }
-                    if (showLetterList) {
+                    if(showLetterList) {
                         Text(randomLetterStr)
                             .font(.title2)
                             .padding(.bottom, 5)
@@ -127,7 +123,7 @@ struct MarbleMode: View {
                         showCopy = true
                         randomNumbers.removeAll()
                         randomLetters.removeAll()
-                        for _ in 1..<numOfMarbles+1{
+                        for _ in 1..<6{
                             randomNumbers.append(Int.random(in: 0..<26))
                         }
                         withAnimation (.easeInOut(duration: 0.5)) {
