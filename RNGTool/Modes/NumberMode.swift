@@ -7,11 +7,20 @@
 
 import SwiftUI
 
+extension String.StringInterpolation {
+    mutating func appendInterpolation(if condition: @autoclosure () -> Bool, _ literal: StringLiteralType) {
+        guard condition() else { return }
+        appendLiteral(literal)
+    }
+}
+
 struct NumberMode: View {
     @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @State private var confirmReset = false
     @State private var showCopy = false
+    @State private var showMaxEditor = false
+    @State private var showMinEditor = false
     @State private var randomNumber = 0
     @State private var randomNumberStr = ""
     @State private var maxNumberInput = ""
@@ -47,16 +56,42 @@ struct NumberMode: View {
                     .padding(.bottom, 10)
                     Divider()
                 }
-                Text("Maximum Number (Default: \(maxNumberDefault))")
-                    .font(.subheadline)
-                    .padding(.top, 10)
-                TextField("Enter a number", text: $maxNumberInput)
-                    .frame(width: 300)
-                Text("Minimum Number (Default: \(minNumberDefault), must be less than maximum number)")
-                    .font(.subheadline)
-                    .padding(.top, 10)
-                TextField("Enter a number", text: $minNumberInput)
-                    .frame(width: 300)
+                Group() {
+                    Text("Default Maximum Number: \(maxNumberDefault). Right click to set a custom value.")
+                        .contextMenu {
+                            Toggle("Show Editor", isOn: $showMaxEditor)
+                            Button(action: {
+                                maxNumber = 0
+                                maxNumberInput = ""
+                                showMaxEditor.toggle()
+                            }) {
+                                Text("Set to Default")
+                            }
+                        }
+                        .help("Right click here to set a custom maximum number")
+                    if(showMaxEditor){
+                        TextField("Enter a number", text: $maxNumberInput)
+                            .frame(width: 300)
+                    }
+                    Divider()
+                    Text("Default Minimum Number: \(minNumberDefault). Right click to set a custom value.")
+                        .contextMenu {
+                            Toggle("Show Editor", isOn: $showMinEditor)
+                            Button(action: {
+                                minNumber = 0
+                                minNumberInput = ""
+                                showMinEditor.toggle()
+                            }) {
+                                Text("Set to Default")
+                            }
+                        }
+                        .help("Right click here to set a custom minimum number")
+                    if(showMinEditor){
+                        TextField("Enter a number", text: $minNumberInput)
+                            .frame(width: 300)
+                    }
+                    Divider()
+                }
                 HStack {
                     Button(action:{
                         maxNumber = Int(maxNumberInput) ?? maxNumberDefault
@@ -69,7 +104,6 @@ struct NumberMode: View {
                         Image(systemName: "play.fill")
                             
                     }
-                    .padding(.vertical, 10)
                     .help("Generate a number")
                     Button(action:{
                         confirmReset = true
@@ -87,6 +121,8 @@ struct NumberMode: View {
                                 minNumber = 0
                                 minNumberInput = ""
                                 randomNumber = 0
+                                showMaxEditor = false
+                                showMinEditor = false
                                 withAnimation (.easeInOut(duration: 0.5)) {
                                     randomNumberStr = ""
                                 }

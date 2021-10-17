@@ -14,6 +14,7 @@ struct NumberSettings: View {
     @State private var minNumberInput = ""
     @State private var showInputError = false
     @State private var showResetPrompt = false
+    @State private var showSuccessAlert = false
     
     var body: some View {
         Form {
@@ -51,6 +52,7 @@ struct NumberSettings: View {
                     if(maxNumberInput != "" && minNumberInput != ""){
                         maxNumberDefault = Int(maxNumberInput)!
                         minNumberDefault = Int(minNumberInput)!
+                        showSuccessAlert = true
                     }
                     else {
                         showInputError = true
@@ -62,6 +64,13 @@ struct NumberSettings: View {
                     Alert(
                         title: Text("Missing numbers!"),
                         message: Text("You must specify a minimum and maximum number!"),
+                        dismissButton: .default(Text("Ok"))
+                    )
+                }
+                .alert(isPresented: $showSuccessAlert){
+                    Alert(
+                        title: Text("Numbers Set"),
+                        message: Text("The following numbers have been set: Max Number: \(maxNumberDefault), Min Number: \(minNumberDefault)"),
                         dismissButton: .default(Text("Ok"))
                     )
                 }
