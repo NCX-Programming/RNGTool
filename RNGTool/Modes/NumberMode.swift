@@ -15,6 +15,7 @@ extension String.StringInterpolation {
 }
 
 struct NumberMode: View {
+    @AppStorage("confirmGenResets") private var confirmGenResets = true
     @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @State private var confirmReset = false
@@ -106,7 +107,21 @@ struct NumberMode: View {
                     }
                     .help("Generate a number")
                     Button(action:{
-                        confirmReset = true
+                        if(confirmGenResets){
+                            confirmReset = true
+                        }
+                        else {
+                            maxNumber = 0
+                            maxNumberInput = ""
+                            minNumber = 0
+                            minNumberInput = ""
+                            randomNumber = 0
+                            showMaxEditor = false
+                            showMinEditor = false
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomNumberStr = ""
+                            }
+                        }
                     }) {
                         Image(systemName: "clear.fill")
                     }

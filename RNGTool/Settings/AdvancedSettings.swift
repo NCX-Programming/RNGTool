@@ -2,12 +2,13 @@
 //  AdvancedSettings.swift
 //  RNGTool
 //
-//  Created by Campbell Bagley on 10/14/21.
+//  Created by Campbell on 10/14/21.
 //
 
 import SwiftUI
 
 struct AdvancedSettings: View {
+    @AppStorage("confirmGenResets") private var confirmGenResets = true
     @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @AppStorage("showLetterList") private var showLetterList = false
@@ -20,6 +21,10 @@ struct AdvancedSettings: View {
     
     var body: some View {
         Form {
+            Toggle("Ask to confirm resetting the generator", isOn: $confirmGenResets)
+            Text("Disabling this will allow you to reset the generator without having to confirm it first.")
+                .foregroundColor(.secondary)
+                .padding(.bottom, 8.0)
             Text("Settings Reset")
                 .font(.title3)
             Text("If you'd like to reset all of RNGTool's settings to their defaults, click below.")
@@ -34,6 +39,7 @@ struct AdvancedSettings: View {
                     title: Text("Confirm Reset"),
                     message: Text("Are you sure you want to reset all settings to their defaults? This cannot be undone."),
                     primaryButton: .default(Text("Confirm")){
+                        confirmGenResets = true
                         maxNumberDefault = 100
                         minNumberDefault = 0
                         showLetterList = false

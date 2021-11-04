@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MarbleMode: View {
+    @AppStorage("confirmGenResets") private var confirmGenResets = true
     @AppStorage("showLetterList") private var showLetterList = false
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
@@ -142,7 +143,22 @@ struct MarbleMode: View {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        confirmReset = true
+                        if(confirmGenResets){
+                            confirmReset = true
+                        }
+                        else {
+                            showMarbles = false
+                            showCopy = false
+                            numOfMarbles = 1
+                            randomNumbers.removeAll()
+                            randomLetters.removeAll()
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomNumberStr = ""
+                            }
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomLetterStr = ""
+                            }
+                        }
                     }) {
                         Image(systemName: "clear.fill")
                     }

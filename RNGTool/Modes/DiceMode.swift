@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DiceMode: View {
+    @AppStorage("confirmGenResets") private var confirmGenResets = true
     @AppStorage("forceSixSides") private var forceSixSides = false
     @AppStorage("allowDiceImages") private var allowDiceImages = true
     @State private var numOfDice = 1
@@ -140,7 +141,19 @@ struct DiceMode: View {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        confirmReset = true
+                        if(confirmGenResets){
+                            confirmReset = true
+                        }
+                        else {
+                            numOfDice = 1
+                            numOfSides = 6
+                            randomNumbers.removeAll()
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomNumberStr = ""
+                            }
+                            showCopy = false
+                            showDice = false
+                        }
                     }) {
                         Image(systemName: "clear.fill")
                     }

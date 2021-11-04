@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CardMode: View {
+    @AppStorage("confirmGenResets") private var confirmGenResets = true
     @AppStorage("showPoints") private var showPoints = false
     @AppStorage("aceValue") private var aceValue = 1
     @AppStorage("useFaces") private var useFaces = true
@@ -117,7 +118,19 @@ struct CardMode: View {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        confirmReset = true
+                        if(confirmGenResets){
+                            confirmReset = true
+                        }
+                        else {
+                            numOfCards = 1
+                            randomNumbers.removeAll()
+                            withAnimation (.easeInOut(duration: 0.5)) {
+                                randomNumberStr = ""
+                                pointValueStr = ""
+                            }
+                            showCopy = false
+                            showCards = false
+                        }
                     }) {
                         Image(systemName: "clear.fill")
                     }
