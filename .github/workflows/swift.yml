@@ -38,22 +38,22 @@ jobs:
       run: |
         curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
         unzip ~/RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
-        mkdir ~/RNGToolDMGKit/RNGTool
-        mv build/Release/RNGTool.app ~/RNGToolDMGKit/RNGTool
+        mkdir ~/RNGToolDMGKit/source_folder
+        mv build/Release/RNGTool.app ~/RNGToolDMGKit/source_folder
     - name: Build DMG From Kit
       run: |
-        cd ~/RNGToolDMGKit/RNGTool
-        ./../create-dmg.sh
+        cd ~/RNGToolDMGKit
+        ./create-dmg.sh
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
       with:
-        path: ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg
+        path: ~/RNGToolDMGKit/RNGTool-Installer.dmg
         name: RNGTool-Installer-latest.dmg
     - name: Generate DMG Checksums
       run: |
         mkdir ~/RNGTool-Checksums
-        shasum -a 256 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg | sed 's/ .*//g' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.sha256
-        openssl md5 ~/RNGToolDMGKit/RNGTool/RNGTool-Installer.dmg | sed 's/.* //' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.md5
+        shasum -a 256 ~/RNGToolDMGKit/RNGTool-Installer.dmg | sed 's/ .*//g' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.sha256
+        openssl md5 ~/RNGToolDMGKit/RNGTool-Installer.dmg | sed 's/.* //' > ~/RNGTool-Checksums/RNGTool-Installer.dmg.md5
     - name: Publish DMG Checksums
       uses: actions/upload-artifact@v2
       with:
