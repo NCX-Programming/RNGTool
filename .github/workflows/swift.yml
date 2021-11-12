@@ -43,6 +43,7 @@ jobs:
     - name: Build DMG From Kit
       run: |
         cd ~/RNGToolDMGKit
+        chmod +x create-dmg.sh
         ./create-dmg.sh
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
