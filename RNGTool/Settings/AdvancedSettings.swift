@@ -24,7 +24,7 @@ struct AdvancedSettings: View {
             Toggle("Ask to confirm resetting the generator", isOn: $confirmGenResets)
             Text("Disabling this will allow you to reset the generator without having to confirm it first.")
                 .foregroundColor(.secondary)
-                .padding(.bottom, 8.0)
+                .padding(.bottom, 10)
             Text("Settings Reset")
                 .font(.title3)
             Text("If you'd like to reset all of RNGTool's settings to their defaults, click below.")
@@ -55,7 +55,7 @@ struct AdvancedSettings: View {
             }
         }
         .padding(20)
-        .frame(width: 350, height: 300)
+        .frame(width: 350, height: 350)
     }
 }
 
