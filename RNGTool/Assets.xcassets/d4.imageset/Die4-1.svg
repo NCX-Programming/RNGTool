@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 512 512">
+<metadata>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="PencilOnly" value="0"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="OutlineMode" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="CMYKEnabledKey" value="0"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="doHistoryDisabled" value="0"/>
+<vectornator:setting key="TimeLapseWatermarkDisabled" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="Units" value="Pixels"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+<vectornator:setting key="DynamicGuides" value="1"/>
+<vectornator:setting key="IsolateActiveLayer" value="0"/>
+</metadata>
+<defs/>
+<g id="Layer 1" vectornator:layerName="Layer 1">
+<path stroke="#ffffff" stroke-width="30" d="M101.089+14.5077L411.281+14.5077C458.675+14.5077+497.095+52.1296+497.095+98.5387L497.095+413.939C497.095+460.348+458.675+497.97+411.281+497.97L101.089+497.97C53.6948+497.97+15.2744+460.348+15.2744+413.939L15.2744+98.5387C15.2744+52.1296+53.6948+14.5077+101.089+14.5077Z" fill="none" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+<path d="M64+128C64+92.6538+92.6538+64+128+64C163.346+64+192+92.6538+192+128C192+163.346+163.346+192+128+192C92.6538+192+64+163.346+64+128Z" opacity="1" fill="#ffffff"/>
+<path d="M320+384C320+348.654+348.654+320+384+320C419.346+320+448+348.654+448+384C448+419.346+419.346+448+384+448C348.654+448+320+419.346+320+384Z" opacity="1" fill="#ffffff"/>
+<path d="M320+128C320+92.6538+348.654+64+384+64C419.346+64+448+92.6538+448+128C448+163.346+419.346+192+384+192C348.654+192+320+163.346+320+128Z" opacity="1" fill="#ffffff"/>
+<path d="M64+384C64+348.654+92.6538+320+128+320C163.346+320+192+348.654+192+384C192+419.346+163.346+448+128+448C92.6538+448+64+419.346+64+384Z" opacity="1" fill="#ffffff"/>
+</g>
+</svg>
