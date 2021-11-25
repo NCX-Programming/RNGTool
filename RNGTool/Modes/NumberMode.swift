@@ -57,15 +57,7 @@ struct NumberMode: View {
                     .padding(.bottom, 5)
                 if(randomNumber != 0){
                     Button(action:{
-                        let pasteboard = NSPasteboard.general
-                        pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-                        pasteboard.setString("\(randomNumber)", forType: NSPasteboard.PasteboardType.string)
-                        var clipboardItems: [String] = []
-                        for element in pasteboard.pasteboardItems! {
-                            if let str = element.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                                clipboardItems.append(str)
-                            }
-                        }
+                        copyToClipboard(item: "\(randomNumber)")
                     }) {
                         Image(systemName: "doc.on.doc.fill")
                     }

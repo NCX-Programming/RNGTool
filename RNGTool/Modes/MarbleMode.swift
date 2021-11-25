@@ -107,15 +107,7 @@ struct MarbleMode: View {
                             randomLetterCopyStr = ""
                             randomLetterCopyStr = "\(randomLetters)"
                             randomLetterCopyStr.removeAll(where: { removeCharacters.contains($0) } )
-                            let pasteboard = NSPasteboard.general
-                            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-                            pasteboard.setString(randomLetterCopyStr, forType: NSPasteboard.PasteboardType.string)
-                            var clipboardItems: [String] = []
-                            for element in pasteboard.pasteboardItems! {
-                                if let str = element.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                                    clipboardItems.append(str)
-                                }
-                            }
+                            copyToClipboard(item: "\(randomLetterCopyStr)")
                         }) {
                             Image(systemName: "doc.on.doc.fill")
                         }

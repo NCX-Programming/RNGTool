@@ -2,7 +2,7 @@
 //  MarbleSettings.swift
 //  RNGTool
 //
-//  Created by Campbell Bagley on 9/27/21.
+//  Created by Campbell on 9/27/21.
 //
 
 import SwiftUI

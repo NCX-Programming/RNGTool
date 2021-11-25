@@ -23,6 +23,7 @@
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
+		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
+		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		3700F27E26DD256D001BEE7A /* RNGTool */ = {
 			isa = PBXGroup;
 			children = (
+				37EF2027274F3B5800FD62BD /* Utilities.swift */,
 				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
 				37DB700426FC03FE0079F3E7 /* Settings */,
@@ -195,6 +198,7 @@
 				3700F28226DD256D001BEE7A /* ContentView.swift in Sources */,
 				37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */,
 				3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */,
+				37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */,
 				37D7771626E56F31005B2C45 /* CardMode.swift in Sources */,
 				374B0EE527001749006CCD69 /* CardSettings.swift in Sources */,
 				37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */,

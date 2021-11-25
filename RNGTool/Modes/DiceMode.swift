@@ -85,15 +85,7 @@ struct DiceMode: View {
                         .padding(.bottom, 5)
                     if(showCopy){
                         Button(action:{
-                            let pasteboard = NSPasteboard.general
-                            pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
-                            pasteboard.setString("\(randomNumbers)", forType: NSPasteboard.PasteboardType.string)
-                            var clipboardItems: [String] = []
-                            for element in pasteboard.pasteboardItems! {
-                                if let str = element.string(forType: NSPasteboard.PasteboardType(rawValue: "public.utf8-plain-text")) {
-                                    clipboardItems.append(str)
-                                }
-                            }
+                            copyToClipboard(item: "\(randomNumbers)")
                         }) {
                             Image(systemName: "doc.on.doc.fill")
                         }
