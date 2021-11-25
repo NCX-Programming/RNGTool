@@ -22,6 +22,21 @@ struct MarbleMode: View {
     @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
+    func resetGen() {
+        showMarbles = false
+        showCopy = false
+        numOfMarbles = 1
+        randomNumbers.removeAll()
+        randomLetters.removeAll()
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomNumberStr = ""
+        }
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomLetterStr = ""
+        }
+        confirmReset = false
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -147,17 +162,7 @@ struct MarbleMode: View {
                             confirmReset = true
                         }
                         else {
-                            showMarbles = false
-                            showCopy = false
-                            numOfMarbles = 1
-                            randomNumbers.removeAll()
-                            randomLetters.removeAll()
-                            withAnimation (.easeInOut(duration: 0.5)) {
-                                randomNumberStr = ""
-                            }
-                            withAnimation (.easeInOut(duration: 0.5)) {
-                                randomLetterStr = ""
-                            }
+                            resetGen()
                         }
                     }) {
                         Image(systemName: "clear.fill")
@@ -168,18 +173,7 @@ struct MarbleMode: View {
                             title: Text("Confirm Reset"),
                             message: Text("Are you sure you want to reset the generator? This cannot be undone."),
                             primaryButton: .default(Text("Confirm")){
-                                showMarbles = false
-                                showCopy = false
-                                numOfMarbles = 1
-                                randomNumbers.removeAll()
-                                randomLetters.removeAll()
-                                withAnimation (.easeInOut(duration: 0.5)) {
-                                    randomNumberStr = ""
-                                }
-                                withAnimation (.easeInOut(duration: 0.5)) {
-                                    randomLetterStr = ""
-                                }
-                                confirmReset = false
+                                resetGen()
                             },
                             secondaryButton: .cancel()
                         )

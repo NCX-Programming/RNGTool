@@ -25,6 +25,18 @@ struct CardMode: View {
     @State private var n = 0
     @State private var nn = 0
     
+    func resetGen() {
+        numOfCards = 1
+        randomNumbers.removeAll()
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomNumberStr = ""
+            pointValueStr = ""
+        }
+        showCopy = false
+        showCards = false
+        confirmReset = false
+    }
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading) {
@@ -122,14 +134,7 @@ struct CardMode: View {
                             confirmReset = true
                         }
                         else {
-                            numOfCards = 1
-                            randomNumbers.removeAll()
-                            withAnimation (.easeInOut(duration: 0.5)) {
-                                randomNumberStr = ""
-                                pointValueStr = ""
-                            }
-                            showCopy = false
-                            showCards = false
+                            resetGen()
                         }
                     }) {
                         Image(systemName: "clear.fill")
@@ -140,15 +145,7 @@ struct CardMode: View {
                             title: Text("Confirm Reset"),
                             message: Text("Are you sure you want to reset the generator? This cannot be undone."),
                             primaryButton: .default(Text("Confirm")){
-                                numOfCards = 1
-                                randomNumbers.removeAll()
-                                withAnimation (.easeInOut(duration: 0.5)) {
-                                    randomNumberStr = ""
-                                    pointValueStr = ""
-                                }
-                                showCopy = false
-                                showCards = false
-                                confirmReset = false
+                                resetGen()
                             },
                             secondaryButton: .cancel()
                         )

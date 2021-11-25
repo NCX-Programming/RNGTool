@@ -22,6 +22,17 @@ struct DiceMode: View {
     @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var diceImages = ["d1","d1","d1","d1","d1","d1"]
     
+    func resetGen() {
+        numOfDice = 1
+        numOfSides = 6
+        randomNumbers.removeAll()
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomNumberStr = ""
+        }
+        showCopy = false
+        showDice = false
+        confirmReset = false
+    }
     
     func incrementStep() {
         numOfSides += 1
@@ -145,14 +156,7 @@ struct DiceMode: View {
                             confirmReset = true
                         }
                         else {
-                            numOfDice = 1
-                            numOfSides = 6
-                            randomNumbers.removeAll()
-                            withAnimation (.easeInOut(duration: 0.5)) {
-                                randomNumberStr = ""
-                            }
-                            showCopy = false
-                            showDice = false
+                            resetGen()
                         }
                     }) {
                         Image(systemName: "clear.fill")
@@ -163,15 +167,7 @@ struct DiceMode: View {
                             title: Text("Confirm Reset"),
                             message: Text("Are you sure you want to reset the generator? This cannot be undone."),
                             primaryButton: .default(Text("Confirm")){
-                                numOfDice = 1
-                                numOfSides = 6
-                                randomNumbers.removeAll()
-                                withAnimation (.easeInOut(duration: 0.5)) {
-                                    randomNumberStr = ""
-                                }
-                                showCopy = false
-                                showDice = false
-                                confirmReset = false
+                                resetGen()
                             },
                             secondaryButton: .cancel()
                         )

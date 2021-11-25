@@ -28,6 +28,21 @@ struct NumberMode: View {
     @State private var minNumberInput = ""
     @State private var maxNumber = 0
     @State private var minNumber = 0
+    
+    func resetGen() {
+        maxNumber = 0
+        maxNumberInput = "\(maxNumberDefault)"
+        minNumber = 0
+        minNumberInput = "\(minNumberDefault)"
+        randomNumber = 0
+        showMaxEditor = false
+        showMinEditor = false
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomNumberStr = ""
+        }
+        confirmReset = false
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading){
@@ -58,7 +73,7 @@ struct NumberMode: View {
                     Divider()
                 }
                 Group() {
-                    Text("Default Maximum Number: \(maxNumberDefault). Right click to set a custom value.")
+                    Text("Maximum Number: \(maxNumberInput). Right click to set a custom value.")
                         .contextMenu {
                             Toggle("Show Editor", isOn: $showMaxEditor)
                             Button(action: {
@@ -70,12 +85,16 @@ struct NumberMode: View {
                             }
                         }
                         .help("Right click here to set a custom maximum number")
+                        .onAppear{
+                            maxNumberInput="\(maxNumberDefault)"
+                        }
                     if(showMaxEditor){
                         TextField("Enter a number", text: $maxNumberInput)
                             .frame(width: 300)
+                            
                     }
                     Divider()
-                    Text("Default Minimum Number: \(minNumberDefault). Right click to set a custom value.")
+                    Text("Minimum Number: \(minNumberDefault). Right click to set a custom value.")
                         .contextMenu {
                             Toggle("Show Editor", isOn: $showMinEditor)
                             Button(action: {
@@ -87,6 +106,9 @@ struct NumberMode: View {
                             }
                         }
                         .help("Right click here to set a custom minimum number")
+                        .onAppear{
+                            minNumberInput="\(minNumberDefault)"
+                        }
                     if(showMinEditor){
                         TextField("Enter a number", text: $minNumberInput)
                             .frame(width: 300)
@@ -111,16 +133,7 @@ struct NumberMode: View {
                             confirmReset = true
                         }
                         else {
-                            maxNumber = 0
-                            maxNumberInput = ""
-                            minNumber = 0
-                            minNumberInput = ""
-                            randomNumber = 0
-                            showMaxEditor = false
-                            showMinEditor = false
-                            withAnimation (.easeInOut(duration: 0.5)) {
-                                randomNumberStr = ""
-                            }
+                            resetGen()
                         }
                     }) {
                         Image(systemName: "clear.fill")
@@ -131,17 +144,7 @@ struct NumberMode: View {
                             title: Text("Confirm Reset"),
                             message: Text("Are you sure you want to reset the generator? This cannot be undone."),
                             primaryButton: .default(Text("Confirm")){
-                                maxNumber = 0
-                                maxNumberInput = ""
-                                minNumber = 0
-                                minNumberInput = ""
-                                randomNumber = 0
-                                showMaxEditor = false
-                                showMinEditor = false
-                                withAnimation (.easeInOut(duration: 0.5)) {
-                                    randomNumberStr = ""
-                                }
-                                confirmReset = false
+                                resetGen()
                             },
                             secondaryButton: .cancel()
                         )
