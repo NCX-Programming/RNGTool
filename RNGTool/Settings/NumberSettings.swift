@@ -12,9 +12,10 @@ struct NumberSettings: View {
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
-    @State private var showInputError = false
     @State private var showResetPrompt = false
-    @State private var showSuccessAlert = false
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     var body: some View {
         Form {
@@ -57,28 +58,25 @@ struct NumberSettings: View {
                     )
                 }
                 Button(action:{
-                    if(maxNumberInput != "" && minNumberInput != ""){
-                        maxNumberDefault = Int(maxNumberInput)!
-                        minNumberDefault = Int(minNumberInput)!
-                        showSuccessAlert = true
+                    if(maxNumberInput == "" || minNumberInput == ""){
+                        showAlert = true
+                        alertTitle = "Missing numbers!"
+                        alertMessage = "You must specify a minimum and maximum number!"
                     }
                     else {
-                        showInputError = true
+                        maxNumberDefault = Int(maxNumberInput)!
+                        minNumberDefault = Int(minNumberInput)!
+                        showAlert = true
+                        alertTitle = "Numbers Saved"
+                        alertMessage = "Your new maximum and minimum numbers have been saved."
                     }
                 }) {
                     Text("Save")
                 }
-                .alert(isPresented: $showInputError){
+                .alert(isPresented: $showAlert){
                     Alert(
-                        title: Text("Missing numbers!"),
-                        message: Text("You must specify a minimum and maximum number!"),
-                        dismissButton: .default(Text("Ok"))
-                    )
-                }
-                .alert(isPresented: $showSuccessAlert){
-                    Alert(
-                        title: Text("Numbers Set"),
-                        message: Text("The following numbers have been set: Max Number: \(maxNumberDefault), Min Number: \(minNumberDefault)"),
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
                         dismissButton: .default(Text("Ok"))
                     )
                 }

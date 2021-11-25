@@ -115,6 +115,8 @@ struct NumberMode: View {
                         withAnimation (.easeInOut(duration: 0.5)) {
                             self.randomNumberStr = "Your random number: \(randomNumber)"
                         }
+                        maxNumberInput="\(maxNumber)"
+                        minNumberInput="\(minNumber)"
                     }) {
                         Image(systemName: "play.fill")
                             
