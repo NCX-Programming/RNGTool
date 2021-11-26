@@ -3,9 +3,9 @@ The best way to generate random numbers on macOS 11.3+
 
 ![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
 
-<image src="https://cdn.ncxprogramming.com/file/image/screenshots/rngtool/repoimage.png" hight=400 width=640/>
+<image src="https://cdn.ncxprogramming.com/file/image/screenshots/rngtool/repoimage.png" hight=397 width=630/>
 
-Image taken in v1.5 (Build 127)
+Image taken in v1.8 Beta (Build 159) This screenshot was taken on a non-retina display, but images shown appear higher quality on retina displays.
 ## Modes:
 - Numbers only
 - Dice
