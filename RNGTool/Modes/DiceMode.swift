@@ -54,29 +54,12 @@ struct DiceMode: View {
                         .font(.title3)
                         .foregroundColor(.secondary)
                     Divider()
-                    HStack(){
-                        if(showDice && allowDiceImages){
-                            Image(diceImages[0]).resizable()
+                    if(showDice && allowDiceImages){
+                        HStack(){
+                            ForEach(0..<numOfDice, id: \.self) { index in
+                              Image(diceImages[index])
+                                .resizable()
                                 .frame(width: 64, height: 64)
-                            if(numOfDice>1){
-                                Image(diceImages[1]).resizable()
-                                    .frame(width: 64, height: 64)
-                                if(numOfDice>2){
-                                    Image(diceImages[2]).resizable()
-                                        .frame(width: 64, height: 64)
-                                    if(numOfDice>3){
-                                        Image(diceImages[3]).resizable()
-                                            .frame(width: 64, height: 64)
-                                        if(numOfDice>4){
-                                            Image(diceImages[4]).resizable()
-                                                .frame(width: 64, height: 64)
-                                            if(numOfDice>5){
-                                                Image(diceImages[5]).resizable()
-                                                    .frame(width: 64, height: 64)
-                                            }
-                                        }
-                                    }
-                                }
                             }
                         }
                     }

@@ -47,50 +47,16 @@ struct MarbleMode: View {
                         .font(.title3)
                         .foregroundColor(.secondary)
                     Divider()
-                    HStack(){
-                        if(showMarbles){
-                            ZStack() {
-                                Text("\(letters[randomNumbers[0]])")
-                                    .font(.title)
-                                Circle()
-                                    .stroke(Color.primary, lineWidth: 3)
-                            }
-                            .frame(width: 64, height: 64)
-                            if(numOfMarbles>1){
+                    if(showMarbles){
+                        HStack(){
+                            ForEach(0..<numOfMarbles, id: \.self) { index in
                                 ZStack() {
-                                    Text("\(letters[randomNumbers[1]])")
+                                    Text("\(letters[randomNumbers[index]])")
                                         .font(.title)
                                     Circle()
                                         .stroke(Color.primary, lineWidth: 3)
                                 }
                                 .frame(width: 64, height: 64)
-                                if(numOfMarbles>2){
-                                    ZStack() {
-                                        Text("\(letters[randomNumbers[2]])")
-                                            .font(.title)
-                                        Circle()
-                                            .stroke(Color.primary, lineWidth: 3)
-                                    }
-                                    .frame(width: 64, height: 64)
-                                    if(numOfMarbles>3){
-                                        ZStack() {
-                                            Text("\(letters[randomNumbers[3]])")
-                                                .font(.title)
-                                            Circle()
-                                                .stroke(Color.primary, lineWidth: 3)
-                                        }
-                                        .frame(width: 64, height: 64)
-                                        if(numOfMarbles>4){
-                                            ZStack() {
-                                                Text("\(letters[randomNumbers[4]])")
-                                                    .font(.title)
-                                                Circle()
-                                                    .stroke(Color.primary, lineWidth: 3)
-                                            }
-                                            .frame(width: 64, height: 64)
-                                        }
-                                    }
-                                }
                             }
                         }
                     }

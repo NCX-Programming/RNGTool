@@ -21,7 +21,7 @@ struct CardMode: View {
     @State private var numOfCards = 1
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var cardImages = ["c1","c1","c1","c1","c1"]
+    @State private var cardImages = ["c1","c1","c1","c1","c1","c1","c1"]
     @State private var n = 0
     @State private var nn = 0
     
@@ -59,6 +59,8 @@ struct CardMode: View {
                         Text("3").tag(3)
                         Text("4").tag(4)
                         Text("5").tag(5)
+                        Text("6").tag(6)
+                        Text("7").tag(7)
                     }
                     .frame(width: 250)
                 }
@@ -67,7 +69,7 @@ struct CardMode: View {
                     Button(action: {
                         showCopy = true
                         randomNumbers.removeAll()
-                        for _ in 1..<numOfCards+1{
+                        for _ in 0..<numOfCards{
                             randomNumbers.append(Int.random(in: 1..<14))
                         }
                         withAnimation (.easeInOut(duration: 0.5)) {
@@ -170,29 +172,12 @@ struct CardMode: View {
                     }
                 }
                 HStack(){
-                    ZStack() {
-                        if(showCards){
-                            Image(cardImages[0]).resizable()
-                                .frame(width: 192, height: 256)
-                            if(numOfCards>1){
-                                Image(cardImages[1]).resizable()
+                    if(showCards){
+                        ZStack(){
+                            ForEach(0..<numOfCards, id: \.self) { index in
+                                Image(cardImages[index]).resizable()
                                     .frame(width: 192, height: 256)
-                                    .offset(x: 40,y: 0)
-                                if(numOfCards>2){
-                                    Image(cardImages[2]).resizable()
-                                        .frame(width: 192, height: 256)
-                                        .offset(x: 80,y: 0)
-                                    if(numOfCards>3){
-                                        Image(cardImages[3]).resizable()
-                                            .frame(width: 192, height: 256)
-                                            .offset(x: 120,y: 0)
-                                        if(numOfCards>4){
-                                            Image(cardImages[4]).resizable()
-                                                .frame(width: 192, height: 256)
-                                                .offset(x: 160,y: 0)
-                                        }
-                                    }
-                                }
+                                    .offset(x: CGFloat(40*index),y: 0)
                             }
                         }
                     }
