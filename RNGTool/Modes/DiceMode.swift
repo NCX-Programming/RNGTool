@@ -22,13 +22,13 @@ struct DiceMode: View {
     @State private var diceImages = ["d1","d1","d1","d1","d1","d1"]
     
     func resetGen() {
+        withAnimation(.easeInOut(duration: 0.5)){
+            randomNumberStr = ""
+            showDice = false
+        }
         numOfDice = 1
         numOfSides = 6
         randomNumbers.removeAll()
-        withAnimation (.easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
-        }
-        showDice = false
         confirmReset = false
     }
     
@@ -109,7 +109,9 @@ struct DiceMode: View {
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                         if(numOfSides==6){
-                            showDice = true
+                            withAnimation(.easeInOut(duration: 0.5)){
+                                showDice = true
+                            }
                             diceImages[0] = "d\(randomNumbers[0])"
                             if(numOfDice>1) {diceImages[1] = "d\(randomNumbers[1])"}
                             if(numOfDice>2) {diceImages[2] = "d\(randomNumbers[2])"}
@@ -118,7 +120,9 @@ struct DiceMode: View {
                             if(numOfDice>5) {diceImages[5] = "d\(randomNumbers[5])"}
                         }
                         else{
-                            showDice = false
+                            withAnimation(.easeInOut(duration: 0.5)){
+                                showDice = false
+                            }
                         }
                     }) {
                         Image(systemName: "play.fill")

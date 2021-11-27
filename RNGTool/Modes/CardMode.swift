@@ -25,13 +25,13 @@ struct CardMode: View {
     @State private var nn = 0
     
     func resetGen() {
-        numOfCards = 1
-        randomNumbers.removeAll()
         withAnimation (.easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             pointValueStr = ""
+            showCards = false
         }
-        showCards = false
+        numOfCards = 1
+        randomNumbers.removeAll()
         confirmReset = false
     }
     
@@ -101,7 +101,6 @@ struct CardMode: View {
                         }
                         if(useFaces==true){
                             n = 0
-                            showCards = true
                             for n in 0..<numOfCards{
                                 if(randomNumbers[n]==1){
                                     cardImages[n] = "cA"
@@ -122,10 +121,12 @@ struct CardMode: View {
                         }
                         else{
                             n = 0
-                            showCards = true
                             for n in 0..<numOfCards{
                                 cardImages[n] = "c\(randomNumbers[n])"
                             }
+                        }
+                        withAnimation(.easeInOut(duration: 0.5)){
+                            showCards = true
                         }
                     }) {
                         Image(systemName: "play.fill")

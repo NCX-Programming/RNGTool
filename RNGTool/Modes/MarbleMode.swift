@@ -22,16 +22,14 @@ struct MarbleMode: View {
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        showMarbles = false
+        withAnimation (.easeInOut(duration: 0.5)) {
+            randomNumberStr = ""
+            randomLetterStr = ""
+            showMarbles = false
+        }
         numOfMarbles = 1
         randomNumbers.removeAll()
         randomLetters.removeAll()
-        withAnimation (.easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
-        }
-        withAnimation (.easeInOut(duration: 0.5)) {
-            randomLetterStr = ""
-        }
         confirmReset = false
     }
     
@@ -106,7 +104,9 @@ struct MarbleMode: View {
                             randomLetterStr = "Your random letter(s): \(randomLetters)"
                             randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        showMarbles = true
+                        withAnimation(.easeInOut(duration: 0.5)){
+                            showMarbles = true
+                        }
                     }) {
                         Image(systemName: "play.fill")
                     }
