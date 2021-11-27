@@ -17,7 +17,6 @@ struct DiceMode: View {
     @State private var randomNumbers = [0]
     @State private var randomNumberStr = ""
     @State private var numsInArray = 0
-    @State private var showCopy = false
     @State private var showDice = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var diceImages = ["d1","d1","d1","d1","d1","d1"]
@@ -29,7 +28,6 @@ struct DiceMode: View {
         withAnimation (.easeInOut(duration: 0.5)) {
             randomNumberStr = ""
         }
-        showCopy = false
         showDice = false
         confirmReset = false
     }
@@ -66,7 +64,7 @@ struct DiceMode: View {
                     Text(randomNumberStr)
                         .font(.title2)
                         .padding(.bottom, 5)
-                    if(showCopy){
+                    if(showDice){
                         Button(action:{
                             copyToClipboard(item: "\(randomNumbers)")
                         }) {
@@ -102,7 +100,6 @@ struct DiceMode: View {
                 Divider()
                 HStack() {
                     Button(action: {
-                        showCopy = true
                         randomNumbers.removeAll()
                         for _ in 1..<numOfDice+1{
                             randomNumbers.append(Int.random(in: 1..<numOfSides+1))

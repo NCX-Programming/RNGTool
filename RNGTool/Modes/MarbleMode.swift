@@ -14,9 +14,8 @@ struct MarbleMode: View {
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var randomLetterStr = ""
-    @State private var randomLetters: [String] = [""]
+    @State private var randomLetters = [String]()
     @State private var randomLetterCopyStr = ""
-    @State private var showCopy = false
     @State private var showMarbles = false
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
@@ -24,7 +23,6 @@ struct MarbleMode: View {
     
     func resetGen() {
         showMarbles = false
-        showCopy = false
         numOfMarbles = 1
         randomNumbers.removeAll()
         randomLetters.removeAll()
@@ -68,7 +66,7 @@ struct MarbleMode: View {
                     Text(randomNumberStr)
                         .font(.title2)
                         .padding(.bottom, 5)
-                    if(showCopy){
+                    if(showMarbles){
                         Button(action:{
                             randomLetterCopyStr = ""
                             randomLetterCopyStr = "\(randomLetters)"
@@ -84,17 +82,14 @@ struct MarbleMode: View {
                 Text("Number of marbles")
                     .font(.title3)
                 Picker("", selection: $numOfMarbles){
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                    Text("3").tag(3)
-                    Text("4").tag(4)
-                    Text("5").tag(5)
+                    ForEach(1..<6, id: \.self) { index in
+                        Text("\(index)").tag(index)
+                    }
                 }
                 .frame(width: 250)
                 Divider()
                 HStack() {
                     Button(action: {
-                        showCopy = true
                         randomNumbers.removeAll()
                         randomLetters.removeAll()
                         for _ in 1..<6{

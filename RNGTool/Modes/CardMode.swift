@@ -16,12 +16,11 @@ struct CardMode: View {
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
     @State private var pointValues = [0]
-    @State private var showCopy = false
     @State private var showCards = false
     @State private var numOfCards = 1
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var cardImages = ["c1","c1","c1","c1","c1","c1","c1"]
+    @State private var cardImages = [String]()
     @State private var n = 0
     @State private var nn = 0
     
@@ -32,7 +31,6 @@ struct CardMode: View {
             randomNumberStr = ""
             pointValueStr = ""
         }
-        showCopy = false
         showCards = false
         confirmReset = false
     }
@@ -53,21 +51,22 @@ struct CardMode: View {
                 Group {
                     Text("Number of cards")
                         .font(.title3)
+                    // The seemingly unrelated code below is together because they must have the same max value
                     Picker("", selection: $numOfCards){
-                        Text("1").tag(1)
-                        Text("2").tag(2)
-                        Text("3").tag(3)
-                        Text("4").tag(4)
-                        Text("5").tag(5)
-                        Text("6").tag(6)
-                        Text("7").tag(7)
+                        ForEach(1..<8, id: \.self) { index in
+                            Text("\(index)").tag(index)
+                        }
                     }
                     .frame(width: 250)
+                    .onAppear{
+                        for _ in 1..<8{
+                            cardImages.append("c1")
+                        }
+                    }
                 }
                 Divider()
                 HStack() {
                     Button(action: {
-                        showCopy = true
                         randomNumbers.removeAll()
                         for _ in 0..<numOfCards{
                             randomNumbers.append(Int.random(in: 1..<14))
@@ -162,7 +161,7 @@ struct CardMode: View {
                     Text(pointValueStr)
                         .font(.title2)
                         .padding(.bottom, 5)
-                    if(showCopy){
+                    if(showCards){
                         Button(action:{
                             copyToClipboard(item: "\(randomNumbers)")
                         }) {
