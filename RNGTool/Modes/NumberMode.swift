@@ -19,7 +19,6 @@ struct NumberMode: View {
     @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
     @State private var confirmReset = false
-    @State private var showCopy = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
     @State private var randomNumber = 0
@@ -35,10 +34,10 @@ struct NumberMode: View {
         minNumber = 0
         minNumberInput = "\(minNumberDefault)"
         randomNumber = 0
-        showMaxEditor = false
-        showMinEditor = false
         withAnimation (.easeInOut(duration: 0.5)) {
             randomNumberStr = ""
+            showMaxEditor = false
+            showMinEditor = false
         }
         confirmReset = false
     }
@@ -71,7 +70,9 @@ struct NumberMode: View {
                             Button(action: {
                                 maxNumber = 0
                                 maxNumberInput = ""
-                                showMaxEditor.toggle()
+                                withAnimation (.easeInOut(duration: 0.5)) {
+                                    showMaxEditor.toggle()
+                                }
                             }) {
                                 Text("Set to Default")
                             }
@@ -92,7 +93,8 @@ struct NumberMode: View {
                             Button(action: {
                                 minNumber = 0
                                 minNumberInput = ""
-                                showMinEditor.toggle()
+                                withAnimation (.easeInOut(duration: 0.5)){
+                                    showMinEditor.toggle()}
                             }) {
                                 Text("Set to Default")
                             }
