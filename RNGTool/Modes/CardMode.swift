@@ -21,8 +21,6 @@ struct CardMode: View {
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var cardImages = [String]()
-    @State private var n = 0
-    @State private var nn = 0
     
     func resetGen() {
         withAnimation (.easeInOut(duration: 0.5)) {
@@ -76,16 +74,15 @@ struct CardMode: View {
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                         if(showPoints==true){
-                            nn = 0
                             pointValues.removeAll()
-                            for nn in 0..<numOfCards{
-                                if(randomNumbers[nn]==1){
+                            for n in 0..<numOfCards{
+                                if(randomNumbers[n]==1){
                                     pointValues.append(aceValue)
                                 }
-                                else if(randomNumbers[nn]>1 && randomNumbers[nn]<11){
-                                    pointValues.append(randomNumbers[nn])
+                                else if(randomNumbers[n]>1 && randomNumbers[n]<11){
+                                    pointValues.append(randomNumbers[n])
                                 }
-                                else if(randomNumbers[nn]>10){
+                                else{
                                     pointValues.append(10)
                                 }
                             }
@@ -99,28 +96,23 @@ struct CardMode: View {
                                 self.pointValueStr = ""
                             }
                         }
-                        if(useFaces==true){
-                            n = 0
+                        if(useFaces){
                             for n in 0..<numOfCards{
-                                if(randomNumbers[n]==1){
-                                    cardImages[n] = "cA"
-                                }
-                                else if(randomNumbers[n]==11){
-                                    cardImages[n] = "cJ"
-                                }
-                                else if(randomNumbers[n]==12){
-                                    cardImages[n] = "cQ"
-                                }
-                                else if(randomNumbers[n]==13){
-                                    cardImages[n] = "cK"
-                                }
-                                else{
-                                    cardImages[n] = "c\(randomNumbers[n])"
+                                switch randomNumbers[n]{
+                                case 1:
+                                    cardImages[n]="cA"
+                                case 11:
+                                    cardImages[n]="cJ"
+                                case 12:
+                                    cardImages[n]="cQ"
+                                case 13:
+                                    cardImages[n]="cK"
+                                default:
+                                    cardImages[n]="c\(randomNumbers[n])"
                                 }
                             }
                         }
                         else{
-                            n = 0
                             for n in 0..<numOfCards{
                                 cardImages[n] = "c\(randomNumbers[n])"
                             }

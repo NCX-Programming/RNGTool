@@ -19,7 +19,7 @@ struct DiceMode: View {
     @State private var numsInArray = 0
     @State private var showDice = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var diceImages = ["d1","d1","d1","d1","d1","d1"]
+    @State private var diceImages = [String]()
     
     func resetGen() {
         withAnimation(.easeInOut(duration: 0.5)){
@@ -76,15 +76,18 @@ struct DiceMode: View {
                 }
                 Text("Number of dice")
                     .font(.title3)
+                // The seemingly unrelated code below is together because they must have the same max value
                 Picker("", selection: $numOfDice){
-                    Text("1").tag(1)
-                    Text("2").tag(2)
-                    Text("3").tag(3)
-                    Text("4").tag(4)
-                    Text("5").tag(5)
-                    Text("6").tag(6)
+                    ForEach(1..<7, id: \.self) { index in
+                        Text("\(index)").tag(index)
+                    }
                 }
                 .frame(width: 250)
+                .onAppear{
+                    for _ in 1..<7{
+                        diceImages.append("d1")
+                    }
+                }
                 Divider()
                 Group{
                     Stepper(onIncrement: incrementStep, onDecrement: decrementStep) {
@@ -112,12 +115,9 @@ struct DiceMode: View {
                             withAnimation(.easeInOut(duration: 0.5)){
                                 showDice = true
                             }
-                            diceImages[0] = "d\(randomNumbers[0])"
-                            if(numOfDice>1) {diceImages[1] = "d\(randomNumbers[1])"}
-                            if(numOfDice>2) {diceImages[2] = "d\(randomNumbers[2])"}
-                            if(numOfDice>3) {diceImages[3] = "d\(randomNumbers[3])"}
-                            if(numOfDice>4) {diceImages[4] = "d\(randomNumbers[4])"}
-                            if(numOfDice>5) {diceImages[5] = "d\(randomNumbers[5])"}
+                            for n in 0..<randomNumbers.count{
+                                if(numOfDice>n) {diceImages[n]="d\(randomNumbers[n])"}
+                            }
                         }
                         else{
                             withAnimation(.easeInOut(duration: 0.5)){
