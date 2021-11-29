@@ -50,8 +50,7 @@ struct NumberSettings: View {
                         primaryButton: .default(Text("Confirm")){
                             minNumberInput = ""
                             maxNumberInput = ""
-                            maxNumberDefault = 100
-                            minNumberDefault = 0
+                            resetNumSet()
                             showResetPrompt = false
                         },
                         secondaryButton: .cancel()

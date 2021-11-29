@@ -21,6 +21,7 @@ struct NumberMode: View {
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
+    @State private var showCopy = false
     @State private var randomNumber = 0
     @State private var randomNumberStr = ""
     @State private var maxNumberInput = ""
@@ -38,6 +39,7 @@ struct NumberMode: View {
             randomNumberStr = ""
             showMaxEditor = false
             showMinEditor = false
+            showCopy = false
         }
         confirmReset = false
     }
@@ -54,7 +56,7 @@ struct NumberMode: View {
                 Text(randomNumberStr)
                     .font(.title2)
                     .padding(.bottom, 5)
-                if(randomNumber != 0){
+                if(showCopy){
                     Button(action:{
                         copyToClipboard(item: "\(randomNumber)")
                     }) {
@@ -115,6 +117,7 @@ struct NumberMode: View {
                         minNumber = Int(minNumberInput) ?? minNumberDefault
                         randomNumber = Int.random(in: minNumber..<maxNumber)
                         withAnimation (.easeInOut(duration: 0.5)) {
+                            showCopy = true
                             self.randomNumberStr = "Your random number: \(randomNumber)"
                         }
                         maxNumberInput="\(maxNumber)"
