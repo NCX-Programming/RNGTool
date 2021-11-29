@@ -73,7 +73,7 @@ struct CardMode: View {
                             self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        if(showPoints==true){
+                        if(showPoints){
                             pointValues.removeAll()
                             for n in 0..<numOfCards{
                                 if(randomNumbers[n]==1){

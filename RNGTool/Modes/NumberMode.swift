@@ -70,7 +70,7 @@ struct NumberMode: View {
                             Button(action: {
                                 maxNumber = 0
                                 maxNumberInput = ""
-                                withAnimation (.easeInOut(duration: 0.5)) {
+                                withAnimation(.easeInOut(duration: 0.5)) {
                                     showMaxEditor.toggle()
                                 }
                             }) {
