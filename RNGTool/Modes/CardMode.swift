@@ -42,8 +42,6 @@ struct CardMode: View {
                     Text("Generate multiple numbers using cards")
                         .font(.title3)
                         .foregroundColor(.secondary)
-                    Text("Looking for more options? They're now in Preferences.")
-                        .foregroundColor(.secondary)
                     Divider()
                 }
                 Group {
