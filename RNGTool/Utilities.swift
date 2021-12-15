@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 func copyToClipboard(item: String){
+    #if os(macOS)
     let pasteboard = NSPasteboard.general
     pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
     pasteboard.setString(item, forType: NSPasteboard.PasteboardType.string)
@@ -18,6 +19,9 @@ func copyToClipboard(item: String){
             clipboardItems.append(str)
         }
     }
+    #elseif os(iOS)
+    UIPasteboard.general.string = "\(item)"
+    #endif
 }
 
 func resetNumSet(){

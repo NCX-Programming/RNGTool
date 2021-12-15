@@ -14,9 +14,25 @@
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
 		37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
 		3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
+		3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
+		3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */; };
+		3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
+		3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
+		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
+		376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
+		376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
+		376FEAE3276983FF00571A78 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
+		376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
+		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
+		376FEAE827698C4600571A78 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
+		376FEAEA27698C4600571A78 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
+		376FEAEB27698C4600571A78 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
+		376FEAEC27698C4600571A78 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
+		376FEAED27698C4600571A78 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
+		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
 		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
@@ -37,9 +53,13 @@
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
 		37010B962702697B00E32C35 /* MarbleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleSettings.swift; sourceTree = "<group>"; };
 		371301692719165A0061D344 /* AdvancedSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettings.swift; sourceTree = "<group>"; };
+		3725BF7727697DC900A1B4E8 /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3725BF7B27697DC900A1B4E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
+		376FEAEE27698D1600571A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
@@ -51,6 +71,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		3700F27A26DD256D001BEE7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3725BF7427697DC900A1B4E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -87,10 +114,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
+			isa = PBXGroup;
+			children = (
+				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
+				3725BF7F27697DCC00A1B4E8 /* Preview Content */,
+				376FEAEE27698D1600571A78 /* SettingsView.swift */,
+			);
+			path = "RNGTool Mobile";
+			sourceTree = "<group>";
+		};
+		3725BF7F27697DCC00A1B4E8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		3794432826D912B500900842 = {
 			isa = PBXGroup;
 			children = (
 				3700F27E26DD256D001BEE7A /* RNGTool */,
+				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
 				3794433226D912B500900842 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3700F27D26DD256D001BEE7A /* RNGTool.app */,
+				3725BF7727697DC900A1B4E8 /* RNGTool.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,17 +193,37 @@
 			productReference = 3700F27D26DD256D001BEE7A /* RNGTool.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3725BF7627697DC900A1B4E8 /* RNGTool Mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3725BF8427697DCC00A1B4E8 /* Build configuration list for PBXNativeTarget "RNGTool Mobile" */;
+			buildPhases = (
+				3725BF7327697DC900A1B4E8 /* Sources */,
+				3725BF7427697DC900A1B4E8 /* Frameworks */,
+				3725BF7527697DC900A1B4E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RNGTool Mobile";
+			productName = "RNGTool Mobile";
+			productReference = 3725BF7727697DC900A1B4E8 /* RNGTool.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3794432926D912B500900842 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					3700F27C26DD256D001BEE7A = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					3725BF7627697DC900A1B4E8 = {
+						CreatedOnToolsVersion = 13.2;
 					};
 				};
 			};
@@ -174,6 +241,7 @@
 			projectRoot = "";
 			targets = (
 				3700F27C26DD256D001BEE7A /* RNGTool */,
+				3725BF7627697DC900A1B4E8 /* RNGTool Mobile */,
 			);
 		};
 /* End PBXProject section */
@@ -185,6 +253,15 @@
 			files = (
 				3700F28726DD2573001BEE7A /* Preview Assets.xcassets in Resources */,
 				3700F28426DD2573001BEE7A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3725BF7527697DC900A1B4E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				376FEADF276980B700571A78 /* Assets.xcassets in Resources */,
+				3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +287,27 @@
 				37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */,
 				3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */,
 				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3725BF7327697DC900A1B4E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
+				376FEAEA27698C4600571A78 /* AdvancedSettings.swift in Sources */,
+				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
+				376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */,
+				376FEAEB27698C4600571A78 /* CardSettings.swift in Sources */,
+				376FEAED27698C4600571A78 /* DiceSettings.swift in Sources */,
+				376FEAE3276983FF00571A78 /* CardMode.swift in Sources */,
+				376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */,
+				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
+				376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */,
+				376FEAE827698C4600571A78 /* MarbleSettings.swift in Sources */,
+				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
+				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
+				376FEAEC27698C4600571A78 /* NumberSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +369,73 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3725BF8227697DCC00A1B4E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = 5GF7GKNTK4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
+				PRODUCT_NAME = RNGTool;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3725BF8327697DCC00A1B4E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = 5GF7GKNTK4;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
+				PRODUCT_NAME = RNGTool;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -397,6 +562,15 @@
 			buildConfigurations = (
 				3700F28A26DD2573001BEE7A /* Debug */,
 				3700F28B26DD2573001BEE7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3725BF8427697DCC00A1B4E8 /* Build configuration list for PBXNativeTarget "RNGTool Mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3725BF8227697DCC00A1B4E8 /* Debug */,
+				3725BF8327697DCC00A1B4E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

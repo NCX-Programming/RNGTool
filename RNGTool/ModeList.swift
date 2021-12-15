@@ -16,9 +16,8 @@ struct ModeList: View {
                 Divider()
                 NavigationLink(destination: NumberMode()) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack() {
                             Text("Numbers")
-                                .bold()
                                 .padding(.leading, 5)
                         }
 
@@ -28,7 +27,7 @@ struct ModeList: View {
                 }
                 NavigationLink(destination: DiceMode()) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack() {
                             Text("Dice")
                                 .bold()
                                 .padding(.leading, 5)
@@ -40,7 +39,7 @@ struct ModeList: View {
                 }
                 NavigationLink(destination: CardMode()) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack() {
                             Text("Cards")
                                 .bold()
                                 .padding(.leading, 5)
@@ -52,7 +51,7 @@ struct ModeList: View {
                 }
                 NavigationLink(destination: MarbleMode()) {
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack() {
                             Text("Marbles")
                                 .bold()
                                 .padding(.leading, 5)

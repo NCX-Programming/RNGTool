@@ -22,7 +22,10 @@ struct CardSettings: View {
             Picker("", selection: $useFaces) {
                 Text("Faces").tag(true)
                 Text("Numbers Only").tag(false)
-            }.pickerStyle(RadioGroupPickerStyle())
+            }
+            #if os(macOS)
+                .pickerStyle(RadioGroupPickerStyle())
+            #endif
                 .padding(.bottom, 12)
             Toggle(isOn: $showPoints) {
                 Text("Show card point values")
@@ -39,8 +42,11 @@ struct CardSettings: View {
             Picker("", selection: $aceValue){
                 Text("1 Point").tag(1)
                 Text("11 Points").tag(11)
-            }.pickerStyle(RadioGroupPickerStyle())
-            .disabled(!showPoints)
+            }
+            #if os(macOS)
+                .pickerStyle(RadioGroupPickerStyle())
+            #endif
+                .disabled(!showPoints)
         }
         .padding(20)
         .frame(width: 350, height: 350)

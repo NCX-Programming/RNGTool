@@ -16,8 +16,10 @@ struct RNGToolApp: App {
         .commands {
             RNGToolCommands()
         }
+        #if os(macOS)
         Settings {
             SettingsView()
         }
+        #endif
     }
 }
