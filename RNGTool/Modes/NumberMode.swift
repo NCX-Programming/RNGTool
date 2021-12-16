@@ -47,11 +47,8 @@ struct NumberMode: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading){
-                //Text("Number Mode")
-                    //.font(.title)
                 Text("Generate a single number using a maximum and minimum number")
                     .font(.title3)
-                    .foregroundColor(.secondary)
                 Divider()
                 Text(randomNumberStr)
                     .font(.title2)

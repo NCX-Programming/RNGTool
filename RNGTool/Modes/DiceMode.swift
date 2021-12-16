@@ -46,11 +46,8 @@ struct DiceMode: View {
         ScrollView{
             VStack(alignment: .leading) {
                 Group {
-                    Text("Dice Mode")
-                        .font(.title)
                     Text("Generate multiple numbers using dice")
                         .font(.title3)
-                        .foregroundColor(.secondary)
                     Divider()
                     if(showDice && allowDiceImages){
                         HStack(){
@@ -152,6 +149,10 @@ struct DiceMode: View {
             }
             .padding(.leading, 12)
         }
+        .navigationTitle("Dice")
+        #if !os(macOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

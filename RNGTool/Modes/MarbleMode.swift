@@ -37,11 +37,8 @@ struct MarbleMode: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Group {
-                    Text("Marble Mode")
-                        .font(.title)
                     Text("Generate multiple letters using marbles")
                         .font(.title3)
-                        .foregroundColor(.secondary)
                     Divider()
                     if(showMarbles){
                         HStack(){
@@ -135,6 +132,10 @@ struct MarbleMode: View {
             }
             .padding(.leading, 12)
         }
+        .navigationTitle("Marbles")
+        #if !os(macOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

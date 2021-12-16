@@ -29,7 +29,6 @@ struct ModeList: View {
                     HStack {
                         VStack() {
                             Text("Dice")
-                                .bold()
                                 .padding(.leading, 5)
                         }
 
@@ -41,7 +40,6 @@ struct ModeList: View {
                     HStack {
                         VStack() {
                             Text("Cards")
-                                .bold()
                                 .padding(.leading, 5)
                         }
                         
@@ -53,7 +51,6 @@ struct ModeList: View {
                     HStack {
                         VStack() {
                             Text("Marbles")
-                                .bold()
                                 .padding(.leading, 5)
                         }
                         

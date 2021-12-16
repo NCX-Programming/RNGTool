@@ -37,11 +37,8 @@ struct CardMode: View {
         ScrollView{
             VStack(alignment: .leading) {
                 Group {
-                    Text("Card Mode")
-                        .font(.title)
                     Text("Generate multiple numbers using cards")
                         .font(.title3)
-                        .foregroundColor(.secondary)
                     Divider()
                 }
                 Group {
@@ -167,7 +164,11 @@ struct CardMode: View {
                             ForEach(0..<numOfCards, id: \.self) { index in
                                 Image(cardImages[index]).resizable()
                                     .frame(width: 192, height: 256)
+                                #if os(iOS)
+                                    .offset(x: CGFloat(25*index),y: 0)
+                                #else
                                     .offset(x: CGFloat(40*index),y: 0)
+                                #endif
                             }
                         }
                     }
@@ -176,6 +177,10 @@ struct CardMode: View {
             }
             .padding(.leading, 12)
         }
+        .navigationTitle("Cards")
+        #if !os(macOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

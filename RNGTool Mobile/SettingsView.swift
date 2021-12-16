@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
     @AppStorage("minNumberDefault") private var minNumberDefault = 0
+    let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var showResetPrompt = false
@@ -92,6 +94,12 @@ struct SettingsView: View {
                 }
             }
         }
+        Text("RNGTool Version: v\(appVersionString), Build: \(buildNumber)")
+            .foregroundColor(.secondary)
+            .font(.caption)
+        Text("© 2021 NCX Programming")
+            .foregroundColor(.secondary)
+            .font(.caption)
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showAdvSet, content: {
