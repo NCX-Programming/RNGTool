@@ -16,73 +16,104 @@ struct SettingsView: View {
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
+    @State private var showAdvSet = false
     
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading){
-                Group{
-                    Text("Number Mode")
-                        .font(.title)
-                    Spacer()
-                    Text("Change Default Numbers")
-                        .font(.title2)
-                    Text("Default Maximum Number")
-                        .font(.title3)
-                    TextField("Enter a number:", text: $maxNumberInput)
-                    Divider()
-                    Text("Default Minimum Number")
-                        .font(.title3)
-                    TextField("Enter a number:", text: $minNumberInput)
-                    Divider()
-                    .onAppear {
-                        maxNumberInput = "\(maxNumberDefault)"
-                        minNumberInput = "\(minNumberDefault)"
+        Form {
+            Section(header: Text("Number Settings")) {
+                Text("Default Maximum Number")
+                TextField(text: $maxNumberInput, prompt: Text("Required")) {
+                    Text("Max Number")
+                }
+                Text("Default Minimum Number")
+                TextField(text: $minNumberInput, prompt: Text("Required")) {
+                    Text("Min Number")
+                }
+                .onAppear {
+                    maxNumberInput = "\(maxNumberDefault)"
+                    minNumberInput = "\(minNumberDefault)"
+                }
+                Button(action:{
+                    showResetPrompt = true
+                }) {
+                    Text("Reset")
+                }
+                .alert(isPresented: $showResetPrompt){
+                    Alert(
+                        title: Text("Confirm Reset"),
+                        message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
+                        primaryButton: .default(Text("Confirm")){
+                            minNumberInput = ""
+                            maxNumberInput = ""
+                            resetNumSet()
+                            showResetPrompt = false
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+                Button(action:{
+                    if(maxNumberInput == "" || minNumberInput == ""){
+                        showAlert = true
+                        alertTitle = "Missing numbers!"
+                        alertMessage = "You must specify a minimum and maximum number!"
                     }
-                    HStack() {
-                        Button(action:{
-                            showResetPrompt = true
-                        }) {
-                            Text("Reset")
-                        }
-                        .alert(isPresented: $showResetPrompt){
-                            Alert(
-                                title: Text("Confirm Reset"),
-                                message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
-                                primaryButton: .default(Text("Confirm")){
-                                    minNumberInput = ""
-                                    maxNumberInput = ""
-                                    resetNumSet()
-                                    showResetPrompt = false
-                                },
-                                secondaryButton: .cancel()
-                            )
-                        }
-                        Button(action:{
-                            if(maxNumberInput == "" || minNumberInput == ""){
-                                showAlert = true
-                                alertTitle = "Missing numbers!"
-                                alertMessage = "You must specify a minimum and maximum number!"
-                            }
-                            else {
-                                maxNumberDefault = Int(maxNumberInput)!
-                                minNumberDefault = Int(minNumberInput)!
-                                showAlert = true
-                                alertTitle = "Numbers Saved"
-                                alertMessage = "Your new maximum and minimum numbers have been saved."
-                            }
-                        }) {
-                            Text("Save")
-                        }
-                        .alert(isPresented: $showAlert){
-                            Alert(
-                                title: Text(alertTitle),
-                                message: Text(alertMessage),
-                                dismissButton: .default(Text("Ok"))
-                            )
-                        }
+                    else {
+                        maxNumberDefault = Int(maxNumberInput)!
+                        minNumberDefault = Int(minNumberInput)!
+                        showAlert = true
+                        alertTitle = "Numbers Saved"
+                        alertMessage = "Your new maximum and minimum numbers have been saved."
                     }
+                }) {
+                    Text("Save")
+                }
+                .alert(isPresented: $showAlert){
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("Ok"))
+                    )
                 }
             }
+            Section(header: Text("Dice Settings")) {
+                DiceSettings()
+            }
+            Section(header: Text("Card Settings")) {
+                CardSettings()
+            }
+            Section(header: Text("Marble Settings")) {
+                MarbleSettings()
+            }
+            Section(header: Text("Advanced Settings")) {
+                Button(action:{
+                    showAdvSet = true
+                }) {
+                    Text("Show Advanced Settings")
+                }
+            }
+        }
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showAdvSet, content: {
+            AdvancedSettingsView()
+        })
+    }
+}
+
+struct AdvancedSettingsView: View {
+    @Environment(\.presentationMode)
+    var presentationMode: Binding<PresentationMode>
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                AdvancedSettings()
+            }
+            .navigationBarTitle("Advanced Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Close", action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
         }
     }
 }

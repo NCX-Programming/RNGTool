@@ -27,12 +27,11 @@
 		376FEAE3276983FF00571A78 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
-		376FEAE827698C4600571A78 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
-		376FEAEA27698C4600571A78 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
-		376FEAEB27698C4600571A78 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
-		376FEAEC27698C4600571A78 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
-		376FEAED27698C4600571A78 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
 		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
+		37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
+		37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
+		37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
+		37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
 		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
@@ -118,8 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
-				3725BF7F27697DCC00A1B4E8 /* Preview Content */,
 				376FEAEE27698D1600571A78 /* SettingsView.swift */,
+				3725BF7F27697DCC00A1B4E8 /* Preview Content */,
 			);
 			path = "RNGTool Mobile";
 			sourceTree = "<group>";
@@ -295,19 +294,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
-				376FEAEA27698C4600571A78 /* AdvancedSettings.swift in Sources */,
 				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
+				37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */,
 				376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */,
-				376FEAEB27698C4600571A78 /* CardSettings.swift in Sources */,
-				376FEAED27698C4600571A78 /* DiceSettings.swift in Sources */,
+				37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */,
 				376FEAE3276983FF00571A78 /* CardMode.swift in Sources */,
 				376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */,
+				37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */,
+				37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */,
 				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
 				376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */,
-				376FEAE827698C4600571A78 /* MarbleSettings.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
 				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
-				376FEAEC27698C4600571A78 /* NumberSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +378,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -413,7 +411,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;

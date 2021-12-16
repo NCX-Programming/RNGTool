@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            List() {
+            Form {
                 NavigationLink(destination: NumberMode()) {
                     Image(systemName: "number")
                         .foregroundColor(.accentColor)
@@ -33,7 +33,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("RNGTool")
-            .toolbar{
+            .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")

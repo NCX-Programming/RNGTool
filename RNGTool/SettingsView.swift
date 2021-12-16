@@ -18,29 +18,37 @@ struct SettingsView: View {
                     Label("Number Mode", systemImage: "number")
                 }
                 .tag(Tabs.number)
-            DiceSettings()
-                .tabItem {
-                    Label("Dice Mode", image: "dice")
-                }
-                .tag(Tabs.dice)
-            CardSettings()
-                .tabItem {
-                    Label("Card Mode", systemImage: "rectangle.grid.3x2")
-                }
-                .tag(Tabs.card)
-            MarbleSettings()
-                .tabItem {
-                    Label("Marble Mode", systemImage: "a.circle")
-                }
-                .tag(Tabs.marble)
-            AdvancedSettings()
-                .tabItem {
-                    Label("Advanced Settings", systemImage: "gear")
-                }
-                .tag(Tabs.advanced)
+            Form {
+                DiceSettings()
+            }
+            .tabItem {
+                Label("Dice Mode", image: "dice")
+            }
+            .tag(Tabs.dice)
+            Form {
+                CardSettings()
+            }
+            .tabItem {
+                Label("Card Mode", systemImage: "rectangle.grid.3x2")
+            }
+            .tag(Tabs.card)
+            Form {
+                MarbleSettings()
+            }
+            .tabItem {
+                Label("Marble Mode", systemImage: "a.circle")
+            }
+            .tag(Tabs.marble)
+            Form {
+                AdvancedSettings()
+            }
+            .tabItem {
+                Label("Advanced Settings", systemImage: "gear")
+            }
+            .tag(Tabs.advanced)
         }
         .padding(20)
-        .frame(width: 450, height: 350)
+        .frame(width: 500, height: 350)
     }
 }
 
