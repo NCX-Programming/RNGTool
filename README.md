@@ -1,5 +1,5 @@
 # RNGTool
-The best way to generate random numbers on macOS 11.3+
+The best way to generate random numbers on macOS 11.3+ and iOS 14.0+ (kinda)
 
 ![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
 
@@ -24,3 +24,5 @@ Generate up to 5 random numbers and letters using marbles. Marble icons are show
 ## Installation
 GitHub Actions automatically builds RNGTool and then creates a DMG installer for it every time we push a commit. Click [here](https://nightly.link/NCX-Programming/RNGTool/workflows/swift/main/RNGTool-Installer-latest.dmg.zip) to download the latest successful build, or [here](https://github.com/NCX-Programming/RNGTool/actions) to view all runs. You will have to Right Click > Open the first time you try and run the program in order to get past Gatekeeper, as unfortunately these binaries are not signed. An auto-generated checksum is also available if you'd like to verify the file before installing it. ([Download latest checksum file](https://nightly.link/NCX-Programming/RNGTool/workflows/swift/main/RNGTool-Checksums.zip))
 These direct download links are provided by [nightly.link](https://nightly.link)
+## iOS
+An iOS version of RNGTool now exists, however I am not an Apple Developer so I cannot distribute builds properly. I am planning to provide IPAs in both releases and actions, but you'll need to use a sideloading tool such as [Sideloadly](https://sideloadly.io) or [AltStore](https://altstore.io) or have a jailbroken device. Another way, if you have a Mac, is to clone the source and have Xcode install the app to your device as a development target (this shares the same limitations as sideloading though, as it'll only last for 7 days without a developer account).
