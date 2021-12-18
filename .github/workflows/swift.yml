@@ -34,22 +34,40 @@ jobs:
         echo "::set-output name=committer_name::$(git log -1 $GITHUB_SHA --pretty=%cN)"
         echo "::set-output name=commit_subject::$(git log -1 $GITHUB_SHA --pretty=%s)"
         echo "::set-output name=commit_message::$(git log -1 $GITHUB_SHA --pretty=%b)"
-    - name: Download and Prepare DMG Kit
+    - name: Build for iOS
+      run: |
+        xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+    - name: Download and Prepare Files for Publishing
       run: |
         curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
         unzip ~/RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
         mkdir ~/RNGToolDMGKit/source_folder
         mv build/Release/RNGTool.app ~/RNGToolDMGKit/source_folder
+        
+        mkdir ~/RNGTooliOS
+        mkdir ~/RNGTooliOS/Payload
+        mv build/Release-iphoneos/RNGTool.app ~/RNGTooliOS/Payload
     - name: Build DMG From Kit
       run: |
         cd ~/RNGToolDMGKit
         chmod +x create-dmg.sh
         ./create-dmg.sh
+    - name: Create IPA File
+      run: |
+        cd ~
+        touch RNGTooliOS/iTunesArtwork
+        zip -r RNGTool.zip RNGTooliOS/
+        mv RNGTool.zip RNGTool.ipa
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
       with:
         path: ~/RNGToolDMGKit/RNGTool-Installer.dmg
         name: RNGTool-Installer-latest.dmg
+    - name: Publish IPA File
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/RNGTool.ipa
+        name: RNGTool.ipa
     - name: Generate DMG Checksums
       run: |
         mkdir ~/RNGTool-Checksums
