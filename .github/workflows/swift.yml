@@ -68,7 +68,7 @@ jobs:
     - name: Build for iOS
       id: build-ios
       run: |
-        xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+        /Applications/Xcode_13.2.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
     - name: Prepare Files for IPA
       run: |
         mkdir ~/RNGTooliOS
