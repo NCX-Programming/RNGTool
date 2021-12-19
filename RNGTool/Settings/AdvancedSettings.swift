@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AdvancedSettings: View {
+    
     @AppStorage("confirmGenResets") private var confirmGenResets = true
     @State private var showAlert = false
     

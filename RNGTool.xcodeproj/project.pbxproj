@@ -25,9 +25,11 @@
 		376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
 		376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		376FEAE3276983FF00571A78 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
-		376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
+		37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
+		37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
+		37AB5BB8276FE46D00F753FC /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB7276FE46D00F753FC /* NumberMode.swift */; };
 		37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
 		37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
@@ -59,6 +61,8 @@
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 		376FEAEE27698D1600571A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		37AB5BB3276FCFC700F753FC /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
+		37AB5BB7276FE46D00F753FC /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGTool-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				37AB5BB6276FE42400F753FC /* Modes */,
 				37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */,
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
 				376FEAEE27698D1600571A78 /* SettingsView.swift */,
@@ -151,9 +156,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		37AB5BB6276FE42400F753FC /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
+			);
+			path = Modes;
+			sourceTree = "<group>";
+		};
 		37DB700426FC03FE0079F3E7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				37AB5BB3276FCFC700F753FC /* SettingsData.swift */,
 				371301692719165A0061D344 /* AdvancedSettings.swift */,
 				37010B962702697B00E32C35 /* MarbleSettings.swift */,
 				374B0EE627001761006CCD69 /* NumberSettings.swift */,
@@ -281,6 +295,7 @@
 				374B0EE527001749006CCD69 /* CardSettings.swift in Sources */,
 				37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */,
 				37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */,
+				37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */,
 				37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */,
 				374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */,
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
@@ -295,10 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */,
 				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
 				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
 				37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */,
-				376FEAE4276983FF00571A78 /* NumberMode.swift in Sources */,
 				37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */,
 				376FEAE3276983FF00571A78 /* CardMode.swift in Sources */,
 				376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */,
@@ -308,6 +323,7 @@
 				376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
 				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
+				37AB5BB8276FE46D00F753FC /* NumberMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
@@ -399,6 +416,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -413,6 +431,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
@@ -433,6 +452,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

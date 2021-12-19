@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct MarbleSettings: View {
-    @AppStorage("showLetterList") private var showLetterList = false
+    @StateObject var settingsData: SettingsData = SettingsData()
     
     var body: some View {
-        Toggle("Show list of letters", isOn: $showLetterList)
+        Toggle("Show list of letters", isOn: $settingsData.showLetterList)
         Text("This will make it so that a list of letters will be shown below the marble icons.")
             .foregroundColor(.secondary)
     }

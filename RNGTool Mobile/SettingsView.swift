@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("maxNumberDefault") private var maxNumberDefault = 100
-    @AppStorage("minNumberDefault") private var minNumberDefault = 0
+    @StateObject var settingsData: SettingsData = SettingsData()
     let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     @State private var maxNumberInput = ""
@@ -32,8 +31,8 @@ struct SettingsView: View {
                     Text("Min Number")
                 }
                 .onAppear {
-                    maxNumberInput = "\(maxNumberDefault)"
-                    minNumberInput = "\(minNumberDefault)"
+                    maxNumberInput = "\(settingsData.maxNumberDefault)"
+                    minNumberInput = "\(settingsData.minNumberDefault)"
                 }
                 Button(action:{
                     showResetPrompt = true
@@ -60,8 +59,8 @@ struct SettingsView: View {
                         alertMessage = "You must specify a minimum and maximum number!"
                     }
                     else {
-                        maxNumberDefault = Int(maxNumberInput)!
-                        minNumberDefault = Int(minNumberInput)!
+                        settingsData.maxNumberDefault = Int(maxNumberInput)!
+                        settingsData.minNumberDefault = Int(minNumberInput)!
                         showAlert = true
                         alertTitle = "Numbers Saved"
                         alertMessage = "Your new maximum and minimum numbers have been saved."

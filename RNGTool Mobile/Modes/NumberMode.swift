@@ -1,8 +1,8 @@
 //
 //  NumberMode.swift
-//  RNGTool
+//  RNGTool Mobile
 //
-//  Created by Campbell on 8/30/21.
+//  Created by Campbell on 12/19/21.
 //
 
 import SwiftUI

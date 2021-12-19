@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct DiceSettings: View {
-    @AppStorage("forceSixSides") private var forceSixSides = false
-    @AppStorage("allowDiceImages") private var allowDiceImages = true
+    @StateObject var settingsData: SettingsData = SettingsData()
 
     var body: some View {
-        Toggle("Enable dice images", isOn: $allowDiceImages)
+        Toggle("Enable dice images", isOn: $settingsData.allowDiceImages)
         Text("Show images of the rolled dice. This is enabled by default.")
             .foregroundColor(.secondary)
-        Toggle("Force 6 sides per die", isOn: $forceSixSides)
-            .disabled(!allowDiceImages)
+        Toggle("Force 6 sides per die", isOn: $settingsData.forceSixSides)
+            .disabled(!settingsData.allowDiceImages)
         Text("This will make it so that the dice images will always be shown.")
             .foregroundColor(.secondary)
     }
