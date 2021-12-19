@@ -22,9 +22,6 @@
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
 		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
-		376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
-		376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
-		376FEAE3276983FF00571A78 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
 		37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
@@ -41,6 +38,9 @@
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
+		37FC9815276FEAD20040BFB9 /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9814276FEAD20040BFB9 /* DiceMode.swift */; };
+		37FC9818276FEE600040BFB9 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9817276FEE600040BFB9 /* CardMode.swift */; };
+		37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9819276FF1D20040BFB9 /* MarbleMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +71,9 @@
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
 		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		37FC9814276FEAD20040BFB9 /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
+		37FC9817276FEE600040BFB9 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
+		37FC9819276FF1D20040BFB9 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,9 @@
 		37AB5BB6276FE42400F753FC /* Modes */ = {
 			isa = PBXGroup;
 			children = (
+				37FC9814276FEAD20040BFB9 /* DiceMode.swift */,
+				37FC9817276FEE600040BFB9 /* CardMode.swift */,
+				37FC9819276FF1D20040BFB9 /* MarbleMode.swift */,
 				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
 			);
 			path = Modes;
@@ -311,16 +317,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */,
+				37FC9815276FEAD20040BFB9 /* DiceMode.swift in Sources */,
 				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
 				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
 				37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */,
 				37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */,
-				376FEAE3276983FF00571A78 /* CardMode.swift in Sources */,
-				376FEAE1276983FF00571A78 /* MarbleMode.swift in Sources */,
 				37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */,
+				37FC9818276FEE600040BFB9 /* CardMode.swift in Sources */,
 				37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */,
+				37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */,
 				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
-				376FEAE2276983FF00571A78 /* DiceMode.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
 				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
 				37AB5BB8276FE46D00F753FC /* NumberMode.swift in Sources */,
@@ -397,7 +403,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -433,7 +439,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;

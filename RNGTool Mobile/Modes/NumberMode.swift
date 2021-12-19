@@ -57,7 +57,7 @@ struct NumberMode: View {
                     Image(systemName: "doc.on.doc.fill")
                 }
                 .font(.system(size: 12, weight:.bold, design: .rounded))
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(5)
                 .background(Color.accentColor)
@@ -108,7 +108,7 @@ struct NumberMode: View {
                         
                 }
                 .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(5)
                 .background(Color.accentColor)
@@ -125,7 +125,7 @@ struct NumberMode: View {
                     Image(systemName: "clear.fill")
                 }
                 .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(5)
                 .background(Color.accentColor)
