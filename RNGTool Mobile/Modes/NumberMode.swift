@@ -44,109 +44,106 @@ struct NumberMode: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading){
-                Text("Generate a single number using a maximum and minimum number")
-                    .font(.title3)
+            Text("Generate a single number using a maximum and minimum number")
+                .font(.title3)
+            Divider()
+            Text(randomNumberStr)
+                .font(.title2)
+                .padding(.bottom, 5)
+            if(showCopy){
+                Button(action:{
+                    copyToClipboard(item: "\(randomNumber)")
+                }) {
+                    Image(systemName: "doc.on.doc.fill")
+                }
+                .font(.system(size: 12, weight:.bold, design: .rounded))
+                .foregroundColor(.primary)
+                .padding(.horizontal)
+                .padding(5)
+                .background(Color.accentColor)
+                .cornerRadius(20)
+                .padding(.bottom, 10)
                 Divider()
-                Text(randomNumberStr)
-                    .font(.title2)
-                    .padding(.bottom, 5)
-                if(showCopy){
-                    Button(action:{
-                        copyToClipboard(item: "\(randomNumber)")
-                    }) {
-                        Image(systemName: "doc.on.doc.fill")
+            }
+            Group() {
+                Text("Maximum Number: \(maxNumberInput). Tap to set a custom value.")
+                    .onTapGesture {
+                        showMaxEditor.toggle()
                     }
-                    .padding(.bottom, 10)
-                    Divider()
+                    .help("Tap here to set a custom maximum number")
+                    .onAppear{
+                        maxNumberInput="\(settingsData.maxNumberDefault)"
+                    }
+                if(showMaxEditor){
+                    TextField("Enter a number", text: $maxNumberInput)
+                        
                 }
-                Group() {
-                    Text("Maximum Number: \(maxNumberInput). Right click to set a custom value.")
-                        .contextMenu {
-                            Toggle("Show Editor", isOn: $showMaxEditor)
-                            Button(action: {
-                                maxNumber = 0
-                                maxNumberInput = ""
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    showMaxEditor.toggle()
-                                }
-                            }) {
-                                Text("Set to Default")
-                            }
-                        }
-                        .help("Right click here to set a custom maximum number")
-                        .onAppear{
-                            maxNumberInput="\(settingsData.maxNumberDefault)"
-                        }
-                    if(showMaxEditor){
-                        TextField("Enter a number", text: $maxNumberInput)
-                            .frame(width: 300)
-                            
+                Divider()
+                Text("Minimum Number: \(settingsData.minNumberDefault). Tap to set a custom value.")
+                    .onTapGesture {
+                        showMinEditor.toggle()
                     }
-                    Divider()
-                    Text("Minimum Number: \(settingsData.minNumberDefault). Right click to set a custom value.")
-                        .contextMenu {
-                            Toggle("Show Editor", isOn: $showMinEditor)
-                            Button(action: {
-                                minNumber = 0
-                                minNumberInput = ""
-                                withAnimation (.easeInOut(duration: 0.5)){
-                                    showMinEditor.toggle()}
-                            }) {
-                                Text("Set to Default")
-                            }
-                        }
-                        .help("Right click here to set a custom minimum number")
-                        .onAppear{
-                            minNumberInput="\(settingsData.minNumberDefault)"
-                        }
-                    if(showMinEditor){
-                        TextField("Enter a number", text: $minNumberInput)
-                            .frame(width: 300)
+                    .help("Tap here to set a custom minimum number")
+                    .onAppear{
+                        minNumberInput="\(settingsData.minNumberDefault)"
                     }
-                    Divider()
+                if(showMinEditor){
+                    TextField("Enter a number", text: $minNumberInput)
                 }
-                HStack {
-                    Button(action:{
-                        maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
-                        minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
-                        randomNumber = Int.random(in: minNumber..<maxNumber)
-                        withAnimation (.easeInOut(duration: 0.5)) {
-                            showCopy = true
-                            self.randomNumberStr = "Your random number: \(randomNumber)"
-                        }
-                        maxNumberInput="\(maxNumber)"
-                        minNumberInput="\(minNumber)"
-                    }) {
-                        Image(systemName: "play.fill")
-                            
+                Divider()
+            }
+            HStack {
+                Button(action:{
+                    maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
+                    minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
+                    randomNumber = Int.random(in: minNumber..<maxNumber)
+                    withAnimation (.easeInOut(duration: 0.5)) {
+                        showCopy = true
+                        self.randomNumberStr = "Your random number: \(randomNumber)"
                     }
-                    .help("Generate a number")
-                    Button(action:{
-                        if(settingsData.confirmGenResets){
-                            confirmReset = true
-                        }
-                        else {
+                    maxNumberInput="\(maxNumber)"
+                    minNumberInput="\(minNumber)"
+                }) {
+                    Image(systemName: "play.fill")
+                        
+                }
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .foregroundColor(.primary)
+                .padding(.horizontal)
+                .padding(5)
+                .background(Color.accentColor)
+                .cornerRadius(20)
+                .help("Generate a number")
+                Button(action:{
+                    if(settingsData.confirmGenResets){
+                        confirmReset = true
+                    }
+                    else {
+                        resetGen()
+                    }
+                }) {
+                    Image(systemName: "clear.fill")
+                }
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .foregroundColor(.primary)
+                .padding(.horizontal)
+                .padding(5)
+                .background(Color.accentColor)
+                .cornerRadius(20)
+                .help("Reset custom values and output")
+                .alert(isPresented: $confirmReset){
+                    Alert(
+                        title: Text("Confirm Reset"),
+                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
+                        primaryButton: .default(Text("Confirm")){
                             resetGen()
-                        }
-                    }) {
-                        Image(systemName: "clear.fill")
-                    }
-                    .help("Reset custom values and output")
-                    .alert(isPresented: $confirmReset){
-                        Alert(
-                            title: Text("Confirm Reset"),
-                            message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                            primaryButton: .default(Text("Confirm")){
-                                resetGen()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
-            .padding(.leading, 12)
         }
+        .padding(.horizontal, 3)
         .navigationTitle("Numbers")
         #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
