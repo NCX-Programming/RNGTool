@@ -21,15 +21,9 @@ struct NumberSettings: View {
             VStack(alignment: .leading) {
                 Text("Change Default Numbers")
                     .font(.title2)
-                Text("Default Maximum Number")
-                    .padding(.top, 10)
-                    .font(.title3)
-                TextField("Enter a number:", text: $maxNumberInput)
+                TextField("Maximum Number:", text: $maxNumberInput)
                     .frame(width: 300)
-                Text("Default Minimum Number")
-                    .padding(.top, 10)
-                    .font(.title3)
-                TextField("Enter a number:", text: $minNumberInput)
+                TextField("Minimum Number:", text: $minNumberInput)
                     .frame(width: 300)
             }
             .onAppear {
@@ -81,8 +75,6 @@ struct NumberSettings: View {
             }
             .padding(.top, 5)
         }
-        .padding(20)
-        .frame(width: 450, height: 350)
     }
 }
 

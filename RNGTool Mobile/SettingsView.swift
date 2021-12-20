@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var settingsData: SettingsData = SettingsData()
-    let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var showResetPrompt = false
@@ -85,20 +83,20 @@ struct SettingsView: View {
             Section(header: Text("Marble Settings")) {
                 MarbleSettings()
             }
-            Section(header: Text("Advanced Settings")) {
+            Section(header: Text("Other")) {
                 Button(action:{
                     showAdvSet = true
                 }) {
                     Text("Show Advanced Settings")
                 }
+                NavigationLink(destination: About()) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                    Text("About RNGTool")
+                }
             }
         }
-        Text("RNGTool Version: v\(appVersionString), Build: \(buildNumber)")
-            .foregroundColor(.secondary)
-            .font(.caption)
-        Text("© 2021 NCX Programming")
-            .foregroundColor(.secondary)
-            .font(.caption)
+
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showAdvSet, content: {

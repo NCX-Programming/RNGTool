@@ -180,13 +180,11 @@ struct CardMode: View {
                             Image(cardImages[index]).resizable()
                                 .frame(width: 192, height: 256)
                                 .offset(x: CGFloat(25*index),y: 0)
-                                
                         }
                     }
                 }
             }
             .padding(.trailing, CGFloat(20*numOfCards))
-            
         }
         .padding(.horizontal, 3)
         .navigationTitle("Cards")
