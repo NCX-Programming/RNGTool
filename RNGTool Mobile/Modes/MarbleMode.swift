@@ -54,11 +54,9 @@ struct MarbleMode: View {
                 }
                 if(showLetterList) {
                     Text(randomLetterStr)
-                        .font(.title3)
                         .padding(.bottom, 5)
                 }
                 Text(randomNumberStr)
-                    .font(.title3)
                     .padding(.bottom, 5)
                 if(showMarbles){
                     Button(action:{

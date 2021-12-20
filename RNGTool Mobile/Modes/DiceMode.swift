@@ -58,7 +58,6 @@ struct DiceMode: View {
                     }
                 }
                 Text(randomNumberStr)
-                    .font(.title3)
                     .padding(.bottom, 5)
                 if(showDice){
                     Button(action:{
