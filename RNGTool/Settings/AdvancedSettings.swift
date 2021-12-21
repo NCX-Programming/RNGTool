@@ -15,6 +15,7 @@ struct AdvancedSettings: View {
     var body: some View {
         Toggle("Ask to confirm resetting the generator", isOn: $confirmGenResets)
         Text("Disabling this will allow you to reset the generator without having to confirm it first.")
+            .font(.subheadline)
             .foregroundColor(.secondary)
         Button(action:{
             showAlert = true
@@ -37,6 +38,7 @@ struct AdvancedSettings: View {
             )
         }
         Text("This will reset all of RNGTool's settings to their default values!")
+            .font(.subheadline)
             .foregroundColor(.secondary)
     }
 }

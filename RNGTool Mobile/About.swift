@@ -21,6 +21,30 @@ struct About: View {
             Text("© 2021 NCX Programming")
                 .foregroundColor(.secondary)
                 .font(.title3)
+            Spacer()
+            Text("Powered by Swift and SwiftUI")
+                .padding(.bottom, 25)
+            Link(destination: URL(string:"https://github.com/NCX-Programming")!) {
+                Image(systemName: "link.circle")
+                Text("Our GitHub")
+            }
+                .frame(maxWidth: UIScreen.main.bounds.width-50)
+                .padding(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
+            Link(destination: URL(string:"https://github.com/NCX-Programming/RNGTool")!) {
+                Image(systemName: "link.circle")
+                Text("This Project")
+            }
+                .frame(maxWidth: UIScreen.main.bounds.width-50)
+                .padding(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
+            Link(destination: URL(string:"https://ncxprogramming.com/contactus")!) {
+                Image(systemName: "link.circle")
+                Text("Contact Us")
+            }
+                .frame(maxWidth: UIScreen.main.bounds.width-50)
+                .padding(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
         }
     }
 }
