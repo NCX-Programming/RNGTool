@@ -1,5 +1,5 @@
 # RNGTool
-The best way to generate random numbers on macOS 11.3+ and iOS 14.0+ (kinda)
+The best way to generate random numbers on macOS 11.3+ and iOS 15.0+ (kinda)
 
 ![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
 
