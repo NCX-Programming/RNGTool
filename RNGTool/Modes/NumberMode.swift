@@ -117,6 +117,8 @@ struct NumberMode: View {
                         }
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"
+                        
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: randomNumber))
                     }) {
                         Image(systemName: "play.fill")
                             

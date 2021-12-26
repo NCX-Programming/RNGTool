@@ -8,7 +8,15 @@
 import Foundation
 import SwiftUI
 
+struct HistoryTable: Identifiable {
+    var modeUsed: String
+    var numbers: Int
+    let id = UUID()
+}
+
 class SettingsData : ObservableObject {
+    // Variable to store the
+    @Published var historyTable = [HistoryTable]()
     // Advanced Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
     // Number Settings

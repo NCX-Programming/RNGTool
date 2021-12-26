@@ -14,6 +14,7 @@
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
 		37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
 		3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
+		371A2FF12777A7A500B94F66 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A2FF02777A7A500B94F66 /* History.swift */; };
 		3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
 		3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */; };
 		3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
@@ -21,6 +22,7 @@
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
+		375C2A0B2778055E00904A03 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375C2A0A2778055E00904A03 /* Launch Screen.storyboard */; };
 		37688CDD27713837003B64CB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
 		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
@@ -55,12 +57,14 @@
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
 		37010B962702697B00E32C35 /* MarbleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleSettings.swift; sourceTree = "<group>"; };
 		371301692719165A0061D344 /* AdvancedSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettings.swift; sourceTree = "<group>"; };
+		371A2FF02777A7A500B94F66 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3725BF7727697DC900A1B4E8 /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3725BF7B27697DC900A1B4E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
+		375C2A0A2778055E00904A03 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		37688CDC27713837003B64CB /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		376FEAEE27698D1600571A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37AB5BB3276FCFC700F753FC /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 			children = (
 				37EF2027274F3B5800FD62BD /* Utilities.swift */,
 				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
+				371A2FF02777A7A500B94F66 /* History.swift */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
 				37DB700426FC03FE0079F3E7 /* Settings */,
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
@@ -126,6 +131,7 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
 				37AB5BB6276FE42400F753FC /* Modes */,
 				37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */,
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
@@ -284,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				375C2A0B2778055E00904A03 /* Launch Screen.storyboard in Resources */,
 				376FEADF276980B700571A78 /* Assets.xcassets in Resources */,
 				3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */,
 			);
@@ -296,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				371A2FF12777A7A500B94F66 /* History.swift in Sources */,
 				3700F28226DD256D001BEE7A /* ContentView.swift in Sources */,
 				37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */,
 				3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */,
@@ -350,7 +358,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 166;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -361,7 +369,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -379,7 +387,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 166;
+				CURRENT_PROJECT_VERSION = 167;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -390,7 +398,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -407,7 +415,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -416,6 +424,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -423,7 +432,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -443,7 +452,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -452,6 +461,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -459,7 +469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.1;
+				MARKETING_VERSION = 1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
