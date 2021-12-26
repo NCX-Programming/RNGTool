@@ -10,6 +10,7 @@ import SwiftUI
 struct About: View {
     let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let buildNumber: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    let copyright: String = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
     
     var body: some View {
         ScrollView {
@@ -18,7 +19,7 @@ struct About: View {
             Text("Version: v\(appVersionString), Build: \(buildNumber)")
                 .foregroundColor(.secondary)
                 .font(.title2)
-            Text("© 2021 NCX Programming")
+            Text(copyright)
                 .foregroundColor(.secondary)
                 .font(.title3)
             Spacer()
