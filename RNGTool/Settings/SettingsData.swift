@@ -10,13 +10,15 @@ import SwiftUI
 
 struct HistoryTable: Identifiable {
     var modeUsed: String
-    var numbers: Int
+    var numbers: String
     let id = UUID()
 }
 
 class SettingsData : ObservableObject {
     // Variable to store the
-    @Published var historyTable = [HistoryTable]()
+    @Published var historyTable = [
+        HistoryTable(modeUsed: "Number Mode", numbers: "0"),
+    ]
     // Advanced Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
     // Number Settings

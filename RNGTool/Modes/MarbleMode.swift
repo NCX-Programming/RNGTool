@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MarbleMode: View {
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
-    @AppStorage("showLetterList") private var showLetterList = false
+    @StateObject var settingsData: SettingsData = SettingsData()
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -53,7 +52,7 @@ struct MarbleMode: View {
                             }
                         }
                     }
-                    if(showLetterList) {
+                    if(settingsData.showLetterList) {
                         Text(randomLetterStr)
                             .font(.title2)
                             .padding(.bottom, 5)
@@ -101,14 +100,20 @@ struct MarbleMode: View {
                             randomLetterStr = "Your random letter(s): \(randomLetters)"
                             randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        withAnimation(.easeInOut(duration: 0.5)){
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             showMarbles = true
+                        }
+                        if(settingsData.historyTable.count != 50) {
+                            settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
+                        }
+                        else {
+                            settingsData.historyTable.remove(at: 0)
                         }
                     }) {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        if(confirmGenResets){
+                        if(settingsData.confirmGenResets){
                             confirmReset = true
                         }
                         else {
