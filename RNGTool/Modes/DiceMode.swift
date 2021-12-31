@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct DiceMode: View {
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
-    @AppStorage("forceSixSides") private var forceSixSides = false
-    @AppStorage("allowDiceImages") private var allowDiceImages = true
+    @EnvironmentObject var settingsData: SettingsData
     @State private var numOfDice = 1
     @State private var numOfSides = 6
     @State private var confirmReset = false
@@ -49,7 +47,7 @@ struct DiceMode: View {
                     Text("Generate multiple numbers using dice")
                         .font(.title3)
                     Divider()
-                    if(showDice && allowDiceImages){
+                    if(showDice && settingsData.allowDiceImages){
                         HStack(){
                             ForEach(0..<numOfDice, id: \.self) { index in
                               Image(diceImages[index])
@@ -91,8 +89,8 @@ struct DiceMode: View {
                         Text("Sides on each die: \(numOfSides)")
                             .font(.title3)
                     }
-                    .disabled(forceSixSides && allowDiceImages)
-                    .help(forceSixSides ? "This option is disabled by \"Force 6 sides per die\" in settings": "")
+                    .disabled(settingsData.forceSixSides && settingsData.allowDiceImages)
+                    .help(settingsData.forceSixSides ? "This option is disabled by \"Force 6 sides per die\" in settings": "")
                     Text("Maximum of 20, minimum of 6. Images are only shown for 6-sided dice.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -121,11 +119,18 @@ struct DiceMode: View {
                                 showDice = false
                             }
                         }
+                        if(settingsData.historyTable.count != 50) {
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                        }
+                        else {
+                            settingsData.historyTable.remove(at: 0)
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                        }
                     }) {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        if(confirmGenResets){
+                        if(settingsData.confirmGenResets){
                             confirmReset = true
                         }
                         else {

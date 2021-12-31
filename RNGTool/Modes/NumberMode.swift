@@ -118,7 +118,13 @@ struct NumberMode: View {
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"
                         
-                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
+                        if(settingsData.historyTable.count != 50) {
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
+                        }
+                        else {
+                            settingsData.historyTable.remove(at: 0)
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
+                        }
                     }) {
                         Image(systemName: "play.fill")
                             

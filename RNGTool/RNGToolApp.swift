@@ -20,7 +20,7 @@ struct RNGToolApp: App {
         }
         #if os(macOS)
         Settings {
-            SettingsView()
+            SettingsView().environmentObject(settingsData)
         }
         WindowGroup("History") {
             History().environmentObject(settingsData)

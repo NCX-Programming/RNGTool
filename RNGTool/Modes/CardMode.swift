@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct CardMode: View {
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
-    @AppStorage("showPoints") private var showPoints = false
-    @AppStorage("aceValue") private var aceValue = 1
-    @AppStorage("useFaces") private var useFaces = true
+    @EnvironmentObject var settingsData: SettingsData
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
@@ -68,11 +65,11 @@ struct CardMode: View {
                             self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        if(showPoints){
+                        if(settingsData.showPoints){
                             pointValues.removeAll()
                             for n in 0..<numOfCards{
                                 if(randomNumbers[n]==1){
-                                    pointValues.append(aceValue)
+                                    pointValues.append(settingsData.aceValue)
                                 }
                                 else if(randomNumbers[n]>1 && randomNumbers[n]<11){
                                     pointValues.append(randomNumbers[n])
@@ -91,7 +88,7 @@ struct CardMode: View {
                                 self.pointValueStr = ""
                             }
                         }
-                        if(useFaces){
+                        if(settingsData.useFaces){
                             for n in 0..<numOfCards{
                                 switch randomNumbers[n]{
                                 case 1:
@@ -115,11 +112,18 @@ struct CardMode: View {
                         withAnimation(.easeInOut(duration: 0.5)){
                             showCards = true
                         }
+                        if(settingsData.historyTable.count != 50) {
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
+                        }
+                        else {
+                            settingsData.historyTable.remove(at: 0)
+                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
+                        }
                     }) {
                         Image(systemName: "play.fill")
                     }
                     Button(action:{
-                        if(confirmGenResets){
+                        if(settingsData.confirmGenResets){
                             confirmReset = true
                         }
                         else {
