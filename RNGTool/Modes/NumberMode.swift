@@ -15,7 +15,7 @@ extension String.StringInterpolation {
 }
 
 struct NumberMode: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
@@ -118,7 +118,7 @@ struct NumberMode: View {
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"
                         
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
+                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
                     }) {
                         Image(systemName: "play.fill")
                             

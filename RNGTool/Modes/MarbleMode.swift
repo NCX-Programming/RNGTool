@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MarbleMode: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -108,6 +108,7 @@ struct MarbleMode: View {
                         }
                         else {
                             settingsData.historyTable.remove(at: 0)
+                            settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
                         }
                     }) {
                         Image(systemName: "play.fill")

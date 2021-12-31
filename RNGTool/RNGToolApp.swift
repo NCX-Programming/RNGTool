@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct RNGToolApp: App {
+    @StateObject var settingsData: SettingsData = SettingsData()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(settingsData)
         }
         .commands {
             RNGToolCommands()
@@ -21,7 +23,7 @@ struct RNGToolApp: App {
             SettingsView()
         }
         WindowGroup("History") {
-            History()
+            History().environmentObject(settingsData)
         }.handlesExternalEvents(matching: Set(arrayLiteral: "History"))
         #endif
     }
@@ -32,7 +34,7 @@ enum OpenWindows: String, CaseIterable {
     case History = "History"
 
     func open(){
-        if let url = URL(string: "rngtool://\(self.rawValue)") { //replace myapp with your app's name
+        if let url = URL(string: "rngtool://\(self.rawValue)") {
             NSWorkspace.shared.open(url)
         }
     }

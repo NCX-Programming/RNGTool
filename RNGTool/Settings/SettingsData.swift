@@ -15,10 +15,8 @@ struct HistoryTable: Identifiable {
 }
 
 class SettingsData : ObservableObject {
-    // Variable to store the
-    @Published var historyTable = [
-        HistoryTable(modeUsed: "Number Mode", numbers: "0"),
-    ]
+    // Variable to store the history of generated numbers
+    @Published var historyTable = [HistoryTable]()
     // Advanced Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
     // Number Settings

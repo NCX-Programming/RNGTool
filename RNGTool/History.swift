@@ -15,7 +15,7 @@ struct ExampleRow: View {
 }
 
 struct History: View {
-    @ObservedObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
         ScrollView {
