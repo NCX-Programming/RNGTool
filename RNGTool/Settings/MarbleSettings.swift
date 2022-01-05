@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MarbleSettings: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
         Toggle("Show list of letters", isOn: $settingsData.showLetterList)

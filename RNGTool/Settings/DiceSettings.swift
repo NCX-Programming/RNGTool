@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DiceSettings: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
 
     var body: some View {
         Toggle("Enable dice images", isOn: $settingsData.allowDiceImages)

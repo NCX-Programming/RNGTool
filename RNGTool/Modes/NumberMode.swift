@@ -156,9 +156,6 @@ struct NumberMode: View {
             .padding(.leading, 12)
         }
         .navigationTitle("Numbers")
-        #if !os(macOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 

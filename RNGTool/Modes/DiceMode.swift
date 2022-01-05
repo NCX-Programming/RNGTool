@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct DiceMode: View {
-    @EnvironmentObject var settingsData: SettingsData
+    @ObservedObject var settingsData: SettingsData = SettingsData()
+    //@EnvironmentObject var settingsData: SettingsData
     @State private var numOfDice = 1
     @State private var numOfSides = 6
     @State private var confirmReset = false
@@ -155,9 +156,6 @@ struct DiceMode: View {
             .padding(.leading, 12)
         }
         .navigationTitle("Dice")
-        #if !os(macOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 

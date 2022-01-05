@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MarbleMode: View {
-    @EnvironmentObject var settingsData: SettingsData
+    @ObservedObject var settingsData: SettingsData = SettingsData()
+    //@EnvironmentObject var settingsData: SettingsData
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -139,9 +140,6 @@ struct MarbleMode: View {
             .padding(.leading, 12)
         }
         .navigationTitle("Marbles")
-        #if !os(macOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 

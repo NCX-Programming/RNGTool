@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardSettings: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
         Picker("Card Style", selection: $settingsData.useFaces) {

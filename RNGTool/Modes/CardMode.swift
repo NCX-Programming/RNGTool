@@ -31,7 +31,7 @@ struct CardMode: View {
     }
     
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack(alignment: .leading) {
                 Group {
                     Text("Generate multiple numbers using cards")
@@ -42,13 +42,13 @@ struct CardMode: View {
                     Text("Number of cards")
                         .font(.title3)
                     // The seemingly unrelated code below is together because they must have the same max value
-                    Picker("", selection: $numOfCards){
+                    Picker("", selection: $numOfCards) {
                         ForEach(1..<8, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
                     .frame(width: 250)
-                    .onAppear{
+                    .onAppear {
                         for _ in 1..<8{
                             cardImages.append("c1")
                         }
@@ -58,23 +58,23 @@ struct CardMode: View {
                 HStack() {
                     Button(action: {
                         randomNumbers.removeAll()
-                        for _ in 0..<numOfCards{
+                        for _ in 0..<numOfCards {
                             randomNumbers.append(Int.random(in: 1..<14))
                         }
                         withAnimation (.easeInOut(duration: 0.5)) {
                             self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        if(settingsData.showPoints){
+                        if(settingsData.showPoints) {
                             pointValues.removeAll()
-                            for n in 0..<numOfCards{
-                                if(randomNumbers[n]==1){
+                            for n in 0..<numOfCards {
+                                if(randomNumbers[n]==1) {
                                     pointValues.append(settingsData.aceValue)
                                 }
-                                else if(randomNumbers[n]>1 && randomNumbers[n]<11){
+                                else if(randomNumbers[n]>1 && randomNumbers[n]<11) {
                                     pointValues.append(randomNumbers[n])
                                 }
-                                else{
+                                else {
                                     pointValues.append(10)
                                 }
                             }
@@ -173,7 +173,6 @@ struct CardMode: View {
                         }
                     }
                 }
-                Spacer()
             }
             .padding(.leading, 12)
         }
