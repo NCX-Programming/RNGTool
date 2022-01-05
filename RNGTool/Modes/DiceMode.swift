@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct DiceMode: View {
-    @ObservedObject var settingsData: SettingsData = SettingsData()
-    //@EnvironmentObject var settingsData: SettingsData
+    @EnvironmentObject var settingsData: SettingsData
     @State private var numOfDice = 1
     @State private var numOfSides = 6
     @State private var confirmReset = false
@@ -161,6 +160,6 @@ struct DiceMode: View {
 
 struct DiceMode_Previews: PreviewProvider {
     static var previews: some View {
-        DiceMode()
+        DiceMode().environmentObject(SettingsData())
     }
 }

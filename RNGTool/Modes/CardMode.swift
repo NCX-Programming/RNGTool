@@ -182,6 +182,6 @@ struct CardMode: View {
 
 struct CardMode_Previews: PreviewProvider {
     static var previews: some View {
-        CardMode()
+        CardMode().environmentObject(SettingsData())
     }
 }

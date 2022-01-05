@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MarbleMode: View {
-    @ObservedObject var settingsData: SettingsData = SettingsData()
-    //@EnvironmentObject var settingsData: SettingsData
+    @EnvironmentObject var settingsData: SettingsData
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -145,6 +144,6 @@ struct MarbleMode: View {
 
 struct MarbleMode_Previews: PreviewProvider {
     static var previews: some View {
-        MarbleMode()
+        MarbleMode().environmentObject(SettingsData())
     }
 }

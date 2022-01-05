@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var showResetPrompt = false
@@ -125,6 +125,6 @@ struct AdvancedSettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView().environmentObject(SettingsData())
     }
 }

@@ -15,8 +15,7 @@ struct ExampleRow: View {
 }
 
 struct History: View {
-    @ObservedObject var settingsData: SettingsData = SettingsData()
-    //@EnvironmentObject var settingsData: SettingsData
+    @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
         GeometryReader { geometry in
@@ -58,6 +57,6 @@ struct History: View {
 
 struct History_Previews: PreviewProvider {
     static var previews: some View {
-        History()
+        History().environmentObject(SettingsData())
     }
 }

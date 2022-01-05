@@ -15,7 +15,7 @@ extension String.StringInterpolation {
 }
 
 struct NumberMode: View {
-    @StateObject var settingsData: SettingsData = SettingsData()
+    @EnvironmentObject var settingsData: SettingsData
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
@@ -145,14 +145,12 @@ struct NumberMode: View {
         }
         .padding(.horizontal, 3)
         .navigationTitle("Numbers")
-        #if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 
 struct NumberMode_Previews: PreviewProvider {
     static var previews: some View {
-        NumberMode()
+        NumberMode().environmentObject(SettingsData())
     }
 }

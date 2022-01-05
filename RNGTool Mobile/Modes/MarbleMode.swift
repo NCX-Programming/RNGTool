@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MarbleMode: View {
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
-    @AppStorage("showLetterList") private var showLetterList = false
+    @EnvironmentObject var settingsData: SettingsData
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -52,7 +51,7 @@ struct MarbleMode: View {
                         }
                     }
                 }
-                if(showLetterList) {
+                if(settingsData.showLetterList) {
                     Text(randomLetterStr)
                         .padding(.bottom, 5)
                 }
@@ -117,7 +116,7 @@ struct MarbleMode: View {
                 .background(Color.accentColor)
                 .cornerRadius(20)
                 Button(action:{
-                    if(confirmGenResets){
+                    if(settingsData.confirmGenResets){
                         confirmReset = true
                     }
                     else {
@@ -153,6 +152,6 @@ struct MarbleMode: View {
 
 struct MarbleMode_Previews: PreviewProvider {
     static var previews: some View {
-        MarbleMode()
+        MarbleMode().environmentObject(SettingsData())
     }
 }

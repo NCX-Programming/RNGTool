@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct AdvancedSettings: View {
-    
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
+    @EnvironmentObject var settingsData: SettingsData
     @State private var showAlert = false
     
     var body: some View {
-        Toggle("Ask to confirm resetting the generator", isOn: $confirmGenResets)
+        Toggle("Ask to confirm resetting the generator", isOn: $settingsData.confirmGenResets)
         Text("Disabling this will allow you to reset the generator without having to confirm it first.")
             .font(.subheadline)
             .foregroundColor(.secondary)
@@ -31,7 +30,7 @@ struct AdvancedSettings: View {
                     resetDiceSet()
                     resetCardSet()
                     resetMarbleSet()
-                    confirmGenResets = true
+                    settingsData.confirmGenResets = true
                     showAlert = false
                 },
                 secondaryButton: .cancel()
@@ -45,6 +44,6 @@ struct AdvancedSettings: View {
 
 struct AdvancedSettings_Previews: PreviewProvider {
     static var previews: some View {
-        AdvancedSettings()
+        AdvancedSettings().environmentObject(SettingsData())
     }
 }

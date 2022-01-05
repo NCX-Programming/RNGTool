@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct CardMode: View {
-    @AppStorage("confirmGenResets") private var confirmGenResets = true
-    @AppStorage("showPoints") private var showPoints = false
-    @AppStorage("aceValue") private var aceValue = 1
-    @AppStorage("useFaces") private var useFaces = true
+    @EnvironmentObject var settingsData: SettingsData
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
@@ -67,11 +64,11 @@ struct CardMode: View {
                         self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                         randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                     }
-                    if(showPoints){
+                    if(settingsData.showPoints){
                         pointValues.removeAll()
                         for n in 0..<numOfCards{
                             if(randomNumbers[n]==1){
-                                pointValues.append(aceValue)
+                                pointValues.append(settingsData.aceValue)
                             }
                             else if(randomNumbers[n]>1 && randomNumbers[n]<11){
                                 pointValues.append(randomNumbers[n])
@@ -90,7 +87,7 @@ struct CardMode: View {
                             self.pointValueStr = ""
                         }
                     }
-                    if(useFaces){
+                    if(settingsData.useFaces){
                         for n in 0..<numOfCards{
                             switch randomNumbers[n]{
                             case 1:
@@ -124,7 +121,7 @@ struct CardMode: View {
                 .background(Color.accentColor)
                 .cornerRadius(20)
                 Button(action:{
-                    if(confirmGenResets){
+                    if(settingsData.confirmGenResets){
                         confirmReset = true
                     }
                     else {
@@ -194,6 +191,6 @@ struct CardMode: View {
 
 struct CardMode_Previews: PreviewProvider {
     static var previews: some View {
-        CardMode()
+        CardMode().environmentObject(SettingsData())
     }
 }
