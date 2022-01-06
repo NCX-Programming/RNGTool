@@ -31,5 +31,4 @@ class SettingsData : ObservableObject {
     @AppStorage("useFaces") var useFaces = true
     // Marble Settings
     @AppStorage("showLetterList") var showLetterList = false
-
 }

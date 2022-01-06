@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
@@ -20,7 +21,7 @@ struct CardMode: View {
     @State private var cardImages = [String]()
     
     func resetGen() {
-        withAnimation (.easeInOut(duration: 0.5)) {
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             pointValueStr = ""
             showCards = false
@@ -31,6 +32,7 @@ struct CardMode: View {
     }
     
     var body: some View {
+        GeometryReader { geometry in
         ScrollView{
             Group {
                 Text("Generate multiple numbers using cards")
@@ -60,7 +62,7 @@ struct CardMode: View {
                     for _ in 0..<numOfCards{
                         randomNumbers.append(Int.random(in: 1..<14))
                     }
-                    withAnimation (.easeInOut(duration: 0.5)) {
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                         self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                         randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                     }
@@ -77,13 +79,13 @@ struct CardMode: View {
                                 pointValues.append(10)
                             }
                         }
-                        withAnimation (.easeInOut(duration: 0.5)) {
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             self.pointValueStr = "Point value(s): \(pointValues)"
                             pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                     }
                     else{
-                        withAnimation (.easeInOut(duration: 0.5)){
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                             self.pointValueStr = ""
                         }
                     }
@@ -108,7 +110,7 @@ struct CardMode: View {
                             cardImages[n] = "c\(randomNumbers[n])"
                         }
                     }
-                    withAnimation(.easeInOut(duration: 0.5)){
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         showCards = true
                     }
                 }) {
@@ -176,12 +178,13 @@ struct CardMode: View {
                         ForEach(0..<numOfCards, id: \.self) { index in
                             Image(cardImages[index]).resizable()
                                 .frame(width: 192, height: 256)
-                                .offset(x: CGFloat(25*index),y: 0)
+                                .offset(x: CGFloat((geometry.size.width*0.075)*CGFloat(index)),y: 0)
                         }
                     }
                 }
             }
-            .padding(.trailing, CGFloat(20*numOfCards))
+            .padding(.trailing, CGFloat((geometry.size.width*0.075)*CGFloat((numOfCards-1))))
+        }
         }
         .padding(.horizontal, 3)
         .navigationTitle("Cards")

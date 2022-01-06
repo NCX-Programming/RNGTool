@@ -8,12 +8,6 @@
 import SwiftUI
 import Foundation
 
-struct ExampleRow: View {
-    var body: some View {
-        Text("Example Row")
-    }
-}
-
 struct History: View {
     @EnvironmentObject var settingsData: SettingsData
     

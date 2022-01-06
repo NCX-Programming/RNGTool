@@ -16,6 +16,7 @@ extension String.StringInterpolation {
 
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
@@ -33,7 +34,7 @@ struct NumberMode: View {
         minNumber = 0
         minNumberInput = "\(settingsData.minNumberDefault)"
         randomNumber = 0
-        withAnimation (.easeInOut(duration: 0.5)) {
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             showMaxEditor = false
             showMinEditor = false
@@ -97,7 +98,7 @@ struct NumberMode: View {
                     maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
                     minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
                     randomNumber = Int.random(in: minNumber..<maxNumber)
-                    withAnimation (.easeInOut(duration: 0.5)) {
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                         showCopy = true
                         self.randomNumberStr = "Your random number: \(randomNumber)"
                     }
