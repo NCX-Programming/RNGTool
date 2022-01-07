@@ -24,6 +24,8 @@ struct RNGToolApp: App {
         }
         WindowGroup("History") {
             History().environmentObject(settingsData)
+                .frame(width: 400, height: 200)
+                .frame(maxWidth: 400, maxHeight: 200)
         }.handlesExternalEvents(matching: Set(arrayLiteral: "History"))
         #endif
     }

@@ -15,37 +15,44 @@ struct History: View {
         GeometryReader { geometry in
             ScrollView {
                 HStack {
-                    List {
-                        Section(header: Text("ID")) {
-                            ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                                Text("\(index)")
-                            }
+                    VStack(alignment: .leading) {
+                        Text("ID")
+                            .foregroundColor(.secondary)
+                        Divider()
+                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                            Text("\(index)")
+                                .padding(.bottom, 3)
                         }
+                        Spacer()
                     }
-                    .disabled(true)
-                    .frame(width: 50, height: geometry.size.height)
-                    List {
-                        Section(header: Text("Mode Used")) {
-                            ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                                Text("\(settingsData.historyTable[index].modeUsed)")
-                            }
+                    .frame(width: 50)
+                    VStack(alignment: .leading) {
+                        Text("Mode Used")
+                            .foregroundColor(.secondary)
+                        Divider()
+                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                            Text("\(settingsData.historyTable[index].modeUsed)")
+                                .padding(.bottom, 3)
                         }
+                        Spacer()
                     }
-                    .disabled(true)
-                    .frame(width: 150, height: geometry.size.height)
-                    List {
-                        Section(header: Text("Number(s)")) {
-                            ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                                Text("\(settingsData.historyTable[index].numbers)")
-                            }
+                    .frame(width: 150)
+                    VStack(alignment: .leading) {
+                        Text("Number(s)")
+                            .foregroundColor(.secondary)
+                        Divider()
+                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                            Text("\(settingsData.historyTable[index].numbers)")
+                                .padding(.bottom, 3)
                         }
+                        Spacer()
                     }
-                    .disabled(true)
-                    .frame(width: 200, height: geometry.size.height)
+                    .frame(width: 200)
                 }
+                .padding(.top, 6)
+                .padding(.leading, 8)
             }
         }
-        .frame(width: 400, height: 200)
     }
 }
 
