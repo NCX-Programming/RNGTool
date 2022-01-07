@@ -125,6 +125,13 @@ struct DiceMode: View {
                             showDice = false
                         }
                     }
+                    if(settingsData.historyTable.count != 50) {
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                    }
+                    else {
+                        settingsData.historyTable.remove(at: 0)
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                    }
                 }) {
                     Image(systemName: "play.fill")
                 }

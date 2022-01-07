@@ -11,25 +11,34 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                NavigationLink(destination: NumberMode()) {
-                    Image(systemName: "number")
-                        .foregroundColor(.accentColor)
-                    Text("Numbers")
+                Section(header: Text("Modes")) {
+                    NavigationLink(destination: NumberMode()) {
+                        Image(systemName: "number")
+                            .foregroundColor(.accentColor)
+                        Text("Numbers")
+                    }
+                    NavigationLink(destination: DiceMode()) {
+                        Image(systemName: "dice")
+                            .foregroundColor(.accentColor)
+                        Text("Dice")
+                    }
+                    NavigationLink(destination: CardMode()) {
+                        Image(systemName: "rectangle.grid.3x2")
+                            .foregroundColor(.accentColor)
+                        Text("Cards")
+                    }
+                    NavigationLink(destination: MarbleMode()) {
+                        Image(systemName: "a.circle")
+                            .foregroundColor(.accentColor)
+                        Text("Marbles")
+                    }
                 }
-                NavigationLink(destination: DiceMode()) {
-                    Image(systemName: "dice")
-                        .foregroundColor(.accentColor)
-                    Text("Dice")
-                }
-                NavigationLink(destination: CardMode()) {
-                    Image(systemName: "rectangle.grid.3x2")
-                        .foregroundColor(.accentColor)
-                    Text("Cards")
-                }
-                NavigationLink(destination: MarbleMode()) {
-                    Image(systemName: "a.circle")
-                        .foregroundColor(.accentColor)
-                    Text("Marbles")
+                Section(header: Text("More")) {
+                    NavigationLink(destination: History()) {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .foregroundColor(.accentColor)
+                        Text("History")
+                    }
                 }
             }
             .navigationTitle("RNGTool")

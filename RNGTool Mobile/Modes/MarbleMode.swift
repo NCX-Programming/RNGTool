@@ -108,6 +108,13 @@ struct MarbleMode: View {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         showMarbles = true
                     }
+                    if(settingsData.historyTable.count != 50) {
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
+                    }
+                    else {
+                        settingsData.historyTable.remove(at: 0)
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
+                    }
                 }) {
                     Image(systemName: "play.fill")
                 }

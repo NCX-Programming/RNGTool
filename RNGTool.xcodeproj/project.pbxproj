@@ -13,6 +13,7 @@
 		3700F28726DD2573001BEE7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28626DD2573001BEE7A /* Preview Assets.xcassets */; };
 		3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28D26DD26C5001BEE7A /* ModeList.swift */; };
 		37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
+		3707EC452788711200E48CFA /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707EC442788711200E48CFA /* History.swift */; };
 		3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
 		371A2FF12777A7A500B94F66 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A2FF02777A7A500B94F66 /* History.swift */; };
 		3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
@@ -56,6 +57,7 @@
 		3700F28926DD2573001BEE7A /* RNGTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RNGTool.entitlements; sourceTree = "<group>"; };
 		3700F28D26DD26C5001BEE7A /* ModeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeList.swift; sourceTree = "<group>"; };
 		37010B962702697B00E32C35 /* MarbleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleSettings.swift; sourceTree = "<group>"; };
+		3707EC442788711200E48CFA /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		371301692719165A0061D344 /* AdvancedSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettings.swift; sourceTree = "<group>"; };
 		371A2FF02777A7A500B94F66 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3725BF7727697DC900A1B4E8 /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				3707EC442788711200E48CFA /* History.swift */,
 				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
 				37AB5BB6276FE42400F753FC /* Modes */,
 				37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */,
@@ -337,6 +340,7 @@
 				37FC9818276FEE600040BFB9 /* CardMode.swift in Sources */,
 				37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */,
 				37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */,
+				3707EC452788711200E48CFA /* History.swift in Sources */,
 				37688CDD27713837003B64CB /* About.swift in Sources */,
 				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
@@ -415,7 +419,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -453,7 +457,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
