@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var settingsData: SettingsData
+    
     var body: some View {
         NavigationView {
             Form {
@@ -39,6 +41,13 @@ struct ContentView: View {
                             .foregroundColor(.accentColor)
                         Text("History")
                     }
+                    if(settingsData.showDevMode) {
+                        NavigationLink(destination: DevMode()) {
+                            Image(systemName: "hammer")
+                                .foregroundColor(.accentColor)
+                            Text("Developer Mode")
+                        }
+                    }
                 }
             }
             .navigationTitle("RNGTool")
@@ -58,7 +67,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
+            ContentView().environmentObject(SettingsData())
         }
     }
 }

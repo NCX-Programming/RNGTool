@@ -10,6 +10,7 @@ import SwiftUI
 struct AdvancedSettings: View {
     @EnvironmentObject var settingsData: SettingsData
     @State private var showAlert = false
+    @State private var devCount = 0
     
     var body: some View {
         Toggle("Ask to confirm resetting the generator", isOn: $settingsData.confirmGenResets)
@@ -39,6 +40,17 @@ struct AdvancedSettings: View {
         Text("This will reset all of RNGTool's settings to their default values!")
             .font(.subheadline)
             .foregroundColor(.secondary)
+        #if os(iOS)
+            .onTapGesture {
+                devCount += 1
+            }
+        #endif
+        if(settingsData.showDevMode || devCount > 4) {
+            Toggle("Show Developer Mode", isOn: $settingsData.showDevMode)
+            Text("Enable access to developer mode. Disabling this will re-hide the toggle.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
     }
 }
 
