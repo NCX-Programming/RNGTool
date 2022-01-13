@@ -69,17 +69,16 @@ jobs:
       id: build-ios
       run: |
         /Applications/Xcode_13.2.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
-    - name: Prepare Files for IPA
+    - name: Prepare Files and Create IPA File
       run: |
-        mkdir ~/RNGTooliOS
-        mkdir ~/RNGTooliOS/Payload
-        mv build/Release-iphoneos/RNGTool.app ~/RNGTooliOS/Payload
-    - name: Create IPA File
-      run: |
+        mkdir ~/RNGToolMobile
+        mkdir ~/RNGToolMobile/Payload
+        mv build/Release-iphoneos/RNGTool.app ~/RNGToolMobile/Payload
         cd ~
-        touch RNGTooliOS/iTunesArtwork
-        zip -r RNGTool.zip RNGTooliOS/
-        mv RNGTool.zip RNGTool.ipa
+        curl https://cdn.ncxprogramming.com/file/icon/rngtoolraw.png --output ~/RNGToolMobile/iTunesArtwork
+        cd RNGToolMobile/
+        zip -r RNGTool.zip *
+        mv RNGTool.zip ~/RNGTool.ipa
     - name: Publish Build Files
       uses: actions/upload-artifact@v2
       with:
@@ -87,7 +86,7 @@ jobs:
         name: RNGTool.ipa
   send_webhook:
       runs-on: ubuntu-latest
-      needs: [build]
+      needs: [build, build-ios]
       name: Send Discord webhook
       if: ${{ !startsWith(github.ref, 'refs/pull') }}
       env:
