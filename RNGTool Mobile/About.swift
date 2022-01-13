@@ -13,6 +13,7 @@ struct About: View {
     let copyright: String = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
     
     var body: some View {
+        GeometryReader { geometry in
         ScrollView {
             Text("RNGTool")
                 .font(.title)
@@ -29,24 +30,29 @@ struct About: View {
                 Image(systemName: "link.circle")
                 Text("Our GitHub")
             }
-                .frame(maxWidth: UIScreen.main.bounds.width-50)
+                .frame(maxWidth: geometry.size.width-(geometry.size.width / 4))
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
             Link(destination: URL(string:"https://github.com/NCX-Programming/RNGTool")!) {
                 Image(systemName: "link.circle")
                 Text("This Project")
             }
-                .frame(maxWidth: UIScreen.main.bounds.width-50)
+                .frame(maxWidth: geometry.size.width-(geometry.size.width / 4))
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
             Link(destination: URL(string:"https://ncxprogramming.com/contactus")!) {
                 Image(systemName: "link.circle")
                 Text("Contact Us")
             }
-                .frame(maxWidth: UIScreen.main.bounds.width-50)
-                .padding(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
+            .frame(maxWidth: geometry.size.width-(geometry.size.width / 4))
+            .padding(10)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
         }
+        .frame(width: geometry.size.width, height: geometry.size.height)
+        }
+        .padding(.horizontal, 3)
+        .navigationTitle("About RNGTool")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
