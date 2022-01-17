@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var numOfDice = 1
     @State private var numOfSides = 6
     @State private var confirmReset = false
@@ -20,7 +21,7 @@ struct DiceMode: View {
     @State private var diceImages = [String]()
     
     func resetGen() {
-        withAnimation(.easeInOut(duration: 0.5)){
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             showDice = false
         }
@@ -102,12 +103,12 @@ struct DiceMode: View {
                         for _ in 1..<numOfDice+1{
                             randomNumbers.append(Int.random(in: 1..<numOfSides+1))
                         }
-                        withAnimation (.easeInOut(duration: 0.5)) {
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                         if(numOfSides==6){
-                            withAnimation(.easeInOut(duration: 0.5)){
+                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                                 showDice = true
                             }
                             for n in 0..<randomNumbers.count{
@@ -115,7 +116,7 @@ struct DiceMode: View {
                             }
                         }
                         else{
-                            withAnimation(.easeInOut(duration: 0.5)){
+                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                                 showDice = false
                             }
                         }

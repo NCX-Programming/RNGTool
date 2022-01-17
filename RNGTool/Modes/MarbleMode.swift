@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var numOfMarbles = 1
     @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
@@ -21,7 +22,7 @@ struct MarbleMode: View {
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        withAnimation (.easeInOut(duration: 0.5)) {
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             randomLetterStr = ""
             showMarbles = false
@@ -89,18 +90,18 @@ struct MarbleMode: View {
                         for _ in 1..<6{
                             randomNumbers.append(Int.random(in: 0..<26))
                         }
-                        withAnimation (.easeInOut(duration: 0.5)) {
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             randomNumberStr = "Your random number(s): \(randomNumbers)"
                             randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
                         for i in 0..<numOfMarbles {
                             randomLetters.append(letters[randomNumbers[i]])
                         }
-                        withAnimation (.easeInOut(duration: 0.5)) {
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             randomLetterStr = "Your random letter(s): \(randomLetters)"
                             randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
                         }
-                        withAnimation(.easeInOut(duration: 0.5)) {
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             showMarbles = true
                         }
                         if(settingsData.historyTable.count != 50) {
