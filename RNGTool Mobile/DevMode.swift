@@ -31,6 +31,7 @@ struct DevMode: View {
                 Text("This will append a new entry with the specified values to the number history table. This does not check for a maximum before appending.")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                Text("Entries: \(settingsData.historyTable.count)")
                 Button(action:{
                     settingsData.historyTable.removeAll()
                 }) {

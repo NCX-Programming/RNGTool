@@ -104,7 +104,7 @@ struct NumberMode: View {
                     }
                     maxNumberInput="\(maxNumber)"
                     minNumberInput="\(minNumber)"
-                    if(settingsData.historyTable.count != 50) {
+                    if !(settingsData.historyTable.count > 49) {
                         settingsData.historyTable.append(HistoryTable(modeUsed: "Number Mode", numbers: "\(randomNumber)"))
                     }
                     else {

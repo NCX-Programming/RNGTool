@@ -113,7 +113,7 @@ struct CardMode: View {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         showCards = true
                     }
-                    if(settingsData.historyTable.count != 50) {
+                    if !(settingsData.historyTable.count > 49) {
                         settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
                     }
                     else {

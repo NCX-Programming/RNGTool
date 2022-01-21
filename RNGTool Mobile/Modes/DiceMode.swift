@@ -125,7 +125,7 @@ struct DiceMode: View {
                             showDice = false
                         }
                     }
-                    if(settingsData.historyTable.count != 50) {
+                    if !(settingsData.historyTable.count > 49) {
                         settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
                     }
                     else {
