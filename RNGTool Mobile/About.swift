@@ -47,6 +47,22 @@ struct About: View {
             .frame(maxWidth: geometry.size.width-(geometry.size.width / 4))
             .padding(10)
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(.primary, lineWidth: 1))
+            Spacer()
+                .padding(.top, 6)
+            Group {
+                Text("Credits")
+                        .font(.title2)
+                Text("Programming and Design")
+                    .font(.title3)
+                Text("NinjaCheetah")
+                    .foregroundColor(.secondary)
+                Text("Writing and Web Work")
+                    .font(.title3)
+                Text("IanSkinner1982")
+                    .foregroundColor(.secondary)
+                Text("SF Symbols provided by Apple")
+                    .font(.title3)
+            }
         }
         .frame(width: geometry.size.width, height: geometry.size.height)
         }
