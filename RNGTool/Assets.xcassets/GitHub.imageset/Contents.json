@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "GitHub-Mark-32px.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "filename" : "GitHub-Mark 3.svg",
+      "idiom" : "universal"
     },
     {
       "appearances" : [
@@ -12,41 +11,8 @@
           "value" : "dark"
         }
       ],
-      "filename" : "GitHub-Mark-Light-32px.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "GitHub-Mark-64px.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "GitHub-Mark-Light-64px.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "GitHub-Mark-120px-plus.png",
-      "idiom" : "universal",
-      "scale" : "3x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "filename" : "GitHub-Mark-Light-120px-plus.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "GitHub-Mark 4.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

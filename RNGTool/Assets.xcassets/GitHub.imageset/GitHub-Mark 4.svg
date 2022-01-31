@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 33.4904 32.3895" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<metadata>
+<vectornator:setting key="IsTimeLapseWatermarkDisabled" value="false"/>
+<vectornator:setting key="UndoHistoryDisabled" value="true"/>
+<vectornator:setting key="VNDimensionsVisible" value="true"/>
+<vectornator:setting key="VNSnapToGuides" value="true"/>
+<vectornator:setting key="WDCMYKEnabledKey" value="false"/>
+<vectornator:setting key="WDDisplayWhiteBackground" value="false"/>
+<vectornator:setting key="WDDynamicGuides" value="true"/>
+<vectornator:setting key="WDGuidesVisible" value="true"/>
+<vectornator:setting key="WDIsolateActiveLayer" value="false"/>
+<vectornator:setting key="WDOutlineMode" value="false"/>
+<vectornator:setting key="WDRulersVisible" value="true"/>
+<vectornator:setting key="WDSnapToEdges" value="false"/>
+<vectornator:setting key="WDSnapToGrid" value="false"/>
+<vectornator:setting key="WDSnapToPoints" value="false"/>
+<vectornator:setting key="WDUnits" value="Points"/>
+</metadata>
+<defs/>
+<g id="Layer 1" vectornator:layerName="Layer 1">
+<path d="M16.7437 0.307308C7.74869 0.307308 0.45569 7.60031 0.45569 16.5973C0.45569 23.7943 5.12269 29.8993 11.5957 32.0543C12.4107 32.2033 12.7077 31.7003 12.7077 31.2683C12.7077 30.8823 12.6937 29.8573 12.6857 28.4983C8.15469 29.4823 7.19869 26.3143 7.19869 26.3143C6.45769 24.4323 5.38969 23.9313 5.38969 23.9313C3.91069 22.9213 5.50169 22.9413 5.50169 22.9413C7.13669 23.0563 7.99669 24.6203 7.99669 24.6203C9.44969 27.1093 11.8097 26.3903 12.7377 25.9733C12.8857 24.9213 13.3057 24.2033 13.7717 23.7963C10.1547 23.3853 6.35169 21.9873 6.35169 15.7453C6.35169 13.9673 6.98669 12.5133 8.02869 11.3743C7.86069 10.9623 7.30169 9.30631 8.18769 7.06331C8.18769 7.06331 9.55569 6.62531 12.6677 8.73331C13.9667 8.37131 15.3607 8.19131 16.7457 8.18531C18.1287 8.19131 19.5227 8.37131 20.8237 8.73331C23.9337 6.62531 25.2987 7.06331 25.2987 7.06331C26.1877 9.30631 25.6287 10.9623 25.4607 11.3743C26.5047 12.5133 27.1357 13.9673 27.1357 15.7453C27.1357 22.0033 23.3267 23.3803 19.6977 23.7833C20.2827 24.2863 20.8037 25.2803 20.8037 26.8003C20.8037 28.9773 20.7837 30.7343 20.7837 31.2683C20.7837 31.7043 21.0767 32.2113 21.9037 32.0523C28.3717 29.8933 33.0347 23.7923 33.0347 16.5973C33.0347 7.60031 25.7407 0.307308 16.7437 0.307308" fill="#ffffff" opacity="1"/>
+</g>
+</svg>
