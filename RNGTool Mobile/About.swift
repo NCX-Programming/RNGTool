@@ -14,18 +14,36 @@ struct About: View {
     
     var body: some View {
         GeometryReader { geometry in
-        ScrollView {
-            Text("RNGTool")
-                .font(.title)
-            Text("Version: v\(appVersionString), Build: \(buildNumber)")
-                .foregroundColor(.secondary)
-                .font(.title2)
-            Text(copyright)
-                .foregroundColor(.secondary)
-                .font(.title3)
-            Spacer()
-            Text("Powered by Swift and SwiftUI")
-                .padding(.bottom, 25)
+        Form {
+            HStack() {
+                ZStack() {
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                        .foregroundColor(Color.accentColor)
+                    Image("LaunchIcon").resizable()
+                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                }
+                VStack(alignment: .leading) {
+                    Text("RNGTool")
+                    Text(copyright)
+                        .foregroundColor(.secondary)
+                    Text("Version \(appVersionString) (\(buildNumber))")
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding(.vertical, 4)
+            Section(header: Text("Links")) {
+                Link(destination: URL(string: "https://github.com/NCX-Programming")!) {
+                    HStack() {
+                        Image("GitHub")
+                            .foregroundColor(.accentColor)
+                        Text("Our GitHub")
+                            .foregroundColor(.primary)
+                    }
+                }
+            }
+        }
+        /*
             Link(destination: URL(string:"https://github.com/NCX-Programming")!) {
                 Image(systemName: "link.circle")
                 Text("Our GitHub")
@@ -63,8 +81,7 @@ struct About: View {
                 Text("SF Symbols provided by Apple")
                     .font(.title3)
             }
-        }
-        .frame(width: geometry.size.width, height: geometry.size.height)
+        }*/
         }
         .padding(.horizontal, 3)
         .navigationTitle("About RNGTool")
