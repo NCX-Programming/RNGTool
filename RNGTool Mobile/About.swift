@@ -17,6 +17,7 @@ struct About: View {
     var body: some View {
         GeometryReader { geometry in
         Form {
+            #if os(iOS)
             HStack() {
                 Image("AltIcon").resizable()
                     .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
@@ -29,6 +30,14 @@ struct About: View {
                 }
             }
             .padding(.vertical, 4)
+            #endif
+            #if os(watchOS)
+            VStack(alignment: .leading) {
+                Text("RNGTool")
+                Text("Version \(appVersionString) (\(buildNumber))")
+                    .foregroundColor(.secondary)
+            }
+            #endif
             Section() {
                 Button(action:{
                     openURL(URL(string: "https://github.com/NCX-Programming")!)
@@ -72,7 +81,7 @@ struct About: View {
         }
         }
         .padding(.horizontal, 3)
-        .navigationTitle("About RNGTool")
+        .navigationTitle("About")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showCredits, content: {
             AboutCredits()

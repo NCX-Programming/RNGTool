@@ -87,7 +87,12 @@ struct SettingsView: View {
                 Button(action:{
                     showAdvSet = true
                 }) {
+                    #if os(iOS)
                     Text("Show Advanced Settings")
+                    #endif
+                    #if os(watchOS)
+                    Text("Advanced Settings")
+                    #endif
                 }
                 NavigationLink(destination: About()) {
                     Image(systemName: "info.circle")
@@ -100,6 +105,13 @@ struct SettingsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showAdvSet, content: {
             AdvancedSettingsView()
+            #if os(watchOS)
+            .toolbar(content: {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") { self.showAdvSet = false }
+                }
+            })
+            #endif
         })
     }
 }
@@ -113,12 +125,15 @@ struct AdvancedSettingsView: View {
             Form {
                 AdvancedSettings()
             }
+            #if os(iOS)
             .navigationBarTitle("Advanced Settings")
             .navigationBarTitleDisplayMode(.inline)
-            #if !os(watchOS)
             .navigationBarItems(trailing: Button("Close", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
+            #endif
+            #if os(watchOS)
+            .navigationBarTitleDisplayMode(.inline)
             #endif
         }
     }
