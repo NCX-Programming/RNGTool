@@ -21,6 +21,7 @@ struct CardSettings: View {
         Text("Changes whether the card graphics will only use numbers or will include face cards.")
             .font(.subheadline)
             .foregroundColor(.secondary)
+        #if !os(watchOS)
         Toggle(isOn: $settingsData.showPoints) {
             Text("Show card point values")
         }
@@ -38,6 +39,7 @@ struct CardSettings: View {
         Text("Changes whether the Ace card is worth 1 or 11 points. This setting is ignored if \"Show card point values\" is off.")
             .font(.subheadline)
             .foregroundColor(.secondary)
+        #endif
     }
 }
 
