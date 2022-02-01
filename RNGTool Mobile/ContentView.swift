@@ -35,7 +35,16 @@ struct ContentView: View {
                         Text("Marbles")
                     }
                 }
+                
                 Section(header: Text("More")) {
+                    #if os(watchOS)
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
+                            .foregroundColor(.accentColor)
+                        Text("Settings")
+                    }
+                    #endif
+                    #if os(iOS)
                     NavigationLink(destination: History()) {
                         Image(systemName: "clock.arrow.circlepath")
                             .foregroundColor(.accentColor)
@@ -48,9 +57,11 @@ struct ContentView: View {
                             Text("Developer Mode")
                         }
                     }
+                    #endif
                 }
             }
             .navigationTitle("RNGTool")
+            #if !os(watchOS)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationLink(destination: SettingsView()) {
@@ -59,6 +70,7 @@ struct ContentView: View {
                     }
                 }
             }
+            #endif
             Text("Select a mode to start generating")
         }
     }

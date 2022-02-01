@@ -77,7 +77,7 @@ struct NumberMode: View {
                     }
                 if(showMaxEditor){
                     TextField("Enter a number", text: $maxNumberInput)
-                        
+                        .keyboardType(.numberPad)
                 }
                 Divider()
                 Text("Minimum Number: \(settingsData.minNumberDefault). Tap to set a custom value.")
@@ -90,6 +90,7 @@ struct NumberMode: View {
                     }
                 if(showMinEditor){
                     TextField("Enter a number", text: $minNumberInput)
+                        .keyboardType(.numberPad)
                 }
                 Divider()
             }

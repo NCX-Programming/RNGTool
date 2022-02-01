@@ -115,9 +115,11 @@ struct AdvancedSettingsView: View {
             }
             .navigationBarTitle("Advanced Settings")
             .navigationBarTitleDisplayMode(.inline)
+            #if !os(watchOS)
             .navigationBarItems(trailing: Button("Close", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
+            #endif
         }
     }
 }

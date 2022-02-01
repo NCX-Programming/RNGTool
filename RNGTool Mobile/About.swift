@@ -141,9 +141,11 @@ struct AboutCredits: View {
             }
             .navigationBarTitle("Credits")
             .navigationBarTitleDisplayMode(.inline)
+            #if !os(watchOS)
             .navigationBarItems(trailing: Button("Close", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
+            #endif
         }
         }
     }

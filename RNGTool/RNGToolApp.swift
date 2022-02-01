@@ -15,9 +15,11 @@ struct RNGToolApp: App {
         WindowGroup {
             ContentView().environmentObject(settingsData)
         }
+        #if !os(watchOS)
         .commands {
             RNGToolCommands()
         }
+        #endif
         #if os(macOS)
         Settings {
             SettingsView().environmentObject(settingsData)
