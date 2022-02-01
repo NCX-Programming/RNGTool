@@ -85,6 +85,13 @@ struct About: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showCredits, content: {
             AboutCredits()
+            #if os(watchOS)
+            .toolbar(content: {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") { self.showCredits = false }
+                }
+            })
+            #endif
         })
     }
 }
@@ -148,9 +155,9 @@ struct AboutCredits: View {
                     }
                 }
             }
+            #if os(iOS)
             .navigationBarTitle("Credits")
             .navigationBarTitleDisplayMode(.inline)
-            #if !os(watchOS)
             .navigationBarItems(trailing: Button("Close", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))

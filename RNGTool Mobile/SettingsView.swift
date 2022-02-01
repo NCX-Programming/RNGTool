@@ -74,15 +74,19 @@ struct SettingsView: View {
                     )
                 }
             }
+            #if !os(watchOS)
             Section(header: Text("Dice Settings")) {
                 DiceSettings()
             }
+            #endif
             Section(header: Text("Card Settings")) {
                 CardSettings()
             }
+            #if !os(watchOS)
             Section(header: Text("Marble Settings")) {
                 MarbleSettings()
             }
+            #endif
             Section(header: Text("Other")) {
                 Button(action:{
                     showAdvSet = true
@@ -131,9 +135,6 @@ struct AdvancedSettingsView: View {
             .navigationBarItems(trailing: Button("Close", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
-            #endif
-            #if os(watchOS)
-            .navigationBarTitleDisplayMode(.inline)
             #endif
         }
     }
