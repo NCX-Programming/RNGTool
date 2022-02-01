@@ -61,6 +61,8 @@ struct NumberMode: View {
                 )
             }
         }
+        .navigationTitle("Numbers")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
