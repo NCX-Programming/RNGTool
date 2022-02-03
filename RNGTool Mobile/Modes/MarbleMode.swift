@@ -81,7 +81,7 @@ struct MarbleMode: View {
             Text("Number of marbles")
                 .font(.title3)
             Picker("", selection: $numOfMarbles){
-                ForEach(1..<6, id: \.self) { index in
+                ForEach(1...5, id: \.self) { index in
                     Text("\(index)").tag(index)
                 }
             }
@@ -91,8 +91,8 @@ struct MarbleMode: View {
                 Button(action: {
                     randomNumbers.removeAll()
                     randomLetters.removeAll()
-                    for _ in 1..<6{
-                        randomNumbers.append(Int.random(in: 0..<26))
+                    for _ in 1...5{
+                        randomNumbers.append(Int.random(in: 0...25))
                     }
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                         randomNumberStr = "Your random number(s): \(randomNumbers)"

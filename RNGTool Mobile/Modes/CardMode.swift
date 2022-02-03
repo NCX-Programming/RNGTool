@@ -44,13 +44,13 @@ struct CardMode: View {
                     .font(.title3)
                 // The seemingly unrelated code below is together because they must have the same max value
                 Picker("", selection: $numOfCards){
-                    ForEach(1..<8, id: \.self) { index in
+                    ForEach(1...7, id: \.self) { index in
                         Text("\(index)").tag(index)
                     }
                 }
                 .pickerStyle(.segmented)
                 .onAppear{
-                    for _ in 1..<8{
+                    for _ in 1...7{
                         cardImages.append("c1")
                     }
                 }
@@ -60,7 +60,7 @@ struct CardMode: View {
                 Button(action: {
                     randomNumbers.removeAll()
                     for _ in 0..<numOfCards{
-                        randomNumbers.append(Int.random(in: 1..<14))
+                        randomNumbers.append(Int.random(in: 1...13))
                     }
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                         self.randomNumberStr = "Your random number(s): \(randomNumbers)"
@@ -69,10 +69,10 @@ struct CardMode: View {
                     if(settingsData.showPoints){
                         pointValues.removeAll()
                         for n in 0..<numOfCards{
-                            if(randomNumbers[n]==1){
+                            if(randomNumbers[n] == 1){
                                 pointValues.append(settingsData.aceValue)
                             }
-                            else if(randomNumbers[n]>1 && randomNumbers[n]<11){
+                            else if(randomNumbers[n] > 1 && randomNumbers[n] < 11){
                                 pointValues.append(randomNumbers[n])
                             }
                             else{

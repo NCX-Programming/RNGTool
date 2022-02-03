@@ -79,13 +79,13 @@ struct DiceMode: View {
                 .font(.title3)
             // The seemingly unrelated code below is together because they must have the same max value
             Picker("Number of dice", selection: $numOfDice){
-                ForEach(1..<7, id: \.self) { index in
+                ForEach(1...6, id: \.self) { index in
                     Text("\(index)").tag(index)
                 }
             }
             .pickerStyle(.segmented)
             .onAppear{
-                for _ in 1..<7{
+                for _ in 1...6{
                     diceImages.append("d1")
                 }
             }
@@ -105,14 +105,14 @@ struct DiceMode: View {
             HStack() {
                 Button(action: {
                     randomNumbers.removeAll()
-                    for _ in 1..<numOfDice+1{
-                        randomNumbers.append(Int.random(in: 1..<numOfSides+1))
+                    for _ in 1...numOfDice{
+                        randomNumbers.append(Int.random(in: 1...numOfSides))
                     }
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                         self.randomNumberStr = "Your random number(s): \(randomNumbers)"
                         randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
                     }
-                    if(numOfSides==6){
+                    if(numOfSides == 6){
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                             showDice = true
                         }

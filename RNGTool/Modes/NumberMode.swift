@@ -111,7 +111,7 @@ struct NumberMode: View {
                     Button(action:{
                         maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
                         minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
-                        randomNumber = Int.random(in: minNumber..<maxNumber)
+                        randomNumber = Int.random(in: minNumber...maxNumber)
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             showCopy = true
                             self.randomNumberStr = "Your random number: \(randomNumber)"
