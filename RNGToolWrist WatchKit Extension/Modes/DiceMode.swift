@@ -69,7 +69,7 @@ struct DiceMode: View {
                 Image(systemName: "play.fill")
             }
             .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.white)
+            .foregroundColor(.primary)
             Button(action:{
                 if(settingsData.confirmGenResets){
                     confirmReset = true
@@ -101,6 +101,6 @@ struct DiceMode: View {
 
 struct DiceMode_Previews: PreviewProvider {
     static var previews: some View {
-        DiceMode()
+        DiceMode().environmentObject(SettingsData())
     }
 }

@@ -68,6 +68,6 @@ struct NumberMode: View {
 
 struct NumberMode_Previews: PreviewProvider {
     static var previews: some View {
-        NumberMode()
+        NumberMode().environmentObject(SettingsData())
     }
 }
