@@ -15,11 +15,6 @@ struct DiceSettings: View {
         Text("Show images of the rolled dice. This is enabled by default.")
             .font(.subheadline)
             .foregroundColor(.secondary)
-        Toggle("Force 6 sides per die", isOn: $settingsData.forceSixSides)
-            .disabled(!settingsData.allowDiceImages)
-        Text("This will make it so that the dice images will always be shown.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
     }
 }
 

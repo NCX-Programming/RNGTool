@@ -33,10 +33,8 @@ func resetNumSet(){
 }
 
 func resetDiceSet(){
-    @AppStorage("forceSixSides") var forceSixSides = false
     @AppStorage("allowDiceImages") var allowDiceImages = true
-    
-    forceSixSides = false
+
     allowDiceImages = true
 }
 
