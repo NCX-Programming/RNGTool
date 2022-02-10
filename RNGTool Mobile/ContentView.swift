@@ -60,10 +60,12 @@ struct ContentView: View {
                     #endif
                 }
             }
+            #if os(watchOS)
             .navigationTitle("RNGTool")
-            #if !os(watchOS)
+            #else
+            .navigationTitle("Home")
             .toolbar {
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .primaryAction) {
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gear")
                             .foregroundColor(.accentColor)
