@@ -74,11 +74,9 @@ struct SettingsView: View {
                     )
                 }
             }
-            #if !os(watchOS)
             Section(header: Text("Dice Settings")) {
                 DiceSettings()
             }
-            #endif
             Section(header: Text("Card Settings")) {
                 CardSettings()
             }

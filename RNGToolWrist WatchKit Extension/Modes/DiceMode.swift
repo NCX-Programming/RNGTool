@@ -13,31 +13,53 @@ struct DiceMode: View {
     @State private var numOfDice = 1
     @State private var confirmReset = false
     @State private var randomNumbers = [0]
-    @State private var showDice = false
-    @State private var diceImages = [String]()
+    @State private var diceImages = ["d1"]
+    @State private var rollCount = 0
+    @State private var showRollHint = true
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-            showDice = false
-        }
         numOfDice = 1
         randomNumbers.removeAll()
+        diceImages[0] = "d1"
         confirmReset = false
+    }
+    
+    func roll() {
+        randomNumbers.removeAll()
+        for _ in 1..<numOfDice+1{
+            randomNumbers.append(Int.random(in: 1...6))
+        }
+        for n in 0..<randomNumbers.count{
+            if(numOfDice>n) {diceImages[n]="d\(randomNumbers[n])"}
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
         ScrollView{
-            Group {
-                if(showDice && settingsData.allowDiceImages){
-                    HStack(){
-                        ForEach(0..<numOfDice, id: \.self) { index in
-                          Image(diceImages[index])
-                            .resizable()
-                            .frame(width: (geometry.size.width / 3) - 10, height: (geometry.size.width / 3) - 10)
-                        }
+            HStack() {
+                ForEach(0..<numOfDice, id: \.self) { index in
+                  Image(diceImages[index])
+                    .resizable()
+                    .frame(width: (geometry.size.width / 2.5) - 10, height: (geometry.size.width / 2.5) - 10)
+                }
+            }
+            .onTapGesture {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                    self.showRollHint = false
+                }
+                if(settingsData.showDiceAnimation && !reduceMotion && rollCount == 0) {
+                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                        self.roll()
+                        self.rollCount += 1
+                        if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
                     }
                 }
+                else { self.roll() }
+            }
+            if(showRollHint) {
+                Text("Tap the dice to roll")
+                    .foregroundColor(.secondary)
             }
             HStack(alignment: .center) {
                 // The seemingly unrelated code below is together because they must have the same max value
@@ -53,23 +75,8 @@ struct DiceMode: View {
                 }
                 .frame(width: geometry.size.width / 4, height: geometry.size.height / 2.5)
                 Text("Number of Dice")
+                    .padding(.top, 10)
             }
-            Button(action: {
-                randomNumbers.removeAll()
-                for _ in 1..<numOfDice+1{
-                    randomNumbers.append(Int.random(in: 1...6))
-                }
-                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                    showDice = true
-                }
-                for n in 0..<randomNumbers.count{
-                    if(numOfDice>n) {diceImages[n]="d\(randomNumbers[n])"}
-                }
-            }) {
-                Image(systemName: "play.fill")
-            }
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.primary)
             Button(action:{
                 if(settingsData.confirmGenResets){
                     confirmReset = true

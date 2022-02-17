@@ -24,6 +24,7 @@ class SettingsData : ObservableObject {
     @AppStorage("maxNumberDefault") var maxNumberDefault = 100
     @AppStorage("minNumberDefault") var minNumberDefault = 0
     // Dice Settings
+    @AppStorage("showDiceAnimation") var showDiceAnimation = true
     @AppStorage("allowDiceImages") var allowDiceImages = true
     // Card Settings
     @AppStorage("showPoints") var showPoints = false

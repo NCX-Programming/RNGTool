@@ -15,53 +15,67 @@ struct DiceMode: View {
     @State private var randomNumbers = [0]
     @State private var randomNumberStr = ""
     @State private var numsInArray = 0
-    @State private var showDice = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var diceImages = [String]()
+    @State private var diceImages = ["d1"]
+    @State private var rollCount = 0
     
     func resetGen() {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
             randomNumberStr = ""
-            showDice = false
         }
         numOfDice = 1
         randomNumbers.removeAll()
+        diceImages[0] = "d1"
         confirmReset = false
+    }
+    
+    func roll() {
+        randomNumbers.removeAll()
+        for _ in 1...numOfDice{
+            randomNumbers.append(Int.random(in: 1...6))
+        }
+        for n in 0..<randomNumbers.count{
+            if(numOfDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
+        }
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+            self.randomNumberStr = "Your random number(s): \(randomNumbers)"
+            randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
         ScrollView{
             Group {
-                Text("Generate multiple numbers using dice")
+                Text("Tap the dice to roll")
                     .font(.title3)
-                Divider()
-                if(showDice && settingsData.allowDiceImages){
-                    HStack(){
-                        ForEach(0..<numOfDice, id: \.self) { index in
-                          Image(diceImages[index])
-                            .resizable()
-                            .frame(width: (geometry.size.width / 6) - 10, height: (geometry.size.width / 6) - 10)
+                    .foregroundColor(.secondary)
+                HStack(){
+                    ForEach(0..<numOfDice, id: \.self) { index in
+                      Image(diceImages[index])
+                        .resizable()
+                        .frame(width: (geometry.size.width / 6) - 10, height: (geometry.size.width / 6) - 10)
+                    }
+                }
+                .onTapGesture {
+                    if(settingsData.showDiceAnimation && !reduceMotion) {
+                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                            self.roll()
+                            self.rollCount += 1
+                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
                         }
+                    }
+                    else { self.roll() }
+                    if !(settingsData.historyTable.count > 49) {
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                    }
+                    else {
+                        settingsData.historyTable.remove(at: 0)
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
                     }
                 }
                 Text(randomNumberStr)
                     .padding(.bottom, 5)
-                if(showDice){
-                    Button(action:{
-                        copyToClipboard(item: "\(randomNumbers)")
-                    }) {
-                        Image(systemName: "doc.on.doc.fill")
-                    }
-                    .font(.system(size: 12, weight:.bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding(.horizontal)
-                    .padding(5)
-                    .background(Color.accentColor)
-                    .cornerRadius(20)
-                    .padding(.bottom, 10)
-                    Divider()
-                }
             }
             Text("Number of dice")
                 .font(.title3)
@@ -79,37 +93,6 @@ struct DiceMode: View {
             }
             Divider()
             HStack() {
-                Button(action: {
-                    randomNumbers.removeAll()
-                    for _ in 1...numOfDice{
-                        randomNumbers.append(Int.random(in: 1...6))
-                    }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-                        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                    }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        showDice = true
-                    }
-                    for n in 0..<randomNumbers.count{
-                        if(numOfDice>n) {diceImages[n]="d\(randomNumbers[n])"}
-                    }
-                    if !(settingsData.historyTable.count > 49) {
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
-                    else {
-                        settingsData.historyTable.remove(at: 0)
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
-                }) {
-                    Image(systemName: "play.fill")
-                }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(5)
-                .background(Color.accentColor)
-                .cornerRadius(20)
                 Button(action:{
                     if(settingsData.confirmGenResets){
                         confirmReset = true

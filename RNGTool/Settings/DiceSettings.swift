@@ -11,8 +11,8 @@ struct DiceSettings: View {
     @EnvironmentObject var settingsData: SettingsData
 
     var body: some View {
-        Toggle("Enable dice images", isOn: $settingsData.allowDiceImages)
-        Text("Show images of the rolled dice. This is enabled by default.")
+        Toggle("Show dice animation", isOn: $settingsData.showDiceAnimation)
+        Text("This changes whether or not the dice images will cycle through images before stopping at one.")
             .font(.subheadline)
             .foregroundColor(.secondary)
     }
