@@ -52,7 +52,15 @@ struct DiceMode: View {
                     ForEach(0..<numOfDice, id: \.self) { index in
                       Image(diceImages[index])
                         .resizable()
-                        .frame(width: 64, height: 64)
+                        .frame(width: geometry.size.width / 8, height: geometry.size.width / 8)
+                    }
+                }
+                .padding(.top, 10)
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Text("Copy")
                     }
                 }
                 .onTapGesture {
