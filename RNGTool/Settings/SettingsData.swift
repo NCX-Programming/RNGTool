@@ -19,6 +19,7 @@ class SettingsData : ObservableObject {
     @Published var historyTable = [HistoryTable]()
     // Advanced Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
+    @AppStorage("showModeHints") var showModeHints = true
     @AppStorage("showDevMode") var showDevMode = false
     // Number Settings
     @AppStorage("maxNumberDefault") var maxNumberDefault = 100

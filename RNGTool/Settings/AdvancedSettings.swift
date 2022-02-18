@@ -17,6 +17,10 @@ struct AdvancedSettings: View {
         Text("Disabling this will allow you to reset the generator without having to confirm it first.")
             .font(.subheadline)
             .foregroundColor(.secondary)
+        Toggle("Show generator usage hints", isOn: $settingsData.showModeHints)
+        Text("Disabling this hides the disappearing hints that appear in some generator modes. (Ex. \"Tap dice to roll\")")
+            .font(.subheadline)
+            .foregroundColor(.secondary)
         Button(action:{
             showAlert = true
         }) {
@@ -32,6 +36,7 @@ struct AdvancedSettings: View {
                     resetCardSet()
                     resetMarbleSet()
                     settingsData.confirmGenResets = true
+                    settingsData.showModeHints = true
                     showAlert = false
                 },
                 secondaryButton: .cancel()

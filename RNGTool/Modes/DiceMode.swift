@@ -15,49 +15,73 @@ struct DiceMode: View {
     @State private var randomNumbers = [0]
     @State private var randomNumberStr = ""
     @State private var numsInArray = 0
-    @State private var showDice = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var diceImages = [String]()
+    @State private var diceImages = ["d1"]
+    @State private var rollCount = 0
+    @State private var showRollHint = true
     
     func resetGen() {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
-            showDice = false
         }
         numOfDice = 1
         randomNumbers.removeAll()
+        diceImages[0] = "d1"
         confirmReset = false
     }
     
+    func roll() {
+        randomNumbers.removeAll()
+        for _ in 1...numOfDice {
+            randomNumbers.append(Int.random(in: 1...6))
+        }
+        for n in 0..<randomNumbers.count {
+            if(numOfDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
+        }
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+            self.randomNumberStr = "Your random number(s): \(randomNumbers)"
+            randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+        }
+    }
+    
     var body: some View {
+        GeometryReader { geometry in
         ScrollView{
             VStack(alignment: .leading) {
-                Group {
-                    Text("Generate multiple numbers using dice")
-                        .font(.title3)
-                    Divider()
-                    if(showDice && settingsData.allowDiceImages){
-                        HStack(){
-                            ForEach(0..<numOfDice, id: \.self) { index in
-                              Image(diceImages[index])
-                                .resizable()
-                                .frame(width: 64, height: 64)
-                            }
-                        }
-                    }
-                    Text(randomNumberStr)
-                        .font(.title2)
-                        .padding(.bottom, 5)
-                    if(showDice){
-                        Button(action:{
-                            copyToClipboard(item: "\(randomNumbers)")
-                        }) {
-                            Image(systemName: "doc.on.doc.fill")
-                        }
-                        .padding(.bottom, 10)
-                        Divider()
+                HStack(){
+                    ForEach(0..<numOfDice, id: \.self) { index in
+                      Image(diceImages[index])
+                        .resizable()
+                        .frame(width: 64, height: 64)
                     }
                 }
+                .onTapGesture {
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                        self.showRollHint = false
+                    }
+                    if(settingsData.showDiceAnimation && !reduceMotion) {
+                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                            self.roll()
+                            self.rollCount += 1
+                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
+                        }
+                    }
+                    else { self.roll() }
+                    if(settingsData.historyTable.count != 50) {
+                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                    }
+                    else {
+                        settingsData.historyTable.remove(at: 0)
+                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+                    }
+                }
+                if(showRollHint && settingsData.showModeHints) {
+                    Text("Click the dice to roll")
+                        .foregroundColor(.secondary)
+                }
+                Text(randomNumberStr)
+                    .font(.title2)
+                    .padding(.bottom, 5)
                 Text("Number of dice")
                     .font(.title3)
                 // The seemingly unrelated code below is together because they must have the same max value
@@ -66,63 +90,38 @@ struct DiceMode: View {
                         Text("\(index)").tag(index)
                     }
                 }
-                .frame(width: 250)
+                .frame(width: 200)
                 .onAppear{
                     for _ in 1...6{
                         diceImages.append("d1")
                     }
                 }
                 Divider()
-                HStack() {
-                    Button(action: {
-                        randomNumbers.removeAll()
-                        for _ in 1...numOfDice{
-                            randomNumbers.append(Int.random(in: 1...6))
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-                            randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            showDice = true
-                        }
-                        for n in 0..<randomNumbers.count{
-                            if(numOfDice>n) {diceImages[n]="d\(randomNumbers[n])"}
-                        }
-                        if(settingsData.historyTable.count != 50) {
-                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                        }
-                        else {
-                            settingsData.historyTable.remove(at: 0)
-                            self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                        }
-                    }) {
-                        Image(systemName: "play.fill")
+                Button(action:{
+                    if(settingsData.confirmGenResets){
+                        confirmReset = true
                     }
-                    Button(action:{
-                        if(settingsData.confirmGenResets){
-                            confirmReset = true
-                        }
-                        else {
+                    else {
+                        resetGen()
+                    }
+                }) {
+                    Image(systemName: "clear.fill")
+                }
+                .help("Reset number of dice and output")
+                .foregroundColor(.red)
+                .alert(isPresented: $confirmReset){
+                    Alert(
+                        title: Text("Confirm Reset"),
+                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
+                        primaryButton: .default(Text("Confirm")){
                             resetGen()
-                        }
-                    }) {
-                        Image(systemName: "clear.fill")
-                    }
-                    .help("Reset custom values and output")
-                    .alert(isPresented: $confirmReset){
-                        Alert(
-                            title: Text("Confirm Reset"),
-                            message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                            primaryButton: .default(Text("Confirm")){
-                                resetGen()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
             .padding(.leading, 12)
+        }
         }
         .navigationTitle("Dice")
     }

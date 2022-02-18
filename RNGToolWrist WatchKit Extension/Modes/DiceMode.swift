@@ -57,8 +57,8 @@ struct DiceMode: View {
                 }
                 else { self.roll() }
             }
-            if(showRollHint) {
-                Text("Tap the dice to roll")
+            if(showRollHint && settingsData.showModeHints) {
+                Text("Tap dice to roll")
                     .foregroundColor(.secondary)
             }
             HStack(alignment: .center) {

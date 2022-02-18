@@ -18,6 +18,7 @@ struct DiceMode: View {
     @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var diceImages = ["d1"]
     @State private var rollCount = 0
+    @State private var showRollHint = true
     
     func resetGen() {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
@@ -47,9 +48,6 @@ struct DiceMode: View {
         GeometryReader { geometry in
         ScrollView{
             Group {
-                Text("Tap the dice to roll")
-                    .font(.title3)
-                    .foregroundColor(.secondary)
                 HStack(){
                     ForEach(0..<numOfDice, id: \.self) { index in
                       Image(diceImages[index])
@@ -57,7 +55,11 @@ struct DiceMode: View {
                         .frame(width: (geometry.size.width / 6) - 10, height: (geometry.size.width / 6) - 10)
                     }
                 }
+                .padding(.top, 10)
                 .onTapGesture {
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                        self.showRollHint = false
+                    }
                     if(settingsData.showDiceAnimation && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
@@ -76,6 +78,11 @@ struct DiceMode: View {
                 }
                 Text(randomNumberStr)
                     .padding(.bottom, 5)
+            }
+            if(showRollHint && settingsData.showModeHints) {
+                Text("Tap dice to roll")
+                    .font(.title3)
+                    .foregroundColor(.secondary)
             }
             Text("Number of dice")
                 .font(.title3)

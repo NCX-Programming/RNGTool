@@ -34,8 +34,10 @@ func resetNumSet(){
 
 func resetDiceSet(){
     @AppStorage("allowDiceImages") var allowDiceImages = true
-
+    @AppStorage("showDiceAnimations") var showDiceAnimations = true
+    
     allowDiceImages = true
+    showDiceAnimations = true
 }
 
 func resetCardSet(){
