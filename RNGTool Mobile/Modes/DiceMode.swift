@@ -56,6 +56,13 @@ struct DiceMode: View {
                     }
                 }
                 .padding(.top, 10)
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                }
                 .onTapGesture {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false

@@ -90,6 +90,13 @@ struct DiceMode: View {
                 Text(randomNumberStr)
                     .font(.title2)
                     .padding(.bottom, 5)
+                    .contextMenu {
+                        Button(action: {
+                            copyToClipboard(item: "\(randomNumbers)")
+                        }) {
+                            Text("Copy")
+                        }
+                    }
                 Text("Number of dice")
                     .font(.title3)
                 // The seemingly unrelated code below is together because they must have the same max value
