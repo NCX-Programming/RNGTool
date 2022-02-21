@@ -34,20 +34,20 @@ func resetNumSet(){
 
 func resetDiceSet(){
     @AppStorage("allowDiceImages") var allowDiceImages = true
-    @AppStorage("showDiceAnimations") var showDiceAnimations = true
+    @AppStorage("showDiceAnimation") var showDiceAnimation = true
     
     allowDiceImages = true
-    showDiceAnimations = true
+    showDiceAnimation = true
 }
 
 func resetCardSet(){
     @AppStorage("showPoints") var showPoints = false
     @AppStorage("aceValue") var aceValue = 1
-    @AppStorage("useFaces") var useFaces = true
+    @AppStorage("showCardAnimation") var showCardAnimation = true
     
     showPoints = false
     aceValue = 1
-    useFaces = true
+    showCardAnimation = false
 }
 
 func resetMarbleSet(){

@@ -27,33 +27,32 @@ struct CardMode: View {
             randomNumberStr = ""
             pointValueStr = ""
         }
+        if(settingsData.showCardAnimation && !reduceMotion) {
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                if(cardsToDisplay == 1) { timer.invalidate() }
+                if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
+            }
+        }
+        else { cardsToDisplay = 1 }
         numOfCards = 1
-        cardsToDisplay = 1
         randomNumbers.removeAll()
         cardImages[0] = "c1"
         confirmReset = false
     }
     
     func getCards() {
-        if(settingsData.useFaces){
-            for n in 0..<numOfCards{
-                switch randomNumbers[n]{
-                case 1:
-                    cardImages[n]="cA"
-                case 11:
-                    cardImages[n]="cJ"
-                case 12:
-                    cardImages[n]="cQ"
-                case 13:
-                    cardImages[n]="cK"
-                default:
-                    cardImages[n]="c\(randomNumbers[n])"
-                }
-            }
-        }
-        else{
-            for n in 0..<numOfCards{
-                cardImages[n] = "c\(randomNumbers[n])"
+        for n in 0..<numOfCards{
+            switch randomNumbers[n]{
+            case 1:
+                cardImages[n]="cA"
+            case 11:
+                cardImages[n]="cJ"
+            case 12:
+                cardImages[n]="cQ"
+            case 13:
+                cardImages[n]="cK"
+            default:
+                cardImages[n]="c\(randomNumbers[n])"
             }
         }
     }
@@ -167,7 +166,7 @@ struct CardMode: View {
                 }
                 cardsToDisplay = 1
                 self.getCards()
-                if(!reduceMotion) {
+                if(settingsData.showCardAnimation && !reduceMotion) {
                     Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                         if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
                         if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }

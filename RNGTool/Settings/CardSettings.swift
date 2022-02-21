@@ -15,10 +15,6 @@ struct CardSettings: View {
         Text("This changes whether or not the card images will appear one at a time.")
             .font(.subheadline)
             .foregroundColor(.secondary)
-        Picker("Card Style", selection: $settingsData.useFaces) {
-            Text("Faces").tag(true)
-            Text("Numbers Only").tag(false)
-        }
         #if os(macOS)
             .pickerStyle(RadioGroupPickerStyle())
         #endif

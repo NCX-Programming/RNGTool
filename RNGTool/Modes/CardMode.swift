@@ -89,24 +89,17 @@ struct CardMode: View {
                                 self.pointValueStr = ""
                             }
                         }
-                        if(settingsData.useFaces){
-                            for n in 0..<numOfCards{
-                                switch randomNumbers[n]{
-                                case 1:
-                                    cardImages[n] = "cA"
-                                case 11:
-                                    cardImages[n] = "cJ"
-                                case 12:
-                                    cardImages[n] = "cQ"
-                                case 13:
-                                    cardImages[n] = "cK"
-                                default:
-                                    cardImages[n] = "c\(randomNumbers[n])"
-                                }
-                            }
-                        }
-                        else{
-                            for n in 0..<numOfCards{
+                        for n in 0..<numOfCards{
+                            switch randomNumbers[n]{
+                            case 1:
+                                cardImages[n] = "cA"
+                            case 11:
+                                cardImages[n] = "cJ"
+                            case 12:
+                                cardImages[n] = "cQ"
+                            case 13:
+                                cardImages[n] = "cK"
+                            default:
                                 cardImages[n] = "c\(randomNumbers[n])"
                             }
                         }
