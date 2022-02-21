@@ -14,31 +14,53 @@ struct CardMode: View {
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
     @State private var pointValues = [0]
-    @State private var showCards = false
     @State private var numOfCards = 1
+    @State private var cardsToDisplay = 1
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]"]
-    @State private var cardImages = [String]()
+    @State private var cardImages = ["c1"]
+    @State private var showDrawHint = true
+    @State private var drawCount = 0
     
     func resetGen() {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             randomNumberStr = ""
             pointValueStr = ""
-            showCards = false
         }
         numOfCards = 1
+        cardsToDisplay = 1
         randomNumbers.removeAll()
+        cardImages[0] = "c1"
         confirmReset = false
+    }
+    
+    func getCards() {
+        if(settingsData.useFaces){
+            for n in 0..<numOfCards{
+                switch randomNumbers[n]{
+                case 1:
+                    cardImages[n]="cA"
+                case 11:
+                    cardImages[n]="cJ"
+                case 12:
+                    cardImages[n]="cQ"
+                case 13:
+                    cardImages[n]="cK"
+                default:
+                    cardImages[n]="c\(randomNumbers[n])"
+                }
+            }
+        }
+        else{
+            for n in 0..<numOfCards{
+                cardImages[n] = "c\(randomNumbers[n])"
+            }
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
         ScrollView{
-            Group {
-                Text("Generate multiple numbers using cards")
-                    .font(.title3)
-                Divider()
-            }
             Group {
                 Text("Number of cards")
                     .font(.title3)
@@ -56,141 +78,112 @@ struct CardMode: View {
                 }
             }
             Divider()
-            HStack() {
-                Button(action: {
-                    randomNumbers.removeAll()
-                    for _ in 0..<numOfCards{
-                        randomNumbers.append(Int.random(in: 1...13))
-                    }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-                        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                    }
-                    if(settingsData.showPoints){
-                        pointValues.removeAll()
-                        for n in 0..<numOfCards{
-                            if(randomNumbers[n] == 1){
-                                pointValues.append(settingsData.aceValue)
-                            }
-                            else if(randomNumbers[n] > 1 && randomNumbers[n] < 11){
-                                pointValues.append(randomNumbers[n])
-                            }
-                            else{
-                                pointValues.append(10)
-                            }
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            self.pointValueStr = "Point value(s): \(pointValues)"
-                            pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
-                        }
-                    }
-                    else{
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                            self.pointValueStr = ""
-                        }
-                    }
-                    if(settingsData.useFaces){
-                        for n in 0..<numOfCards{
-                            switch randomNumbers[n]{
-                            case 1:
-                                cardImages[n]="cA"
-                            case 11:
-                                cardImages[n]="cJ"
-                            case 12:
-                                cardImages[n]="cQ"
-                            case 13:
-                                cardImages[n]="cK"
-                            default:
-                                cardImages[n]="c\(randomNumbers[n])"
-                            }
-                        }
-                    }
-                    else{
-                        for n in 0..<numOfCards{
-                            cardImages[n] = "c\(randomNumbers[n])"
-                        }
-                    }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        showCards = true
-                    }
-                    if !(settingsData.historyTable.count > 49) {
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
-                    }
-                    else {
-                        settingsData.historyTable.remove(at: 0)
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
-                    }
-                }) {
-                    Image(systemName: "play.fill")
+            Button(action:{
+                if(settingsData.confirmGenResets){
+                    confirmReset = true
                 }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(5)
-                .background(Color.accentColor)
-                .cornerRadius(20)
-                Button(action:{
-                    if(settingsData.confirmGenResets){
-                        confirmReset = true
-                    }
-                    else {
-                        resetGen()
-                    }
-                }) {
-                    Image(systemName: "clear.fill")
+                else {
+                    resetGen()
                 }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(5)
-                .background(Color.accentColor)
-                .cornerRadius(20)
-                .help("Reset custom values and output")
-                .alert(isPresented: $confirmReset){
-                    Alert(
-                        title: Text("Confirm Reset"),
-                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                        primaryButton: .default(Text("Confirm")){
-                            resetGen()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+            }) {
+                Image(systemName: "clear.fill")
             }
-            if(showCards) {
-                Divider()
+            .font(.system(size: 20, weight:.bold, design: .rounded))
+            .foregroundColor(.white)
+            .padding(.horizontal)
+            .padding(5)
+            .background(Color.accentColor)
+            .cornerRadius(20)
+            .help("Reset custom values and output")
+            .alert(isPresented: $confirmReset){
+                Alert(
+                    title: Text("Confirm Reset"),
+                    message: Text("Are you sure you want to reset the generator? This cannot be undone."),
+                    primaryButton: .default(Text("Confirm")){
+                        resetGen()
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
+            if(showDrawHint && settingsData.showModeHints) {
+                Text("Tap cards to draw a hand")
+                    .font(.title3)
+                    .foregroundColor(.secondary)
             }
             Group {
-                Text(randomNumberStr)
                 Text(pointValueStr)
                     .padding(.bottom, 5)
-                if(showCards){
-                    Button(action:{
-                        copyToClipboard(item: "\(randomNumbers)")
-                    }) {
-                        Image(systemName: "doc.on.doc.fill")
-                    }
-                    .font(.system(size: 12, weight:.bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding(.horizontal)
-                    .padding(5)
-                    .background(Color.accentColor)
-                    .cornerRadius(20)
-                    .padding(.bottom, 10)
-                }
             }
             VStack(alignment: .leading) {
-                if(showCards){
-                    ZStack(){
-                        ForEach(0..<numOfCards, id: \.self) { index in
-                            Image(cardImages[index]).resizable()
-                                .frame(width: 192, height: 256)
-                                .offset(x: CGFloat((geometry.size.width*0.075)*CGFloat(index)),y: 0)
-                        }
+                ZStack(){
+                    ForEach(0..<cardsToDisplay, id: \.self) { index in
+                        Image(cardImages[index]).resizable()
+                            .frame(width: 192, height: 256)
+                            .offset(x: CGFloat((geometry.size.width*0.075)*CGFloat(index)),y: 0)
+                    }
+                }
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Label("Copy", systemImage: "doc.on.doc")
                     }
                 }
             }
-            .padding(.trailing, CGFloat((geometry.size.width*0.075)*CGFloat((numOfCards-1))))
+            .onTapGesture {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                    self.showDrawHint = false
+                }
+                randomNumbers.removeAll()
+                for _ in 1...7{
+                    randomNumbers.append(Int.random(in: 1...13))
+                }
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                    self.randomNumberStr = "Your random number(s): \(randomNumbers)"
+                    randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+                }
+                if(settingsData.showPoints){
+                    pointValues.removeAll()
+                    for n in 0..<numOfCards{
+                        if(randomNumbers[n] == 1){
+                            pointValues.append(settingsData.aceValue)
+                        }
+                        else if(randomNumbers[n] > 1 && randomNumbers[n] < 11){
+                            pointValues.append(randomNumbers[n])
+                        }
+                        else{
+                            pointValues.append(10)
+                        }
+                    }
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                        self.pointValueStr = "Point value(s): \(pointValues)"
+                        pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
+                    }
+                }
+                else{
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                        self.pointValueStr = ""
+                    }
+                }
+                cardsToDisplay = 1
+                self.getCards()
+                if(!reduceMotion) {
+                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                        if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
+                        if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }
+                        self.drawCount += 1
+                    }
+                }
+                else { cardsToDisplay = numOfCards }
+                if !(settingsData.historyTable.count > 49) {
+                    settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
+                }
+                else {
+                    settingsData.historyTable.remove(at: 0)
+                    settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
+                }
+            }
+            .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
         }
         }
         .padding(.horizontal, 3)

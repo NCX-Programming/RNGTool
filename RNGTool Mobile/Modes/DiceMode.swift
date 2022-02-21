@@ -44,6 +44,16 @@ struct DiceMode: View {
         }
     }
     
+    func saveHistory() {
+        if !(settingsData.historyTable.count > 49) {
+            settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+        }
+        else {
+            settingsData.historyTable.remove(at: 0)
+            settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
         ScrollView{
@@ -71,17 +81,11 @@ struct DiceMode: View {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1
-                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
+                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0; self.saveHistory() }
                         }
                     }
-                    else { self.roll() }
-                    if !(settingsData.historyTable.count > 49) {
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
-                    else {
-                        settingsData.historyTable.remove(at: 0)
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
+                    else { self.roll(); self.saveHistory() }
+                    
                 }
                 Text(randomNumberStr)
                     .padding(.bottom, 5)
