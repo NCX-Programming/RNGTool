@@ -28,6 +28,7 @@ class SettingsData : ObservableObject {
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
     @AppStorage("allowDiceImages") var allowDiceImages = true
     // Card Settings
+    @AppStorage("showCardAnimation") var showCardAnimation = true
     @AppStorage("showPoints") var showPoints = false
     @AppStorage("aceValue") var aceValue = 1
     @AppStorage("useFaces") var useFaces = true

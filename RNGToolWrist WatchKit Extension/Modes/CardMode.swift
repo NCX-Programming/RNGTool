@@ -13,33 +13,80 @@ struct CardMode: View {
     @State private var randomNumbers = [0]
     @State private var showCards = false
     @State private var numOfCards = 1
+    @State private var cardsToDisplay = 1
     @State private var confirmReset = false
-    @State private var cardImages = [String]()
+    @State private var cardImages = ["c1"]
+    @State private var drawCount = 0
+    @State private var showDrawHint = true
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            showCards = false
-        }
         numOfCards = 1
+        cardsToDisplay = 1
         randomNumbers.removeAll()
+        cardImages[0] = "c1"
         confirmReset = false
+    }
+    
+    func getCards() {
+        if(settingsData.useFaces){
+            for n in 0..<numOfCards{
+                switch randomNumbers[n]{
+                case 1:
+                    cardImages[n] = "cA"
+                case 11:
+                    cardImages[n] = "cJ"
+                case 12:
+                    cardImages[n] = "cQ"
+                case 13:
+                    cardImages[n] = "cK"
+                default:
+                    cardImages[n] = "c\(randomNumbers[n])"
+                }
+            }
+        }
+        else{
+            for n in 0..<numOfCards{
+                cardImages[n] = "c\(randomNumbers[n])"
+            }
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
         ScrollView{
             VStack(alignment: .leading) {
-                if(showCards){
-                    ZStack(){
-                        ForEach(0..<numOfCards, id: \.self) { index in
-                            Image(cardImages[index]).resizable()
-                                .frame(width: 96, height: 128)
-                                .offset(x: CGFloat((geometry.size.width * 0.075) * CGFloat(index)), y: 0)
-                        }
+                ZStack(){
+                    ForEach(0..<cardsToDisplay, id: \.self) { index in
+                        Image(cardImages[index]).resizable()
+                            .frame(width: 96, height: 128)
+                            .offset(x: CGFloat((geometry.size.width * 0.075) * CGFloat(index)), y: 0)
                     }
                 }
             }
-            .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((numOfCards - 1))))
+            .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
+            .onTapGesture {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                    self.showDrawHint = false
+                }
+                randomNumbers.removeAll()
+                for _ in 0..<numOfCards{
+                    randomNumbers.append(Int.random(in: 1...13))
+                }
+                cardsToDisplay = 1
+                self.getCards()
+                if(settingsData.showCardAnimation && !reduceMotion) {
+                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                        if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
+                        if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }
+                        self.drawCount += 1
+                    }
+                }
+                else { cardsToDisplay = numOfCards }
+            }
+            if(showDrawHint && settingsData.showModeHints) {
+                Text("Tap cards to draw")
+                    .foregroundColor(.secondary)
+            }
             HStack(alignment: .center) {
                 // The seemingly unrelated code below is together because they must have the same max value
                 Picker("", selection: $numOfCards){
@@ -54,41 +101,8 @@ struct CardMode: View {
                 }
                 .frame(width: geometry.size.width / 4, height: geometry.size.height / 2.5)
                 Text("Number of Cards")
+                    .padding(.top, 12)
             }
-            Button(action: {
-                randomNumbers.removeAll()
-                for _ in 0..<numOfCards{
-                    randomNumbers.append(Int.random(in: 1...13))
-                }
-                if(settingsData.useFaces){
-                    for n in 0..<numOfCards{
-                        switch randomNumbers[n]{
-                        case 1:
-                            cardImages[n] = "cA"
-                        case 11:
-                            cardImages[n] = "cJ"
-                        case 12:
-                            cardImages[n] = "cQ"
-                        case 13:
-                            cardImages[n] = "cK"
-                        default:
-                            cardImages[n] = "c\(randomNumbers[n])"
-                        }
-                    }
-                }
-                else{
-                    for n in 0..<numOfCards{
-                        cardImages[n] = "c\(randomNumbers[n])"
-                    }
-                }
-                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                    showCards = true
-                }
-            }) {
-                Image(systemName: "play.fill")
-            }
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.primary)
             Button(action:{
                 if(settingsData.confirmGenResets){
                     confirmReset = true
