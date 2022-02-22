@@ -52,7 +52,7 @@ struct DiceMode: View {
                     ForEach(0..<numOfDice, id: \.self) { index in
                       Image(diceImages[index])
                         .resizable()
-                        .frame(width: geometry.size.width / 8, height: geometry.size.width / 8)
+                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                     }
                 }
                 .padding(.top, 10)

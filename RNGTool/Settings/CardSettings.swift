@@ -15,12 +15,6 @@ struct CardSettings: View {
         Text("This changes whether or not the card images will appear one at a time.")
             .font(.subheadline)
             .foregroundColor(.secondary)
-        #if os(macOS)
-            .pickerStyle(RadioGroupPickerStyle())
-        #endif
-        Text("Changes whether the card graphics will only use numbers or will include face cards.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
         #if !os(watchOS)
         Toggle(isOn: $settingsData.showPoints) {
             Text("Show card point values")

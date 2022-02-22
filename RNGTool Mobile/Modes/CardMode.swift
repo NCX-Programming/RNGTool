@@ -121,12 +121,12 @@ struct CardMode: View {
                             .offset(x: CGFloat((geometry.size.width*0.075)*CGFloat(index)),y: 0)
                     }
                 }
-                .contextMenu {
-                    Button(action: {
-                        copyToClipboard(item: "\(randomNumbers)")
-                    }) {
-                        Label("Copy", systemImage: "doc.on.doc")
-                    }
+            }
+            .contextMenu {
+                Button(action: {
+                    copyToClipboard(item: "\(randomNumbers)")
+                }) {
+                    Label("Copy", systemImage: "doc.on.doc")
                 }
             }
             .onTapGesture {
