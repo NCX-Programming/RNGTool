@@ -75,13 +75,10 @@ struct DiceMode: View {
                         }
                     }
                     else { self.roll() }
-                    if(settingsData.historyTable.count != 50) {
-                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
-                    else {
-                        settingsData.historyTable.remove(at: 0)
-                        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: "\(randomNumbers)"))
-                    }
+                    if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
+                    var copyString = "\(randomNumbers)"
+                    copyString.removeAll(where: { removeCharacters.contains($0) } )
+                    self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: copyString))
                 }
                 if(showRollHint && settingsData.showModeHints) {
                     Text("Click the dice to roll")
@@ -92,7 +89,9 @@ struct DiceMode: View {
                     .padding(.bottom, 5)
                     .contextMenu {
                         Button(action: {
-                            copyToClipboard(item: "\(randomNumbers)")
+                            var copyString = "\(randomNumbers)"
+                            copyString.removeAll(where: { removeCharacters.contains($0) } )
+                            copyToClipboard(item: copyString)
                         }) {
                             Text("Copy")
                         }
