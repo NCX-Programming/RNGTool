@@ -51,7 +51,7 @@ func resetCardSet(){
 }
 
 func resetMarbleSet(){
-    @AppStorage("showLetterList") var showLetterList = false
+    @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
     
-    showLetterList = false
+    showMarbleAnimation = true
 }

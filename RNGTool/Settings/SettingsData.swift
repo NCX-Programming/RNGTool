@@ -32,5 +32,5 @@ class SettingsData : ObservableObject {
     @AppStorage("showPoints") var showPoints = false
     @AppStorage("aceValue") var aceValue = 1
     // Marble Settings
-    @AppStorage("showLetterList") var showLetterList = false
+    @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
 }

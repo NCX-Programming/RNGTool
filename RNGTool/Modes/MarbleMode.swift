@@ -53,11 +53,9 @@ struct MarbleMode: View {
                             }
                         }
                     }
-                    if(settingsData.showLetterList) {
-                        Text(randomLetterStr)
-                            .font(.title2)
-                            .padding(.bottom, 5)
-                    }
+                    Text(randomLetterStr)
+                        .font(.title2)
+                        .padding(.bottom, 5)
                     Text(randomNumberStr)
                         .font(.title2)
                         .padding(.bottom, 5)

@@ -174,13 +174,8 @@ struct CardMode: View {
                     }
                 }
                 else { cardsToDisplay = numOfCards }
-                if !(settingsData.historyTable.count > 49) {
-                    settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
-                }
-                else {
-                    settingsData.historyTable.remove(at: 0)
-                    settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
-                }
+                if (settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
+                settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
             }
             .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
         }

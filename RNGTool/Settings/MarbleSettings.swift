@@ -11,8 +11,8 @@ struct MarbleSettings: View {
     @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
-        Toggle("Show list of letters", isOn: $settingsData.showLetterList)
-        Text("This will make it so that a list of letters will be shown below the marble icons.")
+        Toggle("Show marble animation", isOn: $settingsData.showMarbleAnimation)
+        Text("This changes whether or not the marbles will cycle through letters before stopping at one.")
             .font(.subheadline)
             .foregroundColor(.secondary)
     }
