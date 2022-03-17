@@ -15,103 +15,90 @@ struct MarbleMode: View {
     @State private var randomNumbers = [0]
     @State private var randomLetterStr = ""
     @State private var randomLetters = [String]()
-    @State private var randomLetterCopyStr = ""
-    @State private var showMarbles = false
     @State private var confirmReset = false
     @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
             randomLetterStr = ""
-            showMarbles = false
         }
         numOfMarbles = 1
-        randomNumbers.removeAll()
-        randomLetters.removeAll()
+        for index in 0..<randomNumbers.count {
+            randomNumbers[index] = 0
+        }
+        randomLetters[0] = "A"
         confirmReset = false
     }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Group {
-                    Text("Generate multiple letters using marbles")
-                        .font(.title3)
-                    Divider()
-                    if(showMarbles){
-                        HStack(){
-                            ForEach(0..<numOfMarbles, id: \.self) { index in
-                                ZStack() {
-                                    Text("\(letters[randomNumbers[index]])")
-                                        .font(.title)
-                                    Circle()
-                                        .stroke(Color.primary, lineWidth: 3)
-                                }
-                                .frame(width: 64, height: 64)
-                            }
+                HStack(){
+                    ForEach(0..<numOfMarbles, id: \.self) { index in
+                        ZStack() {
+                            Text("\(letters[randomNumbers[index]])")
+                                .font(.title)
+                            Circle()
+                                .stroke(Color.primary, lineWidth: 3)
                         }
-                    }
-                    Text(randomLetterStr)
-                        .font(.title2)
-                        .padding(.bottom, 5)
-                    Text(randomNumberStr)
-                        .font(.title2)
-                        .padding(.bottom, 5)
-                    if(showMarbles){
-                        Button(action:{
-                            randomLetterCopyStr = ""
-                            randomLetterCopyStr = "\(randomLetters)"
-                            randomLetterCopyStr.removeAll(where: { removeCharacters.contains($0) } )
-                            copyToClipboard(item: "\(randomLetterCopyStr)")
-                        }) {
-                            Image(systemName: "doc.on.doc.fill")
-                        }
-                        .padding(.bottom, 10)
-                        Divider()
+                        .frame(width: 64, height: 64)
                     }
                 }
+                .padding(.top, 10)
+                .contextMenu {
+                    Button(action: {
+                        var randomLetterCopyStr = "\(randomLetters)"
+                        randomLetterCopyStr.removeAll(where: { removeCharacters.contains($0) } )
+                        copyToClipboard(item: "\(randomLetterCopyStr)")
+                    }) {
+                        Text("Copy")
+                    }
+                }
+                .onTapGesture {
+                    randomNumbers.removeAll()
+                    randomLetters.removeAll()
+                    for _ in 1...5{
+                        randomNumbers.append(Int.random(in: 0...25))
+                    }
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                        randomNumberStr = "Your random number(s): \(randomNumbers)"
+                        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+                    }
+                    for i in 0..<numOfMarbles {
+                        randomLetters.append(letters[randomNumbers[i]])
+                    }
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                        randomLetterStr = "Your random letter(s): \(randomLetters)"
+                        randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
+                    }
+                    if(settingsData.historyTable.count != 50) {
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
+                    }
+                    else {
+                        settingsData.historyTable.remove(at: 0)
+                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
+                    }
+                }
+                Text(randomLetterStr)
+                    .font(.title2)
+                    .padding(.bottom, 5)
                 Text("Number of marbles")
                     .font(.title3)
+                // The seemingly unrelated code below is together because they must have the same max value
                 Picker("", selection: $numOfMarbles){
                     ForEach(1...5, id: \.self) { index in
                         Text("\(index)").tag(index)
                     }
                 }
-                .frame(width: 250)
+                .frame(width: 200)
+                .onAppear{
+                    for _ in 1...5{
+                        randomNumbers.append(0)
+                    }
+                }
                 Divider()
                 HStack() {
-                    Button(action: {
-                        randomNumbers.removeAll()
-                        randomLetters.removeAll()
-                        for _ in 1...5{
-                            randomNumbers.append(Int.random(in: 0...25))
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            randomNumberStr = "Your random number(s): \(randomNumbers)"
-                            randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                        }
-                        for i in 0..<numOfMarbles {
-                            randomLetters.append(letters[randomNumbers[i]])
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            randomLetterStr = "Your random letter(s): \(randomLetters)"
-                            randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
-                        }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            showMarbles = true
-                        }
-                        if(settingsData.historyTable.count != 50) {
-                            settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
-                        }
-                        else {
-                            settingsData.historyTable.remove(at: 0)
-                            settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
-                        }
-                    }) {
-                        Image(systemName: "play.fill")
-                    }
                     Button(action:{
                         if(settingsData.confirmGenResets){
                             confirmReset = true
@@ -123,6 +110,7 @@ struct MarbleMode: View {
                         Image(systemName: "clear.fill")
                     }
                     .help("Reset custom values and output")
+                    .foregroundColor(.red)
                     .alert(isPresented: $confirmReset){
                         Alert(
                             title: Text("Confirm Reset"),
