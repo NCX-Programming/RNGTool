@@ -23,6 +23,7 @@
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
 		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
+		3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759793D27E568BF0013D365 /* UpdateCheck.swift */; };
 		375C2A0B2778055E00904A03 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375C2A0A2778055E00904A03 /* Launch Screen.storyboard */; };
 		37688CDD27713837003B64CB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
 		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
@@ -128,6 +129,8 @@
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
 		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
+		3759793D27E568BF0013D365 /* UpdateCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheck.swift; sourceTree = "<group>"; };
+		3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RNGToolWrist WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		375C2A0A2778055E00904A03 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		37688CDC27713837003B64CB /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		376FEAEE27698D1600571A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -187,10 +190,11 @@
 				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
 				371A2FF02777A7A500B94F66 /* History.swift */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
-				37DB700426FC03FE0079F3E7 /* Settings */,
+				3759793D27E568BF0013D365 /* UpdateCheck.swift */,
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				3700F28D26DD26C5001BEE7A /* ModeList.swift */,
 				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
+				37DB700426FC03FE0079F3E7 /* Settings */,
 				37E97B9926DD71A2000BF61B /* Modes */,
 				3700F28326DD2573001BEE7A /* Assets.xcassets */,
 				3700F28826DD2573001BEE7A /* Info.plist */,
@@ -299,6 +303,7 @@
 		37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */,
 				37F5723027A8C551007D29FB /* Modes */,
 				37F5721027A8BA7F007D29FB /* Info.plist */,
 				37F5720D27A8BA7F007D29FB /* Preview Content */,
@@ -497,6 +502,7 @@
 				37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */,
 				37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */,
 				37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */,
+				3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */,
 				374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */,
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
 				374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */,
@@ -824,6 +830,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
@@ -857,6 +864,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";

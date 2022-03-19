@@ -7,10 +7,17 @@
 
 import SwiftUI
 
+
+
 struct RNGToolCommands: Commands {
+    
+    
     var body: some Commands {
         SidebarCommands()
         #if os(macOS)
+        CommandGroup(after: CommandGroupPlacement.appInfo) {
+            UpdateCheck()
+        }
         CommandGroup(before: CommandGroupPlacement.sidebar) {
             Button("Show History") {
                 OpenWindows.History.open()
