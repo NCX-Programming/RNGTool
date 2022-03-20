@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct RNGToolCommands: Commands {
     
     
