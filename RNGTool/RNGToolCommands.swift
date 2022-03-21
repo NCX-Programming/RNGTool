@@ -14,7 +14,9 @@ struct RNGToolCommands: Commands {
         SidebarCommands()
         #if os(macOS)
         CommandGroup(after: CommandGroupPlacement.appInfo) {
-            UpdateCheck()
+            Button("Check for Updates...") {
+                OpenWindows.Update.open()
+            }
         }
         CommandGroup(before: CommandGroupPlacement.sidebar) {
             Button("Show History") {

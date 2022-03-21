@@ -29,6 +29,11 @@ struct RNGToolApp: App {
                 .frame(width: 400, height: 200)
                 .frame(maxWidth: 400, maxHeight: 200)
         }.handlesExternalEvents(matching: Set(arrayLiteral: "History"))
+        WindowGroup("Update") {
+            UpdateCheck()
+                .frame(width: 300, height: 100)
+                .frame(maxWidth: 300, maxHeight: 100)
+        }.handlesExternalEvents(matching: Set(arrayLiteral: "Update"))
         #endif
     }
 }
@@ -36,6 +41,7 @@ struct RNGToolApp: App {
 #if os(macOS)
 enum OpenWindows: String, CaseIterable {
     case History = "History"
+    case Update = "Update"
 
     func open(){
         if let url = URL(string: "rngtool://\(self.rawValue)") {

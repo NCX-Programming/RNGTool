@@ -17,49 +17,54 @@ struct TaskEntry: Codable {
 struct UpdateCheck: View {
     let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let buildNumberStr: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    @Environment(\.openURL) var openURL
     @State var entry: TaskEntry? = nil
     @State private var tagMarketVer: String?
-    @State private var noUpdate = false
     @State private var yesUpdate = false
+    @State private var showSpinner = true
+    @State private var updateString = ""
     
     var body: some View {
-        Button("Check for Updates...") {
-            checkForUpdates()
-            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                print("API access complete!")
-                let tagName: String = entry?.tagName ?? "vX.X-25565"
-                print(tagName)
-                let tagNameSplit = tagName.split(separator: "-")
-                let tagStripped: Int = tagNameSplit.last.map{ Int($0) ?? 25565 } ?? 25565
-                print(tagStripped)
-                tagMarketVer = tagNameSplit.first.map{ String($0) }
-                print(tagMarketVer!)
-                let buildNumber: Int = Int(buildNumberStr) ?? 0
-                print("Current version: \(buildNumber), latest version: \(tagStripped).")
-                //if(tagStripped > buildNumber) { yesUpdate = true }
-                //else { updateAlert.noUpdate = true }
-                DispatchQueue.main.sync {
-                    if(tagStripped > buildNumber) { yesUpdate = true }
-                    else { noUpdate = true }
+        HStack(alignment: .center) {
+            VStack(alignment: .center) {
+                if showSpinner {
+                    ProgressView("Checking for updates...")
                 }
+                Text(updateString)
+                    .onAppear {
+                        checkForUpdates()
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                            print("API access complete!")
+                            let tagName: String = entry?.tagName ?? "vX.X-25565"
+                            print(tagName)
+                            let tagNameSplit = tagName.split(separator: "-")
+                            let tagStripped: Int = tagNameSplit.last.map{ Int($0) ?? 25565 } ?? 25565
+                            print(tagStripped)
+                            tagMarketVer = tagNameSplit.first.map{ String($0) }
+                            print(tagMarketVer!)
+                            let buildNumber: Int = Int(buildNumberStr) ?? 0
+                            print("Current version: \(buildNumber), latest version: \(tagStripped).")
+                            DispatchQueue.main.sync {
+                                if(tagStripped > buildNumber) {
+                                    showSpinner = false; yesUpdate = true
+                                    updateString = "New version available! (RNGTool \(tagMarketVer!))"
+                                }
+                                else { showSpinner = false; updateString = "You're up to date! (RNGTool \(appVersionString))" }
+                            }
+                        }
+                    }
             }
         }
-        .alert(isPresented: $noUpdate) {
-            Alert(
-                title: Text("Up to date!"),
-                message: Text("You're running the latest version of RNGTool. \(appVersionString)")
-            )
-        }
-        /*.alert(isPresented: $yesUpdate) {
+        .alert(isPresented: $yesUpdate) {
             Alert(
                 title: Text("Update available!"),
-                message: Text("RNGTool version \(tagMarketVer!) is available, and you're running version \(appVersionString)."),
-                primaryButton: .default(Text("Confirm")){
-                    print("Ok")
+                message: Text("RNGTool \(tagMarketVer!) is available! You're currently running RNGTool \(appVersionString)."),
+                primaryButton: .default(Text("View Release")){
+                    openURL(URL(string: "https://github.com/NCX-Programming/RNGTool/releases/latest")!)
                 },
                 secondaryButton: .cancel()
             )
-        }*/
+        }
     }
     func checkForUpdates() {
         guard let url = URL(string: "https://api.github.com/repos/NCX-Programming/RNGTool/releases/latest") else {
