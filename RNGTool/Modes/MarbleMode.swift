@@ -11,11 +11,12 @@ struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var numOfMarbles = 1
-    @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var randomLetterStr = ""
     @State private var randomLetters = [String]()
     @State private var confirmReset = false
+    @State private var showRollHint = true
+    @State private var rollCount = 0
     @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
@@ -29,6 +30,21 @@ struct MarbleMode: View {
         }
         randomLetters[0] = "A"
         confirmReset = false
+    }
+    
+    func roll() {
+        randomNumbers.removeAll()
+        randomLetters.removeAll()
+        for _ in 1...5{
+            randomNumbers.append(Int.random(in: 0...25))
+        }
+        for i in 0..<numOfMarbles {
+            randomLetters.append(letters[randomNumbers[i]])
+        }
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+            randomLetterStr = "Your random letter(s): \(randomLetters)"
+            randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
+        }
     }
     
     var body: some View {
@@ -56,29 +72,25 @@ struct MarbleMode: View {
                     }
                 }
                 .onTapGesture {
-                    randomNumbers.removeAll()
-                    randomLetters.removeAll()
-                    for _ in 1...5{
-                        randomNumbers.append(Int.random(in: 0...25))
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                        self.showRollHint = false
                     }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        randomNumberStr = "Your random number(s): \(randomNumbers)"
-                        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+                    if(settingsData.showMarbleAnimation && !reduceMotion) {
+                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                            self.roll()
+                            self.rollCount += 1
+                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
+                        }
                     }
-                    for i in 0..<numOfMarbles {
-                        randomLetters.append(letters[randomNumbers[i]])
-                    }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        randomLetterStr = "Your random letter(s): \(randomLetters)"
-                        randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
-                    }
-                    if(settingsData.historyTable.count != 50) {
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
-                    }
-                    else {
-                        settingsData.historyTable.remove(at: 0)
-                        settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: "\(randomNumbers)"))
-                    }
+                    else { self.roll() }
+                    if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
+                    var copyString = "\(randomLetters)"
+                    copyString.removeAll(where: { removeCharacters.contains($0) } )
+                    self.settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: copyString))
+                }
+                if(showRollHint && settingsData.showModeHints) {
+                    Text("Click the marbles to roll")
+                        .foregroundColor(.secondary)
                 }
                 Text(randomLetterStr)
                     .font(.title2)
