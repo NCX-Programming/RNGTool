@@ -32,6 +32,13 @@ struct MarbleMode: View {
         confirmReset = false
     }
     
+    func saveHistory() {
+        if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
+        var copyString = "\(randomLetters)"
+        copyString.removeAll(where: { removeCharacters.contains($0) } )
+        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: copyString))
+    }
+
     func roll() {
         randomNumbers.removeAll()
         randomLetters.removeAll()
@@ -79,14 +86,14 @@ struct MarbleMode: View {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1
-                            if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
+                            if(rollCount == 9) {
+                                timer.invalidate()
+                                self.rollCount = 0
+                                self.saveHistory()
+                            }
                         }
                     }
-                    else { self.roll() }
-                    if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
-                    var copyString = "\(randomLetters)"
-                    copyString.removeAll(where: { removeCharacters.contains($0) } )
-                    self.settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: copyString))
+                    else { self.roll(); self.saveHistory() }
                 }
                 if(showRollHint && settingsData.showModeHints) {
                     Text("Click the marbles to roll")

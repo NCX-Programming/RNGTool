@@ -24,7 +24,7 @@ struct History: View {
                     Spacer()
                 }
                 VStack {
-                    Text("Number(s)")
+                    Text("Result(s)")
                         .foregroundColor(.secondary)
                     Divider()
                     ForEach(0..<settingsData.historyTable.count, id: \.self) { index in

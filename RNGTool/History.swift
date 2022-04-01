@@ -38,12 +38,19 @@ struct History: View {
                     }
                     .frame(width: 150)
                     VStack(alignment: .leading) {
-                        Text("Number(s)")
+                        Text("Result(s)")
                             .foregroundColor(.secondary)
                         Divider()
                         ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
                             Text("\(settingsData.historyTable[index].numbers)")
                                 .padding(.bottom, 3)
+                                .contextMenu {
+                                    Button(action: {
+                                        copyToClipboard(item: settingsData.historyTable[index].numbers)
+                                    }) {
+                                        Text("Copy")
+                                    }
+                                }
                         }
                         Spacer()
                     }
