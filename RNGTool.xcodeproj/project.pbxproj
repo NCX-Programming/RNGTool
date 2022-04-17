@@ -137,7 +137,7 @@
 		37A8B4D5278A8EF600A4D08F /* DevMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevMode.swift; sourceTree = "<group>"; };
 		37AB5BB3276FCFC700F753FC /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		37AB5BB7276FE46D00F753FC /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
-		37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGTool-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
+		37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGTool-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
@@ -186,19 +186,15 @@
 		3700F27E26DD256D001BEE7A /* RNGTool */ = {
 			isa = PBXGroup;
 			children = (
-				37EF2027274F3B5800FD62BD /* Utilities.swift */,
-				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
+				3700F28326DD2573001BEE7A /* Assets.xcassets */,
+				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				371A2FF02777A7A500B94F66 /* History.swift */,
+				3700F28826DD2573001BEE7A /* Info.plist */,
+				3700F28D26DD26C5001BEE7A /* ModeList.swift */,
+				3700F28926DD2573001BEE7A /* RNGTool.entitlements */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
 				3759793D27E568BF0013D365 /* UpdateCheck.swift */,
-				3700F28126DD256D001BEE7A /* ContentView.swift */,
-				3700F28D26DD26C5001BEE7A /* ModeList.swift */,
-				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
-				37DB700426FC03FE0079F3E7 /* Settings */,
 				37E97B9926DD71A2000BF61B /* Modes */,
-				3700F28326DD2573001BEE7A /* Assets.xcassets */,
-				3700F28826DD2573001BEE7A /* Info.plist */,
-				3700F28926DD2573001BEE7A /* RNGTool.entitlements */,
 				3700F28526DD2573001BEE7A /* Preview Content */,
 			);
 			path = RNGTool;
@@ -215,14 +211,14 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
+				37688CDC27713837003B64CB /* About.swift */,
+				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
 				37A8B4D5278A8EF600A4D08F /* DevMode.swift */,
 				3707EC442788711200E48CFA /* History.swift */,
-				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
-				37AB5BB6276FE42400F753FC /* Modes */,
-				37D00E26276AEAFC00968BEE /* RNGTool-Mobile-Info.plist */,
-				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
-				37688CDC27713837003B64CB /* About.swift */,
 				376FEAEE27698D1600571A78 /* SettingsView.swift */,
+				37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */,
+				37AB5BB6276FE42400F753FC /* Modes */,
 				3725BF7F27697DCC00A1B4E8 /* Preview Content */,
 			);
 			path = "RNGTool Mobile";
@@ -239,9 +235,9 @@
 		3794432826D912B500900842 = {
 			isa = PBXGroup;
 			children = (
+				37BF55B9280C92A1002425B2 /* Global */,
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
-				37F571F927A8BA7A007D29FB /* RNGToolWrist */,
 				37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */,
 				3794433226D912B500900842 /* Products */,
 			);
@@ -269,15 +265,26 @@
 			path = Modes;
 			sourceTree = "<group>";
 		};
+		37BF55B9280C92A1002425B2 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
+				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
+				37EF2027274F3B5800FD62BD /* Utilities.swift */,
+				37DB700426FC03FE0079F3E7 /* Settings */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		37DB700426FC03FE0079F3E7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				37AB5BB3276FCFC700F753FC /* SettingsData.swift */,
 				371301692719165A0061D344 /* AdvancedSettings.swift */,
-				37010B962702697B00E32C35 /* MarbleSettings.swift */,
 				374B0EE627001761006CCD69 /* NumberSettings.swift */,
-				374B0EE427001749006CCD69 /* CardSettings.swift */,
 				37DB700226FC03F90079F3E7 /* DiceSettings.swift */,
+				374B0EE427001749006CCD69 /* CardSettings.swift */,
+				37010B962702697B00E32C35 /* MarbleSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -293,19 +300,12 @@
 			path = Modes;
 			sourceTree = "<group>";
 		};
-		37F571F927A8BA7A007D29FB /* RNGToolWrist */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RNGToolWrist;
-			sourceTree = "<group>";
-		};
 		37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
 				3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */,
-				37F5723027A8C551007D29FB /* Modes */,
 				37F5721027A8BA7F007D29FB /* Info.plist */,
+				37F5723027A8C551007D29FB /* Modes */,
 				37F5720D27A8BA7F007D29FB /* Preview Content */,
 			);
 			path = "RNGToolWrist WatchKit Extension";
@@ -640,7 +640,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -659,7 +659,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -679,7 +679,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -698,7 +698,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -832,7 +832,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -847,7 +847,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -866,7 +866,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -881,7 +881,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -903,14 +903,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2022 NCX Programming";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.NCX-Programming.RNGToolMobile";
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -931,14 +931,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2022 NCX Programming";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.NCX-Programming.RNGToolMobile";
-				MARKETING_VERSION = 1.9.1;
+				MARKETING_VERSION = 1.9.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;

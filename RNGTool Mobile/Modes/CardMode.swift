@@ -160,8 +160,7 @@ struct CardMode: View {
                     }
                 }
                 else { cardsToDisplay = numOfCards }
-                if (settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
-                settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: "\(randomNumbers)"))
+                addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
             }
             .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
         }

@@ -28,14 +28,7 @@ struct MarbleMode: View {
         randomLetters[0] = "A"
         confirmReset = false
     }
-    
-    func saveHistory() {
-        if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
-        var copyString = "\(randomLetters)"
-        copyString.removeAll(where: { removeCharacters.contains($0) } )
-        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Marble Mode", numbers: copyString))
-    }
-    
+
     func roll() {
         randomLetters.removeAll()
         for index in 0...4{
@@ -82,11 +75,14 @@ struct MarbleMode: View {
                         self.rollCount += 1
                         if(rollCount == 10) {
                             timer.invalidate(); self.rollCount = 0
-                            self.saveHistory()
+                            addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
                         }
                     }
                 }
-                else { self.roll(); self.saveHistory() }
+                else {
+                    self.roll()
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
+                }
             }
             Text(randomLetterStr)
                 .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))

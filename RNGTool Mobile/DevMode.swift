@@ -24,7 +24,7 @@ struct DevMode: View {
                     Text("Numbers")
                 }
                 Button(action:{
-                    settingsData.historyTable.append(HistoryTable(modeUsed: historyModeInput, numbers: historyNumberInput))
+                    addHistoryEntry(settingsData: settingsData, results: historyNumberInput, mode: historyModeInput)
                 }) {
                     Text("Append")
                 }
