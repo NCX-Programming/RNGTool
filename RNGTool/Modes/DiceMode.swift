@@ -27,13 +27,6 @@ struct DiceMode: View {
         confirmReset = false
     }
     
-    func saveHistory() {
-        if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
-        var copyString = "\(randomNumbers)"
-        copyString.removeAll(where: { removeCharacters.contains($0) } )
-        self.settingsData.historyTable.append(HistoryTable(modeUsed: "Dice Mode", numbers: copyString))
-    }
-    
     func roll() {
         randomNumbers.removeAll()
         for _ in 1...numOfDice {
@@ -75,11 +68,14 @@ struct DiceMode: View {
                             self.rollCount += 1
                             if(rollCount == 10) {
                                 timer.invalidate(); self.rollCount = 0
-                                self.saveHistory()
+                                addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
                             }
                         }
                     }
-                    else { self.roll(); self.saveHistory() }
+                    else {
+                        self.roll()
+                        addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                    }
                 }
                 if(showRollHint && settingsData.showModeHints) {
                     Text("Click the dice to roll")

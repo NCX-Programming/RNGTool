@@ -148,8 +148,7 @@ struct CardMode: View {
                         }
                     }
                     else { cardsToDisplay = numOfCards }
-                    if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
-                    self.settingsData.historyTable.append(HistoryTable(modeUsed: "Card Mode", numbers: randomNumberStr))
+                    addHistoryEntry(settingsData: settingsData, results: randomNumberStr, mode: "Card Mode")
                 }
             }
             .padding(.leading, 12)

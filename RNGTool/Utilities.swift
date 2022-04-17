@@ -10,6 +10,13 @@ import SwiftUI
 
 let removeCharacters: Set<Character> = ["[", "]", "\""]
 
+func addHistoryEntry(settingsData: SettingsData, results: String, mode: String) {
+    var resultsClear: String = results
+    resultsClear.removeAll(where: { removeCharacters.contains($0) } )
+    if(settingsData.historyTable.count == 50) { settingsData.historyTable.remove(at: 0) }
+    settingsData.historyTable.append(HistoryTable(modeUsed: mode, numbers: resultsClear))
+}
+
 func copyToClipboard(item: String){
     #if os(macOS)
     let pasteboard = NSPasteboard.general
