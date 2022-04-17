@@ -15,15 +15,12 @@ struct DiceMode: View {
     @State private var randomNumbers = [0]
     @State private var randomNumberStr = ""
     @State private var numsInArray = 0
-    @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var diceImages = ["d1"]
     @State private var rollCount = 0
     @State private var showRollHint = true
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
-        }
+        randomNumberStr = ""
         numOfDice = 1
         randomNumbers.removeAll()
         diceImages[0] = "d1"
@@ -45,10 +42,8 @@ struct DiceMode: View {
         for n in 0..<randomNumbers.count {
             if(numOfDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-            randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-        }
+        self.randomNumberStr = "Your random number(s): \(randomNumbers)"
+        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
     }
     
     var body: some View {
@@ -91,6 +86,7 @@ struct DiceMode: View {
                         .foregroundColor(.secondary)
                 }
                 Text(randomNumberStr)
+                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                     .font(.title2)
                     .padding(.bottom, 5)
                     .contextMenu {

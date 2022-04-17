@@ -17,13 +17,10 @@ struct MarbleMode: View {
     @State private var randomLetters = [String]()
     @State private var confirmReset = false
     @State private var showRollHint = true
-    @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomLetterStr = ""
-        }
+        randomLetterStr = ""
         numOfMarbles = 1
         for index in 0..<randomNumbers.count {
             randomNumbers[index] = 0
@@ -47,10 +44,8 @@ struct MarbleMode: View {
         for n in 0..<randomNumbers.count{
             if(numOfMarbles > n) { randomLetters.append("\(letters[randomNumbers[n]])") }
         }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomLetterStr = "Your random letter(s): \(randomLetters)"
-            randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
-        }
+        randomLetterStr = "Your random letter(s): \(randomLetters)"
+        randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
     }
     
     var body: some View {
@@ -94,6 +89,7 @@ struct MarbleMode: View {
                 else { self.roll(); self.saveHistory() }
             }
             Text(randomLetterStr)
+                .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                 .padding(.bottom, 5)
             if(showRollHint && settingsData.showModeHints) {
                 Text("Tap dice to roll")

@@ -17,13 +17,10 @@ struct MarbleMode: View {
     @State private var confirmReset = false
     @State private var showRollHint = true
     @State private var rollCount = 0
-    @State private var removeCharacters: Set<Character> = ["[", "]", "\""]
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomLetterStr = ""
-        }
+        randomLetterStr = ""
         numOfMarbles = 1
         for index in 0..<randomNumbers.count {
             randomNumbers[index] = 0
@@ -48,10 +45,8 @@ struct MarbleMode: View {
         for i in 0..<numOfMarbles {
             randomLetters.append(letters[randomNumbers[i]])
         }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomLetterStr = "Your random letter(s): \(randomLetters)"
-            randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
-        }
+        randomLetterStr = "Your random letter(s): \(randomLetters)"
+        randomLetterStr.removeAll(where: { removeCharacters.contains($0) } )
     }
     
     var body: some View {
@@ -100,6 +95,7 @@ struct MarbleMode: View {
                         .foregroundColor(.secondary)
                 }
                 Text(randomLetterStr)
+                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                     .font(.title2)
                     .padding(.bottom, 5)
                 Text("Number of marbles")

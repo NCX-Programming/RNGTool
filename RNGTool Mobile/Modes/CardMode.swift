@@ -10,23 +10,18 @@ import SwiftUI
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var randomNumberStr = ""
     @State private var randomNumbers = [0]
     @State private var pointValueStr = ""
     @State private var pointValues = [0]
     @State private var numOfCards = 1
     @State private var cardsToDisplay = 1
     @State private var confirmReset = false
-    @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var cardImages = ["c1"]
     @State private var showDrawHint = true
     @State private var drawCount = 0
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
-            pointValueStr = ""
-        }
+        pointValueStr = ""
         if(settingsData.showCardAnimation && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if(cardsToDisplay == 1) { timer.invalidate() }
@@ -109,10 +104,9 @@ struct CardMode: View {
                     .font(.title3)
                     .foregroundColor(.secondary)
             }
-            Group {
-                Text(pointValueStr)
-                    .padding(.bottom, 5)
-            }
+            Text(pointValueStr)
+                .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
+                .padding(.bottom, 5)
             VStack(alignment: .leading) {
                 ZStack(){
                     ForEach(0..<cardsToDisplay, id: \.self) { index in
@@ -137,10 +131,6 @@ struct CardMode: View {
                 for _ in 1...7{
                     randomNumbers.append(Int.random(in: 1...13))
                 }
-                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                    self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-                    randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                }
                 if(settingsData.showPoints){
                     pointValues.removeAll()
                     for n in 0..<numOfCards{
@@ -154,15 +144,11 @@ struct CardMode: View {
                             pointValues.append(10)
                         }
                     }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        self.pointValueStr = "Point value(s): \(pointValues)"
-                        pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
-                    }
+                    self.pointValueStr = "Point value(s): \(pointValues)"
+                    pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
                 }
                 else{
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        self.pointValueStr = ""
-                    }
+                    self.pointValueStr = ""
                 }
                 cardsToDisplay = 1
                 self.getCards()

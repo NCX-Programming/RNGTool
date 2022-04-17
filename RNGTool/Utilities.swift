@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+let removeCharacters: Set<Character> = ["[", "]", "\""]
+
 func copyToClipboard(item: String){
     #if os(macOS)
     let pasteboard = NSPasteboard.general

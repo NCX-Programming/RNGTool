@@ -17,15 +17,12 @@ struct CardMode: View {
     @State private var numOfCards = 1
     @State private var cardsToDisplay = 1
     @State private var confirmReset = false
-    @State private var removeCharacters: Set<Character> = ["[", "]"]
     @State private var cardImages = ["c1"]
     @State private var drawCount = 0
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
-            pointValueStr = ""
-        }
+        randomNumberStr = ""
+        pointValueStr = ""
         if(settingsData.showCardAnimation && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if(cardsToDisplay == 1) { timer.invalidate() }
@@ -83,9 +80,10 @@ struct CardMode: View {
                     )
                 }
                 Text(pointValueStr)
+                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                     .font(.title2)
                     .padding(.bottom, 5)
-                HStack(){
+                HStack() {
                     ZStack(){
                         ForEach(0..<cardsToDisplay, id: \.self) { index in
                             Image(cardImages[index]).resizable()
@@ -121,15 +119,11 @@ struct CardMode: View {
                                 pointValues.append(10)
                             }
                         }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            self.pointValueStr = "Point value(s): \(pointValues)"
-                            pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
-                        }
+                        self.pointValueStr = "Point value(s): \(pointValues)"
+                        pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
                     }
                     else {
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            self.pointValueStr = ""
-                        }
+                        self.pointValueStr = ""
                     }
                     cardsToDisplay = 1
                     for n in 0..<numOfCards{
