@@ -13,20 +13,28 @@ struct MarbleMode: View {
     @State private var numOfMarbles = 1
     @State private var randomNumbers = [0]
     @State private var randomLetters = [String]()
-    @State private var showMarbles = false
     @State private var confirmReset = false
+    @State private var showRollHint = true
+    @State private var rollCount = 0
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            showMarbles = false
-        }
         numOfMarbles = 1
         for index in 0..<randomNumbers.count {
             randomNumbers[index] = 0
         }
         randomLetters[0] = "A"
         confirmReset = false
+    }
+    
+    func roll() {
+        randomLetters.removeAll()
+        for index in 0...2 {
+            randomNumbers[index] = Int.random(in: 0...25)
+        }
+        for i in 0..<numOfMarbles {
+            randomLetters.append(letters[randomNumbers[i]])
+        }
     }
     
     var body: some View {
@@ -45,17 +53,21 @@ struct MarbleMode: View {
             }
             .padding(.top, 4)
             .onTapGesture {
-                randomNumbers.removeAll()
-                randomLetters.removeAll()
-                for _ in 1...3 {
-                    randomNumbers.append(Int.random(in: 0...25))
-                }
-                for i in 0..<numOfMarbles {
-                    randomLetters.append(letters[randomNumbers[i]])
-                }
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                    showMarbles = true
+                    self.showRollHint = false
                 }
+                if(settingsData.showMarbleAnimation && !reduceMotion) {
+                    Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                        self.roll()
+                        self.rollCount += 1
+                        if(rollCount == 10) { timer.invalidate(); self.rollCount = 0 }
+                    }
+                }
+                else { self.roll() }
+            }
+            if(showRollHint && settingsData.showModeHints) {
+                Text("Tap dice to roll")
+                    .foregroundColor(.secondary)
             }
             HStack(alignment: .center) {
                 Picker("", selection: $numOfMarbles){
