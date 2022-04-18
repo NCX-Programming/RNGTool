@@ -22,41 +22,32 @@ struct MarbleMode: View {
             showMarbles = false
         }
         numOfMarbles = 1
-        randomNumbers.removeAll()
-        randomLetters.removeAll()
+        for index in 0..<randomNumbers.count {
+            randomNumbers[index] = 0
+        }
+        randomLetters[0] = "A"
         confirmReset = false
     }
     
     var body: some View {
         GeometryReader { geometry in
         ScrollView {
-            if(showMarbles){
-                HStack(){
-                    ForEach(0..<numOfMarbles, id: \.self) { index in
-                        ZStack() {
-                            Text("\(letters[randomNumbers[index]])")
-                                .font(.title3)
-                            Circle()
-                                .stroke(Color.primary, lineWidth: 3)
-                        }
-                        .frame(width: (geometry.size.width / 5) - 10, height: (geometry.size.width / 5) - 10)
+            HStack(){
+                ForEach(0..<numOfMarbles, id: \.self) { index in
+                    ZStack() {
+                        Text("\(letters[randomNumbers[index]])")
+                            .font(.title3)
+                        Circle()
+                            .stroke(Color.primary, lineWidth: 3)
                     }
+                    .frame(width: (geometry.size.width / 3) - 10, height: (geometry.size.width / 3) - 10)
                 }
-                .padding(.top, 4)
             }
-            HStack(alignment: .center) {
-                Picker("", selection: $numOfMarbles){
-                    ForEach(1...5, id: \.self) { index in
-                        Text("\(index)").tag(index)
-                    }
-                }
-                .frame(width: geometry.size.width / 4, height: geometry.size.height / 2.5)
-                Text("Number of Marbles")
-            }
-            Button(action: {
+            .padding(.top, 4)
+            .onTapGesture {
                 randomNumbers.removeAll()
                 randomLetters.removeAll()
-                for _ in 1...5{
+                for _ in 1...3 {
                     randomNumbers.append(Int.random(in: 0...25))
                 }
                 for i in 0..<numOfMarbles {
@@ -65,11 +56,22 @@ struct MarbleMode: View {
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     showMarbles = true
                 }
-            }) {
-                Image(systemName: "play.fill")
             }
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.primary)
+            HStack(alignment: .center) {
+                Picker("", selection: $numOfMarbles){
+                    ForEach(1...3, id: \.self) { index in
+                        Text("\(index)").tag(index)
+                    }
+                }
+                .frame(width: geometry.size.width / 4, height: geometry.size.height / 2.5)
+                .onAppear{
+                    for _ in 1...3 {
+                        randomNumbers.append(0)
+                    }
+                }
+                Text("Number of Marbles")
+                    .padding(.top, 10)
+            }
             Button(action:{
                 if(settingsData.confirmGenResets){
                     confirmReset = true

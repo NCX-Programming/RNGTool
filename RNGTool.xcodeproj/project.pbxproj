@@ -211,11 +211,11 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
-				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
 				37688CDC27713837003B64CB /* About.swift */,
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
 				37A8B4D5278A8EF600A4D08F /* DevMode.swift */,
 				3707EC442788711200E48CFA /* History.swift */,
+				375C2A0A2778055E00904A03 /* Launch Screen.storyboard */,
 				376FEAEE27698D1600571A78 /* SettingsView.swift */,
 				37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */,
 				37AB5BB6276FE42400F753FC /* Modes */,

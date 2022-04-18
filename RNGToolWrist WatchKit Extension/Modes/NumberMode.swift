@@ -11,33 +11,78 @@ struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var confirmReset = false
+    @State private var showRollHint = true
     @State private var randomNumber = 0
-    @State private var randomNumberStr = ""
+    @State private var randomNumberStr = "0"
+    @State private var maxNumber = 100
+    @State private var minNumber = 0
     
     func resetGen() {
         randomNumber = 0
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
-            randomNumberStr = ""
+            randomNumberStr = "0"
         }
+        maxNumber = 100
+        minNumber = 0
         confirmReset = false
     }
-    
+
     var body: some View {
         ScrollView {
-            Text("Your random number:")
             Text(randomNumberStr)
-            Spacer()
-            Button(action:{
-                randomNumber = Int.random(in: settingsData.minNumberDefault...settingsData.maxNumberDefault)
-                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
-                    self.randomNumberStr = "\(randomNumber)"
+                .font(.title)
+                .onTapGesture {
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                        self.showRollHint = false
+                    }
+                    randomNumber = Int.random(in: minNumber...maxNumber)
+                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
+                        self.randomNumberStr = "\(randomNumber)"
+                    }
                 }
-            }) {
-                Image(systemName: "play.fill")
-                    
+            if(showRollHint && settingsData.showModeHints) {
+                Text("Tap number to generate")
+                    .foregroundColor(.secondary)
             }
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.primary)
+            Spacer()
+            VStack() {
+                Text("Max: \(maxNumber)")
+                HStack() {
+                    Button(action:{
+                        if(maxNumber > minNumber) { maxNumber -= 1 }
+                    }) {
+                        Image(systemName: "minus")
+                            
+                    }
+                    Button(action:{
+                        maxNumber += 1
+                    }) {
+                        Image(systemName: "plus")
+                            
+                    }
+                }
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .foregroundColor(.primary)
+            }
+            VStack() {
+                Text("Min: \(minNumber)")
+                HStack() {
+                    Button(action:{
+                        if(minNumber > 0) { minNumber -= 1 }
+                    }) {
+                        Image(systemName: "minus")
+                            
+                    }
+                    Button(action:{
+                        if(minNumber < maxNumber) { minNumber += 1 }
+                    }) {
+                        Image(systemName: "plus")
+                            
+                    }
+                }
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .foregroundColor(.primary)
+            }
             Button(action:{
                 if(settingsData.confirmGenResets){
                     confirmReset = true

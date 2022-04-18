@@ -14,7 +14,6 @@ struct DiceMode: View {
     @State private var confirmReset = false
     @State private var randomNumbers = [0]
     @State private var randomNumberStr = ""
-    @State private var numsInArray = 0
     @State private var diceImages = ["d1"]
     @State private var rollCount = 0
     @State private var showRollHint = true
