@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData

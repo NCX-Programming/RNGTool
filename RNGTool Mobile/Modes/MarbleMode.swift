@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @State private var engine: CHHapticEngine?
     @State private var numOfMarbles = 1
     @State private var rollCount = 0
     @State private var randomNumbers = [0]
@@ -66,6 +68,7 @@ struct MarbleMode: View {
                 }
             }
             .onTapGesture {
+                if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     self.showRollHint = false
                 }
@@ -84,6 +87,7 @@ struct MarbleMode: View {
                     addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
                 }
             }
+            .onAppear { prepareHaptics(engine: &engine) }
             Text(randomLetterStr)
                 .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                 .padding(.bottom, 5)
@@ -108,12 +112,11 @@ struct MarbleMode: View {
             }
             Divider()
             Button(action:{
+                playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.1)
                 if(settingsData.confirmGenResets){
                     confirmReset = true
                 }
-                else {
-                    resetGen()
-                }
+                else { resetGen() }
             }) {
                 Image(systemName: "clear.fill")
             }

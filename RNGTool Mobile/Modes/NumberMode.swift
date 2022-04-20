@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 extension String.StringInterpolation {
     mutating func appendInterpolation(if condition: @autoclosure () -> Bool, _ literal: StringLiteralType) {
@@ -17,6 +18,7 @@ extension String.StringInterpolation {
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @State private var engine: CHHapticEngine?
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
@@ -96,6 +98,7 @@ struct NumberMode: View {
             }
             HStack {
                 Button(action:{
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2)
                     maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
                     minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
                     randomNumber = Int.random(in: minNumber...maxNumber)
@@ -110,6 +113,7 @@ struct NumberMode: View {
                     Image(systemName: "play.fill")
                         
                 }
+                .onAppear { prepareHaptics(engine: &engine) }
                 .font(.system(size: 20, weight:.bold, design: .rounded))
                 .foregroundColor(.white)
                 .padding(.horizontal)
@@ -118,12 +122,11 @@ struct NumberMode: View {
                 .cornerRadius(20)
                 .help("Generate a number")
                 Button(action:{
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.1)
                     if(settingsData.confirmGenResets){
                         confirmReset = true
                     }
-                    else {
-                        resetGen()
-                    }
+                    else { resetGen() }
                 }) {
                     Image(systemName: "clear.fill")
                 }

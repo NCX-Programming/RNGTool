@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @State private var engine: CHHapticEngine?
     @State private var numOfDice = 1
     @State private var confirmReset = false
     @State private var randomNumbers = [0]
@@ -58,6 +60,7 @@ struct DiceMode: View {
                     }
                 }
                 .onTapGesture {
+                    if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }
@@ -76,6 +79,7 @@ struct DiceMode: View {
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
                     }
                 }
+                .onAppear { prepareHaptics(engine: &engine) }
                 Text(randomNumberStr)
                     .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
                     .padding(.bottom, 5)
@@ -102,12 +106,11 @@ struct DiceMode: View {
             Divider()
             HStack() {
                 Button(action:{
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.1)
                     if(settingsData.confirmGenResets){
                         confirmReset = true
                     }
-                    else {
-                        resetGen()
-                    }
+                    else { resetGen() }
                 }) {
                     Image(systemName: "clear.fill")
                 }
