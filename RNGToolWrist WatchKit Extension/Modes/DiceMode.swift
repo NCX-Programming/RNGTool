@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
@@ -45,6 +46,7 @@ struct DiceMode: View {
                 }
             }
             .onTapGesture {
+                WKInterfaceDevice.current().play(.click)
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     self.showRollHint = false
                 }

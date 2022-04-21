@@ -6,9 +6,17 @@
 //
 
 import SwiftUI
+#if os(iOS)
+import CoreHaptics
+#elseif os(watchOS)
+import WatchKit
+#endif
 
 struct SettingsView: View {
     @EnvironmentObject var settingsData: SettingsData
+    #if os(iOS)
+    @State private var engine: CHHapticEngine?
+    #endif
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var showResetPrompt = false
@@ -33,6 +41,11 @@ struct SettingsView: View {
                     minNumberInput = "\(settingsData.minNumberDefault)"
                 }
                 Button(action:{
+                    #if os(iOS)
+                    playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
+                    #elseif os(watchOS)
+                    WKInterfaceDevice.current().play(.click)
+                    #endif
                     showResetPrompt = true
                 }) {
                     Text("Reset")
@@ -51,6 +64,11 @@ struct SettingsView: View {
                     )
                 }
                 Button(action:{
+                    #if os(iOS)
+                    playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
+                    #elseif os(watchOS)
+                    WKInterfaceDevice.current().play(.click)
+                    #endif
                     if(maxNumberInput == "" || minNumberInput == ""){
                         showAlert = true
                         alertTitle = "Missing numbers!"
@@ -87,6 +105,11 @@ struct SettingsView: View {
             #endif
             Section(header: Text("Other")) {
                 Button(action:{
+                    #if os(iOS)
+                    playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
+                    #elseif os(watchOS)
+                    WKInterfaceDevice.current().play(.click)
+                    #endif
                     showAdvSet = true
                 }) {
                     #if os(iOS)
@@ -103,6 +126,9 @@ struct SettingsView: View {
                 }
             }
         }
+        #if os(iOS)
+        .onAppear { prepareHaptics(engine: &engine) }
+        #endif
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showAdvSet, content: {

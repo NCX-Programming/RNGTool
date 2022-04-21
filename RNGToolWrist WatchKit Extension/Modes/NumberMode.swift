@@ -33,6 +33,7 @@ struct NumberMode: View {
             Text(randomNumberStr)
                 .font(.title)
                 .onTapGesture {
+                    WKInterfaceDevice.current().play(.click)
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
@@ -58,6 +59,7 @@ struct CardMode: View {
             }
             .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
             .onTapGesture {
+                WKInterfaceDevice.current().play(.click)
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     self.showDrawHint = false
                 }

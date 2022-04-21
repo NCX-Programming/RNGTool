@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
@@ -53,6 +54,7 @@ struct MarbleMode: View {
             }
             .padding(.top, 4)
             .onTapGesture {
+                WKInterfaceDevice.current().play(.click)
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     self.showRollHint = false
                 }
