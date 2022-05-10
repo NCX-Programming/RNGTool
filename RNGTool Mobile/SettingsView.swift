@@ -27,7 +27,7 @@ struct SettingsView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Number Settings")) {
+            Section(header: Text("Number Settings"), footer: Text("The default maximum and minimum numbers when using Number Mode.")) {
                 Text("Default Maximum Number")
                 TextField(text: $maxNumberInput, prompt: Text("Required")) {
                     Text("Max Number")
@@ -92,16 +92,10 @@ struct SettingsView: View {
                     )
                 }
             }
-            Section(header: Text("Dice Settings")) {
-                DiceSettings()
-            }
-            Section(header: Text("Card Settings")) {
-                CardSettings()
-            }
+            DiceSettings()
+            CardSettings()
             #if !os(watchOS)
-            Section(header: Text("Marble Settings")) {
-                MarbleSettings()
-            }
+            MarbleSettings()
             #endif
             Section(header: Text("Other")) {
                 Button(action:{

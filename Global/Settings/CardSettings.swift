@@ -11,34 +11,29 @@ struct CardSettings: View {
     @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
-        Toggle("Show card animation", isOn: $settingsData.showCardAnimation)
-        Text("This changes whether or not the card images will appear one at a time.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+        Section(header: Text("Card Settings")) {
+            Toggle("Show draw animation", isOn: $settingsData.showCardAnimation)
+        }
         #if !os(watchOS)
-        Toggle(isOn: $settingsData.showPoints) {
-            Text("Show card point values")
+        Section(footer: Text("Shows the common point values of each card.")) {
+            Toggle(isOn: $settingsData.showPoints) {
+                Text("Show card point values")
+            }
+            Picker("Ace Point Value", selection: $settingsData.aceValue){
+                Text("1 Point").tag(1)
+                Text("11 Points").tag(11)
+            }
+            #if os(macOS)
+                .pickerStyle(RadioGroupPickerStyle())
+            #endif
+                .disabled(!settingsData.showPoints)
         }
-        Text("This will show what the point value of a card is in most card games.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
-        Picker("Ace Point Value", selection: $settingsData.aceValue){
-            Text("1 Point").tag(1)
-            Text("11 Points").tag(11)
-        }
-        #if os(macOS)
-            .pickerStyle(RadioGroupPickerStyle())
-        #endif
-            .disabled(!settingsData.showPoints)
-        Text("Changes whether the Ace card is worth 1 or 11 points. This setting is ignored if \"Show card point values\" is off.")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
         #endif
     }
 }
 
 struct CardSettings_Previews: PreviewProvider {
     static var previews: some View {
-        CardSettings()
+        CardSettings().environmentObject(SettingsData())
     }
 }

@@ -17,7 +17,7 @@ func addHistoryEntry(settingsData: SettingsData, results: String, mode: String) 
     settingsData.historyTable.append(HistoryTable(modeUsed: mode, numbers: resultsClear))
 }
 
-func copyToClipboard(item: String){
+func copyToClipboard(item: String) {
     #if os(macOS)
     let pasteboard = NSPasteboard.general
     pasteboard.declareTypes([NSPasteboard.PasteboardType.string], owner: nil)
@@ -33,7 +33,7 @@ func copyToClipboard(item: String){
     #endif
 }
 
-func resetNumSet(){
+func resetNumSet() {
     @AppStorage("maxNumberDefault") var maxNumberDefault = 100
     @AppStorage("minNumberDefault") var minNumberDefault = 0
 
@@ -41,7 +41,7 @@ func resetNumSet(){
     minNumberDefault = 0
 }
 
-func resetDiceSet(){
+func resetDiceSet() {
     @AppStorage("allowDiceImages") var allowDiceImages = true
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
     
@@ -49,7 +49,7 @@ func resetDiceSet(){
     showDiceAnimation = true
 }
 
-func resetCardSet(){
+func resetCardSet() {
     @AppStorage("showPoints") var showPoints = false
     @AppStorage("aceValue") var aceValue = 1
     @AppStorage("showCardAnimation") var showCardAnimation = true
@@ -59,7 +59,7 @@ func resetCardSet(){
     showCardAnimation = false
 }
 
-func resetMarbleSet(){
+func resetMarbleSet() {
     @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
     
     showMarbleAnimation = true

@@ -14,7 +14,7 @@ struct DevMode: View {
     
     var body: some View {
         Form {
-            Section(header: Text("History Table Manipulation")) {
+            Section(header: Text("History Table Manipulation"), footer: Text("This will append a new entry with the specified values to the number history table. This does not check for a maximum before appending.")) {
                 Text("Mode Used")
                 TextField(text: $historyModeInput, prompt: Text("Required")) {
                     Text("Mode Used")
@@ -28,18 +28,14 @@ struct DevMode: View {
                 }) {
                     Text("Append")
                 }
-                Text("This will append a new entry with the specified values to the number history table. This does not check for a maximum before appending.")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+            }
+            Section(footer: Text("This will erase all entries in the table.")) {
                 Text("Entries: \(settingsData.historyTable.count)")
                 Button(action:{
                     settingsData.historyTable.removeAll()
                 }) {
                     Text("Reset Table")
                 }
-                Text("This will erase all entries in the table.")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
             }
         }
         .padding(.horizontal, 3)
