@@ -20,6 +20,7 @@ class SettingsData : ObservableObject {
     // Advanced Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
     @AppStorage("showModeHints") var showModeHints = true
+    @AppStorage("checkUpdatesOnStartup") var checkUpdatesOnStartup = true
     @AppStorage("showDevMode") var showDevMode = false
     // Number Settings
     @AppStorage("maxNumberDefault") var maxNumberDefault = 100

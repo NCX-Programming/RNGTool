@@ -26,6 +26,11 @@ struct AdvancedSettings: View {
                 Toggle("Ask to confirm resets", isOn: $settingsData.confirmGenResets)
                 Toggle("Show tap hints", isOn: $settingsData.showModeHints)
             }
+            #if os(macOS)
+            Section(header: Text("Updates")) {
+                Toggle("Check for updates on startup", isOn: $settingsData.checkUpdatesOnStartup)
+            }
+            #endif
             Section(header: Text("Settings Reset"),footer: Text("This will reset all of RNGTool's settings to their default values!")) {
                 Button(action:{
                     #if os(iOS)

@@ -22,6 +22,31 @@ enum InvalidHTTPError: Error {
     case invalid
 }
 
+func checkForUpdates(completionHandler: @escaping (Result<TaskEntry, Error>) -> Void) {
+    guard let url = URL(string: "https://api.github.com/repos/NCX-Programming/RNGTool/releases/latest") else {
+        print("Invalid URL")
+        return
+    }
+    let request = URLRequest(url: url)
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        guard case .none = error else { return }
+        
+        guard let data = data else {
+            print("Data error.")
+            return
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            completionHandler(.failure(InvalidHTTPError.invalid))
+            return
+        }
+        
+        let decoded: Result<TaskEntry, Error> = Result(catching: { try JSONDecoder().decode(TaskEntry.self, from: data) })
+        completionHandler(decoded)
+    }.resume()
+}
+
 struct UpdateCheck: View {
     let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let buildNumberStr: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
@@ -78,29 +103,5 @@ struct UpdateCheck: View {
                 secondaryButton: .cancel()
             )
         }
-    }
-    func checkForUpdates(completionHandler: @escaping (Result<TaskEntry, Error>) -> Void) {
-        guard let url = URL(string: "https://api.github.com/repos/NCX-Programming/RNGTool/releases/latest") else {
-            print("Invalid URL")
-            return
-        }
-        let request = URLRequest(url: url)
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard case .none = error else { return }
-            
-            guard let data = data else {
-                print("Data error.")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                completionHandler(.failure(InvalidHTTPError.invalid))
-                return
-            }
-            
-            let decoded: Result<TaskEntry, Error> = Result(catching: { try JSONDecoder().decode(TaskEntry.self, from: data) })
-            completionHandler(decoded)
-        }.resume()
     }
 }
