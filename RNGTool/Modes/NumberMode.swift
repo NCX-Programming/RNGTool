@@ -20,9 +20,7 @@ struct NumberMode: View {
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
-    @State private var showCopy = false
     @State private var randomNumber = 0
-    @State private var randomNumberStr = ""
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var maxNumber = 0
@@ -35,10 +33,8 @@ struct NumberMode: View {
         minNumberInput = "\(settingsData.minNumberDefault)"
         randomNumber = 0
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
             showMaxEditor = false
             showMinEditor = false
-            showCopy = false
         }
         confirmReset = false
     }
@@ -96,13 +92,8 @@ struct NumberMode: View {
                         minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
                         if (maxNumber <= minNumber) { minNumber = settingsData.minNumberDefault }
                         randomNumber = Int.random(in: minNumber...maxNumber)
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                            showCopy = true
-                            self.randomNumberStr = "Your random number: \(randomNumber)"
-                        }
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"
-                        
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
                         Image(systemName: "play.fill")

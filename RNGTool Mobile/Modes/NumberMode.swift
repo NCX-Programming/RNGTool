@@ -22,9 +22,7 @@ struct NumberMode: View {
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
-    @State private var showCopy = false
     @State private var randomNumber = 0
-    @State private var randomNumberStr = ""
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var maxNumber = 0
@@ -37,41 +35,30 @@ struct NumberMode: View {
         minNumberInput = "\(settingsData.minNumberDefault)"
         randomNumber = 0
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            randomNumberStr = ""
             showMaxEditor = false
             showMinEditor = false
-            showCopy = false
         }
         confirmReset = false
     }
     
     var body: some View {
         ScrollView {
-            Text("Generate a single number using a maximum and minimum number")
-                .font(.title3)
-            Divider()
-            Text(randomNumberStr)
-                .font(.title2)
+            Text("\(randomNumber)")
+                .font(.title)
                 .padding(.bottom, 5)
-            if(showCopy){
-                Button(action:{
-                    copyToClipboard(item: "\(randomNumber)")
-                }) {
-                    Image(systemName: "doc.on.doc.fill")
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumber)")
+                    }) {
+                        Text("Copy")
+                    }
                 }
-                .font(.system(size: 12, weight:.bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(5)
-                .background(Color.accentColor)
-                .cornerRadius(20)
-                .padding(.bottom, 10)
-                Divider()
-            }
             Group() {
-                Text("Maximum Number: \(maxNumberInput). Tap to set a custom value.")
+                Text("Maximum: \(maxNumberInput). Tap to change.")
                     .onTapGesture {
-                        showMaxEditor.toggle()
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
+                            showMaxEditor.toggle()
+                        }
                     }
                     .help("Tap here to set a custom maximum number")
                     .onAppear{
@@ -82,9 +69,11 @@ struct NumberMode: View {
                         .keyboardType(.numberPad)
                 }
                 Divider()
-                Text("Minimum Number: \(settingsData.minNumberDefault). Tap to set a custom value.")
+                Text("Minimum: \(settingsData.minNumberDefault). Tap to change.")
                     .onTapGesture {
-                        showMinEditor.toggle()
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
+                            showMinEditor.toggle()
+                        }
                     }
                     .help("Tap here to set a custom minimum number")
                     .onAppear{
@@ -99,13 +88,10 @@ struct NumberMode: View {
             HStack {
                 Button(action:{
                     playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2)
-                    maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
-                    minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
+                    maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
+                    minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
+                    if (maxNumber <= minNumber) { minNumber = settingsData.minNumberDefault }
                     randomNumber = Int.random(in: minNumber...maxNumber)
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                        showCopy = true
-                        self.randomNumberStr = "Your random number: \(randomNumber)"
-                    }
                     maxNumberInput="\(maxNumber)"
                     minNumberInput="\(minNumber)"
                     addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")

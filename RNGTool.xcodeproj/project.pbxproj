@@ -648,7 +648,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -689,7 +689,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -843,7 +843,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -858,7 +858,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.2;
+				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -877,7 +877,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -892,7 +892,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.2;
+				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -914,7 +914,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
@@ -942,7 +942,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
