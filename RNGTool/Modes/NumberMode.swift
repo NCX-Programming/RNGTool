@@ -46,58 +46,41 @@ struct NumberMode: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading){
-                Text("Generate a single number using a maximum and minimum number")
-                    .font(.title3)
-                Divider()
-                Text(randomNumberStr)
-                    .font(.title2)
+                Text("\(randomNumber)")
+                    .font(.system(size: 48))
                     .padding(.bottom, 5)
-                if(showCopy){
-                    Button(action:{
-                        copyToClipboard(item: "\(randomNumber)")
-                    }) {
-                        Image(systemName: "doc.on.doc.fill")
+                    .contextMenu {
+                        Button(action: {
+                            copyToClipboard(item: "\(randomNumber)")
+                        }) {
+                            Text("Copy")
+                        }
                     }
-                    .padding(.bottom, 10)
-                    Divider()
-                }
                 Group() {
-                    Text("Maximum Number: \(maxNumberInput). Right click to set a custom value.")
-                        .contextMenu {
-                            Toggle("Show Editor", isOn: $showMaxEditor)
-                            Button(action: {
-                                maxNumber = 0
-                                maxNumberInput = ""
-                                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                                    showMaxEditor.toggle()
-                                }
-                            }) {
-                                Text("Set to Default")
+                    Text("Maximum Number: \(maxNumberInput). Click to change.")
+                        .onTapGesture {
+                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
+                                showMaxEditor.toggle()
                             }
                         }
-                        .help("Right click here to set a custom maximum number")
+                        .help("Click to set a custom maximum number")
+                        .font(.title2)
                         .onAppear{
                             maxNumberInput="\(settingsData.maxNumberDefault)"
                         }
                     if(showMaxEditor){
                         TextField("Enter a number", text: $maxNumberInput)
                             .frame(width: 300)
-                            
                     }
                     Divider()
-                    Text("Minimum Number: \(settingsData.minNumberDefault). Right click to set a custom value.")
-                        .contextMenu {
-                            Toggle("Show Editor", isOn: $showMinEditor)
-                            Button(action: {
-                                minNumber = 0
-                                minNumberInput = ""
-                                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-                                    showMinEditor.toggle()}
-                            }) {
-                                Text("Set to Default")
+                    Text("Minimum Number: \(settingsData.minNumberDefault). Click to change.")
+                        .onTapGesture {
+                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
+                                showMinEditor.toggle()
                             }
                         }
-                        .help("Right click here to set a custom minimum number")
+                        .help("Click to set a custom minimum number")
+                        .font(.title2)
                         .onAppear{
                             minNumberInput="\(settingsData.minNumberDefault)"
                         }
@@ -109,8 +92,9 @@ struct NumberMode: View {
                 }
                 HStack {
                     Button(action:{
-                        maxNumber = Int(maxNumberInput) ?? settingsData.maxNumberDefault
-                        minNumber = Int(minNumberInput) ?? settingsData.minNumberDefault
+                        maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
+                        minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
+                        if (maxNumber <= minNumber) { minNumber = settingsData.minNumberDefault }
                         randomNumber = Int.random(in: minNumber...maxNumber)
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                             showCopy = true
@@ -136,6 +120,7 @@ struct NumberMode: View {
                         Image(systemName: "clear.fill")
                     }
                     .help("Reset custom values and output")
+                    .foregroundColor(.red)
                     .alert(isPresented: $confirmReset){
                         Alert(
                             title: Text("Confirm Reset"),
