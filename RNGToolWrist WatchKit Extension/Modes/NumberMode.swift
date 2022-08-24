@@ -13,10 +13,13 @@ struct NumberMode: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var confirmReset = false
     @State private var showRollHint = true
+    @State private var showNumKeyboard = false
     @State private var randomNumber = 0
     @State private var randomNumberStr = "0"
     @State private var maxNumber = 100
     @State private var minNumber = 0
+    @State private var keyboardNumber = 0
+    @State private var kbReturnType = 1
     
     func resetGen() {
         randomNumber = 0
@@ -49,41 +52,23 @@ struct NumberMode: View {
             Spacer()
             VStack() {
                 Text("Max: \(maxNumber)")
-                HStack() {
-                    Button(action:{
-                        if(maxNumber > minNumber) { maxNumber -= 1 }
-                    }) {
-                        Image(systemName: "minus")
-                            
+                    .onTapGesture {
+                        kbReturnType = 1
+                        keyboardNumber = maxNumber
+                        showNumKeyboard = true
                     }
-                    Button(action:{
-                        maxNumber += 1
-                    }) {
-                        Image(systemName: "plus")
-                            
-                    }
-                }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.primary)
+                Text("Tap to change")
+                    .foregroundColor(.secondary)
             }
             VStack() {
                 Text("Min: \(minNumber)")
-                HStack() {
-                    Button(action:{
-                        if(minNumber > 0) { minNumber -= 1 }
-                    }) {
-                        Image(systemName: "minus")
-                            
+                    .onTapGesture {
+                        kbReturnType = 2
+                        keyboardNumber = minNumber
+                        showNumKeyboard = true
                     }
-                    Button(action:{
-                        if(minNumber < maxNumber) { minNumber += 1 }
-                    }) {
-                        Image(systemName: "plus")
-                            
-                    }
-                }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.primary)
+                Text("Tap to change")
+                    .foregroundColor(.secondary)
             }
             Button(action:{
                 if(settingsData.confirmGenResets){
@@ -106,6 +91,27 @@ struct NumberMode: View {
                     },
                     secondaryButton: .cancel()
                 )
+            }
+            .sheet(isPresented: $showNumKeyboard) {
+                NumKeyboard(targetNumber: $keyboardNumber)
+                .toolbar(content: {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") { self.showNumKeyboard = false }
+                    }
+                })
+                .toolbar(content: {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Done") {
+                            if(kbReturnType == 1) {
+                                maxNumber = keyboardNumber
+                            }
+                            else if(kbReturnType == 2) {
+                                minNumber = keyboardNumber
+                            }
+                            self.showNumKeyboard = false
+                        }
+                    }
+                })
             }
         }
         .navigationTitle("Numbers")
