@@ -52,12 +52,12 @@ struct CardMode: View {
                 ZStack(){
                     ForEach(0..<cardsToDisplay, id: \.self) { index in
                         Image(cardImages[index]).resizable()
-                            .frame(width: 96, height: 128)
-                            .offset(x: CGFloat((geometry.size.width * 0.075) * CGFloat(index)), y: 0)
+                            .frame(width: 90, height: 126)
+                            .offset(x: CGFloat((geometry.size.width * 0.15) * CGFloat(index)), y: 0)
                     }
                 }
             }
-            .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
+            .padding(.trailing, CGFloat((geometry.size.width * 0.15) * CGFloat((cardsToDisplay - 1))))
             .onTapGesture {
                 WKInterfaceDevice.current().play(.click)
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){

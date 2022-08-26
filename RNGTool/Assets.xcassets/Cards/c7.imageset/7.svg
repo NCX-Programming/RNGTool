@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 180 252" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<clipPath id="TextBounds">
+<rect height="39" width="19.8438" x="8.20312" y="3"/>
+</clipPath>
+<clipPath id="TextBounds_2">
+<rect height="39" width="19.8438" x="151.953" y="210"/>
+</clipPath>
+<clipPath id="TextBounds_3">
+<rect height="77" width="36.6875" x="71.6562" y="87.5"/>
+</clipPath>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="252" width="180" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Layer-1" vectornator:layerName="Layer 1">
+<path d="M16 2.84217e-14L164 2.84217e-14C172.837 2.84217e-14 180 7.16344 180 16L180 236C180 244.837 172.837 252 164 252L16 252C7.16344 252 0 244.837 0 236L0 16C0 7.16344 7.16344 2.84217e-14 16 2.84217e-14Z" fill="#ffffff" fill-rule="nonzero" opacity="1" stroke="none"/>
+<path clip-path="url(#TextBounds)" d="M13.8594 32.0313C13.8594 32.7656 14.4531 33.25 15.0938 33.25C15.75 33.25 16.125 32.875 16.4219 32.25L24.3906 15.0469C24.7344 14.3125 24.9531 13.5938 24.9531 13.1563C24.9531 12.2344 24.2812 11.6719 23.4688 11.6719L12.3438 11.6719C11.375 11.6719 10.9062 12.1719 10.9062 12.875C10.9062 13.5625 11.375 14.0625 12.3438 14.0625L22.0312 14.0625L22.0312 14.2188L14.1406 31.0469C13.9688 31.3906 13.8594 31.6875 13.8594 32.0313Z" fill="#000000" opacity="1" stroke="none"/>
+<path clip-path="url(#TextBounds_2)" d="M166.141 219.969C166.141 219.234 165.547 218.75 164.906 218.75C164.25 218.75 163.875 219.125 163.578 219.75L155.609 236.953C155.266 237.688 155.047 238.406 155.047 238.844C155.047 239.766 155.719 240.328 156.531 240.328L167.656 240.328C168.625 240.328 169.094 239.828 169.094 239.125C169.094 238.438 168.625 237.938 167.656 237.938L157.969 237.938L157.969 237.781L165.859 220.953C166.031 220.609 166.141 220.313 166.141 219.969Z" fill="#000000" opacity="1" stroke="none"/>
+<path clip-path="url(#TextBounds_3)" d="M81.4688 146.562C81.4688 148.031 82.6562 149 83.9375 149C85.25 149 86 148.25 86.5938 147L102.531 112.594C103.219 111.125 103.656 109.688 103.656 108.812C103.656 106.969 102.312 105.844 100.688 105.844L78.4375 105.844C76.5 105.844 75.5625 106.844 75.5625 108.25C75.5625 109.625 76.5 110.625 78.4375 110.625L97.8125 110.625L97.8125 110.938L82.0312 144.594C81.6875 145.281 81.4688 145.875 81.4688 146.562Z" fill="#000000" opacity="1" stroke="none"/>
+<path d="M15 1L165 1C172.732 1 179 7.28814 179 15.0449L179 236.955C179 244.712 172.732 251 165 251L15 251C7.26801 251 1 244.712 1 236.955L1 15.0449C1 7.28814 7.26801 1 15 1Z" fill="none" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+</g>
+</svg>

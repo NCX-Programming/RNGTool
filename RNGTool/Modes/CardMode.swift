@@ -87,7 +87,7 @@ struct CardMode: View {
                     ZStack(){
                         ForEach(0..<cardsToDisplay, id: \.self) { index in
                             Image(cardImages[index]).resizable()
-                                .frame(width: 192, height: 256)
+                                .frame(width: 180, height: 252)
                                 .offset(x: CGFloat(40*index),y: 0)
                         }
                     }

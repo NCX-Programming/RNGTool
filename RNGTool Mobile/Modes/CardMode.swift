@@ -112,8 +112,8 @@ struct CardMode: View {
                 ZStack(){
                     ForEach(0..<cardsToDisplay, id: \.self) { index in
                         Image(cardImages[index]).resizable()
-                            .frame(width: 192, height: 256)
-                            .offset(x: CGFloat((geometry.size.width*0.075)*CGFloat(index)),y: 0)
+                            .frame(width: 180, height: 252)
+                            .offset(x: CGFloat((geometry.size.width * 0.085) * CGFloat(index)),y: 0)
                     }
                 }
             }
@@ -164,7 +164,7 @@ struct CardMode: View {
                 else { cardsToDisplay = numOfCards }
                 addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
             }
-            .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
+            .padding(.trailing, CGFloat((geometry.size.width * 0.085) * CGFloat((cardsToDisplay - 1))))
             .onAppear { prepareHaptics(engine: &engine) }
         }
         }
