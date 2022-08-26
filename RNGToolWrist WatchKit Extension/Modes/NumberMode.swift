@@ -51,24 +51,22 @@ struct NumberMode: View {
             }
             Spacer()
             VStack() {
-                Text("Max: \(maxNumber)")
-                    .onTapGesture {
-                        kbReturnType = 1
-                        keyboardNumber = maxNumber
-                        showNumKeyboard = true
-                    }
-                Text("Tap to change")
-                    .foregroundColor(.secondary)
+                Button(action: {
+                    kbReturnType = 1
+                    keyboardNumber = maxNumber
+                    showNumKeyboard = true
+                }) {
+                    Text("Max: \(maxNumber)")
+                }
             }
             VStack() {
-                Text("Min: \(minNumber)")
-                    .onTapGesture {
-                        kbReturnType = 2
-                        keyboardNumber = minNumber
-                        showNumKeyboard = true
-                    }
-                Text("Tap to change")
-                    .foregroundColor(.secondary)
+                Button(action: {
+                    kbReturnType = 2
+                    keyboardNumber = minNumber
+                    showNumKeyboard = true
+                }) {
+                    Text("Min: \(minNumber)")
+                }
             }
             Button(action:{
                 if(settingsData.confirmGenResets){
