@@ -16,9 +16,13 @@ struct SettingsView: View {
     @EnvironmentObject var settingsData: SettingsData
     #if os(iOS)
     @State private var engine: CHHapticEngine?
-    #endif
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
+    #elseif os(watchOS)
+    @State private var kbReturnType = 0
+    @State private var keyboardNumber = 0
+    @State private var showNumKeyboard = false
+    #endif
     @State private var showResetPrompt = false
     @State private var showAlert = false
     @State private var alertTitle = ""
@@ -28,6 +32,7 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section(header: Text("Number Settings"), footer: Text("The default maximum and minimum numbers when using Number Mode.")) {
+                #if os(iOS)
                 Text("Default Maximum Number")
                 TextField(text: $maxNumberInput, prompt: Text("Required")) {
                     Text("Max Number")
@@ -40,6 +45,43 @@ struct SettingsView: View {
                     maxNumberInput = "\(settingsData.maxNumberDefault)"
                     minNumberInput = "\(settingsData.minNumberDefault)"
                 }
+                #elseif os(watchOS)
+                Button(action: {
+                    kbReturnType = 1
+                    keyboardNumber = settingsData.maxNumberDefault
+                    showNumKeyboard = true
+                }) {
+                    Text("Max: \(settingsData.maxNumberDefault)")
+                }
+                Button(action: {
+                    kbReturnType = 2
+                    keyboardNumber = settingsData.minNumberDefault
+                    showNumKeyboard = true
+                }) {
+                    Text("Min: \(settingsData.minNumberDefault)")
+                }
+                .sheet(isPresented: $showNumKeyboard) {
+                    NumKeyboard(targetNumber: $keyboardNumber)
+                    .toolbar(content: {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") { self.showNumKeyboard = false }
+                        }
+                    })
+                    .toolbar(content: {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") {
+                                if(kbReturnType == 1) {
+                                    settingsData.maxNumberDefault = keyboardNumber
+                                }
+                                else if(kbReturnType == 2) {
+                                    settingsData.minNumberDefault = keyboardNumber
+                                }
+                                self.showNumKeyboard = false
+                            }
+                        }
+                    })
+                }
+                #endif
                 Button(action:{
                     #if os(iOS)
                     playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
@@ -55,20 +97,19 @@ struct SettingsView: View {
                         title: Text("Confirm Reset"),
                         message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
                         primaryButton: .default(Text("Confirm")){
+                            #if os(iOS)
                             minNumberInput = ""
                             maxNumberInput = ""
+                            #endif
                             resetNumSet()
                             showResetPrompt = false
                         },
                         secondaryButton: .cancel()
                     )
                 }
+                #if os(iOS)
                 Button(action:{
-                    #if os(iOS)
                     playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
-                    #elseif os(watchOS)
-                    WKInterfaceDevice.current().play(.click)
-                    #endif
                     if(maxNumberInput == "" || minNumberInput == ""){
                         showAlert = true
                         alertTitle = "Missing numbers!"
@@ -91,6 +132,7 @@ struct SettingsView: View {
                         dismissButton: .default(Text("Ok"))
                     )
                 }
+                #endif
             }
             DiceSettings()
             CardSettings()
@@ -113,6 +155,16 @@ struct SettingsView: View {
                     Text("Advanced Settings")
                     #endif
                 }
+                .sheet(isPresented: $showAdvSet, content: {
+                    AdvancedSettingsView()
+                    #if os(watchOS)
+                    .toolbar(content: {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Close") { self.showAdvSet = false }
+                        }
+                    })
+                    #endif
+                })
                 NavigationLink(destination: About()) {
                     Image(systemName: "info.circle")
                         .foregroundColor(.accentColor)
@@ -125,16 +177,7 @@ struct SettingsView: View {
         #endif
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showAdvSet, content: {
-            AdvancedSettingsView()
-            #if os(watchOS)
-            .toolbar(content: {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") { self.showAdvSet = false }
-                }
-            })
-            #endif
-        })
+        
     }
 }
 

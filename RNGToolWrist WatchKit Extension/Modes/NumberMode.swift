@@ -26,8 +26,8 @@ struct NumberMode: View {
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
             randomNumberStr = "0"
         }
-        maxNumber = 100
-        minNumber = 0
+        maxNumber = settingsData.maxNumberDefault
+        minNumber = settingsData.minNumberDefault
         confirmReset = false
     }
 
@@ -114,6 +114,10 @@ struct NumberMode: View {
         }
         .navigationTitle("Numbers")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            maxNumber = settingsData.maxNumberDefault
+            minNumber = settingsData.minNumberDefault
+        }
     }
 }
 
