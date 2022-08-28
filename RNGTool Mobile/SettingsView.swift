@@ -37,9 +37,15 @@ struct SettingsView: View {
                 TextField(text: $maxNumberInput, prompt: Text("Required")) {
                     Text("Max Number")
                 }
+                .onChange(of: maxNumberInput) { maxNumberInput in
+                    settingsData.maxNumberDefault = Int(maxNumberInput) ?? 100
+                }
                 Text("Default Minimum Number")
                 TextField(text: $minNumberInput, prompt: Text("Required")) {
                     Text("Min Number")
+                }
+                .onChange(of: minNumberInput) { minNumberInput in
+                    settingsData.minNumberDefault = Int(minNumberInput) ?? 0
                 }
                 .onAppear {
                     maxNumberInput = "\(settingsData.maxNumberDefault)"
@@ -98,41 +104,17 @@ struct SettingsView: View {
                         message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
                         primaryButton: .default(Text("Confirm")){
                             #if os(iOS)
-                            minNumberInput = ""
-                            maxNumberInput = ""
+                            maxNumberInput = "100"
+                            minNumberInput = "0"
+                            #elseif os(watchOS)
+                            settingsData.maxNumberDefault = 100
+                            settingsData.minNumberDefault = 0
                             #endif
-                            resetNumSet()
                             showResetPrompt = false
                         },
                         secondaryButton: .cancel()
                     )
                 }
-                #if os(iOS)
-                Button(action:{
-                    playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
-                    if(maxNumberInput == "" || minNumberInput == ""){
-                        showAlert = true
-                        alertTitle = "Missing numbers!"
-                        alertMessage = "You must specify a minimum and maximum number!"
-                    }
-                    else {
-                        settingsData.maxNumberDefault = Int(maxNumberInput)!
-                        settingsData.minNumberDefault = Int(minNumberInput)!
-                        showAlert = true
-                        alertTitle = "Numbers Saved"
-                        alertMessage = "Your new maximum and minimum numbers have been saved."
-                    }
-                }) {
-                    Text("Save")
-                }
-                .alert(isPresented: $showAlert){
-                    Alert(
-                        title: Text(alertTitle),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("Ok"))
-                    )
-                }
-                #endif
             }
             DiceSettings()
             CardSettings()

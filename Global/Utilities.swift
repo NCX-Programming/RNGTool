@@ -33,14 +33,6 @@ func copyToClipboard(item: String) {
     #endif
 }
 
-func resetNumSet() {
-    @AppStorage("maxNumberDefault") var maxNumberDefault = 100
-    @AppStorage("minNumberDefault") var minNumberDefault = 0
-
-    maxNumberDefault = 100
-    minNumberDefault = 0
-}
-
 func resetDiceSet() {
     @AppStorage("allowDiceImages") var allowDiceImages = true
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
@@ -56,7 +48,7 @@ func resetCardSet() {
     
     showPoints = false
     aceValue = 1
-    showCardAnimation = false
+    showCardAnimation = true
 }
 
 func resetMarbleSet() {

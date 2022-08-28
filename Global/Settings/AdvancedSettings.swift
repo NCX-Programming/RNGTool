@@ -48,7 +48,8 @@ struct AdvancedSettings: View {
                         title: Text("Confirm Reset"),
                         message: Text("Are you sure you want to reset all settings to their defaults? This cannot be undone."),
                         primaryButton: .default(Text("Confirm")){
-                            resetNumSet()
+                            settingsData.maxNumberDefault = 100
+                            settingsData.minNumberDefault = 0
                             resetDiceSet()
                             resetCardSet()
                             resetMarbleSet()
