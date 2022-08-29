@@ -12,9 +12,6 @@ struct NumberSettings: View {
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
     @State private var showResetPrompt = false
-    @State private var showAlert = false
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
     
     var body: some View {
         Form {
@@ -23,8 +20,14 @@ struct NumberSettings: View {
                     .font(.title2)
                 TextField("Maximum Number:", text: $maxNumberInput)
                     .frame(width: 300)
+                    .onChange(of: maxNumberInput) { maxNumberInput in
+                        settingsData.maxNumberDefault = Int(maxNumberInput) ?? 100
+                    }
                 TextField("Minimum Number:", text: $minNumberInput)
                     .frame(width: 300)
+                    .onChange(of: minNumberInput) { minNumberInput in
+                        settingsData.minNumberDefault = Int(minNumberInput) ?? 0
+                    }
             }
             .onAppear {
                 maxNumberInput = "\(settingsData.maxNumberDefault)"
@@ -41,35 +44,11 @@ struct NumberSettings: View {
                         title: Text("Confirm Reset"),
                         message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
                         primaryButton: .default(Text("Confirm")){
-                            minNumberInput = ""
-                            maxNumberInput = ""
-                            resetNumSet()
+                            maxNumberInput = "100"
+                            minNumberInput = "0"
                             showResetPrompt = false
                         },
                         secondaryButton: .cancel()
-                    )
-                }
-                Button(action:{
-                    if(maxNumberInput == "" || minNumberInput == ""){
-                        showAlert = true
-                        alertTitle = "Missing numbers!"
-                        alertMessage = "You must specify a minimum and maximum number!"
-                    }
-                    else {
-                        settingsData.maxNumberDefault = Int(maxNumberInput)!
-                        settingsData.minNumberDefault = Int(minNumberInput)!
-                        showAlert = true
-                        alertTitle = "Numbers Saved"
-                        alertMessage = "Your new maximum and minimum numbers have been saved."
-                    }
-                }) {
-                    Text("Save")
-                }
-                .alert(isPresented: $showAlert){
-                    Alert(
-                        title: Text(alertTitle),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("Ok"))
                     )
                 }
             }
