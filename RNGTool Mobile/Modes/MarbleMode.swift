@@ -50,7 +50,7 @@ struct MarbleMode: View {
                 ForEach(0..<numOfMarbles, id: \.self) { index in
                     ZStack() {
                         Text("\(letters[randomNumbers[index]])")
-                            .font(.title)
+                            .font(.system(size: geometry.size.width / 16))
                         Circle()
                             .stroke(Color.primary, lineWidth: 3)
                     }
