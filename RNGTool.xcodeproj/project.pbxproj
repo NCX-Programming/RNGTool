@@ -45,6 +45,7 @@
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
+		37E9F43C28C0265E0098037D /* RNGToolWrist-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */; };
 		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		37F5720F27A8BA7F007D29FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */; };
 		37F5721327A8BA7F007D29FB /* RNGTool.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37F571F827A8BA7A007D29FB /* RNGTool.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -129,7 +130,7 @@
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
-		37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGToolWrist-Info.plist"; sourceTree = "<group>"; };
+		37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RNGToolWrist-Info.plist"; sourceTree = "<group>"; };
 		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		37F571F827A8BA7A007D29FB /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -222,7 +223,6 @@
 		3794432826D912B500900842 = {
 			isa = PBXGroup;
 			children = (
-				37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */,
 				37BF55B9280C92A1002425B2 /* Global */,
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
@@ -292,6 +292,7 @@
 			children = (
 				3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */,
 				37F5721027A8BA7F007D29FB /* Info.plist */,
+				37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */,
 				37F5723027A8C551007D29FB /* Modes */,
 				37F5720D27A8BA7F007D29FB /* Preview Content */,
 				3729936528B5BA3600EDF9DE /* NumKeyboard.swift */,
@@ -438,6 +439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E9F43C28C0265E0098037D /* RNGToolWrist-Info.plist in Resources */,
 				37F5720F27A8BA7F007D29FB /* Preview Assets.xcassets in Resources */,
 				37F5721D27A8BB7F007D29FB /* Assets.xcassets in Resources */,
 			);
