@@ -24,7 +24,7 @@ jobs:
         brew update && \
         brew install create-dmg
     - name: Set Xcode Version
-      run: xcode-select --switch /Applications/Xcode_14.0.app
+      run: sudo xcode-select --switch /Applications/Xcode_14.0.app
     - name: Build
       id: build
       run: |
@@ -59,7 +59,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set Xcode Version
-      run: xcode-select --switch /Applications/Xcode_14.0.app
+      run: sudo xcode-select --switch /Applications/Xcode_14.0.app
     - name: Build for iOS
       id: build-ios
       run: |
