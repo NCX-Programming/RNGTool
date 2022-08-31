@@ -115,8 +115,10 @@ struct NumberMode: View {
         .navigationTitle("Numbers")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            maxNumber = settingsData.maxNumberDefault
-            minNumber = settingsData.minNumberDefault
+            if (kbReturnType == 0) {
+                maxNumber = settingsData.maxNumberDefault
+                minNumber = settingsData.minNumberDefault
+            }
         }
     }
 }
