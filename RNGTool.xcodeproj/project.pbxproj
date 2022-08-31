@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,10 +46,8 @@
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
-		37F5720127A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37F5720027A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37F5720F27A8BA7F007D29FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */; };
 		37F5721327A8BA7F007D29FB /* RNGTool.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37F571F827A8BA7A007D29FB /* RNGTool.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		37F5721C27A8BB68007D29FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		37F5721D27A8BB7F007D29FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		37F5721E27A8C294007D29FB /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
 		37F5722027A8C2FC007D29FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
@@ -71,13 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		37F5720227A8BA7D007D29FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3794432926D912B500900842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 37F571FF27A8BA7D007D29FB;
-			remoteInfo = "RNGToolWrist WatchKit Extension";
-		};
 		37F5721127A8BA7F007D29FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3794432926D912B500900842 /* Project object */;
@@ -88,17 +79,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		37F5721727A8BA7F007D29FB /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				37F5720127A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		37F5721B27A8BA7F007D29FB /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,9 +129,9 @@
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
+		37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGToolWrist-Info.plist"; sourceTree = "<group>"; };
 		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		37F571F827A8BA7A007D29FB /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37F5720027A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RNGToolWrist WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37F5721027A8BA7F007D29FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37F5723127A8C573007D29FB /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
@@ -242,6 +222,7 @@
 		3794432826D912B500900842 = {
 			isa = PBXGroup;
 			children = (
+				37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */,
 				37BF55B9280C92A1002425B2 /* Global */,
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
@@ -256,7 +237,6 @@
 				3700F27D26DD256D001BEE7A /* RNGTool.app */,
 				3725BF7727697DC900A1B4E8 /* RNGTool.app */,
 				37F571F827A8BA7A007D29FB /* RNGTool.app */,
-				37F5720027A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,34 +362,17 @@
 			buildConfigurationList = 37F5721827A8BA7F007D29FB /* Build configuration list for PBXNativeTarget "RNGToolWrist" */;
 			buildPhases = (
 				37F571F627A8BA7A007D29FB /* Resources */,
-				37F5721727A8BA7F007D29FB /* Embed App Extensions */,
+				37F571FC27A8BA7D007D29FB /* Sources */,
+				37F571FD27A8BA7D007D29FB /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				37F5720327A8BA7D007D29FB /* PBXTargetDependency */,
 			);
 			name = RNGToolWrist;
 			productName = RNGToolWrist;
 			productReference = 37F571F827A8BA7A007D29FB /* RNGTool.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		37F571FF27A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 37F5721427A8BA7F007D29FB /* Build configuration list for PBXNativeTarget "RNGToolWrist WatchKit Extension" */;
-			buildPhases = (
-				37F571FC27A8BA7D007D29FB /* Sources */,
-				37F571FD27A8BA7D007D29FB /* Frameworks */,
-				37F571FE27A8BA7D007D29FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "RNGToolWrist WatchKit Extension";
-			productName = "RNGToolWrist WatchKit Extension";
-			productReference = 37F5720027A8BA7D007D29FB /* RNGToolWrist WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -418,7 +381,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					3700F27C26DD256D001BEE7A = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -429,13 +392,10 @@
 					37F571F727A8BA7A007D29FB = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					37F571FF27A8BA7D007D29FB = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
 				};
 			};
 			buildConfigurationList = 3794432C26D912B500900842 /* Build configuration list for PBXProject "RNGTool" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -450,7 +410,6 @@
 				3700F27C26DD256D001BEE7A /* RNGTool */,
 				3725BF7627697DC900A1B4E8 /* RNGTool Mobile */,
 				37F571F727A8BA7A007D29FB /* RNGToolWrist */,
-				37F571FF27A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -476,14 +435,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		37F571F627A8BA7A007D29FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37F5721C27A8BB68007D29FB /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		37F571FE27A8BA7D007D29FB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -570,11 +521,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		37F5720327A8BA7D007D29FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 37F571FF27A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */;
-			targetProxy = 37F5720227A8BA7D007D29FB /* PBXContainerItemProxy */;
-		};
 		37F5721227A8BA7F007D29FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -595,6 +541,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 182;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -625,6 +572,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 182;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -761,6 +709,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -822,6 +771,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -842,91 +792,30 @@
 			};
 			name = Release;
 		};
-		37F5721527A8BA7F007D29FB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
-				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 5GF7GKNTK4;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "RNGToolWrist WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "RNGToolWrist WatchKit Extension";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.9.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Debug;
-		};
-		37F5721627A8BA7F007D29FB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
-				DEVELOPMENT_ASSET_PATHS = "\"RNGToolWrist WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 5GF7GKNTK4;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "RNGToolWrist WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "RNGToolWrist WatchKit Extension";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.9.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp.watchkitextension";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.3;
-			};
-			name = Release;
-		};
 		37F5721927A8BA7F007D29FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2022 NCX Programming";
+				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.NCX-Programming.RNGToolMobile";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
@@ -944,17 +833,25 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = RNGToolWrist_WatchKit_Extension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2022 NCX Programming";
+				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.NCX-Programming.RNGToolMobile";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
@@ -994,15 +891,6 @@
 			buildConfigurations = (
 				3794434226D912BB00900842 /* Debug */,
 				3794434326D912BB00900842 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		37F5721427A8BA7F007D29FB /* Build configuration list for PBXNativeTarget "RNGToolWrist WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				37F5721527A8BA7F007D29FB /* Debug */,
-				37F5721627A8BA7F007D29FB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
