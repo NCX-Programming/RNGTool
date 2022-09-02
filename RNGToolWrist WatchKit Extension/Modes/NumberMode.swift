@@ -11,21 +11,17 @@ import WatchKit
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
+    @SceneStorage("NumberMode.maxNumber") private var maxNumber = 0
+    @SceneStorage("NumberMode.minNumber") private var minNumber = 0
     @State private var confirmReset = false
     @State private var showRollHint = true
     @State private var showNumKeyboard = false
-    @State private var randomNumber = 0
-    @State private var randomNumberStr = "0"
-    @State private var maxNumber = 100
-    @State private var minNumber = 0
     @State private var keyboardNumber = 0
-    @State private var kbReturnType = 1
+    @State private var kbReturnType = 0
     
     func resetGen() {
         randomNumber = 0
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
-            randomNumberStr = "0"
-        }
         maxNumber = settingsData.maxNumberDefault
         minNumber = settingsData.minNumberDefault
         confirmReset = false
@@ -33,7 +29,7 @@ struct NumberMode: View {
 
     var body: some View {
         ScrollView {
-            Text(randomNumberStr)
+            Text("\(randomNumber)")
                 .font(.title)
                 .onTapGesture {
                     WKInterfaceDevice.current().play(.click)
@@ -41,9 +37,6 @@ struct NumberMode: View {
                         self.showRollHint = false
                     }
                     randomNumber = Int.random(in: minNumber...maxNumber)
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.25)) {
-                        self.randomNumberStr = "\(randomNumber)"
-                    }
                 }
             if(showRollHint && settingsData.showModeHints) {
                 Text("Tap number to generate")
@@ -116,8 +109,8 @@ struct NumberMode: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if (kbReturnType == 0) {
-                maxNumber = settingsData.maxNumberDefault
-                minNumber = settingsData.minNumberDefault
+                if (maxNumber == 0 || settingsData.saveModeStates == false) { maxNumber = settingsData.maxNumberDefault }
+                if (minNumber == 0 || settingsData.saveModeStates == false) { minNumber = settingsData.minNumberDefault }
             }
         }
     }

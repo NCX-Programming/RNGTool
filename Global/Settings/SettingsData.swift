@@ -18,8 +18,7 @@ class SettingsData : ObservableObject {
     // Variable to store the history of generated numbers
     @Published var historyTable = [HistoryTable]()
     // Advanced Settings
-    @AppStorage("confirmGenResets") var confirmGenResets = true
-    @AppStorage("showModeHints") var showModeHints = true
+    @AppStorage("saveModeStates") var saveModeStates = true
     @AppStorage("checkUpdatesOnStartup") var checkUpdatesOnStartup = true
     @AppStorage("showDevMode") var showDevMode = false
     // Number Settings
@@ -34,4 +33,7 @@ class SettingsData : ObservableObject {
     @AppStorage("aceValue") var aceValue = 1
     // Marble Settings
     @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
+    // Interface Settings
+    @AppStorage("confirmGenResets") var confirmGenResets = true
+    @AppStorage("showModeHints") var showModeHints = true
 }

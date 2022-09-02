@@ -18,15 +18,15 @@ extension String.StringInterpolation {
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
+    @SceneStorage("NumberMode.maxNumber") private var maxNumber = 0
+    @SceneStorage("NumberMode.minNumber") private var minNumber = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset = false
     @State private var showMaxEditor = false
     @State private var showMinEditor = false
-    @State private var randomNumber = 0
     @State private var maxNumberInput = ""
     @State private var minNumberInput = ""
-    @State private var maxNumber = 0
-    @State private var minNumber = 0
     
     func resetGen() {
         maxNumber = 0
@@ -46,6 +46,9 @@ struct NumberMode: View {
             Text("\(randomNumber)")
                 .font(.title)
                 .padding(.bottom, 5)
+                .onAppear {
+                    if (settingsData.saveModeStates == false) { randomNumber = 0 }
+                }
                 .contextMenu {
                     Button(action: {
                         copyToClipboard(item: "\(randomNumber)")
@@ -62,28 +65,36 @@ struct NumberMode: View {
                     }
                     .help("Tap here to set a custom maximum number")
                     .onAppear{
-                        maxNumberInput="\(settingsData.maxNumberDefault)"
+                        maxNumberInput = "\(maxNumber)"
+                        if (maxNumber == 0 || settingsData.saveModeStates == false) { maxNumberInput = "\(settingsData.maxNumberDefault)" }
                     }
                 if(showMaxEditor){
                     TextField("Enter a number", text: $maxNumberInput)
                         .keyboardType(.numberPad)
                 }
                 Divider()
-                Text("Minimum: \(settingsData.minNumberDefault). Tap to change.")
+                Text("Minimum: \(minNumber). Tap to change.")
                     .onTapGesture {
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
                             showMinEditor.toggle()
                         }
                     }
                     .help("Tap here to set a custom minimum number")
-                    .onAppear{
-                        minNumberInput="\(settingsData.minNumberDefault)"
+                    .onAppear {
+                        minNumberInput = "\(minNumber)"
+                        if (minNumber == 0 || settingsData.saveModeStates == false) { minNumberInput = "\(settingsData.minNumberDefault)" }
                     }
                 if(showMinEditor){
                     TextField("Enter a number", text: $minNumberInput)
                         .keyboardType(.numberPad)
                 }
                 Divider()
+            }
+            .onChange(of: maxNumberInput) { maxNumberInput in
+                maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
+            }
+            .onChange(of: minNumberInput) { minNumberInput in
+                minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
             }
             HStack {
                 Button(action:{

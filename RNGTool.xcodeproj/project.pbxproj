@@ -40,6 +40,9 @@
 		37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
 		37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
 		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
+		37D8BF6828C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* InterfaceSettings.swift */; };
+		37D8BF6928C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* InterfaceSettings.swift */; };
+		37D8BF6A28C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* InterfaceSettings.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
@@ -125,6 +128,7 @@
 		37AB5BB7276FE46D00F753FC /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGTool-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
+		37D8BF6728C2BF8700EFC2DC /* InterfaceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceSettings.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 				37DB700226FC03F90079F3E7 /* DiceSettings.swift */,
 				374B0EE427001749006CCD69 /* CardSettings.swift */,
 				37010B962702697B00E32C35 /* MarbleSettings.swift */,
+				37D8BF6728C2BF8700EFC2DC /* InterfaceSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */,
 				374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */,
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
+				37D8BF6828C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */,
 				374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */,
 				37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */,
 				3700F28E26DD26C5001BEE7A /* ModeList.swift in Sources */,
@@ -491,6 +497,7 @@
 				37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */,
 				3707EC452788711200E48CFA /* History.swift in Sources */,
 				37688CDD27713837003B64CB /* About.swift in Sources */,
+				37D8BF6928C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */,
 				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
 				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
@@ -506,6 +513,7 @@
 				37F5722927A8C4B0007D29FB /* ContentView.swift in Sources */,
 				37F5723227A8C573007D29FB /* DiceMode.swift in Sources */,
 				37F5722327A8C31B007D29FB /* SettingsData.swift in Sources */,
+				37D8BF6A28C2BF8700EFC2DC /* InterfaceSettings.swift in Sources */,
 				3729936628B5BA3600EDF9DE /* NumKeyboard.swift in Sources */,
 				37F5722527A8C31B007D29FB /* MarbleSettings.swift in Sources */,
 				37F5723827A8C59B007D29FB /* NumberMode.swift in Sources */,
@@ -542,7 +550,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 182;
+				CURRENT_PROJECT_VERSION = 183;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -555,7 +563,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -573,7 +581,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 182;
+				CURRENT_PROJECT_VERSION = 183;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -586,7 +594,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -604,7 +612,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -623,7 +631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -645,7 +653,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -664,7 +672,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile";
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -805,7 +813,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -818,7 +826,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -841,7 +849,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -854,7 +862,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGToolMobile.watchkitapp";
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;

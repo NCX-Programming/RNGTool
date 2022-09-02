@@ -118,9 +118,8 @@ struct SettingsView: View {
             }
             DiceSettings()
             CardSettings()
-            #if !os(watchOS)
             MarbleSettings()
-            #endif
+            InterfaceSettings()
             Section(header: Text("Other")) {
                 Button(action:{
                     #if os(iOS)

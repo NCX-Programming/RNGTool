@@ -22,13 +22,13 @@ struct AdvancedSettings: View {
     
     var body: some View {
         Group {
-            Section(header: Text("Interface"), footer: Text("Disable tap hints to hide text like \"Tap to roll\".")) {
-                Toggle("Ask to confirm resets", isOn: $settingsData.confirmGenResets)
-                Toggle("Show tap hints", isOn: $settingsData.showModeHints)
-            }
             #if os(macOS)
             Section(header: Text("Updates")) {
                 Toggle("Check for updates on startup", isOn: $settingsData.checkUpdatesOnStartup)
+            }
+            #else
+            Section(header: Text("Save Mode States"), footer: Text("Whether or not the generators state, including the results and parameters, will be saved between launches.")) {
+                Toggle("Save generator states", isOn: $settingsData.saveModeStates)
             }
             #endif
             Section(header: Text("Settings Reset"),footer: Text("This will reset all of RNGTool's settings to their default values!")) {
