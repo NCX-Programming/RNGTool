@@ -61,11 +61,13 @@ struct AdvancedSettings: View {
                     )
                 }
             }
+            #if DEBUG
             if(settingsData.showDevMode || devCount > 2) {
                 Section(header: Text("Developer Mode"),footer: Text("Enable access to developer mode. Disabling this will re-hide the toggle.")) {
                     Toggle("Show Developer Mode", isOn: $settingsData.showDevMode)
                 }
             }
+            #endif
         }
         #if os(iOS)
         .onAppear { prepareHaptics(engine: &engine) }

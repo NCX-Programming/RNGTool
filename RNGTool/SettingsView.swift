@@ -55,7 +55,7 @@ struct SettingsView: View {
             .tag(Tabs.advanced)
         }
         .padding(20)
-        .frame(width: 500, height: 350)
+        .frame(width: 600, height: 250)
     }
 }
 
