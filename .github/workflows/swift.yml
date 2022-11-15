@@ -26,7 +26,7 @@ jobs:
     - name: Build
       id: build
       run: |
-        /Applications/Xcode_14.0.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+        /Applications/Xcode_14.1.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
         
         echo ::set-output name=commit_tag::$(git describe --abbrev=0 --tags)
         echo ::set-output name=commit_hash::$(git log --format=%h -1)
@@ -59,7 +59,7 @@ jobs:
     - name: Build for iOS
       id: build-ios
       run: |
-        /Applications/Xcode_14.0.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+        /Applications/Xcode_14.1.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
     - name: Prepare Files and Create IPA File
       run: |
         mkdir ~/RNGToolMobile
