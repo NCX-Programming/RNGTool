@@ -39,7 +39,7 @@ jobs:
         curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
         unzip ~/RNGToolDMGKit.zip -d ~/RNGToolDMGKit/
         mkdir ~/RNGToolDMGKit/source_folder
-        mv build/Release/RNGTool.app ~/RNGToolDMGKit/source_folder
+        mv build/Debug/RNGTool.app ~/RNGToolDMGKit/source_folder
     - name: Build DMG From Kit
       run: |
         cd ~/RNGToolDMGKit
@@ -64,7 +64,7 @@ jobs:
       run: |
         mkdir ~/RNGToolMobile
         mkdir ~/RNGToolMobile/Payload
-        mv build/Release-iphoneos/RNGTool.app ~/RNGToolMobile/Payload
+        mv build/Debug-iphoneos/RNGTool.app ~/RNGToolMobile/Payload
         cd ~
         curl https://cdn.ncxprogramming.com/file/icon/rngtoolraw.png --output ~/RNGToolMobile/iTunesArtwork
         cd RNGToolMobile/
