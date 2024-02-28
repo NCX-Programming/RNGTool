@@ -80,7 +80,7 @@ struct DiceMode: View {
                     }
                 }
                 .onShake {
-                    if(settingsData.useShakeToRoll) {
+                    if(settingsData.useShakeForDice) {
                         if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                             self.showRollHint = false

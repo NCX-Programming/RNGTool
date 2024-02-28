@@ -27,13 +27,14 @@ class SettingsData : ObservableObject {
     // Dice Settings
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
     @AppStorage("allowDiceImages") var allowDiceImages = true
-    @AppStorage("useShakeToRoll") var useShakeToRoll = true
+    @AppStorage("useShakeForDice") var useShakeForDice = true
     // Card Settings
     @AppStorage("showCardAnimation") var showCardAnimation = true
     @AppStorage("showPoints") var showPoints = false
     @AppStorage("aceValue") var aceValue = 1
     // Marble Settings
     @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
+    @AppStorage("useShakeForMarbles") var useShakeForMarbles = true
     // Interface Settings
     @AppStorage("confirmGenResets") var confirmGenResets = true
     @AppStorage("showModeHints") var showModeHints = true

@@ -39,11 +39,11 @@ func copyToClipboard(item: String) {
 func resetDiceSet() {
     @AppStorage("allowDiceImages") var allowDiceImages = true
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
-    @AppStorage("useShakeToRoll") var useShakeToRoll = true
+    @AppStorage("useShakeForDice") var useShakeForDice = true
     
     allowDiceImages = true
     showDiceAnimation = true
-    useShakeToRoll = true
+    useShakeForDice = true
 }
 
 func resetCardSet() {
@@ -58,8 +58,10 @@ func resetCardSet() {
 
 func resetMarbleSet() {
     @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
+    @AppStorage("useShakeForMarbles") var useShakeForMarbles = true
     
     showMarbleAnimation = true
+    useShakeForMarbles = true
 }
 
 #if os(iOS)

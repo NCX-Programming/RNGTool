@@ -13,7 +13,7 @@ struct DiceSettings: View {
     var body: some View {
         Section(header: Text("Dice Settings")) {
             Toggle("Show roll animation", isOn: $settingsData.showDiceAnimation)
-            Toggle("Roll by shaking your device", isOn: $settingsData.useShakeToRoll)
+            Toggle("Roll by shaking your device", isOn: $settingsData.useShakeForDice)
         }
     }
 }
