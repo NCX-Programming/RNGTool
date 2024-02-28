@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import SwiftUI
 
 let removeCharacters: Set<Character> = ["[", "]", "\""]
@@ -36,9 +37,11 @@ func copyToClipboard(item: String) {
 func resetDiceSet() {
     @AppStorage("allowDiceImages") var allowDiceImages = true
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
+    @AppStorage("useShakeToRoll") var useShakeToRoll = true
     
     allowDiceImages = true
     showDiceAnimation = true
+    useShakeToRoll = true
 }
 
 func resetCardSet() {
@@ -56,3 +59,35 @@ func resetMarbleSet() {
     
     showMarbleAnimation = true
 }
+
+#if os(iOS)
+extension UIDevice {
+    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
+}
+
+extension UIWindow {
+     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
+        }
+     }
+}
+
+struct DeviceShakeViewModifier: ViewModifier {
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
+                action()
+            }
+    }
+}
+
+extension View {
+    func onShake(perform action: @escaping () -> Void) -> some View {
+        self.modifier(DeviceShakeViewModifier(action: action))
+    }
+}
+#endif

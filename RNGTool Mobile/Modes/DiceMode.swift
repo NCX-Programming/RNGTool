@@ -79,6 +79,28 @@ struct DiceMode: View {
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
                     }
                 }
+                .onShake {
+                    if(settingsData.useShakeToRoll) {
+                        if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                            self.showRollHint = false
+                        }
+                        if(settingsData.showDiceAnimation && !reduceMotion) {
+                            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                                self.roll()
+                                self.rollCount += 1
+                                if(rollCount == 10) {
+                                    timer.invalidate(); self.rollCount = 0
+                                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                                }
+                            }
+                        }
+                        else {
+                            self.roll()
+                            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                        }
+                    }
+                }
                 .onAppear { prepareHaptics(engine: &engine) }
                 Text(randomNumberStr)
                     .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))

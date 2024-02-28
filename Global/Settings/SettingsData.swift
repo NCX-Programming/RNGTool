@@ -27,6 +27,7 @@ class SettingsData : ObservableObject {
     // Dice Settings
     @AppStorage("showDiceAnimation") var showDiceAnimation = true
     @AppStorage("allowDiceImages") var allowDiceImages = true
+    @AppStorage("useShakeToRoll") var useShakeToRoll = true
     // Card Settings
     @AppStorage("showCardAnimation") var showCardAnimation = true
     @AppStorage("showPoints") var showPoints = false
