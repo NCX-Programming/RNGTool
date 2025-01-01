@@ -9,16 +9,9 @@ on:
 jobs:
   build:
 
-    runs-on: macos-12
-    outputs:
-      commit_tag: ${{ steps.build.outputs.commit_tag }}
-      commit_hash: ${{ steps.build.outputs.commit_hash }}
-      author_name: ${{ steps.build.outputs.author_name }}
-      committer_name: ${{ steps.build.outputs.committer_name }}
-      commit_subject: ${{ steps.build.outputs.commit_subject }}
-      commit_message: ${{ steps.build.outputs.commit_message }}
+    runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Get Tools
       run: |
         brew update && \
@@ -26,14 +19,7 @@ jobs:
     - name: Build
       id: build
       run: |
-        /Applications/Xcode_14.1.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Debug build CODE_SIGNING_ALLOWED=NO
-        
-        echo ::set-output name=commit_tag::$(git describe --abbrev=0 --tags)
-        echo ::set-output name=commit_hash::$(git log --format=%h -1)
-        echo "::set-output name=author_name::$(git log -1 $GITHUB_SHA --pretty=%aN)"
-        echo "::set-output name=committer_name::$(git log -1 $GITHUB_SHA --pretty=%cN)"
-        echo "::set-output name=commit_subject::$(git log -1 $GITHUB_SHA --pretty=%s)"
-        echo "::set-output name=commit_message::$(git log -1 $GITHUB_SHA --pretty=%b)"
+        xcodebuild -project "RNGTool.xcodeproj/" -destination "generic/platform=macOS" -configuration Debug build CODE_SIGNING_ALLOWED=NO
     - name: Download and Prepare Files for Publishing
       run: |
         curl https://cdn.ncxprogramming.com/file/software/mac/RNGToolDMGKit.zip --output ~/RNGToolDMGKit.zip
@@ -46,20 +32,20 @@ jobs:
         chmod +x create-dmg.sh
         ./create-dmg.sh
     - name: Publish Build Files
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         path: ~/RNGToolDMGKit/RNGTool-Installer.dmg
         name: RNGTool-Installer-latest.dmg
 
   build-ios:
 
-    runs-on: macos-12
+    runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build for iOS
       id: build-ios
       run: |
-        /Applications/Xcode_14.1.app/Contents/Developer/usr/bin/xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Debug build CODE_SIGNING_ALLOWED=NO
+        xcodebuild -project "RNGTool.xcodeproj/" -target "RNGTool Mobile" -destination "generic/platform=iOS" -configuration Debug build CODE_SIGNING_ALLOWED=NO
     - name: Prepare Files and Create IPA File
       run: |
         mkdir ~/RNGToolMobile
@@ -71,33 +57,7 @@ jobs:
         zip -r RNGTool.zip *
         mv RNGTool.zip ~/RNGTool.ipa
     - name: Publish Build Files
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         path: ~/RNGTool.ipa
         name: RNGTool.ipa
-
-  send_webhook:
-      runs-on: ubuntu-latest
-      needs: [build, build-ios]
-      name: Send Discord webhook
-      if: ${{ !startsWith(github.ref, 'refs/pull') }}
-      env:
-        AUTHOR_NAME: ${{ needs.build.outputs.author_name }}
-        COMMITTER_NAME: ${{ needs.build.outputs.committer_name }}
-        COMMIT_SUBJECT: ${{ needs.build.outputs.commit_subject }}
-        COMMIT_MESSAGE: ${{ needs.build.outputs.commit_message }}
-      steps:
-        - name: Send success webhook
-          if: ${{ success() }}
-          run: |
-            curl -o send.sh https://raw.githubusercontent.com/NCX-Programming/discord-webhooks/master/send-ghactions.sh
-            chmod +x send.sh
-            ./send.sh success ${{ secrets.IAN_WEBHOOK_URL }}
-            ./send.sh success ${{ secrets.NCX_WEBHOOK_URL }}
-        - name: Send failure webhook
-          if: ${{ failure() }}
-          run: |
-            curl -o send.sh https://raw.githubusercontent.com/NCX-Programming/discord-webhooks/master/send-ghactions.sh
-            chmod +x send.sh
-            ./send.sh failure ${{ secrets.IAN_WEBHOOK_URL }}
-            ./send.sh failure ${{ secrets.NCX_WEBHOOK_URL }}
