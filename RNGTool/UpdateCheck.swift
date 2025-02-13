@@ -47,6 +47,27 @@ func checkForUpdates(completionHandler: @escaping (Result<TaskEntry, Error>) -> 
     }.resume()
 }
 
+func compareVersions(remoteVersion: String) -> Bool {
+    let localVersionStr: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    print("Local version is: \(localVersionStr)")
+    let localVersionArray = localVersionStr.split(separator: ".")
+    let localVersionMapped = localVersionArray.map { Int($0)!}
+    // Remove leading "v" from remote version and then split at the "." separators.
+    var remoteVersionStr = remoteVersion
+    remoteVersionStr.remove(at: remoteVersionStr.startIndex)
+    print("Remote version is: \(remoteVersionStr)")
+    let remoteVersionArray = remoteVersionStr.split(separator: ".")
+    let remoteVersionMapped = remoteVersionArray.map { Int($0)!}
+    for i in 0...remoteVersionMapped.count-1 {
+        if (remoteVersionMapped[i] > localVersionMapped[i]) {
+            print("A new update is available")
+            return true
+        }
+    }
+    print("This is the latest RNGTool version")
+    return false
+}
+
 struct UpdateCheck: View {
     let appVersionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     let buildNumberStr: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
@@ -63,36 +84,25 @@ struct UpdateCheck: View {
                     ProgressView("Checking for updates...")
                 }
                 Text(updateString)
-                    .onAppear {
-                        checkForUpdates { result in
-                            DispatchQueue.global().async {
-                                switch result {
-                                    case .success(let value):
-                                    // This comparison logic is seriously flawed and requires the build number to always be included in the
-                                    // GitHub release version, which is dumb and I don't want to do that anymore.
-                                        print(value)
-                                        print("API access complete!")
-                                        let tagName: String = value.tagName
-                                        print(tagName)
-                                        let tagNameSplit = tagName.split(separator: "-")
-                                        let tagStripped: Int = tagNameSplit.last.map{ Int($0) ?? 1 } ?? 1
-                                        print(tagStripped)
-                                        tagMarketVer = tagNameSplit.first.map{ String($0) }
-                                        print(tagMarketVer!)
-                                        let buildNumber: Int = Int(buildNumberStr) ?? 0
-                                        print("Current version: \(buildNumber), latest version: \(tagStripped).")
-                                        DispatchQueue.main.sync {
-                                            if(tagStripped > buildNumber) {
-                                                showSpinner = false; yesUpdate = true
-                                                updateString = "New version available! (RNGTool \(tagMarketVer!))"
-                                            }
-                                            else { showSpinner = false; updateString = "You're up to date! (RNGTool \(appVersionString))" }
-                                        }
-                                    case .failure(let error): print(error)
+            }
+        }
+        .onAppear {
+            checkForUpdates { result in
+                DispatchQueue.global().async {
+                    switch result {
+                        case .success(let value):
+                            print("API access complete!")
+                            let tagName: String = value.tagName
+                            DispatchQueue.main.sync {
+                                if(compareVersions(remoteVersion: tagName)) {
+                                    showSpinner = false; yesUpdate = true
+                                    updateString = "New version available! (RNGTool \(tagMarketVer!))"
                                 }
+                                else { showSpinner = false; updateString = "You're up to date! (RNGTool \(appVersionString))" }
                             }
-                        }
+                        case .failure(let error): print(error)
                     }
+                }
             }
         }
         .alert(isPresented: $yesUpdate) {

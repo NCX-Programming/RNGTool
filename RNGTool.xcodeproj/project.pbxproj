@@ -72,6 +72,16 @@
 		37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9819276FF1D20040BFB9 /* MarbleMode.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		379A29EE2D5EB0C000A90C5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3794432926D912B500900842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37F571F727A8BA7A007D29FB;
+			remoteInfo = RNGToolWrist;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		37F5721B27A8BA7F007D29FB /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -221,6 +231,7 @@
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
 				37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */,
+				379A29ED2D5EB0C000A90C5C /* Frameworks */,
 				3794433226D912B500900842 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -233,6 +244,13 @@
 				37F571F827A8BA7A007D29FB /* RNGTool.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		379A29ED2D5EB0C000A90C5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		37AB5BB6276FE42400F753FC /* Modes */ = {
@@ -346,6 +364,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				379A29EF2D5EB0C000A90C5C /* PBXTargetDependency */,
 			);
 			name = "RNGTool Mobile";
 			productName = "RNGTool Mobile";
@@ -520,6 +539,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		379A29EF2D5EB0C000A90C5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37F571F727A8BA7A007D29FB /* RNGToolWrist */;
+			targetProxy = 379A29EE2D5EB0C000A90C5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		3700F28A26DD2573001BEE7A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -532,7 +559,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -564,7 +591,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;

@@ -21,19 +21,10 @@ struct ContentView: View {
                         DispatchQueue.global().async {
                             switch result {
                                 case .success(let value):
-                                    print(value)
                                     print("API access complete!")
                                     let tagName: String = value.tagName
-                                    print(tagName)
-                                    let tagNameSplit = tagName.split(separator: "-")
-                                    let tagStripped: Int = tagNameSplit.last.map{ Int($0) ?? 1 } ?? 1
-                                    print(tagStripped)
-                                    let tagMarketVer = tagNameSplit.first.map{ String($0) }
-                                    print(tagMarketVer!)
-                                    let buildNumber: Int = Int(buildNumberStr) ?? 0
-                                    print("Current version: \(buildNumber), latest version: \(tagStripped).")
                                     DispatchQueue.main.sync {
-                                        if(tagStripped > buildNumber) {
+                                        if(compareVersions(remoteVersion: tagName)) {
                                             OpenWindows.Update.open()
                                         }
                                     }
