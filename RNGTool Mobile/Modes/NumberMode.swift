@@ -19,8 +19,8 @@ struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
-    @SceneStorage("NumberMode.maxNumber") private var maxNumber = 0
-    @SceneStorage("NumberMode.minNumber") private var minNumber = 0
+    @State private var maxNumber = 0
+    @State private var minNumber = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset = false
     @State private var showMaxEditor = false

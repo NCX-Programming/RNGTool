@@ -36,32 +36,33 @@ func copyToClipboard(item: String) {
     #endif
 }
 
-func resetDiceSet() {
-    @AppStorage("allowDiceImages") var allowDiceImages = true
-    @AppStorage("showDiceAnimation") var showDiceAnimation = true
-    @AppStorage("useShakeForDice") var useShakeForDice = true
-    
-    allowDiceImages = true
-    showDiceAnimation = true
-    useShakeForDice = true
+func resetGenSet(settingsData: SettingsData) {
+    settingsData.confirmGenResets = true
+    settingsData.showModeHints = true
+    settingsData.playAnimations = true
+    settingsData.useMotionInput = true
 }
 
-func resetCardSet() {
-    @AppStorage("showPoints") var showPoints = false
-    @AppStorage("aceValue") var aceValue = 1
-    @AppStorage("showCardAnimation") var showCardAnimation = true
-    
-    showPoints = false
-    aceValue = 1
-    showCardAnimation = true
+func resetDiceSet(settingsData: SettingsData) {
+    // Dummy
+    return
 }
 
-func resetMarbleSet() {
-    @AppStorage("showMarbleAnimation") var showMarbleAnimation = true
-    @AppStorage("useShakeForMarbles") var useShakeForMarbles = true
-    
-    showMarbleAnimation = true
-    useShakeForMarbles = true
+func resetCardSet(settingsData: SettingsData) {
+    settingsData.showPoints = false
+    settingsData.aceValue = 1
+}
+
+func resetMarbleSet(settingsData: SettingsData) {
+    // Dummy
+    return
+}
+
+func resetAdvSet(settingsData: SettingsData) {
+    settingsData.saveModeStates = true
+    #if os(macOS)
+    settingsData.checkUpdatesOnStartup = true // macOS-only key
+    #endif
 }
 
 #if os(iOS)

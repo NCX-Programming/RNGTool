@@ -9,22 +9,22 @@ import SwiftUI
 
 struct SettingsView: View {
     private enum Tabs: Hashable {
-            case number, dice, card, marble, interface, advanced
+            case general, number, card, advanced
     }
     var body: some View {
         TabView {
+            Form {
+                GeneralSettings()
+            }
+            .tabItem {
+                Label("General Settings", systemImage: "gear")
+            }
+            .tag(Tabs.general)
             NumberSettings()
                 .tabItem {
                     Label("Number Mode", systemImage: "number")
                 }
                 .tag(Tabs.number)
-            Form {
-                DiceSettings()
-            }
-            .tabItem {
-                Label("Dice Mode", image: "dice")
-            }
-            .tag(Tabs.dice)
             Form {
                 CardSettings()
             }
@@ -33,24 +33,10 @@ struct SettingsView: View {
             }
             .tag(Tabs.card)
             Form {
-                MarbleSettings()
-            }
-            .tabItem {
-                Label("Marble Mode", systemImage: "a.circle")
-            }
-            .tag(Tabs.marble)
-            Form {
-                InterfaceSettings()
-            }
-            .tabItem {
-                Label("Interface Settings", systemImage: "display")
-            }
-            .tag(Tabs.interface)
-            Form {
                 AdvancedSettings()
             }
             .tabItem {
-                Label("Advanced Settings", systemImage: "gear")
+                Label("Advanced Settings", systemImage: "gearshape.2")
             }
             .tag(Tabs.advanced)
         }

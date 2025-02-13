@@ -68,6 +68,8 @@ struct UpdateCheck: View {
                             DispatchQueue.global().async {
                                 switch result {
                                     case .success(let value):
+                                    // This comparison logic is seriously flawed and requires the build number to always be included in the
+                                    // GitHub release version, which is dumb and I don't want to do that anymore.
                                         print(value)
                                         print("API access complete!")
                                         let tagName: String = value.tagName

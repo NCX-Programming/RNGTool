@@ -23,7 +23,7 @@ struct CardMode: View {
     func resetGen() {
         randomNumberStr = ""
         pointValueStr = ""
-        if(settingsData.showCardAnimation && !reduceMotion) {
+        if(settingsData.playAnimations && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if(cardsToDisplay == 1) { timer.invalidate() }
                 if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
@@ -140,7 +140,7 @@ struct CardMode: View {
                             cardImages[n] = "c\(randomNumbers[n])"
                         }
                     }
-                    if(settingsData.showCardAnimation && !reduceMotion) {
+                    if(settingsData.playAnimations && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
                             if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }

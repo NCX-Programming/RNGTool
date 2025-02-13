@@ -70,7 +70,7 @@ struct MarbleMode: View {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }
-                    if(settingsData.showMarbleAnimation && !reduceMotion) {
+                    if(settingsData.playAnimations && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1

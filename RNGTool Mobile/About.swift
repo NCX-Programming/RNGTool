@@ -120,9 +120,9 @@ struct AboutCredits: View {
                         Text("Writing and Web Work")
                             .font(.title3)
                         Button(action:{
-                            openURL(URL(string: "https://github.com/IanSkinner1982")!)
+                            openURL(URL(string: "https://github.com/rvtr")!)
                         }) {
-                            Text("IanSkinner1982")
+                            Text("rvtr")
                         }
                     }
                     Divider().frame(width: geometry.size.width - (geometry.size.width / 6))

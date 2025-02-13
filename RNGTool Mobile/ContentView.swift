@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Modes")) {
+                Section(header: Text("RNGTool")) {
                     NavigationLink(destination: NumberMode()) {
                         Image(systemName: "number")
                             .foregroundColor(.accentColor)
@@ -60,10 +60,8 @@ struct ContentView: View {
                     #endif
                 }
             }
-            #if os(watchOS)
             .navigationTitle("RNGTool")
-            #else
-            .navigationTitle("Home")
+            #if !os(watchOS)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     NavigationLink(destination: SettingsView()) {

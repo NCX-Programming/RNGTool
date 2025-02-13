@@ -11,11 +11,8 @@ struct CardSettings: View {
     @EnvironmentObject var settingsData: SettingsData
     
     var body: some View {
-        Section(header: Text("Card Settings")) {
-            Toggle("Show draw animation", isOn: $settingsData.showCardAnimation)
-        }
         #if !os(watchOS)
-        Section(footer: Text("Shows the common point values of each card.")) {
+        Section(header: Text("Card Mode"), footer: Text("Shows the common point values of each card.")) {
             Toggle(isOn: $settingsData.showPoints) {
                 Text("Show card point values")
             }

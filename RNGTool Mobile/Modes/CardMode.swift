@@ -24,7 +24,7 @@ struct CardMode: View {
     
     func resetGen() {
         pointValueStr = ""
-        if(settingsData.showCardAnimation && !reduceMotion) {
+        if(settingsData.playAnimations && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if(cardsToDisplay == 1) { timer.invalidate() }
                 if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
@@ -154,7 +154,7 @@ struct CardMode: View {
                 }
                 cardsToDisplay = 1
                 self.getCards()
-                if(settingsData.showCardAnimation && !reduceMotion) {
+                if(settingsData.playAnimations && !reduceMotion) {
                     Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                         if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }
                         self.drawCount += 1

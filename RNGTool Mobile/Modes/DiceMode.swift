@@ -64,7 +64,7 @@ struct DiceMode: View {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }
-                    if(settingsData.showDiceAnimation && !reduceMotion) {
+                    if(settingsData.playAnimations && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1
@@ -80,12 +80,12 @@ struct DiceMode: View {
                     }
                 }
                 .onShake {
-                    if(settingsData.useShakeForDice) {
+                    if(settingsData.useMotionInput) {
                         if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                             self.showRollHint = false
                         }
-                        if(settingsData.showDiceAnimation && !reduceMotion) {
+                        if(settingsData.playAnimations && !reduceMotion) {
                             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                                 self.roll()
                                 self.rollCount += 1

@@ -62,7 +62,7 @@ struct DiceMode: View {
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }
-                    if(settingsData.showDiceAnimation && !reduceMotion) {
+                    if(settingsData.playAnimations && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1

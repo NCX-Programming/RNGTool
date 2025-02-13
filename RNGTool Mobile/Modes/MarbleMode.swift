@@ -72,7 +72,7 @@ struct MarbleMode: View {
                 withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                     self.showRollHint = false
                 }
-                if(settingsData.showMarbleAnimation && !reduceMotion) {
+                if(settingsData.playAnimations && !reduceMotion) {
                     Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                         self.roll()
                         self.rollCount += 1
@@ -88,12 +88,12 @@ struct MarbleMode: View {
                 }
             }
             .onShake {
-                if(settingsData.useShakeForMarbles) {
+                if(settingsData.useMotionInput) {
                     if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
                     withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                         self.showRollHint = false
                     }
-                    if(settingsData.showMarbleAnimation && !reduceMotion) {
+                    if(settingsData.playAnimations && !reduceMotion) {
                         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                             self.roll()
                             self.rollCount += 1

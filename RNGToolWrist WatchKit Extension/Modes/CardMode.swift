@@ -69,7 +69,7 @@ struct CardMode: View {
                 }
                 cardsToDisplay = 1
                 self.getCards()
-                if(settingsData.showCardAnimation && !reduceMotion) {
+                if(settingsData.playAnimations && !reduceMotion) {
                     Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                         if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
                         if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }

@@ -50,11 +50,11 @@ struct AdvancedSettings: View {
                         primaryButton: .default(Text("Confirm")){
                             settingsData.maxNumberDefault = 100
                             settingsData.minNumberDefault = 0
-                            resetDiceSet()
-                            resetCardSet()
-                            resetMarbleSet()
-                            settingsData.confirmGenResets = true
-                            settingsData.showModeHints = true
+                            resetGenSet(settingsData: settingsData)
+                            resetDiceSet(settingsData: settingsData)
+                            resetCardSet(settingsData: settingsData)
+                            resetMarbleSet(settingsData: settingsData)
+                            resetAdvSet(settingsData: settingsData)
                             showAlert = false
                         },
                         secondaryButton: .cancel()
@@ -64,7 +64,7 @@ struct AdvancedSettings: View {
             #if DEBUG
             if(settingsData.showDevMode || devCount > 2) {
                 Section(header: Text("Developer Mode"),footer: Text("Enable access to developer mode. Disabling this will re-hide the toggle.")) {
-                    Toggle("Show Developer Mode", isOn: $settingsData.showDevMode)
+                    Toggle("Show Developer Mode", isOn: $settingsData.showDevMode) // Why does toggling this send you back a page??
                 }
             }
             #endif
