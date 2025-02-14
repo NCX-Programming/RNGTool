@@ -73,6 +73,7 @@ struct ContentView: View {
             #endif
             Text("Select a mode to start generating")
         }
+        .navigationViewStyle(.stack)
     }
 }
 

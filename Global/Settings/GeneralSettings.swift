@@ -13,9 +13,9 @@ struct GeneralSettings: View {
     var body: some View {
         Section(header: Text("General"), footer: Text("Disable usage hints to hide text like \"Tap to roll\".")) {
             Toggle("Ask to confirm resets", isOn: $settingsData.confirmGenResets)
-            Toggle("Play animations", isOn: $settingsData.playAnimations)
+            Toggle("Play animations in supported modes", isOn: $settingsData.playAnimations)
             #if os(iOS)
-            Toggle("Use gestures", isOn: $settingsData.useMotionInput)
+            Toggle("Shake your device to generate in supported modes", isOn: $settingsData.useMotionInput)
             #endif
             Toggle("Show usage hints", isOn: $settingsData.showModeHints)
         }

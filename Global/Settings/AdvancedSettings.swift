@@ -27,7 +27,7 @@ struct AdvancedSettings: View {
                 Toggle("Check for updates on startup", isOn: $settingsData.checkUpdatesOnStartup)
             }
             #else
-            Section(header: Text("Save Mode States"), footer: Text("Whether or not the generators state, including the results and parameters, will be saved between launches.")) {
+            Section(header: Text("Save Mode States"), footer: Text("Whether or not the random numbers generated will be saved between launches.")) {
                 Toggle("Save generator states", isOn: $settingsData.saveModeStates)
             }
             #endif
@@ -63,8 +63,8 @@ struct AdvancedSettings: View {
             }
             #if DEBUG
             if(settingsData.showDevMode || devCount > 2) {
-                Section(header: Text("Developer Mode"),footer: Text("Enable access to developer mode. Disabling this will re-hide the toggle.")) {
-                    Toggle("Show Developer Mode", isOn: $settingsData.showDevMode) // Why does toggling this send you back a page??
+                Section(header: Text("Developer Mode"),footer: Text("Enable access to developer mode. This option will survive settings resets.")) {
+                    Toggle("Show Developer Mode", isOn: $settingsData.showDevMode)
                 }
             }
             #endif

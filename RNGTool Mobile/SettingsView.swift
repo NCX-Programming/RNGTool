@@ -46,6 +46,7 @@ struct SettingsView: View {
                     settingsData.minNumberDefault = Int(minNumberInput) ?? 0
                 }
                 .keyboardType(.numberPad)
+                
                 .onAppear {
                     maxNumberInput = "\(settingsData.maxNumberDefault)"
                     minNumberInput = "\(settingsData.minNumberDefault)"
