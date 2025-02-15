@@ -1,7 +1,7 @@
 # RNGTool
-The best way to generate random numbers on macOS 11.3+ and iOS 15.0+ (kinda)
+The best way to generate random numbers on macOS 12+, iOS 15+, and watchOS 8+ (kinda)
 
-![](https://github.com/NCX-Programming/RNGTool/workflows/Swift/badge.svg?branch=main)
+[![Swift](https://github.com/NCX-Programming/RNGTool/actions/workflows/swift.yml/badge.svg)](https://github.com/NCX-Programming/RNGTool/actions/workflows/swift.yml)
 
 <image src="https://cdn.ncxprogramming.com/file/image/screenshots/rngtool/repoimage.png" hight=397 width=630/>
 
@@ -16,9 +16,9 @@ Generate up to 7 random numbers using cards. You can optionally display the poin
 ### Marbles
 Generate up to 5 random letters using marbles. Marble icons are shown with the letter on them.
 ## System Requirements
-- Mac: At least macOS 11.3 or higher
+- Mac: At least macOS 12.4 or higher
 - iOS Device: At least iOS/iPadOS 15.0 or higher
-- Apple Watch: Any watch that is up to date and paired to a phone supported by RNGTool
+- Apple Watch: At least watchOS 8.3 or higher
 
 ## Installation (macOS, stable)
 First, head to [the releases](https://github.com/NCX-Programming/RNGTool/releases) and download the latest DMG. Mount it and move `RNGTool.app` to your Applications folder like any other program. To get around the build not being signed, you'll need to go into your Applications folder and Right Click > Open the first time you install and after any updates to allow it past Gatekeeper.
