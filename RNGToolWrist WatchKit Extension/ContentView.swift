@@ -1,22 +1,11 @@
 //
 //  ContentView.swift
-//  RNGTool Mobile
+//  RNGToolWrist
 //
-//  Created by Campbell on 12/14/21.
+//  Created by Campbell on 2/15/25.
 //
 
 import SwiftUI
-import UIKit
-
-extension View {
-    @ViewBuilder func phoneOnlyStackNavigationView() -> some View {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            self.navigationViewStyle(.automatic)
-        } else {
-            self.navigationViewStyle(.stack)
-        }
-    }
-}
 
 struct ContentView: View {
     @EnvironmentObject var settingsData: SettingsData
@@ -48,39 +37,19 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("More")) {
-                    NavigationLink(destination: History()) {
-                        Image(systemName: "clock.arrow.circlepath")
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
                             .foregroundColor(.accentColor)
-                        Text("History")
-                    }
-                    if(settingsData.showDevMode) {
-                        NavigationLink(destination: DevMode()) {
-                            Image(systemName: "hammer")
-                                .foregroundColor(.accentColor)
-                            Text("Developer Mode")
-                        }
+                        Text("Settings")
                     }
                 }
             }
             .navigationTitle("RNGTool")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    NavigationLink(destination: SettingsView()) {
-                        Image(systemName: "gear")
-                            .foregroundColor(.accentColor)
-                    }
-                }
-            }
             Text("Select a mode to start generating")
         }
-        .phoneOnlyStackNavigationView()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView().environmentObject(SettingsData())
-        }
-    }
+#Preview {
+    ContentView()
 }

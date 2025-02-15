@@ -17,7 +17,7 @@ struct SettingsView: View {
                 GeneralSettings()
             }
             .tabItem {
-                Label("General Settings", systemImage: "gear")
+                Label("General", systemImage: "gear")
             }
             .tag(Tabs.general)
             NumberSettings()
@@ -36,7 +36,7 @@ struct SettingsView: View {
                 AdvancedSettings()
             }
             .tabItem {
-                Label("Advanced Settings", systemImage: "gearshape.2")
+                Label("Advanced", systemImage: "gearshape.2")
             }
             .tag(Tabs.advanced)
         }

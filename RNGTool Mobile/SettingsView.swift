@@ -7,6 +7,7 @@
 
 import SwiftUI
 #if os(iOS)
+import UIKit
 import CoreHaptics
 #elseif os(watchOS)
 import WatchKit
@@ -24,7 +25,8 @@ struct SettingsView: View {
     @State private var showNumKeyboard = false
     #endif
     @State private var showResetPrompt = false
-    
+    @State private var showAdvSettings = false
+
     var body: some View {
         Form {
             GeneralSettings()
@@ -98,34 +100,50 @@ struct SettingsView: View {
                 }) {
                     Text("Reset")
                 }
-                .alert(isPresented: $showResetPrompt){
-                    Alert(
-                        title: Text("Confirm Reset"),
-                        message: Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone."),
-                        primaryButton: .default(Text("Confirm")){
-                            #if os(iOS)
-                            maxNumberInput = "100"
-                            minNumberInput = "0"
-                            #elseif os(watchOS)
-                            settingsData.maxNumberDefault = 100
-                            settingsData.minNumberDefault = 0
-                            #endif
-                            showResetPrompt = false
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
+                .alert("Confirm Reset", isPresented: $showResetPrompt, actions: {
+                    Button("Confirm", role: .destructive) {
+                        #if os(iOS)
+                        maxNumberInput = "100"
+                        minNumberInput = "0"
+                        #elseif os(watchOS)
+                        settingsData.maxNumberDefault = 100
+                        settingsData.minNumberDefault = 0
+                        #endif
+                        showResetPrompt = false
+                    }
+                }, message: {
+                    Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone.")
+                })
             }
             #if !os(watchOS)
             // Card mode only offers point value configuration, which isn't used on watchOS right now
             CardSettings()
             #endif
             Section(header: Text("More")) {
-                NavigationLink(destination: AdvancedSettingsView()) {
+                #if os(iOS)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Button(action: {
+                        showAdvSettings = true
+                    }) {
+                        Text("Show Advanced Settings")
+                    }
+                    .sheet(isPresented: $showAdvSettings, content: {
+                        AdvancedSettingsiPad()
+                    })
+                } else {
+                    NavigationLink(destination: AdvancedSettings()) {
+                        Image(systemName: "gearshape.2")
+                            .foregroundColor(.accentColor)
+                        Text("Advanced Settings")
+                    }
+                }
+                #else
+                NavigationLink(destination: AdvancedSettings()) {
                     Image(systemName: "gearshape.2")
                         .foregroundColor(.accentColor)
                     Text("Advanced Settings")
                 }
+                #endif
                 NavigationLink(destination: About()) {
                     Image(systemName: "info.circle")
                         .foregroundColor(.accentColor)
@@ -142,15 +160,21 @@ struct SettingsView: View {
     }
 }
 
-struct AdvancedSettingsView: View {
+#if os(iOS)
+struct AdvancedSettingsiPad: View {
+    @Environment(\.presentationMode)
+    var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
-        Form {
+        NavigationView {
             AdvancedSettings()
+            .navigationBarItems(trailing: Button("Close", action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
         }
-        .navigationBarTitle("Advanced")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
+#endif
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

@@ -45,6 +45,7 @@
 		37D8BF6A28C2BF8700EFC2DC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
+		37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B7182D61347F007A91C5 /* ContentView.swift */; };
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
@@ -62,7 +63,6 @@
 		37F5722627A8C3C5007D29FB /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
 		37F5722727A8C3CD007D29FB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
 		37F5722827A8C3E5007D29FB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
-		37F5722927A8C4B0007D29FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
 		37F5723227A8C573007D29FB /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723127A8C573007D29FB /* DiceMode.swift */; };
 		37F5723427A8C583007D29FB /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723327A8C583007D29FB /* CardMode.swift */; };
 		37F5723627A8C58D007D29FB /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723527A8C58D007D29FB /* MarbleMode.swift */; };
@@ -131,6 +131,7 @@
 		37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
+		37E2B7182D61347F007A91C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
@@ -309,6 +310,7 @@
 				37F5723027A8C551007D29FB /* Modes */,
 				37F5720D27A8BA7F007D29FB /* Preview Content */,
 				3729936528B5BA3600EDF9DE /* NumKeyboard.swift */,
+				37E2B7182D61347F007A91C5 /* ContentView.swift */,
 			);
 			path = "RNGToolWrist WatchKit Extension";
 			sourceTree = "<group>";
@@ -519,12 +521,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F5722627A8C3C5007D29FB /* AdvancedSettings.swift in Sources */,
-				37F5722927A8C4B0007D29FB /* ContentView.swift in Sources */,
 				37F5723227A8C573007D29FB /* DiceMode.swift in Sources */,
 				37F5722327A8C31B007D29FB /* SettingsData.swift in Sources */,
 				37D8BF6A28C2BF8700EFC2DC /* GeneralSettings.swift in Sources */,
 				3729936628B5BA3600EDF9DE /* NumKeyboard.swift in Sources */,
 				37F5722527A8C31B007D29FB /* MarbleSettings.swift in Sources */,
+				37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */,
 				37F5723827A8C59B007D29FB /* NumberMode.swift in Sources */,
 				37F5722427A8C31B007D29FB /* DiceSettings.swift in Sources */,
 				37F5723427A8C583007D29FB /* CardMode.swift in Sources */,
@@ -559,7 +561,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -571,7 +573,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -591,7 +593,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -603,7 +605,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.NCX-Programming.RNGTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -622,7 +624,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -663,7 +665,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -824,7 +826,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -859,7 +861,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
