@@ -33,6 +33,11 @@ struct ContentView: View {
                             .foregroundColor(.accentColor)
                         Text("Numbers")
                     }
+                    NavigationLink(destination: CoinMode()) {
+                        Image(systemName: "centsign.circle")
+                            .foregroundColor(.accentColor)
+                        Text("Coins")
+                    }
                     NavigationLink(destination: DiceMode()) {
                         Image(systemName: "dice")
                             .foregroundColor(.accentColor)

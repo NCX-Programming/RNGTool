@@ -13,7 +13,7 @@ struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var engine: CHHapticEngine?
-    @State private var numOfDice: Int = 1
+    @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
     @State private var randomNumbers: [Int] = [0]
     @State private var randomNumberStr: String = ""
@@ -23,7 +23,7 @@ struct DiceMode: View {
     
     func resetGen() {
         randomNumberStr = ""
-        numOfDice = 1
+        numDice = 1
         randomNumbers.removeAll()
         diceImages[0] = "d1"
         confirmReset = false
@@ -33,11 +33,11 @@ struct DiceMode: View {
     // corresponds with the number rolled for it.
     func roll() {
         randomNumbers.removeAll()
-        for _ in 1...numOfDice{
+        for _ in 1...numDice{
             randomNumbers.append(Int.random(in: 1...6))
         }
         for n in 0..<randomNumbers.count{
-            if(numOfDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
+            if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
         self.randomNumberStr = "Your random number(s): \(randomNumbers)"
         randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
@@ -87,9 +87,9 @@ struct DiceMode: View {
                     VStack() {
                         // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
                         // for that row in it.
-                        ForEach(0..<Int((Double(numOfDice) / 3.0).rounded(.up)), id: \.self) { index in
+                        ForEach(0..<Int((Double(numDice) / 3.0).rounded(.up)), id: \.self) { index in
                             HStack() {
-                                ForEach((3 * index)..<(numOfDice > (3 * (index + 1)) ? numOfDice - (numOfDice - (3 * (index + 1))) : numOfDice), id: \.self) { innerIndex in
+                                ForEach((3 * index)..<(numDice > (3 * (index + 1)) ? numDice - (numDice - (3 * (index + 1))) : numDice), id: \.self) { innerIndex in
                                     Image(diceImages[innerIndex])
                                         .resizable()
                                         .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
@@ -119,7 +119,7 @@ struct DiceMode: View {
                             .foregroundColor(.secondary)
                     }
                     Text("Number of dice")
-                    Picker("Number of dice", selection: $numOfDice){
+                    Picker("Number of dice", selection: $numDice){
                         ForEach(1...9, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
