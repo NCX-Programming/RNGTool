@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
+import UIKit
 import CoreHaptics
 
 struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var engine: CHHapticEngine?
-    @State private var numOfDice = 1
-    @State private var confirmReset = false
-    @State private var randomNumbers = [0]
-    @State private var randomNumberStr = ""
-    @State private var diceImages = ["d1"]
-    @State private var rollCount = 0
-    @State private var showRollHint = true
+    @State private var numOfDice: Int = 1
+    @State private var confirmReset: Bool = false
+    @State private var randomNumbers: [Int] = [0]
+    @State private var randomNumberStr: String = ""
+    @State private var diceImages: [String] = Array(repeating: "d1", count: 9)
+    @State private var rollCount: Int = 0
+    @State private var showRollHint: Bool = true
     
     func resetGen() {
         randomNumberStr = ""
@@ -28,6 +29,8 @@ struct DiceMode: View {
         confirmReset = false
     }
     
+    // Roll function that generates a number for every die being shown in the range 1-6, and then sets each shown die to the image that
+    // corresponds with the number rolled for it.
     func roll() {
         randomNumbers.removeAll()
         for _ in 1...numOfDice{
@@ -40,123 +43,137 @@ struct DiceMode: View {
         randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
     }
     
+    // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
+    // repeatedly.
+    func startRoll() {
+        if (rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1) }
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+        if (settingsData.playAnimations && !reduceMotion) {
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                // Play a single haptic tap for every roll in the animation. (It's more fun this way!)
+                playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+                self.roll()
+                self.rollCount += 1
+                if (rollCount == 10) {
+                    timer.invalidate(); self.rollCount = 0
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                }
+            }
+        }
+        else {
+            self.roll()
+            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+        }
+    }
+    
+    func getDieSize(geometry: GeometryProxy) -> CGFloat {
+        // Currently using some different (and somewhat rough) calculations for iPad, because the die size calculations used for iPhone
+        // don't work for the bigger screen, especially when you take the sidebar into account.
+        let smallerLength = min(geometry.size.width, geometry.size.height)
+        var dieSize: CGFloat
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            dieSize = (smallerLength / 4.25) - 15
+        }
+        else {
+            dieSize = (smallerLength / 3) - 15
+        }
+        return dieSize
+    }
+    
     var body: some View {
         GeometryReader { geometry in
-        ScrollView{
-            Group {
-                HStack(){
-                    ForEach(0..<numOfDice, id: \.self) { index in
-                      Image(diceImages[index])
-                        .resizable()
-                        .frame(width: (geometry.size.width / 6) - 10, height: (geometry.size.width / 6) - 10)
-                    }
-                }
-                .padding(.top, 10)
-                .contextMenu {
-                    Button(action: {
-                        copyToClipboard(item: "\(randomNumbers)")
-                    }) {
-                        Label("Copy", systemImage: "doc.on.doc")
-                    }
-                }
-                .onTapGesture {
-                    if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        self.showRollHint = false
-                    }
-                    if(settingsData.playAnimations && !reduceMotion) {
-                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                            self.roll()
-                            self.rollCount += 1
-                            if(rollCount == 10) {
-                                timer.invalidate(); self.rollCount = 0
-                                addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+            VStack() {
+                VStack() {
+                    VStack() {
+                        // Draw the dice in a 3x3 grid. There's probably a more efficient way to do this, but I haven't figured out what
+                        // that way is yet.
+                        HStack(){
+                            ForEach(0..<(numOfDice > 3 ? numOfDice - (numOfDice - 3) : numOfDice), id: \.self) { index in
+                                Image(diceImages[index])
+                                    .resizable()
+                                    .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                             }
                         }
-                    }
-                    else {
-                        self.roll()
-                        addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
-                    }
-                }
-                .onShake {
-                    if(settingsData.useMotionInput) {
-                        if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.2) }
-                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                            self.showRollHint = false
-                        }
-                        if(settingsData.playAnimations && !reduceMotion) {
-                            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                                self.roll()
-                                self.rollCount += 1
-                                if(rollCount == 10) {
-                                    timer.invalidate(); self.rollCount = 0
-                                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                        HStack(){
+                            if (numOfDice > 3) {
+                                ForEach(3..<(numOfDice > 6 ? numOfDice - (numOfDice - 6) : numOfDice), id: \.self) { index in
+                                    Image(diceImages[index])
+                                        .resizable()
+                                        .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                                 }
                             }
                         }
-                        else {
-                            self.roll()
-                            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                        HStack(){
+                            if (numOfDice > 6) {
+                                ForEach(6..<numOfDice, id: \.self) { index in
+                                    Image(diceImages[index])
+                                        .resizable()
+                                        .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
+                                }
+                            }
                         }
                     }
-                }
-                .onAppear { prepareHaptics(engine: &engine) }
-                Text(randomNumberStr)
-                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
-                    .padding(.bottom, 5)
-            }
-            if(showRollHint && settingsData.showModeHints) {
-                Text("Tap dice to roll")
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-            }
-            Text("Number of dice")
-                .font(.title3)
-            // The seemingly unrelated code below is together because they must have the same max value
-            Picker("Number of dice", selection: $numOfDice){
-                ForEach(1...6, id: \.self) { index in
-                    Text("\(index)").tag(index)
-                }
-            }
-            .pickerStyle(.segmented)
-            .onAppear{
-                for _ in 1...6{
-                    diceImages.append("d1")
-                }
-            }
-            Divider()
-            HStack() {
-                Button(action:{
-                    playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.1)
-                    if(settingsData.confirmGenResets){
-                        confirmReset = true
+                    .padding(.top, 10)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
+                    .contextMenu {
+                        Button(action: {
+                            copyToClipboard(item: "\(randomNumbers)")
+                        }) {
+                            Label("Copy", systemImage: "doc.on.doc")
+                        }
                     }
-                    else { resetGen() }
-                }) {
-                    Image(systemName: "clear.fill")
+                    // Tapping and shaking trigger the same code, but the shake gesture should only trigger a roll if motion input is
+                    // currently enabled.
+                    .onTapGesture { startRoll() }
+                    .onShake { if(settingsData.useMotionInput) { startRoll() } }
                 }
-                .font(.system(size: 20, weight:.bold, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                .padding(5)
-                .background(Color.accentColor)
-                .cornerRadius(20)
-                .help("Reset custom values and output")
-                .alert(isPresented: $confirmReset){
-                    Alert(
-                        title: Text("Confirm Reset"),
-                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                        primaryButton: .default(Text("Confirm")){
+                Spacer()
+                VStack() {
+                    if (showRollHint && settingsData.showModeHints) {
+                        Text("Tap the die to roll")
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                    }
+                    Text("Number of dice")
+                    Picker("Number of dice", selection: $numOfDice){
+                        ForEach(1...9, id: \.self) { index in
+                            Text("\(index)").tag(index)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal, geometry.size.width * 0.075)
+                    .padding(.bottom, 10)
+                    Button(action:{
+                        startRoll()
+                    }) {
+                        Image(systemName: "play.fill")
+                            .padding(.horizontal, geometry.size.width * 0.4)
+                            .padding(.vertical, 10)
+                    }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Roll the dice")
+                    Button(action:{
+                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
+                        if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
+                    }) {
+                        Image(systemName: "clear.fill")
+                            .padding(.horizontal, geometry.size.width * 0.4)
+                            .padding(.vertical, 10)
+                    }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Reset dice count and roll")
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
                             resetGen()
-                        },
-                        secondaryButton: .cancel()
-                    )
+                        }
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
+                    .padding(.bottom, 10)
                 }
             }
         }
-        }
-        .padding(.horizontal, 3)
+        .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Dice")
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// This is the large button style originally used in the number mode redesign
 struct LargeSquareAccentButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

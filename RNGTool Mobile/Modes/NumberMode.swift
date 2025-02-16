@@ -54,6 +54,7 @@ struct NumberMode: View {
                             Image(systemName: "document.on.document")
                         }
                     }
+                Spacer()
                 VStack() {
                     Text("Maximum")
                     TextField("Enter a number", text: $maxNumberInput)
@@ -110,8 +111,8 @@ struct NumberMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
+                    .padding(.bottom, 10)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.4)
             }
             .onAppear { prepareHaptics(engine: &engine) }
             //.padding(.horizontal, 3)

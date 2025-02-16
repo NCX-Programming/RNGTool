@@ -36,7 +36,7 @@ struct History: View {
                 }
             }
             if(settingsData.historyTable.count == 0) {
-                Text("No numbers yet! Get generating!")
+                Text("No history yet! Get generating!")
             }
         }
         .padding(.horizontal, 3)
