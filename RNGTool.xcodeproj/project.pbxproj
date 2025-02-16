@@ -47,6 +47,7 @@
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
 		37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B7182D61347F007A91C5 /* ContentView.swift */; };
 		37E7DC5B2D6177E80054D341 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DC5A2D6177E80054D341 /* Components.swift */; };
+		37E7DC5E2D619ABC0054D341 /* CoinMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DC5C2D619ABC0054D341 /* CoinMode.swift */; };
 		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
 		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
@@ -134,6 +135,7 @@
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
 		37E2B7182D61347F007A91C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		37E7DC5A2D6177E80054D341 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		37E7DC5C2D619ABC0054D341 /* CoinMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoinMode.swift; path = "RNGTool Mobile/Modes/CoinMode.swift"; sourceTree = SOURCE_ROOT; };
 		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
 		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				37FC9814276FEAD20040BFB9 /* DiceMode.swift */,
+				37E7DC5C2D619ABC0054D341 /* CoinMode.swift */,
 				37FC9817276FEE600040BFB9 /* CardMode.swift */,
 				37FC9819276FF1D20040BFB9 /* MarbleMode.swift */,
 				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
@@ -502,6 +505,7 @@
 				37FC9815276FEAD20040BFB9 /* DiceMode.swift in Sources */,
 				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
 				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
+				37E7DC5E2D619ABC0054D341 /* CoinMode.swift in Sources */,
 				37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */,
 				37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */,
 				37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */,
@@ -628,7 +632,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -669,7 +673,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;

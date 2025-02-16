@@ -115,7 +115,6 @@ struct NumberMode: View {
                 }
             }
             .onAppear { prepareHaptics(engine: &engine) }
-            //.padding(.horizontal, 3)
             .navigationTitle("Numbers")
             .navigationBarTitleDisplayMode(.inline)
         }

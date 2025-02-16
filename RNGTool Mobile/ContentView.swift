@@ -27,7 +27,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("RNGTool")) {
+                Section(header: Text("Modes")) {
                     NavigationLink(destination: NumberMode()) {
                         Image(systemName: "number")
                             .foregroundColor(.accentColor)

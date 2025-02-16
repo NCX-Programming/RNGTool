@@ -85,28 +85,12 @@ struct DiceMode: View {
             VStack() {
                 VStack() {
                     VStack() {
-                        // Draw the dice in a 3x3 grid. There's probably a more efficient way to do this, but I haven't figured out what
-                        // that way is yet.
-                        HStack(){
-                            ForEach(0..<(numOfDice > 3 ? numOfDice - (numOfDice - 3) : numOfDice), id: \.self) { index in
-                                Image(diceImages[index])
-                                    .resizable()
-                                    .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
-                            }
-                        }
-                        HStack(){
-                            if (numOfDice > 3) {
-                                ForEach(3..<(numOfDice > 6 ? numOfDice - (numOfDice - 6) : numOfDice), id: \.self) { index in
-                                    Image(diceImages[index])
-                                        .resizable()
-                                        .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
-                                }
-                            }
-                        }
-                        HStack(){
-                            if (numOfDice > 6) {
-                                ForEach(6..<numOfDice, id: \.self) { index in
-                                    Image(diceImages[index])
+                        // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
+                        // for that row in it.
+                        ForEach(0..<Int((Double(numOfDice) / 3.0).rounded(.up)), id: \.self) { index in
+                            HStack() {
+                                ForEach((3 * index)..<(numOfDice > (3 * (index + 1)) ? numOfDice - (numOfDice - (3 * (index + 1))) : numOfDice), id: \.self) { innerIndex in
+                                    Image(diceImages[innerIndex])
                                         .resizable()
                                         .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                                 }
