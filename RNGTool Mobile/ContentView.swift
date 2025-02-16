@@ -8,6 +8,9 @@
 import SwiftUI
 import UIKit
 
+// This extension makes it so that navigationViewStyle is only set to the default (.automatic) on iPad, and on iPhone (or god forbid, iPod
+// Touch) it'll use the stack style. Using stack over automatic makes no visible difference on iPhone, but it fixes a navigation issue with
+// the Advanced Settings.
 extension View {
     @ViewBuilder func phoneOnlyStackNavigationView() -> some View {
         if UIDevice.current.userInterfaceIdiom == .pad {

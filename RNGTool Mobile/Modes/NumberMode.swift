@@ -12,7 +12,7 @@ struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
-    @State private var maxNumber: Int = 0
+    @State private var maxNumber: Int = 100
     @State private var minNumber: Int = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset: Bool = false
@@ -34,13 +34,14 @@ struct NumberMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView {
+            VStack() {
                 Text("\(randomNumber)")
-                    // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above the buttons, and not truncating.
+                    // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
+                    // the buttons, and not truncating.
                     .font(.system(size: 1000))
                     .minimumScaleFactor(0.01)
                     .lineLimit(1)
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.5, alignment: .center)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
                     .allowsTightening(true)
                     .onAppear {
                         if (settingsData.saveModeStates == false) { randomNumber = 0 }
@@ -53,44 +54,34 @@ struct NumberMode: View {
                             Image(systemName: "document.on.document")
                         }
                     }
-                Group() {
+                VStack() {
                     Text("Maximum")
                     TextField("Enter a number", text: $maxNumberInput)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .focused($fieldFocused, equals: .maxNumber)
-                        .onAppear{
-                            maxNumberInput = "\(maxNumber)"
-                            if (maxNumber == 0 || settingsData.saveModeStates == false) { maxNumberInput = "\(settingsData.maxNumberDefault)" }
+                        .onChange(of: maxNumberInput) { maxNumberInput in
+                            maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
                         }
+                        .onAppear { maxNumberInput = "\(settingsData.maxNumberDefault)" } // Load default maximum
                     Text("Minimum")
                     TextField("Enter a number", text: $minNumberInput)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .focused($fieldFocused, equals: .minNumber)
-                        .onAppear {
-                            minNumberInput = "\(minNumber)"
-                            if (minNumber == 0 || settingsData.saveModeStates == false) { minNumberInput = "\(settingsData.minNumberDefault)" }
+                        .onChange(of: minNumberInput) { minNumberInput in
+                            minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
                         }
-                }
-                .onChange(of: maxNumberInput) { maxNumberInput in
-                    maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
-                }
-                .onChange(of: minNumberInput) { minNumberInput in
-                    minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
-                }
-                Spacer()
-                    .padding(.bottom, 10)
-                VStack {
+                        .onAppear { minNumberInput = "\(settingsData.minNumberDefault)" } // Load default minimum
+                        .padding(.bottom, 10)
                     Button(action:{
-                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
-                        fieldFocused = .none
-                        maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
-                        minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
-                        if (maxNumber <= minNumber) { minNumber = settingsData.minNumberDefault }
+                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+                        fieldFocused = .none // Dismisses the keyboard, if it's open
+                        if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
                         randomNumber = Int.random(in: minNumber...maxNumber)
+                        // This fixes the displayed numbers if they were invalid
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
@@ -99,42 +90,31 @@ struct NumberMode: View {
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
                     }
-                    .onAppear { prepareHaptics(engine: &engine) }
-                    .font(.system(size: 20, weight:.bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .background(Color.accentColor)
-                    .cornerRadius(10)
+                    .buttonStyle(LargeSquareAccentButton())
                     .help("Generate a number")
                     Button(action:{
-                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
-                        fieldFocused = .none
-                        if(settingsData.confirmGenResets){
-                            confirmReset = true
-                        }
-                        else { resetGen() }
+                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
+                        fieldFocused = .none // Dismisses the keyboard, if it's open
+                        if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
                         Image(systemName: "clear.fill")
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
                     }
-                    .font(.system(size: 20, weight:.bold, design: .rounded))
-                    .foregroundColor(.white)
-                    .background(Color.accentColor)
-                    .cornerRadius(10)
+                    .buttonStyle(LargeSquareAccentButton())
                     .help("Reset custom values and output")
-                    .alert(isPresented: $confirmReset){
-                        Alert(
-                            title: Text("Confirm Reset"),
-                            message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                            primaryButton: .default(Text("Confirm")){
-                                resetGen()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
+                            resetGen()
+                        }
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height * 0.4)
             }
-            .padding(.horizontal, 3)
+            .onAppear { prepareHaptics(engine: &engine) }
+            //.padding(.horizontal, 3)
             .navigationTitle("Numbers")
             .navigationBarTitleDisplayMode(.inline)
         }

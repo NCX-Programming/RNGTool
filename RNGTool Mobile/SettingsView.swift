@@ -54,6 +54,8 @@ struct SettingsView: View {
                     minNumberInput = "\(settingsData.minNumberDefault)"
                 }
                 #elseif os(watchOS)
+                // Use the custom watchOS number keyboard for easier number input, since the default keyboard is absolutely awful for just
+                // entering numbers.
                 Button(action: {
                     kbReturnType = 1
                     keyboardNumber = settingsData.maxNumberDefault
@@ -121,6 +123,7 @@ struct SettingsView: View {
             #endif
             Section(header: Text("More")) {
                 #if os(iOS)
+                // If we're on iPad, then display advanced settings as a sheet that pops up over everything.
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Button(action: {
                         showAdvSettings = true
@@ -130,6 +133,7 @@ struct SettingsView: View {
                     .sheet(isPresented: $showAdvSettings, content: {
                         AdvancedSettingsiPad()
                     })
+                // If we're not on iPad, then display a navigation link to the advanced settings screen.
                 } else {
                     NavigationLink(destination: AdvancedSettings()) {
                         Image(systemName: "gearshape.2")
@@ -138,6 +142,7 @@ struct SettingsView: View {
                     }
                 }
                 #else
+                // Always use the navigation link style when we're on watchOS (there's probably a nicer way to unify this).
                 NavigationLink(destination: AdvancedSettings()) {
                     Image(systemName: "gearshape.2")
                         .foregroundColor(.accentColor)

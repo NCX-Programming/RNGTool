@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// This view just exists to provide easy access to some features that are handy for testing. The name makes it sound wayyyyy cooler.
 struct DevMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0

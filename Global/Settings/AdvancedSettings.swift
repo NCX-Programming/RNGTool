@@ -19,7 +19,7 @@ struct AdvancedSettings: View {
     #endif
     @State private var showResetPrompt = false
     #if targetEnvironment(simulator)
-    @State private var devCount = 3 // Always show the debug mode toggle if we're using a sim
+    @State private var devCount = 3 // Always show the debug mode toggle if we're using a sim, no reason to hide it there
     #else
     @State private var devCount = 0
     #endif
