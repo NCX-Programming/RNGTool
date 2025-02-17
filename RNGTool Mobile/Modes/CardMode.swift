@@ -38,18 +38,18 @@ struct CardMode: View {
     }
     
     func getCards() {
-        for n in 0..<numCards{
-            switch randomNumbers[n]{
-            case 1:
-                cardImages[n]="cA"
-            case 11:
-                cardImages[n]="cJ"
-            case 12:
-                cardImages[n]="cQ"
-            case 13:
-                cardImages[n]="cK"
-            default:
-                cardImages[n]="c\(randomNumbers[n])"
+        for n in 0..<numCards {
+            switch randomNumbers[n] {
+                case 1:
+                    cardImages[n]="cA"
+                case 11:
+                    cardImages[n]="cJ"
+                case 12:
+                    cardImages[n]="cQ"
+                case 13:
+                    cardImages[n]="cK"
+                default:
+                    cardImages[n]="c\(randomNumbers[n])"
             }
         }
     }
@@ -59,16 +59,16 @@ struct CardMode: View {
             self.showDrawHint = false
         }
         randomNumbers.removeAll()
-        for _ in 1...7{
+        for _ in 1...7 {
             randomNumbers.append(Int.random(in: 1...13))
         }
-        if(settingsData.showPoints){
+        if(settingsData.showPoints) {
             pointValues.removeAll()
             for n in 0..<numCards {
                 if(randomNumbers[n] == 1) {
                     pointValues.append(settingsData.aceValue)
                 }
-                else if(randomNumbers[n] > 1 && randomNumbers[n] < 11) {
+                else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {
                     pointValues.append(randomNumbers[n])
                 }
                 else {
@@ -78,7 +78,7 @@ struct CardMode: View {
             self.pointValueStr = "Point value(s): \(pointValues)"
             pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
         }
-        else{
+        else {
             self.pointValueStr = ""
         }
         cardsToDisplay = 1

@@ -13,7 +13,7 @@ struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var engine: CHHapticEngine?
-    @State private var numOfMarbles: Int = 1
+    @State private var numMarbles: Int = 1
     @State private var rollCount: Int = 0
     @State private var randomNumbers: [Int] = Array(repeating: 0, count: 9)
     @State private var randomLetters: [String] = Array(repeating: "A", count: 9)
@@ -22,7 +22,7 @@ struct MarbleMode: View {
     @State private var letters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        numOfMarbles = 1
+        numMarbles = 1
         for index in 0..<randomNumbers.count {
             randomNumbers[index] = 0
         }
@@ -32,11 +32,11 @@ struct MarbleMode: View {
 
     func roll() {
         randomLetters.removeAll()
-        for index in 0..<numOfMarbles {
+        for index in 0..<numMarbles {
             randomNumbers[index] = Int.random(in: 0...25)
         }
         for n in 0..<randomNumbers.count {
-            if(numOfMarbles > n) { randomLetters.append("\(letters[randomNumbers[n]])") }
+            if(numMarbles > n) { randomLetters.append("\(letters[randomNumbers[n]])") }
         }
     }
     
@@ -67,9 +67,9 @@ struct MarbleMode: View {
                     VStack() {
                         // Same as the dice, draw the marbles in a 3x3 grid by creating a row for each multiple of 3 marbles, and then only
                         // drawing marbles intended for that row in it.
-                        ForEach(0..<Int((Double(numOfMarbles) / 3.0).rounded(.up)), id: \.self) { index in
+                        ForEach(0..<Int((Double(numMarbles) / 3.0).rounded(.up)), id: \.self) { index in
                             HStack() {
-                                ForEach((3 * index)..<(numOfMarbles > (3 * (index + 1)) ? numOfMarbles - (numOfMarbles - (3 * (index + 1))) : numOfMarbles), id: \.self) { innerIndex in
+                                ForEach((3 * index)..<(numMarbles > (3 * (index + 1)) ? numMarbles - (numMarbles - (3 * (index + 1))) : numMarbles), id: \.self) { innerIndex in
                                     ZStack() {
                                         Text("\(letters[randomNumbers[innerIndex]])")
                                             // Font calculations are split because using a larger portion of the screen width on iPhone
@@ -79,8 +79,13 @@ struct MarbleMode: View {
                                             .stroke(Color.primary, lineWidth: 4)
                                     }
                                     .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
+                                    // Making the content shape a rectangle and attaching the onTapGesture here means that you can tap
+                                    // anywhere in the invisible rectangle that the marble fits in to roll.
+                                    .contentShape(Rectangle())
+                                    .onTapGesture { startRoll() }
                                 }
                             }
+                            
                         }
                     }
                     .padding(.top, 10)
@@ -96,7 +101,6 @@ struct MarbleMode: View {
                     }
                     // Tapping and shaking are effectively the same, but shaking should only actually trigger a roll if we're supposed to be
                     // reading motion input.
-                    .onTapGesture { startRoll() }
                     .onShake { if(settingsData.useMotionInput) { startRoll() } }
                 }
                 Spacer()
@@ -107,7 +111,7 @@ struct MarbleMode: View {
                             .foregroundColor(.secondary)
                     }
                     Text("Number of marbles")
-                    Picker("Number of marbles", selection: $numOfMarbles){
+                    Picker("Number of marbles", selection: $numMarbles){
                         ForEach(1...9, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
