@@ -59,11 +59,8 @@ struct CoinMode: View {
                     Text("Heads: \(headsCount)")
                     // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
                     // the buttons, and not truncating.
-                        .font(.system(size: 1000))
-                        .minimumScaleFactor(0.01)
-                        .lineLimit(1)
+                        .maxSizeText()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.2, alignment: .center)
-                        .allowsTightening(true)
                         .contextMenu {
                             Button(action: {
                                 copyToClipboard(item: "Heads: \(headsCount)")
@@ -75,11 +72,8 @@ struct CoinMode: View {
                     Text("Tails: \(tailsCount)")
                     // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
                     // the buttons, and not truncating.
-                        .font(.system(size: 1000))
-                        .minimumScaleFactor(0.01)
-                        .lineLimit(1)
+                        .maxSizeText()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.2, alignment: .center)
-                        .allowsTightening(true)
                         .contextMenu {
                             Button(action: {
                                 copyToClipboard(item: "Tails: \(tailsCount)")

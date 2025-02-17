@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 import CoreHaptics
 
 struct DiceMode: View {
@@ -64,20 +63,6 @@ struct DiceMode: View {
             self.roll()
             addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
         }
-    }
-    
-    func getDieSize(geometry: GeometryProxy) -> CGFloat {
-        // Currently using some different (and somewhat rough) calculations for iPad, because the die size calculations used for iPhone
-        // don't work for the bigger screen, especially when you take the sidebar into account.
-        let smallerLength = min(geometry.size.width, geometry.size.height)
-        var dieSize: CGFloat
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            dieSize = (smallerLength / 4.25) - 15
-        }
-        else {
-            dieSize = (smallerLength / 3) - 15
-        }
-        return dieSize
     }
     
     var body: some View {
