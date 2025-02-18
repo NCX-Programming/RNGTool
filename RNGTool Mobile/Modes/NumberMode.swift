@@ -28,7 +28,7 @@ struct NumberMode: View {
     func resetGen() {
         maxNumberInput = "\(settingsData.maxNumberDefault)"
         minNumberInput = "\(settingsData.minNumberDefault)"
-        randomNumber = 0
+        if (!reduceMotion && settingsData.playAnimations) { withAnimation { randomNumber = 0 } } else { randomNumber = 0 }
         confirmReset = false
     }
     
@@ -42,6 +42,14 @@ struct NumberMode: View {
                     .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
                     .onAppear {
                         if (settingsData.saveModeStates == false) { randomNumber = 0 }
+                    }
+                    .apply {
+                        if #available(iOS 17.0, *) {
+                            $0.contentTransition(.numericText(value: Double(randomNumber)))
+                        }
+                        else if #available(iOS 16.0, *) {
+                            $0.contentTransition(.numericText())
+                        }
                     }
                     .contextMenu {
                         Button(action: {
@@ -78,7 +86,9 @@ struct NumberMode: View {
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                         fieldFocused = .none // Dismisses the keyboard, if it's open
                         if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
-                        randomNumber = Int.random(in: minNumber...maxNumber)
+                        if (!reduceMotion && settingsData.playAnimations) {
+                            withAnimation { randomNumber = Int.random(in: minNumber...maxNumber) } }
+                        else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         // This fixes the displayed numbers if they were invalid
                         maxNumberInput="\(maxNumber)"
                         minNumberInput="\(minNumber)"

@@ -39,6 +39,12 @@ extension View {
     }
 }
 
+// Custom view extension that just applies modifiers in a block to the object it's applied to. Mostly useful for splitting up conditional
+// modifiers that should only be applied for certain OS versions.
+extension View {
+    func apply<V: View>(@ViewBuilder _ block: (Self) -> V) -> V { block(self) }
+}
+
 // Function that finds a good size for the dice in dice mode based off of the screen size. Also used in marble mode for the same purpose.
 func getDieSize(geometry: GeometryProxy) -> CGFloat {
     // Currently using some different (and somewhat rough) calculations for iPad, because the die size calculations used for iPhone
