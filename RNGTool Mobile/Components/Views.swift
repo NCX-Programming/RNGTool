@@ -17,7 +17,15 @@ struct LargeSquareAccentButton: ButtonStyle {
         configuration.label
             .font(.system(size: 20, weight:.bold, design: .rounded))
             .foregroundColor(.white)
-            .background(Color.accentColor)
+            // Apply a tasteful gradient, but unfortunately only on iOS 16.0+ (sorry).
+            .apply {
+                if #available(iOS 16.0, *) {
+                    $0.background(Color.accentColor.gradient)
+                }
+                else {
+                    $0.background(Color.accentColor)
+                }
+            }
             .cornerRadius(10)
     }
 }

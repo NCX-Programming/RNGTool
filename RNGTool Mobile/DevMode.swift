@@ -10,10 +10,12 @@ import SwiftUI
 // This view just exists to provide easy access to some features that are handy for testing. The name makes it sound wayyyyy cooler.
 struct DevMode: View {
     @EnvironmentObject var settingsData: SettingsData
-    @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
+    @SceneStorage("NumberMode.randomNumber") private var numRandomNumber = 0
+    @SceneStorage("CoinMode.coinCount") private var coinCoinCount = 0
+    @SceneStorage("CoinMode.headsCount") private var coinHeadsCount = 0
+    @SceneStorage("CoinMode.tailsCount") private var coinTailsCount = 0
     @State private var historyModeInput = ""
     @State private var historyNumberInput = ""
-    @State private var randomNumberStr = ""
     
     var body: some View {
         Form {
@@ -24,7 +26,7 @@ struct DevMode: View {
                 }
                 Text("Numbers")
                 TextField(text: $historyNumberInput, prompt: Text("Required")) {
-                    Text("Numbers")
+                    Text("Result")
                 }
                 Button(action:{
                     addHistoryEntry(settingsData: settingsData, results: historyNumberInput, mode: historyModeInput)
@@ -40,17 +42,36 @@ struct DevMode: View {
                     Text("Reset Table")
                 }
             }
-            Section(header: Text("@SceneStorage Manipulation"), footer: Text("Edit the values stored in @SceneStorage for Number Mode.")) {
-                Text("randomNumber")
-                TextField(text: $randomNumberStr, prompt: Text("Enter a number")) {
-                    Text("Numbers")
+            Section(header: Text("@SceneStorage Manipulation"), footer: Text("Edit the values stored in @SceneStorage for number mode.")) {
+                HStack() {
+                    Image(systemName: "number")
+                        .foregroundColor(.accentColor)
+                    Text("randomNumber")
                 }
-                .onChange(of: randomNumberStr) { randomNumberStr in
-                    randomNumber = Int(randomNumberStr.prefix(19)) ?? 0
+                TextField("Enter a number", value: $numRandomNumber, format: .number)
+                    .keyboardType(.numberPad)
+            }
+            Section(footer: Text("Edit the values stored in @SceneStorage for coin mode.")) {
+                HStack() {
+                    Image(systemName: "centsign.circle")
+                        .foregroundColor(.accentColor)
+                    Text("coinCount")
                 }
-                .onAppear {
-                    randomNumberStr = "\(randomNumber)"
+                TextField("Enter a number", value: $coinCoinCount, format: .number)
+                .keyboardType(.numberPad)
+                HStack() {
+                    Image(systemName: "centsign.circle")
+                        .foregroundColor(.accentColor)
+                    Text("headsCount")
                 }
+                TextField("Enter a number", value: $coinHeadsCount, format: .number)
+                .keyboardType(.numberPad)
+                HStack() {
+                    Image(systemName: "centsign.circle")
+                        .foregroundColor(.accentColor)
+                    Text("tailsCount")
+                }
+                TextField("Enter a number", value: $coinTailsCount, format: .number)
                 .keyboardType(.numberPad)
             }
         }

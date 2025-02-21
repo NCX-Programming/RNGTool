@@ -96,6 +96,8 @@ struct About: View {
     }
 }
 
+// TOOD: Revise all of this nonsense, because it doesn't look good and is awkward to have in its own sheet. It can probably all just be
+// integrated into the existing credits UI without much issue.
 struct AboutCredits: View {
     @Environment(\.openURL) var openURL
     @Environment(\.presentationMode)

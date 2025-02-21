@@ -11,9 +11,9 @@ import CoreHaptics
 struct CoinMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var headsCount: Int = 0
-    @State private var tailsCount: Int = 0
-    @State private var coinCount: Int = 0
+    @SceneStorage("CoinMode.coinCount") private var coinCount: Int = 0
+    @SceneStorage("CoinMode.headsCount") private var headsCount: Int = 0
+    @SceneStorage("CoinMode.tailsCount") private var tailsCount: Int = 0
     @State private var numCoins: Int = 1
     @State private var flipCount: Int = 0
     @State private var engine: CHHapticEngine?
@@ -38,7 +38,6 @@ struct CoinMode: View {
     }
     
     func flipCoins() {
-        if (flipCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1) }
         Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { timer in
             // Play a single haptic tap for every coin flipped. (Just like with the dice, it's more fun this way!)
             playHaptics(engine: engine, intensity: 0.75, sharpness: 0.75, count: 0.075)
@@ -84,6 +83,14 @@ struct CoinMode: View {
                         }
                     Spacer()
                 }
+                .onAppear {
+                    // Clear out remembered values if we aren't supposed to save them
+                    if (settingsData.saveModeStates == false) {
+                        coinCount = 0
+                        headsCount = 0
+                        tailsCount = 0
+                    }
+                }
                 Spacer()
                 VStack() {
                     Text("Total Coins Flipped: \(coinCount)")
@@ -98,7 +105,6 @@ struct CoinMode: View {
                     }
                     .padding(.horizontal, geometry.size.width * 0.075)
                     Button(action:{
-                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                         flipCoins()
                     }) {
                         Image(systemName: "play.fill")

@@ -129,7 +129,7 @@ struct MarbleMode: View {
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Roll the marbles")
                     Button(action:{
-                        playHaptics(engine: engine, intensity: 1, sharpness: 0.5, count: 0.1)
+                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if( settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
                         Image(systemName: "clear.fill")

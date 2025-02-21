@@ -17,8 +17,6 @@ struct SettingsView: View {
     @EnvironmentObject var settingsData: SettingsData
     #if os(iOS)
     @State private var engine: CHHapticEngine?
-    @State private var maxNumberInput = ""
-    @State private var minNumberInput = ""
     #elseif os(watchOS)
     @State private var kbReturnType = 0
     @State private var keyboardNumber = 0
@@ -33,26 +31,11 @@ struct SettingsView: View {
             Section(header: Text("Number Mode"), footer: Text("The default maximum and minimum numbers when using Number Mode.")) {
                 #if os(iOS)
                 Text("Default Maximum Number")
-                TextField(text: $maxNumberInput, prompt: Text("Required")) {
-                    Text("Max Number")
-                }
-                .onChange(of: maxNumberInput) { maxNumberInput in
-                    settingsData.maxNumberDefault = Int(maxNumberInput) ?? 100
-                }
+                TextField("Required", value: $settingsData.maxNumberDefault, format: .number)
                 .keyboardType(.numberPad)
                 Text("Default Minimum Number")
-                TextField(text: $minNumberInput, prompt: Text("Required")) {
-                    Text("Min Number")
-                }
-                .onChange(of: minNumberInput) { minNumberInput in
-                    settingsData.minNumberDefault = Int(minNumberInput) ?? 0
-                }
+                TextField("Required", value: $settingsData.minNumberDefault, format: .number)
                 .keyboardType(.numberPad)
-                
-                .onAppear {
-                    maxNumberInput = "\(settingsData.maxNumberDefault)"
-                    minNumberInput = "\(settingsData.minNumberDefault)"
-                }
                 #elseif os(watchOS)
                 // Use the custom watchOS number keyboard for easier number input, since the default keyboard is absolutely awful for just
                 // entering numbers.
@@ -104,13 +87,8 @@ struct SettingsView: View {
                 }
                 .alert("Confirm Reset", isPresented: $showResetPrompt, actions: {
                     Button("Confirm", role: .destructive) {
-                        #if os(iOS)
-                        maxNumberInput = "100"
-                        minNumberInput = "0"
-                        #elseif os(watchOS)
                         settingsData.maxNumberDefault = 100
                         settingsData.minNumberDefault = 0
-                        #endif
                         showResetPrompt = false
                     }
                 }, message: {

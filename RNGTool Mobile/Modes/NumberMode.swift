@@ -16,8 +16,6 @@ struct NumberMode: View {
     @State private var minNumber: Int = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset: Bool = false
-    @State private var maxNumberInput: String = ""
-    @State private var minNumberInput: String = ""
     // Enum for the @FocusState used to dismiss the keyboard when a button is pressed
     enum Field {
         case maxNumber
@@ -26,8 +24,8 @@ struct NumberMode: View {
     @FocusState private var fieldFocused: Field?
     
     func resetGen() {
-        maxNumberInput = "\(settingsData.maxNumberDefault)"
-        minNumberInput = "\(settingsData.minNumberDefault)"
+        maxNumber = settingsData.maxNumberDefault
+        minNumber = settingsData.minNumberDefault
         if (!reduceMotion && settingsData.playAnimations) { withAnimation { randomNumber = 0 } } else { randomNumber = 0 }
         confirmReset = false
     }
@@ -40,9 +38,7 @@ struct NumberMode: View {
                     // the buttons, and not truncating.
                     .maxSizeText()
                     .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
-                    .onAppear {
-                        if (settingsData.saveModeStates == false) { randomNumber = 0 }
-                    }
+                    .onAppear { if (settingsData.saveModeStates == false) { randomNumber = 0 } } // Clear on load if we aren't meant to save
                     .apply {
                         if #available(iOS 17.0, *) {
                             $0.contentTransition(.numericText(value: Double(randomNumber)))
@@ -62,25 +58,19 @@ struct NumberMode: View {
                 Spacer()
                 VStack() {
                     Text("Maximum")
-                    TextField("Enter a number", text: $maxNumberInput)
+                    TextField("Enter a number", value: $maxNumber, format: .number)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .focused($fieldFocused, equals: .maxNumber)
-                        .onChange(of: maxNumberInput) { maxNumberInput in
-                            maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
-                        }
-                        .onAppear { maxNumberInput = "\(settingsData.maxNumberDefault)" } // Load default maximum
+                        .onAppear { maxNumber = settingsData.maxNumberDefault } // Load default maximum
                     Text("Minimum")
-                    TextField("Enter a number", text: $minNumberInput)
+                    TextField("Enter a number", value: $minNumber, format: .number)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .focused($fieldFocused, equals: .minNumber)
-                        .onChange(of: minNumberInput) { minNumberInput in
-                            minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
-                        }
-                        .onAppear { minNumberInput = "\(settingsData.minNumberDefault)" } // Load default minimum
+                        .onAppear { minNumber = settingsData.minNumberDefault } // Load default minimum
                         .padding(.bottom, 10)
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
@@ -89,9 +79,6 @@ struct NumberMode: View {
                         if (!reduceMotion && settingsData.playAnimations) {
                             withAnimation { randomNumber = Int.random(in: minNumber...maxNumber) } }
                         else { randomNumber = Int.random(in: minNumber...maxNumber) }
-                        // This fixes the displayed numbers if they were invalid
-                        maxNumberInput="\(maxNumber)"
-                        minNumberInput="\(minNumber)"
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
                         Image(systemName: "play.fill")
