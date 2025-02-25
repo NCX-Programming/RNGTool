@@ -263,11 +263,11 @@
 		37AB5BB6276FE42400F753FC /* Modes */ = {
 			isa = PBXGroup;
 			children = (
-				37FC9814276FEAD20040BFB9 /* DiceMode.swift */,
+				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
 				37E7DC5C2D619ABC0054D341 /* CoinMode.swift */,
+				37FC9814276FEAD20040BFB9 /* DiceMode.swift */,
 				37FC9817276FEE600040BFB9 /* CardMode.swift */,
 				37FC9819276FF1D20040BFB9 /* MarbleMode.swift */,
-				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -644,7 +644,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -685,7 +685,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;

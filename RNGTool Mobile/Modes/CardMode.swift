@@ -106,7 +106,7 @@ struct CardMode: View {
                             ForEach(0..<cardsToDisplay, id: \.self) { index in
                                 Image(cardImages[index]).resizable()
                                     .frame(width: 180, height: 252)
-                                    .offset(x: CGFloat((geometry.size.width * 0.085) * CGFloat(index)),y: 0)
+                                    .offset(x: CGFloat((geometry.size.width * 0.085) * CGFloat(index)), y: 0)
                             }
                         }
                     }
@@ -120,7 +120,15 @@ struct CardMode: View {
                     .onTapGesture { drawCards() }
                     .padding(.trailing, CGFloat((geometry.size.width * 0.085) * CGFloat((cardsToDisplay - 1))))
                     Text(pointValueStr)
-                        .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
+                        .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
+                        .apply {
+                            if #available(iOS 16.0, *) {
+                                $0.contentTransition(.numericText())
+                            }
+                            else {
+                                $0.animation(reduceMotion ? .none : .easeInOut(duration: 0.25), value: pointValueStr)
+                            }
+                        }
                         .padding(.bottom, 5)
                     Spacer()
                 }
