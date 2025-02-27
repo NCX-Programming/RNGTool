@@ -17,34 +17,33 @@ extension String.StringInterpolation {
 struct NumberMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var confirmReset = false
-    @State private var showMaxEditor = false
-    @State private var showMinEditor = false
-    @State private var randomNumber = 0
-    @State private var maxNumberInput = ""
-    @State private var minNumberInput = ""
-    @State private var maxNumber = 0
-    @State private var minNumber = 0
+    @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
+    @State private var confirmReset: Bool = false
+    @State private var maxNumber: Int = 0
+    @State private var minNumber: Int = 0
     
     func resetGen() {
         maxNumber = 0
-        maxNumberInput = "\(settingsData.maxNumberDefault)"
         minNumber = 0
-        minNumberInput = "\(settingsData.minNumberDefault)"
-        randomNumber = 0
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            showMaxEditor = false
-            showMinEditor = false
-        }
+        if (!reduceMotion && settingsData.playAnimations) { withAnimation { randomNumber = 0 } } else { randomNumber = 0 }
         confirmReset = false
     }
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading){
+        GeometryReader { geometry in
+            VStack() {
                 Text("\(randomNumber)")
-                    .font(.system(size: 48))
-                    .padding(.bottom, 5)
+                    .maxSizeText()
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
+                    .apply {
+                        if #available(macOS 14.0, *) {
+                            $0.contentTransition(.numericText(value: Double(randomNumber)))
+                        }
+                        else if #available(macOS 13.0, *) {
+                            $0.contentTransition(.numericText())
+                        }
+                    }
+                    .onAppear { if (settingsData.saveModeStates == false) { randomNumber = 0 } } // Clear on load if we aren't meant to save
                     .contextMenu {
                         Button(action: {
                             copyToClipboard(item: "\(randomNumber)")
@@ -52,54 +51,34 @@ struct NumberMode: View {
                             Text("Copy")
                         }
                     }
-                Group() {
-                    Text("Maximum Number: \(maxNumberInput). Click to change.")
-                        .onTapGesture {
-                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
-                                showMaxEditor.toggle()
-                            }
-                        }
-                        .help("Click to set a custom maximum number")
-                        .font(.title2)
-                        .onAppear{
-                            maxNumberInput="\(settingsData.maxNumberDefault)"
-                        }
-                    if(showMaxEditor){
-                        TextField("Enter a number", text: $maxNumberInput)
+                Spacer()
+                VStack() {
+                    HStack() {
+                        Text("Maximum: ")
+                            .onAppear { maxNumber = settingsData.maxNumberDefault } // Load default maximum
+                        TextField("Enter a number", value: $maxNumber, format: .number)
                             .frame(width: 300)
                     }
-                    Divider()
-                    Text("Minimum Number: \(settingsData.minNumberDefault). Click to change.")
-                        .onTapGesture {
-                            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.3)) {
-                                showMinEditor.toggle()
-                            }
-                        }
-                        .help("Click to set a custom minimum number")
-                        .font(.title2)
-                        .onAppear{
-                            minNumberInput="\(settingsData.minNumberDefault)"
-                        }
-                    if(showMinEditor){
-                        TextField("Enter a number", text: $minNumberInput)
+                    HStack() {
+                        Text("Minimum: ")
+                            .onAppear { minNumber = settingsData.minNumberDefault } // Load default minimum
+                        TextField("Enter a number", value: $minNumber, format: .number)
                             .frame(width: 300)
                     }
-                    Divider()
-                }
-                HStack {
+                    .padding(.bottom, 10)
                     Button(action:{
-                        maxNumber = Int(maxNumberInput.prefix(19)) ?? settingsData.maxNumberDefault
-                        minNumber = Int(minNumberInput.prefix(19)) ?? settingsData.minNumberDefault
-                        if (maxNumber <= minNumber) { minNumber = settingsData.minNumberDefault }
-                        randomNumber = Int.random(in: minNumber...maxNumber)
-                        maxNumberInput="\(maxNumber)"
-                        minNumberInput="\(minNumber)"
+                        if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
+                        if (!reduceMotion && settingsData.playAnimations) {
+                            withAnimation { randomNumber = Int.random(in: minNumber...maxNumber) } }
+                        else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
                         Image(systemName: "play.fill")
-                            
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
                     }
                     .help("Generate a number")
+                    .buttonStyle(LargeSquareAccentButton())
                     Button(action:{
                         if(settingsData.confirmGenResets){
                             confirmReset = true
@@ -109,29 +88,26 @@ struct NumberMode: View {
                         }
                     }) {
                         Image(systemName: "clear.fill")
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
                     }
                     .help("Reset custom values and output")
-                    .foregroundColor(.red)
-                    .alert(isPresented: $confirmReset){
-                        Alert(
-                            title: Text("Confirm Reset"),
-                            message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                            primaryButton: .default(Text("Confirm")){
-                                resetGen()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
+                            resetGen()
+                        }
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
+                    .padding(.bottom, 10)
                 }
             }
-            .padding(.leading, 12)
         }
         .navigationTitle("Numbers")
     }
 }
 
-struct NumberMode_Previews: PreviewProvider {
-    static var previews: some View {
-        NumberMode().environmentObject(SettingsData())
-    }
+#Preview {
+    NumberMode().environmentObject(SettingsData())
 }

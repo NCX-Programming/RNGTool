@@ -10,137 +10,127 @@ import SwiftUI
 struct DiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var numOfDice = 1
-    @State private var confirmReset = false
-    @State private var randomNumbers = [0]
-    @State private var randomNumberStr = ""
-    @State private var numsInArray = 0
-    @State private var diceImages = ["d1"]
-    @State private var rollCount = 0
-    @State private var showRollHint = true
+    @State private var numDice: Int = 1
+    @State private var confirmReset: Bool = false
+    @State private var randomNumbers: [Int] = [0]
+    @State private var numsInArray: Int = 0
+    @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
+    @State private var rollCount: Int = 0
+    @State private var showRollHint: Bool = true
     
     func resetGen() {
-        randomNumberStr = ""
-        numOfDice = 1
+        numDice = 1
         randomNumbers.removeAll()
         diceImages[0] = "d1"
         confirmReset = false
     }
     
+    // Roll function that generates a number for every die being shown in the range 1-6, and then sets each shown die to the image that
+    // corresponds with the number rolled for it.
     func roll() {
         randomNumbers.removeAll()
-        for _ in 1...numOfDice {
+        for _ in 1...numDice {
             randomNumbers.append(Int.random(in: 1...6))
         }
         for n in 0..<randomNumbers.count {
-            if(numOfDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
+            if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
-        self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
+    }
+    
+    // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
+    // repeatedly.
+    func startRoll() {
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+        if (settingsData.playAnimations && !reduceMotion) {
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                self.roll()
+                self.rollCount += 1
+                if (rollCount == 10) {
+                    timer.invalidate(); self.rollCount = 0
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                }
+            }
+        }
+        else {
+            self.roll()
+            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+        }
     }
     
     var body: some View {
         GeometryReader { geometry in
-        ScrollView{
-            VStack(alignment: .leading) {
-                HStack(){
-                    ForEach(0..<numOfDice, id: \.self) { index in
-                      Image(diceImages[index])
-                        .resizable()
-                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
-                    }
-                }
-                .padding(.top, 10)
-                .contextMenu {
-                    Button(action: {
-                        copyToClipboard(item: "\(randomNumbers)")
-                    }) {
-                        Text("Copy")
-                    }
-                }
-                .onTapGesture {
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        self.showRollHint = false
-                    }
-                    if(settingsData.playAnimations && !reduceMotion) {
-                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                            self.roll()
-                            self.rollCount += 1
-                            if(rollCount == 10) {
-                                timer.invalidate(); self.rollCount = 0
-                                addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+            VStack() {
+                VStack() {
+                    VStack() {
+                        // Draw the dice in a 6x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
+                        // for that row in it.
+                        ForEach(0..<Int((Double(numDice) / 6.0).rounded(.up)), id: \.self) { index in
+                            HStack() {
+                                ForEach((6 * index)..<(numDice > (6 * (index + 1)) ? numDice - (numDice - (6 * (index + 1))) : numDice), id: \.self) { innerIndex in
+                                    Image(diceImages[innerIndex])
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
+                                }
                             }
                         }
                     }
-                    else {
-                        self.roll()
-                        addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
-                    }
-                }
-                if(showRollHint && settingsData.showModeHints) {
-                    Text("Click the dice to roll")
-                        .foregroundColor(.secondary)
-                }
-                Text(randomNumberStr)
-                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
-                    .font(.title2)
-                    .padding(.bottom, 5)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
                     .contextMenu {
                         Button(action: {
-                            var copyString = "\(randomNumbers)"
-                            copyString.removeAll(where: { removeCharacters.contains($0) } )
-                            copyToClipboard(item: copyString)
+                            copyToClipboard(item: "\(randomNumbers)")
                         }) {
                             Text("Copy")
                         }
                     }
-                Text("Number of dice")
-                    .font(.title3)
-                // The seemingly unrelated code below is together because they must have the same max value
-                Picker("", selection: $numOfDice){
-                    ForEach(1...6, id: \.self) { index in
-                        Text("\(index)").tag(index)
-                    }
+                    .onTapGesture { startRoll() }
                 }
-                .frame(width: 200)
-                .onAppear{
-                    for _ in 1...6{
-                        diceImages.append("d1")
+                Spacer()
+                VStack() {
+                    if(showRollHint && settingsData.showModeHints) {
+                        Text("Click the dice to roll")
+                            .foregroundColor(.secondary)
                     }
-                }
-                Divider()
-                Button(action:{
-                    if(settingsData.confirmGenResets){
-                        confirmReset = true
+                    Picker("Number of dice:", selection: $numDice){
+                        ForEach(1...18, id: \.self) { index in
+                            Text("\(index)").tag(index)
+                        }
                     }
-                    else {
-                        resetGen()
+                    .frame(width: 300)
+                    .padding(.bottom, 10)
+                    Button(action:{
+                        startRoll()
+                    }) {
+                        Image(systemName: "play.fill")
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
                     }
-                }) {
-                    Image(systemName: "clear.fill")
-                }
-                .help("Reset number of dice and output")
-                .foregroundColor(.red)
-                .alert(isPresented: $confirmReset){
-                    Alert(
-                        title: Text("Confirm Reset"),
-                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                        primaryButton: .default(Text("Confirm")){
+                    .help("Roll the dice")
+                    .buttonStyle(LargeSquareAccentButton())
+                    Button(action:{
+                        if (settingsData.confirmGenResets) { confirmReset = true }
+                        else { resetGen() }
+                    }) {
+                        Image(systemName: "clear.fill")
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
+                    }
+                    .help("Reset the dice roll")
+                    .buttonStyle(LargeSquareAccentButton())
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
                             resetGen()
-                        },
-                        secondaryButton: .cancel()
-                    )
+                        }
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
+                    .padding(.bottom, 10)
                 }
             }
-            .padding(.leading, 12)
-        }
         }
         .navigationTitle("Dice")
     }
 }
 
-struct DiceMode_Previews: PreviewProvider {
-    static var previews: some View {
-        DiceMode().environmentObject(SettingsData())
-    }
+#Preview {
+    DiceMode().environmentObject(SettingsData())
 }

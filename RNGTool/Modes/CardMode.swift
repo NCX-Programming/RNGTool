@@ -10,18 +10,17 @@ import SwiftUI
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var randomNumberStr = ""
-    @State private var randomNumbers = [0]
-    @State private var pointValueStr = ""
-    @State private var pointValues = [0]
-    @State private var numOfCards = 1
-    @State private var cardsToDisplay = 1
-    @State private var confirmReset = false
-    @State private var cardImages = ["c1"]
-    @State private var drawCount = 0
+    @State private var randomNumbers: [Int] = [0]
+    @State private var pointValueStr: String = ""
+    @State private var pointValues: [Int] = [0]
+    @State private var numCards: Int = 1
+    @State private var cardsToDisplay: Int = 1
+    @State private var confirmReset: Bool = false
+    @State private var cardImages: [String] = Array(repeating: "c1", count: 10)
+    @State private var showDrawHint: Bool = true
+    @State private var drawCount: Int = 0
     
     func resetGen() {
-        randomNumberStr = ""
         pointValueStr = ""
         if(settingsData.playAnimations && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
@@ -30,136 +29,152 @@ struct CardMode: View {
             }
         }
         else { cardsToDisplay = 1 }
-        numOfCards = 1
+        numCards = 1
         randomNumbers.removeAll()
         cardImages[0] = "c1"
         confirmReset = false
     }
     
+    func getCards() {
+        for n in 0..<numCards {
+            switch randomNumbers[n] {
+                case 1:
+                    cardImages[n]="cA"
+                case 11:
+                    cardImages[n]="cJ"
+                case 12:
+                    cardImages[n]="cQ"
+                case 13:
+                    cardImages[n]="cK"
+                default:
+                    cardImages[n]="c\(randomNumbers[n])"
+            }
+        }
+    }
+    
+    func drawCards() {
+        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+            self.showDrawHint = false
+        }
+        randomNumbers.removeAll()
+        for _ in 1...10 {
+            randomNumbers.append(Int.random(in: 1...13))
+        }
+        if(settingsData.showPoints) {
+            pointValues.removeAll()
+            for n in 0..<numCards {
+                if (randomNumbers[n] == 1) {
+                    pointValues.append(settingsData.aceValue)
+                }
+                else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {
+                    pointValues.append(randomNumbers[n])
+                }
+                else {
+                    pointValues.append(10)
+                }
+            }
+            self.pointValueStr = "Point value(s): \(pointValues)"
+            pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
+        }
+        else {
+            self.pointValueStr = ""
+        }
+        cardsToDisplay = 1
+        self.getCards()
+        if(settingsData.playAnimations && !reduceMotion) {
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                if(cardsToDisplay < numCards) { cardsToDisplay += 1 }
+                self.drawCount += 1
+                if(drawCount == numCards) { timer.invalidate(); self.drawCount = 0 }
+            }
+        }
+        else { cardsToDisplay = numCards }
+        addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
+    }
+    
     var body: some View {
         GeometryReader { geometry in
-        ScrollView {
-            VStack(alignment: .leading) {
-                Group {
-                    Text("Number of cards")
-                        .font(.title3)
-                    // The seemingly unrelated code below is together because they must have the same max value
-                    Picker("", selection: $numOfCards) {
-                        ForEach(1...7, id: \.self) { index in
+            VStack() {
+                VStack() {
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        ZStack(){
+                            ForEach(0..<cardsToDisplay, id: \.self) { index in
+                                Image(cardImages[index]).resizable()
+                                    .frame(width: 180, height: 252)
+                                    .offset(x: CGFloat((geometry.size.width * 0.085) * CGFloat(index)), y: 0)
+                            }
+                        }
+                    }
+                    .contextMenu {
+                        Button(action: {
+                            copyToClipboard(item: "\(randomNumbers)")
+                        }) {
+                            Label("Copy", systemImage: "doc.on.doc")
+                        }
+                    }
+                    .onTapGesture { drawCards() }
+                    .padding(.trailing, CGFloat((geometry.size.width * 0.085) * CGFloat((cardsToDisplay - 1))))
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
+                    Text(pointValueStr)
+                        .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
+                        .apply {
+                            if #available(macOS 13.0, *) {
+                                $0.contentTransition(.numericText())
+                            }
+                            else {
+                                $0.animation(reduceMotion ? .none : .easeInOut(duration: 0.25), value: pointValueStr)
+                            }
+                        }
+                    Spacer()
+                }
+                Spacer()
+                VStack() {
+                    if (showDrawHint && settingsData.showModeHints) {
+                        Text("Tap the card to draw a hand")
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                    }
+                    Picker("Number of cards:", selection: $numCards) {
+                        ForEach(1...10, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
-                    .frame(width: 250)
-                    .onAppear {
-                        for _ in 1...7{
-                            cardImages.append("c1")
-                        }
-                    }
-                }
-                Divider()
-                Button(action:{
-                    if(settingsData.confirmGenResets){
-                        confirmReset = true
-                    }
-                    else {
-                        resetGen()
-                    }
-                }) {
-                    Image(systemName: "clear.fill")
-                }
-                .help("Reset custom values and output")
-                .foregroundColor(.red)
-                .alert(isPresented: $confirmReset){
-                    Alert(
-                        title: Text("Confirm Reset"),
-                        message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                        primaryButton: .default(Text("Confirm")){
-                            resetGen()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-                Text(pointValueStr)
-                    .animation(reduceMotion ? .none : .easeInOut(duration: 0.5))
-                    .font(.title2)
-                    .padding(.bottom, 5)
-                HStack() {
-                    ZStack(){
-                        ForEach(0..<cardsToDisplay, id: \.self) { index in
-                            Image(cardImages[index]).resizable()
-                                .frame(width: 180, height: 252)
-                                .offset(x: CGFloat(40*index),y: 0)
-                        }
-                    }
-                }
-                .contextMenu {
-                    Button(action: {
-                        copyToClipboard(item: randomNumberStr)
+                    .frame(width: 300)
+                    .padding(.bottom, 10)
+                    Button(action:{
+                        drawCards()
                     }) {
-                        Text("Copy")
+                        Image(systemName: "play.fill")
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
                     }
-                }
-                .onTapGesture {
-                    randomNumbers.removeAll()
-                    for _ in 0..<numOfCards {
-                        randomNumbers.append(Int.random(in: 1...13))
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Draw a hand")
+                    Button(action:{
+                        if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
+                    }) {
+                        Image(systemName: "clear.fill")
+                            .padding(.horizontal, geometry.size.width * 0.2)
+                            .padding(.vertical, 10)
                     }
-                    self.randomNumberStr = "\(randomNumbers)"
-                    randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
-                    if(settingsData.showPoints) {
-                        pointValues.removeAll()
-                        for n in 0..<numOfCards {
-                            if(randomNumbers[n] == 1) {
-                                pointValues.append(settingsData.aceValue)
-                            }
-                            else if(randomNumbers[n] > 1 && randomNumbers[n] < 11) {
-                                pointValues.append(randomNumbers[n])
-                            }
-                            else {
-                                pointValues.append(10)
-                            }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Reset drawn hand")
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
+                            resetGen()
                         }
-                        self.pointValueStr = "Point value(s): \(pointValues)"
-                        pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
-                    }
-                    else {
-                        self.pointValueStr = ""
-                    }
-                    cardsToDisplay = 1
-                    for n in 0..<numOfCards{
-                        switch randomNumbers[n]{
-                        case 1:
-                            cardImages[n] = "cA"
-                        case 11:
-                            cardImages[n] = "cJ"
-                        case 12:
-                            cardImages[n] = "cQ"
-                        case 13:
-                            cardImages[n] = "cK"
-                        default:
-                            cardImages[n] = "c\(randomNumbers[n])"
-                        }
-                    }
-                    if(settingsData.playAnimations && !reduceMotion) {
-                        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                            if(drawCount == numOfCards) { timer.invalidate(); self.drawCount = 0 }
-                            if(cardsToDisplay < numOfCards) { cardsToDisplay += 1 }
-                            self.drawCount += 1
-                        }
-                    }
-                    else { cardsToDisplay = numOfCards }
-                    addHistoryEntry(settingsData: settingsData, results: randomNumberStr, mode: "Card Mode")
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
+                    .padding(.bottom, 10)
                 }
             }
-            .padding(.leading, 12)
-        }
         }
         .navigationTitle("Cards")
     }
 }
 
-struct CardMode_Previews: PreviewProvider {
-    static var previews: some View {
-        CardMode().environmentObject(SettingsData())
-    }
+#Preview {
+    CardMode().environmentObject(SettingsData())
 }

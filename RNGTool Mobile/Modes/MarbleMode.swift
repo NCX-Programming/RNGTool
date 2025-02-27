@@ -15,7 +15,6 @@ struct MarbleMode: View {
     @State private var engine: CHHapticEngine?
     @State private var numMarbles: Int = 1
     @State private var rollCount: Int = 0
-    @State private var randomNumbers: [Int] = Array(repeating: 0, count: 9)
     @State private var randomLetters: [String] = Array(repeating: "A", count: 9)
     @State private var confirmReset: Bool = false
     @State private var showRollHint: Bool = true
@@ -23,20 +22,14 @@ struct MarbleMode: View {
     
     func resetGen() {
         numMarbles = 1
-        for index in 0..<randomNumbers.count {
-            randomNumbers[index] = 0
-        }
         randomLetters[0] = "A"
         confirmReset = false
     }
 
     func roll() {
         randomLetters.removeAll()
-        for index in 0..<numMarbles {
-            randomNumbers[index] = Int.random(in: 0...25)
-        }
-        for n in 0..<randomNumbers.count {
-            if(numMarbles > n) { randomLetters.append("\(letters[randomNumbers[n]])") }
+        for _ in 0..<numMarbles {
+            randomLetters.append(letters[Int.random(in: 0...25)])
         }
     }
     
@@ -71,7 +64,7 @@ struct MarbleMode: View {
                             HStack() {
                                 ForEach((3 * index)..<(numMarbles > (3 * (index + 1)) ? numMarbles - (numMarbles - (3 * (index + 1))) : numMarbles), id: \.self) { innerIndex in
                                     ZStack() {
-                                        Text("\(letters[randomNumbers[innerIndex]])")
+                                        Text("\(randomLetters[innerIndex])")
                                             // Font calculations are split because using a larger portion of the screen width on iPhone
                                             // produces a better result compared to iPad.
                                             .font(.system(size: (UIDevice.current.userInterfaceIdiom == .pad) ? (geometry.size.width / 14) : (geometry.size.width / 10)))
@@ -127,7 +120,7 @@ struct MarbleMode: View {
                             .padding(.vertical, 10)
                     }
                     .buttonStyle(LargeSquareAccentButton())
-                    .help("Roll the marbles")
+                    .help("Roll some marbles")
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if( settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }

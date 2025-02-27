@@ -65,7 +65,7 @@ struct CardMode: View {
         if(settingsData.showPoints) {
             pointValues.removeAll()
             for n in 0..<numCards {
-                if(randomNumbers[n] == 1) {
+                if (randomNumbers[n] == 1) {
                     pointValues.append(settingsData.aceValue)
                 }
                 else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {

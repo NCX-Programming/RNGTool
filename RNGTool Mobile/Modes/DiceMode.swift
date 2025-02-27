@@ -15,13 +15,11 @@ struct DiceMode: View {
     @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
     @State private var randomNumbers: [Int] = [0]
-    @State private var randomNumberStr: String = ""
     @State private var diceImages: [String] = Array(repeating: "d1", count: 9)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
     
     func resetGen() {
-        randomNumberStr = ""
         numDice = 1
         randomNumbers.removeAll()
         diceImages[0] = "d1"
@@ -38,8 +36,6 @@ struct DiceMode: View {
         for n in 0..<randomNumbers.count{
             if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
-        self.randomNumberStr = "Your random number(s): \(randomNumbers)"
-        randomNumberStr.removeAll(where: { removeCharacters.contains($0) } )
     }
     
     // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled

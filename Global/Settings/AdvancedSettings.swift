@@ -30,11 +30,10 @@ struct AdvancedSettings: View {
             Section(header: Text("Updates")) {
                 Toggle("Check for updates on startup", isOn: $settingsData.checkUpdatesOnStartup)
             }
-            #else
+            #endif
             Section(header: Text("Save Mode States"), footer: Text("Whether or not the random numbers generated will be saved between launches.")) {
                 Toggle("Save generator states", isOn: $settingsData.saveModeStates)
             }
-            #endif
             Section(header: Text("Settings Reset"),footer: Text("This will reset all of RNGTool's settings to their default values!")) {
                 Button(action:{
                     #if os(iOS)
