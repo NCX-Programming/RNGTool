@@ -18,13 +18,6 @@ struct RNGToolCommands: Commands {
                 OpenWindows.Update.open()
             }
         }
-        CommandGroup(before: CommandGroupPlacement.sidebar) {
-            Button("Show History") {
-                OpenWindows.History.open()
-            }
-            .keyboardShortcut("h", modifiers: [.command, .shift])
-            Divider()
-        }
         #endif
     }
 }

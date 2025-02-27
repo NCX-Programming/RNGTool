@@ -10,61 +10,31 @@ import Foundation
 
 struct History: View {
     @EnvironmentObject var settingsData: SettingsData
+    @State private var selectedEntries = Set<HistoryTable.ID>()
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("ID")
-                            .foregroundColor(.secondary)
-                        Divider()
-                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                            Text("\(index)")
-                                .padding(.bottom, 3)
+        // History on macOS, now with 100% more actual table! This looks much much better.
+        Table(settingsData.historyTable, selection: $selectedEntries) {
+            TableColumn("Mode Used") { item in
+                Text(item.modeUsed)
+                    .contextMenu {
+                        Button("Copy") {
+                            copyToClipboard(item: item.modeUsed)
                         }
-                        Spacer()
                     }
-                    .frame(width: 50)
-                    VStack(alignment: .leading) {
-                        Text("Mode Used")
-                            .foregroundColor(.secondary)
-                        Divider()
-                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                            Text("\(settingsData.historyTable[index].modeUsed)")
-                                .padding(.bottom, 3)
+            }
+            TableColumn("Result(s)") { item in
+                Text(item.numbers)
+                    .contextMenu {
+                        Button("Copy") {
+                            copyToClipboard(item: item.numbers)
                         }
-                        Spacer()
                     }
-                    .frame(width: 150)
-                    VStack(alignment: .leading) {
-                        Text("Result(s)")
-                            .foregroundColor(.secondary)
-                        Divider()
-                        ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                            Text("\(settingsData.historyTable[index].numbers)")
-                                .padding(.bottom, 3)
-                                .contextMenu {
-                                    Button(action: {
-                                        copyToClipboard(item: settingsData.historyTable[index].numbers)
-                                    }) {
-                                        Text("Copy")
-                                    }
-                                }
-                        }
-                        Spacer()
-                    }
-                    .frame(width: 200)
-                }
-                .padding(.top, 6)
-                .padding(.leading, 8)
             }
         }
     }
 }
 
-struct History_Previews: PreviewProvider {
-    static var previews: some View {
-        History().environmentObject(SettingsData())
-    }
+#Preview {
+    History().environmentObject(SettingsData())
 }

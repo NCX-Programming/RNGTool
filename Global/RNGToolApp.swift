@@ -24,11 +24,6 @@ struct RNGToolApp: App {
         Settings {
             SettingsView().environmentObject(settingsData)
         }
-        WindowGroup("History") {
-            History().environmentObject(settingsData)
-                .frame(width: 400, height: 200)
-                .frame(maxWidth: 400, maxHeight: 200)
-        }.handlesExternalEvents(matching: Set(arrayLiteral: "History"))
         WindowGroup("Update") {
             UpdateCheck()
                 .frame(width: 300, height: 100)
@@ -40,7 +35,6 @@ struct RNGToolApp: App {
 
 #if os(macOS)
 enum OpenWindows: String, CaseIterable {
-    case History = "History"
     case Update = "Update"
 
     func open(){

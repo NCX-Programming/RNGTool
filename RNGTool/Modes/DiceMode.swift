@@ -13,7 +13,6 @@ struct DiceMode: View {
     @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
     @State private var randomNumbers: [Int] = [0]
-    @State private var numsInArray: Int = 0
     @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
