@@ -15,7 +15,7 @@ struct NumberMode: View {
     @SceneStorage("NumberMode.maxNumber") private var maxNumber = 0
     @SceneStorage("NumberMode.minNumber") private var minNumber = 0
     @State private var confirmReset = false
-    @State private var showRollHint = true
+    @State private var showHint = true
     @State private var showNumKeyboard = false
     @State private var keyboardNumber = 0
     @State private var kbReturnType = 0
@@ -28,81 +28,76 @@ struct NumberMode: View {
     }
 
     var body: some View {
-        ScrollView {
-            Text("\(randomNumber)")
-                .font(.title)
-                .onTapGesture {
-                    WKInterfaceDevice.current().play(.click)
-                    withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-                        self.showRollHint = false
-                    }
-                    randomNumber = Int.random(in: minNumber...maxNumber)
-                }
-            if(showRollHint && settingsData.showModeHints) {
-                Text("Tap number to generate")
-                    .foregroundColor(.secondary)
-            }
-            Spacer()
-            VStack() {
-                Button(action: {
-                    kbReturnType = 1
-                    keyboardNumber = maxNumber
-                    showNumKeyboard = true
-                }) {
-                    Text("Max: \(maxNumber)")
-                }
-            }
-            VStack() {
-                Button(action: {
-                    kbReturnType = 2
-                    keyboardNumber = minNumber
-                    showNumKeyboard = true
-                }) {
-                    Text("Min: \(minNumber)")
-                }
-            }
-            Button(action:{
-                if(settingsData.confirmGenResets){
-                    confirmReset = true
-                }
-                else {
-                    resetGen()
-                }
-            }) {
-                Image(systemName: "clear.fill")
-            }
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.red)
-            .alert(isPresented: $confirmReset){
-                Alert(
-                    title: Text("Confirm Reset"),
-                    message: Text("Are you sure you want to reset the generator? This cannot be undone."),
-                    primaryButton: .default(Text("Confirm")){
-                        resetGen()
-                    },
-                    secondaryButton: .cancel()
-                )
-            }
-            .sheet(isPresented: $showNumKeyboard) {
-                NumKeyboard(targetNumber: $keyboardNumber)
-                .toolbar(content: {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") { self.showNumKeyboard = false }
-                    }
-                })
-                .toolbar(content: {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done") {
-                            if(kbReturnType == 1) {
-                                maxNumber = keyboardNumber
-                            }
-                            else if(kbReturnType == 2) {
-                                minNumber = keyboardNumber
-                            }
-                            self.showNumKeyboard = false
+        GeometryReader { geometry in
+            ScrollView {
+                Text("\(randomNumber)")
+                    .maxSizeText()
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.5)
+                    .onTapGesture {
+                        WKInterfaceDevice.current().play(.click)
+                        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
+                            self.showHint = false
                         }
+                        randomNumber = Int.random(in: minNumber...maxNumber)
                     }
+                if(showHint && settingsData.showModeHints) {
+                    Text("Tap number to generate")
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                VStack() {
+                    Button(action: {
+                        kbReturnType = 1
+                        keyboardNumber = maxNumber
+                        showNumKeyboard = true
+                    }) {
+                        Text("Max: \(maxNumber)")
+                    }
+                }
+                VStack() {
+                    Button(action: {
+                        kbReturnType = 2
+                        keyboardNumber = minNumber
+                        showNumKeyboard = true
+                    }) {
+                        Text("Min: \(minNumber)")
+                    }
+                }
+                Button(action:{
+                    if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
+                }) {
+                    Image(systemName: "clear.fill")
+                }
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .foregroundColor(.red)
+                .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                    Button("Confirm", role: .destructive) {
+                        resetGen()
+                    }
+                }, message: {
+                    Text("Are you sure you want to reset the generator?")
                 })
+                .sheet(isPresented: $showNumKeyboard) {
+                    NumKeyboard(targetNumber: $keyboardNumber)
+                        .toolbar(content: {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel") { self.showNumKeyboard = false }
+                            }
+                        })
+                        .toolbar(content: {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Done") {
+                                    if(kbReturnType == 1) {
+                                        maxNumber = keyboardNumber
+                                    }
+                                    else if(kbReturnType == 2) {
+                                        minNumber = keyboardNumber
+                                    }
+                                    self.showNumKeyboard = false
+                                }
+                            }
+                        })
+                }
             }
         }
         .navigationTitle("Numbers")
@@ -116,8 +111,6 @@ struct NumberMode: View {
     }
 }
 
-struct NumberMode_Previews: PreviewProvider {
-    static var previews: some View {
-        NumberMode().environmentObject(SettingsData())
-    }
+#Preview {
+    NumberMode().environmentObject(SettingsData())
 }

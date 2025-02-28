@@ -115,7 +115,7 @@ struct NumKeyboard: View {
                         }
                     }
                 }
-                .font(.system(size: 18, weight: .regular, design: .rounded))
+                .font(.system(size: 16, weight: .regular, design: .rounded))
             }
             .onAppear {
                 currentNumberStr = "\(targetNumber)"

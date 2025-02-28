@@ -23,8 +23,8 @@ struct NumberMode: View {
     @State private var minNumber: Int = 0
     
     func resetGen() {
-        maxNumber = 0
-        minNumber = 0
+        maxNumber = settingsData.maxNumberDefault
+        minNumber = settingsData.minNumberDefault
         if (!reduceMotion && settingsData.playAnimations) { withAnimation { randomNumber = 0 } } else { randomNumber = 0 }
         confirmReset = false
     }

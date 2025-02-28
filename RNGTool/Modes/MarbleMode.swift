@@ -19,14 +19,13 @@ struct MarbleMode: View {
     
     func resetGen() {
         numMarbles = 1
-        randomLetters[0] = "A"
+        randomLetters = Array(repeating: "A", count: 18)
         confirmReset = false
     }
 
     func roll() {
-        randomLetters.removeAll()
-        for _ in 0..<numMarbles {
-            randomLetters.append(letters[Int.random(in: 0...25)])
+        for i in 0..<numMarbles {
+            randomLetters[i] = letters[Int.random(in: 0...25)]
         }
     }
     

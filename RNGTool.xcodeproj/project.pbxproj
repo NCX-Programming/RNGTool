@@ -30,6 +30,7 @@
 		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
+		377D1E362D70A722005CB600 /* CoinMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D1E352D70A722005CB600 /* CoinMode.swift */; };
 		37A8B4D6278A8EF600A4D08F /* DevMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B4D5278A8EF600A4D08F /* DevMode.swift */; };
 		37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
 		37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
@@ -129,6 +130,7 @@
 		375C2A0A2778055E00904A03 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		37688CDC27713837003B64CB /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		376FEAEE27698D1600571A78 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		377D1E352D70A722005CB600 /* CoinMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMode.swift; sourceTree = "<group>"; };
 		37A8B4D5278A8EF600A4D08F /* DevMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevMode.swift; sourceTree = "<group>"; };
 		37AB5BB3276FCFC700F753FC /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		37AB5BB7276FE46D00F753FC /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
@@ -278,6 +280,14 @@
 			path = Modes;
 			sourceTree = "<group>";
 		};
+		37B08FD52D6FEFA2003FBBBF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3729936528B5BA3600EDF9DE /* NumKeyboard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		37B86DF82D6E2738008821C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,13 +355,13 @@
 		37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				37B08FD52D6FEFA2003FBBBF /* Components */,
+				37F5723027A8C551007D29FB /* Modes */,
+				37E2B7182D61347F007A91C5 /* ContentView.swift */,
 				3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */,
 				37F5721027A8BA7F007D29FB /* Info.plist */,
 				37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */,
-				37F5723027A8C551007D29FB /* Modes */,
 				37F5720D27A8BA7F007D29FB /* Preview Content */,
-				3729936528B5BA3600EDF9DE /* NumKeyboard.swift */,
-				37E2B7182D61347F007A91C5 /* ContentView.swift */,
 			);
 			path = "RNGToolWrist WatchKit Extension";
 			sourceTree = "<group>";
@@ -367,10 +377,11 @@
 		37F5723027A8C551007D29FB /* Modes */ = {
 			isa = PBXGroup;
 			children = (
+				37F5723727A8C59B007D29FB /* NumberMode.swift */,
+				377D1E352D70A722005CB600 /* CoinMode.swift */,
 				37F5723127A8C573007D29FB /* DiceMode.swift */,
 				37F5723327A8C583007D29FB /* CardMode.swift */,
 				37F5723527A8C58D007D29FB /* MarbleMode.swift */,
-				37F5723727A8C59B007D29FB /* NumberMode.swift */,
 			);
 			path = Modes;
 			sourceTree = "<group>";
@@ -578,6 +589,7 @@
 				37F5722427A8C31B007D29FB /* DiceSettings.swift in Sources */,
 				37F5723427A8C583007D29FB /* CardMode.swift in Sources */,
 				37F5722027A8C2FC007D29FB /* SettingsView.swift in Sources */,
+				377D1E362D70A722005CB600 /* CoinMode.swift in Sources */,
 				37F5722227A8C31B007D29FB /* CardSettings.swift in Sources */,
 				37B86DFD2D6E277E008821C3 /* GlobalViews.swift in Sources */,
 				37F5722727A8C3CD007D29FB /* About.swift in Sources */,
@@ -609,7 +621,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -641,7 +653,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
@@ -672,7 +684,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -713,7 +725,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				ENABLE_PREVIEWS = YES;
@@ -874,7 +886,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -909,7 +921,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 5GF7GKNTK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";

@@ -16,7 +16,7 @@ struct CardMode: View {
     @State private var numCards: Int = 1
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
-    @State private var cardImages: [String] = Array(repeating: "c1", count: 10)
+    @State private var cardImages: [String] = Array(repeating: "c1", count: 12)
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
     
@@ -57,7 +57,7 @@ struct CardMode: View {
             self.showDrawHint = false
         }
         randomNumbers.removeAll()
-        for _ in 1...10 {
+        for _ in 1...12 {
             randomNumbers.append(Int.random(in: 1...13))
         }
         if(settingsData.showPoints) {
@@ -102,7 +102,7 @@ struct CardMode: View {
                             ForEach(0..<cardsToDisplay, id: \.self) { index in
                                 Image(cardImages[index]).resizable()
                                     .frame(width: 180, height: 252)
-                                    .offset(x: CGFloat((geometry.size.width * 0.085) * CGFloat(index)), y: 0)
+                                    .offset(x: CGFloat((geometry.size.width * 0.075) * CGFloat(index)), y: 0)
                             }
                         }
                     }
@@ -114,7 +114,7 @@ struct CardMode: View {
                         }
                     }
                     .onTapGesture { drawCards() }
-                    .padding(.trailing, CGFloat((geometry.size.width * 0.085) * CGFloat((cardsToDisplay - 1))))
+                    .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
                     .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
                     Text(pointValueStr)
                         .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
@@ -136,7 +136,7 @@ struct CardMode: View {
                             .foregroundColor(.secondary)
                     }
                     Picker("Number of cards:", selection: $numCards) {
-                        ForEach(1...10, id: \.self) { index in
+                        ForEach(1...12, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }

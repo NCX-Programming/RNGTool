@@ -13,11 +13,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("RNGTool")) {
+                Section(header: Text("Modes")) {
                     NavigationLink(destination: NumberMode()) {
                         Image(systemName: "number")
                             .foregroundColor(.accentColor)
                         Text("Numbers")
+                    }
+                    NavigationLink(destination: CoinMode()) {
+                        Image(systemName: "centsign.circle")
+                            .foregroundColor(.accentColor)
+                        Text("Coins")
                     }
                     NavigationLink(destination: DiceMode()) {
                         Image(systemName: "dice")
