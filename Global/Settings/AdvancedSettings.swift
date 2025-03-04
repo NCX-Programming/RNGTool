@@ -19,7 +19,7 @@ struct AdvancedSettings: View {
     #endif
     @State private var showResetPrompt = false
     #if targetEnvironment(simulator)
-    @State private var devCount = 3 // Always show the debug mode toggle if we're using a sim, no reason to hide it there
+    @State private var devCount = 3 // Always show the developer mode toggle if we're using a sim, no reason to hide it there
     #else
     @State private var devCount = 0
     #endif
@@ -37,11 +37,11 @@ struct AdvancedSettings: View {
             Section(header: Text("Settings Reset"),footer: Text("This will reset all of RNGTool's settings to their default values!")) {
                 Button(action:{
                     #if os(iOS)
-                    devCount += 1
                     playHaptics(engine: engine, intensity: 0.8, sharpness: 0.5, count: 0.1)
                     #elseif os(watchOS)
                     WKInterfaceDevice.current().play(.click)
                     #endif
+                    devCount += 1
                     showResetPrompt = true
                 }) {
                     Text("Reset Settings")
@@ -61,7 +61,7 @@ struct AdvancedSettings: View {
                     Text("Are you sure you want to reset all settings to their defaults? This cannot be undone.")
                 })
             }
-            #if DEBUG && os(iOS)
+            #if DEBUG && !os(macOS)
             if(settingsData.showDevMode || devCount > 2) {
                 Section(header: Text("Developer Mode"),footer: Text("Enable access to developer mode. This option will survive settings resets.")) {
                     Toggle("Show Developer Mode", isOn: $settingsData.showDevMode)
