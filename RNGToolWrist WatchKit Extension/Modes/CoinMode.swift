@@ -11,7 +11,7 @@ import WatchKit
 struct CoinMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var coinFlip: Int = -1
+    @SceneStorage("CoinMode.coinFlip") private var coinFlip: Int = -1
     @State private var confirmReset: Bool = false
     @State private var showHint: Bool = true
     

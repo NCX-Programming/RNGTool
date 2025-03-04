@@ -92,7 +92,7 @@ struct SettingsView: View {
                         showResetPrompt = false
                     }
                 }, message: {
-                    Text("Are you sure you want to reset the minimum and maximum numbers to their defaults? This cannot be undone.")
+                    Text("Are you sure you want to reset the minimum and maximum numbers to their defaults?")
                 })
             }
             #if !os(watchOS)
