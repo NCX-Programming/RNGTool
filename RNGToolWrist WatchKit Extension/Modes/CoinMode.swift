@@ -44,8 +44,9 @@ struct CoinMode: View {
                         }
                         else {
                             ZStack() {
-                                Text(coinFlip == 1 ? "H" : "T")
-                                    .font(.system(size: geometry.size.width / 5, design: .rounded))
+                                Image(systemName: coinFlip == 1 ? "person" : "building.columns")
+                                    .resizable()
+                                    .frame(width: geometry.size.width / 4, height: geometry.size.width / 4)
                                 Circle()
                                     .stroke(Color.primary, lineWidth: 3)
                             }
@@ -63,6 +64,7 @@ struct CoinMode: View {
                         Image(systemName: "clear.fill")
                     }
                     .font(.system(size: 20, weight:.bold, design: .rounded))
+                    .padding(.top, 10)
                     .foregroundColor(.red)
                     .alert("Confirm Reset", isPresented: $confirmReset, actions: {
                         Button("Confirm", role: .destructive) {

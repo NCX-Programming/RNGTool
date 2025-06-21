@@ -53,7 +53,7 @@ struct DiceMode: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack() {
+                VStack(alignment: .center) {
                     HStack() {
                         ForEach(0..<numDice, id: \.self) { index in
                           Image(diceImages[index])
@@ -66,16 +66,12 @@ struct DiceMode: View {
                         Text("Tap dice to roll")
                             .foregroundColor(.secondary)
                     }
-                    HStack() {
-                        Picker("", selection: $numDice){
-                            ForEach(1...2, id: \.self) { index in
-                                Text("\(index)").tag(index)
-                            }
+                    Picker("Number of Dice", selection: $numDice){
+                        ForEach(1...2, id: \.self) { index in
+                            Text("\(index)").tag(index)
                         }
-                        .frame(width: geometry.size.width / 3)
-                        Text("Number of Dice")
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height / 2, alignment: .center)
+                    .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
@@ -92,6 +88,7 @@ struct DiceMode: View {
                     })
                 }
             }
+            .frame(width: geometry.size.width)
         }
         .navigationTitle("Dice")
         .navigationBarTitleDisplayMode(.inline)

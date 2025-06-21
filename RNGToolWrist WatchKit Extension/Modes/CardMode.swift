@@ -84,16 +84,12 @@ struct CardMode: View {
                     Text("Tap cards to draw")
                         .foregroundColor(.secondary)
                 }
-                HStack(alignment: .center) {
-                    Picker("", selection: $numCards){
-                        ForEach(1...3, id: \.self) { index in
-                            Text("\(index)").tag(index)
-                        }
+                Picker("Number of Cards", selection: $numCards){
+                    ForEach(1...3, id: \.self) { index in
+                        Text("\(index)").tag(index)
                     }
-                    .frame(width: geometry.size.width / 4, height: geometry.size.height / 2.5)
-                    Text("Number of Cards")
-                        .padding(.top, 12)
                 }
+                .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
                 Button(action:{
                     if(settingsData.confirmGenResets){
                         confirmReset = true
@@ -114,6 +110,7 @@ struct CardMode: View {
                     Text("Are you sure you want to reset the generator?")
                 })
             }
+            .frame(width: geometry.size.width)
         }
         .navigationTitle("Cards")
         .navigationBarTitleDisplayMode(.inline)

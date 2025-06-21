@@ -11,7 +11,7 @@ import WatchKit
 struct MarbleMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var numOfMarbles = 1
+    @State private var numMarbles = 1
     @State private var randomLetters: [String] = Array(repeating: "A", count: 3)
     @State private var confirmReset = false
     @State private var showRollHint = true
@@ -19,13 +19,13 @@ struct MarbleMode: View {
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     func resetGen() {
-        numOfMarbles = 1
+        numMarbles = 1
         randomLetters = Array(repeating: "A", count: 3)
         confirmReset = false
     }
     
     func roll() {
-        for i in 0..<numOfMarbles {
+        for i in 0..<numMarbles {
             randomLetters[i] = letters[Int.random(in: 0...25)]
         }
     }
@@ -49,7 +49,7 @@ struct MarbleMode: View {
         GeometryReader { geometry in
             ScrollView {
                 HStack(){
-                    ForEach(0..<numOfMarbles, id: \.self) { index in
+                    ForEach(0..<numMarbles, id: \.self) { index in
                         ZStack() {
                             Text("\(randomLetters[index])")
                                 .font(.title3)
@@ -65,16 +65,12 @@ struct MarbleMode: View {
                     Text("Tap dice to roll")
                         .foregroundColor(.secondary)
                 }
-                HStack(alignment: .center) {
-                    Picker("", selection: $numOfMarbles){
-                        ForEach(1...3, id: \.self) { index in
-                            Text("\(index)").tag(index)
-                        }
+                Picker("Number of Marbles", selection: $numMarbles){
+                    ForEach(1...3, id: \.self) { index in
+                        Text("\(index)").tag(index)
                     }
-                    .frame(width: geometry.size.width / 3)
-                    Text("Number of Marbles")
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height / 2, alignment: .center)
+                .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
                 Button(action:{
                     if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                 }) {
@@ -90,6 +86,7 @@ struct MarbleMode: View {
                     Text("Are you sure you want to reset the generator?")
                 })
             }
+            .frame(width: geometry.size.width)
         }
         .navigationTitle("Marbles")
         .navigationBarTitleDisplayMode(.inline)
