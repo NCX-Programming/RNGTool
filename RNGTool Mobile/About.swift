@@ -39,22 +39,16 @@ struct About: View {
                 #endif
                 Section(header: Text("Links")) {
                     Button(action:{
-                        openURL(URL(string: "https://github.com/NCX-Programming")!)
-                    }) {
-                        Label("Our GitHub", image: "GitHub")
-                            .foregroundColor(.primary)
-                    }
-                    Button(action:{
                         openURL(URL(string: "https://github.com/NCX-Programming/RNGTool")!)
                     }) {
-                        Label("Source Code", image: "GitHub")
+                        Label("RNGTool on GitHub", image: "GitHub")
                             .foregroundColor(.primary)
                     }
                     Button(action:{
-                        openURL(URL(string: "https://ncxprogramming.com/software/rngtool")!)
+                        openURL(URL(string: "https://ninjacheetah.dev")!)
                     }) {
                         Label {
-                            Text("RNGTool on Our Website")
+                            Text("My Website")
                                 .foregroundColor(.primary)
                         } icon: {
                             Image(systemName: "link.circle.fill").resizable()
@@ -64,10 +58,10 @@ struct About: View {
                         }
                     }
                     Button(action:{
-                        openURL(URL(string: "https://ncxprogramming.com/contactus")!)
+                        openURL(URL(string: "https://ncxprogramming.com/software/rngtool")!)
                     }) {
                         Label {
-                            Text("Contact Us")
+                            Text("RNGTool on the NCX Programming Website")
                                 .foregroundColor(.primary)
                         } icon: {
                             Image(systemName: "link.circle.fill").resizable()
@@ -78,7 +72,7 @@ struct About: View {
                     }
                 }
                 Section() {
-                    Text("RNGTool was designed and developed with love by Campbell (NinjaCheetah).")
+                    Text("RNGTool was designed and developed with love by Campbell Bagley (NinjaCheetah)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
