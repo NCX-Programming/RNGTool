@@ -16,11 +16,13 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numDice = 1
         randomNumbers.removeAll()
-        diceImages[0] = "d1"
+        diceImages = Array(repeating: "d1", count: 18)
         confirmReset = false
     }
     
@@ -39,9 +41,13 @@ struct DiceMode: View {
     // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
     // repeatedly.
     func startRoll() {
+        // Check the validity of the timer. If the timer is valid, then we shouldn't start a new roll because one is already in progress.
+        if (timer?.isValid == true) {
+            return
+        }
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
         if (settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 self.roll()
                 self.rollCount += 1
                 if (rollCount == 10) {

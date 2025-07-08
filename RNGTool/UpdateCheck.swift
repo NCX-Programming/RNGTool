@@ -5,6 +5,9 @@
 //  Created by Campbell on 3/18/22.
 //
 
+// Ideally ALL of this code should be rewritten. It's very old and a lot of it was written by StackOverflow and not me. It's
+// probably way overkill, and is definitely more convoluted than NUSGet's update check.
+
 import Foundation
 import SwiftUI
 
@@ -59,7 +62,9 @@ func compareVersions(remoteVersion: String) -> Bool {
     let remoteVersionArray = remoteVersionStr.split(separator: ".")
     let remoteVersionMapped = remoteVersionArray.map { Int($0)!}
     for i in 0...remoteVersionMapped.count-1 {
-        if (remoteVersionMapped[i] > localVersionMapped[i]) {
+        if (remoteVersionMapped[i] < localVersionMapped[i]) {
+            break
+        } else if (remoteVersionMapped[i] > localVersionMapped[i]) {
             print("A new update is available")
             return true
         }

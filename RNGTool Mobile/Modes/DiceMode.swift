@@ -18,11 +18,13 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 9)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numDice = 1
         randomNumbers.removeAll()
-        diceImages[0] = "d1"
+        diceImages = Array(repeating: "d1", count: 9)
         confirmReset = false
     }
     
@@ -41,10 +43,13 @@ struct DiceMode: View {
     // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
     // repeatedly.
     func startRoll() {
+        if (timer?.isValid == true) {
+            return
+        }
         if (rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1) }
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
         if (settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 // Play a single haptic tap for every roll in the animation. (It's more fun this way!)
                 playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                 self.roll()

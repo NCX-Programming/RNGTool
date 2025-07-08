@@ -19,12 +19,14 @@ struct CardMode: View {
     @State private var cardImages: [String] = Array(repeating: "c1", count: 3)
     @State private var drawCount: Int = 0
     @State private var showDrawHint: Bool = true
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numCards = 1
         cardsToDisplay = 1
         randomNumbers.removeAll()
-        cardImages[0] = "c1"
+        cardImages = Array(repeating: "c1", count: 3)
         confirmReset = false
     }
     
@@ -46,6 +48,9 @@ struct CardMode: View {
     }
     
     func drawCards() {
+        if (timer?.isValid == true) {
+            return
+        }
         WKInterfaceDevice.current().play(.click)
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
             showDrawHint = false
@@ -57,7 +62,7 @@ struct CardMode: View {
         cardsToDisplay = 1
         self.getCards()
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if (drawCount == numCards) { timer.invalidate(); drawCount = 0 }
                 if (cardsToDisplay < numCards) { cardsToDisplay += 1 }
                 drawCount += 1

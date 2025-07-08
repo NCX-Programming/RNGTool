@@ -21,20 +21,31 @@ struct CardMode: View {
     @State private var cardImages: [String] = Array(repeating: "c1", count: 7)
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
+    @State private var timer: Timer?
+    
+    func clearVars() {
+        numCards = 1
+        randomNumbers.removeAll()
+        cardImages = Array(repeating: "c1", count: 7)
+        confirmReset = false
+    }
     
     func resetGen() {
+        timer?.invalidate()
         pointValueStr = ""
-        if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                if(cardsToDisplay == 1) { timer.invalidate() }
+        if (settingsData.playAnimations && !reduceMotion) {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { timer in
+                if(cardsToDisplay == 1) {
+                    timer.invalidate()
+                    clearVars()
+                }
                 if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
             }
         }
-        else { cardsToDisplay = 1 }
-        numCards = 1
-        randomNumbers.removeAll()
-        cardImages[0] = "c1"
-        confirmReset = false
+        else {
+            cardsToDisplay = 1
+            clearVars()
+        }
     }
     
     func getCards() {
@@ -55,6 +66,9 @@ struct CardMode: View {
     }
     
     func drawCards() {
+        if (timer?.isValid == true) {
+            return
+        }
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
             self.showDrawHint = false
         }
@@ -84,7 +98,7 @@ struct CardMode: View {
         cardsToDisplay = 1
         self.getCards()
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 // Play a single haptic tap for every draw in the animation. (It's more fun this way!)
                 playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                 if(cardsToDisplay < numCards) { cardsToDisplay += 1 }

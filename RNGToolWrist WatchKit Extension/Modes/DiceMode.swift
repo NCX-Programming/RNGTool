@@ -17,11 +17,13 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 2)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numDice = 1
         randomNumbers.removeAll()
-        diceImages[0] = "d1"
+        diceImages = Array(repeating: "d1", count: 2)
         confirmReset = false
     }
     
@@ -36,12 +38,15 @@ struct DiceMode: View {
     }
     
     func startRoll() {
+        if (timer?.isValid == true) {
+            return
+        }
         WKInterfaceDevice.current().play(.click)
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             showRollHint = false
         }
         if(settingsData.playAnimations && !reduceMotion && rollCount == 0) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 roll()
                 rollCount += 1
                 if (rollCount == 10) { timer.invalidate(); rollCount = 0 }

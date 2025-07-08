@@ -622,7 +622,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -636,7 +636,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -655,7 +655,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -669,7 +669,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -687,7 +687,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -707,7 +707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -729,7 +729,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -749,7 +749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -893,7 +893,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -907,7 +907,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -929,7 +929,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -943,7 +943,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;

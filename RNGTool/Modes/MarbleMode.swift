@@ -16,8 +16,10 @@ struct MarbleMode: View {
     @State private var showRollHint: Bool = true
     @State private var rollCount: Int = 0
     @State private var letters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numMarbles = 1
         randomLetters = Array(repeating: "A", count: 18)
         confirmReset = false
@@ -30,9 +32,12 @@ struct MarbleMode: View {
     }
     
     func startRoll() {
+        if (timer?.isValid == true) {
+            return
+        }
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 self.roll()
                 self.rollCount += 1
                 if(rollCount == 10) {

@@ -16,8 +16,10 @@ struct CoinMode: View {
     @State private var numCoins: Int = 1
     @State private var flipCount: Int = 0
     @State private var confirmReset: Bool = false
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         headsCount = 0
         tailsCount = 0
         coinCount = 0
@@ -36,10 +38,13 @@ struct CoinMode: View {
     }
     
     func flipCoins() {
-        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+        if (timer?.isValid == true) {
+            return
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             self.flipCoin()
             self.flipCount += 1
-            if (flipCount == numCoins) {
+            if (flipCount >= numCoins) {
                 timer.invalidate(); self.flipCount = 0
                 addHistoryEntry(settingsData: settingsData, results: "H: \(headsCount), T: \(tailsCount)", mode: "Coin Mode")
             }

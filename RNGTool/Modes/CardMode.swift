@@ -19,11 +19,13 @@ struct CardMode: View {
     @State private var cardImages: [String] = Array(repeating: "c1", count: 12)
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         pointValueStr = ""
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { timer in
                 if(cardsToDisplay == 1) { timer.invalidate() }
                 if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
             }
@@ -31,7 +33,7 @@ struct CardMode: View {
         else { cardsToDisplay = 1 }
         numCards = 1
         randomNumbers.removeAll()
-        cardImages[0] = "c1"
+        cardImages = Array(repeating: "c1", count: 12)
         confirmReset = false
     }
     
@@ -53,6 +55,9 @@ struct CardMode: View {
     }
     
     func drawCards() {
+        if (timer?.isValid == true) {
+            return
+        }
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
             self.showDrawHint = false
         }
@@ -82,7 +87,7 @@ struct CardMode: View {
         cardsToDisplay = 1
         self.getCards()
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 if(cardsToDisplay < numCards) { cardsToDisplay += 1 }
                 self.drawCount += 1
                 if(drawCount == numCards) { timer.invalidate(); self.drawCount = 0 }
@@ -102,7 +107,7 @@ struct CardMode: View {
                             ForEach(0..<cardsToDisplay, id: \.self) { index in
                                 Image(cardImages[index]).resizable()
                                     .frame(width: 180, height: 252)
-                                    .offset(x: CGFloat((geometry.size.width * 0.075) * CGFloat(index)), y: 0)
+                                    .offset(x: CGFloat((geometry.size.width * 0.065) * CGFloat(index)), y: 0)
                             }
                         }
                     }
@@ -114,7 +119,7 @@ struct CardMode: View {
                         }
                     }
                     .onTapGesture { drawCards() }
-                    .padding(.trailing, CGFloat((geometry.size.width * 0.075) * CGFloat((cardsToDisplay - 1))))
+                    .padding(.trailing, CGFloat((geometry.size.width * 0.065) * CGFloat((cardsToDisplay - 1))))
                     .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
                     Text(pointValueStr)
                         .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()

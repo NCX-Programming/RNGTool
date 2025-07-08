@@ -17,8 +17,10 @@ struct MarbleMode: View {
     @State private var showRollHint = true
     @State private var rollCount = 0
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    @State private var timer: Timer?
     
     func resetGen() {
+        timer?.invalidate()
         numMarbles = 1
         randomLetters = Array(repeating: "A", count: 3)
         confirmReset = false
@@ -31,12 +33,15 @@ struct MarbleMode: View {
     }
     
     func startRoll() {
+        if (timer?.isValid == true) {
+            return
+        }
         WKInterfaceDevice.current().play(.click)
         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
             showRollHint = false
         }
         if(settingsData.playAnimations && !reduceMotion) {
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 roll()
                 rollCount += 1
                 if (rollCount == 10) { timer.invalidate(); rollCount = 0 }
