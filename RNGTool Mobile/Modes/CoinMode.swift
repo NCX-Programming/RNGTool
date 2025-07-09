@@ -18,10 +18,11 @@ struct CoinMode: View {
     @State private var flipCount: Int = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset: Bool = false
-    @State private var timer: Timer?
+    @State private var flipTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        flipTask?.cancel()
+        flipTask = nil
         headsCount = 0
         tailsCount = 0
         coinCount = 0
@@ -40,17 +41,24 @@ struct CoinMode: View {
     }
     
     func flipCoins() {
-        if (timer?.isValid == true) {
-            return
-        }
-        timer = Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { timer in
-            // Play a single haptic tap for every coin flipped. (Just like with the dice, it's more fun this way!)
-            playHaptics(engine: engine, intensity: 0.75, sharpness: 0.75, count: 0.075)
-            self.flipCoin()
-            self.flipCount += 1
-            if (flipCount >= numCoins) {
-                timer.invalidate(); self.flipCount = 0
+        // No more spam flipping allowed!
+        guard flipTask == nil else { return }
+        flipTask = Task {
+            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+            for _ in 0..<numCoins {
+                if Task.isCancelled { return }
+                await MainActor.run {
+                    self.flipCoin()
+                    self.flipCount += 1
+                }
+                // Play a single haptic tap for every coin flipped. (Just like with the dice, it's more fun this way!)
+                playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+                try? await Task.sleep(nanoseconds: 75_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+            }
+            await MainActor.run {
                 addHistoryEntry(settingsData: settingsData, results: "H: \(headsCount), T: \(tailsCount)", mode: "Coin Mode")
+                flipCount = 0
+                flipTask = nil
             }
         }
     }
@@ -117,7 +125,8 @@ struct CoinMode: View {
                             .padding(.vertical, 10)
                     }
                     .buttonStyle(LargeSquareAccentButton())
-                    .help("Flip a coin")
+                    .help("Flip some coins")
+                    .disabled(flipTask != nil)
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }

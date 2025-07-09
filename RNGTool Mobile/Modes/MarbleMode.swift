@@ -19,10 +19,11 @@ struct MarbleMode: View {
     @State private var confirmReset: Bool = false
     @State private var showRollHint: Bool = true
     @State private var letters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    @State private var timer: Timer?
+    @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        rollTask?.cancel()
+        rollTask = nil
         numMarbles = 1
         randomLetters = Array(repeating: "A", count: 9)
         confirmReset = false
@@ -35,25 +36,35 @@ struct MarbleMode: View {
     }
     
     func startRoll() {
-        if (timer?.isValid == true) {
-            return
-        }
-        if(rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1) }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
-        if(settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
-                self.roll()
-                self.rollCount += 1
-                if(rollCount == 10) {
-                    timer.invalidate(); self.rollCount = 0
+        // Abort if a roll was somehow triggered while one is already ongoing. This shouldn't be possible since the roll button gets
+        // disabled during the roll, but it's here anyway.
+        guard rollTask == nil else { return }
+        rollTask = Task {
+            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<10 {
+                    if Task.isCancelled { return }
+                    await MainActor.run {
+                        self.roll()
+                    }
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                }
+                await MainActor.run {
                     addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
+                    rollCount = 0
+                    rollTask = nil
+                }
+            } else {
+                await MainActor.run {
+                    self.roll()
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
+                    rollTask = nil
                 }
             }
-        }
-        else {
-            self.roll()
-            addHistoryEntry(settingsData: settingsData, results: "\(randomLetters)", mode: "Marble Mode")
         }
     }
     
@@ -125,6 +136,7 @@ struct MarbleMode: View {
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Roll some marbles")
+                    .disabled(rollTask != nil)
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if( settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }

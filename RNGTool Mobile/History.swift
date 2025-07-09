@@ -9,6 +9,13 @@ import SwiftUI
 
 struct History: View {
     @EnvironmentObject var settingsData: SettingsData
+    @State private var confirmReset: Bool = false
+    
+    func clearHistory() {
+        print("history cleared")
+        settingsData.historyTable.removeAll()
+        confirmReset = false
+    }
     
     var body: some View {
         ScrollView {
@@ -42,6 +49,23 @@ struct History: View {
         .padding(.horizontal, 3)
         .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    confirmReset = true
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Clear History", isPresented: $confirmReset, actions: {
+            Button("Confirm", role: .destructive) {
+                clearHistory()
+            }
+        }, message: {
+            Text("Are you sure you want to clear your RNGTool history?")
+        })
     }
 }
 

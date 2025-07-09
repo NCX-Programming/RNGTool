@@ -18,12 +18,12 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 9)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
-    @State private var timer: Timer?
+    @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        rollTask?.cancel()
+        rollTask = nil
         numDice = 1
-        randomNumbers.removeAll()
         diceImages = Array(repeating: "d1", count: 9)
         confirmReset = false
     }
@@ -31,10 +31,7 @@ struct DiceMode: View {
     // Roll function that generates a number for every die being shown in the range 1-6, and then sets each shown die to the image that
     // corresponds with the number rolled for it.
     func roll() {
-        randomNumbers.removeAll()
-        for _ in 1...numDice{
-            randomNumbers.append(Int.random(in: 1...6))
-        }
+        randomNumbers = (1...numDice).map { _ in Int.random(in: 1...6) }
         for n in 0..<randomNumbers.count{
             if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
@@ -43,26 +40,35 @@ struct DiceMode: View {
     // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
     // repeatedly.
     func startRoll() {
-        if (timer?.isValid == true) {
-            return
-        }
-        if (rollCount == 0) { playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1) }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
-        if (settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                // Play a single haptic tap for every roll in the animation. (It's more fun this way!)
-                playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
-                self.roll()
-                self.rollCount += 1
-                if (rollCount == 10) {
-                    timer.invalidate(); self.rollCount = 0
+        // Abort if a roll was somehow triggered while one is already ongoing. This shouldn't be possible since the roll button gets
+        // disabled during the roll, but it's here anyway.
+        guard rollTask == nil else { return }
+        rollTask = Task {
+            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<10 {
+                    if Task.isCancelled { return }
+                    await MainActor.run {
+                        self.roll()
+                    }
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                }
+                await MainActor.run {
                     addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                    rollCount = 0
+                    rollTask = nil
+                }
+            } else {
+                await MainActor.run {
+                    self.roll()
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                    rollTask = nil
                 }
             }
-        }
-        else {
-            self.roll()
-            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
         }
     }
     
@@ -122,6 +128,7 @@ struct DiceMode: View {
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Roll the dice")
+                    .disabled(rollTask != nil)
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
