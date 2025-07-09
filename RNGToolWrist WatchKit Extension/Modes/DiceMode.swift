@@ -17,42 +17,50 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 2)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
-    @State private var timer: Timer?
+    @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        rollTask?.cancel()
+        rollTask = nil
         numDice = 1
-        randomNumbers.removeAll()
         diceImages = Array(repeating: "d1", count: 2)
         confirmReset = false
     }
     
     func roll() {
-        randomNumbers.removeAll()
-        for _ in 0..<numDice {
-            randomNumbers.append(Int.random(in: 1...6))
-        }
+        randomNumbers = (0..<numDice).map { _ in Int.random(in: 1...6) }
         for n in 0..<randomNumbers.count {
             if (numDice>n) {diceImages[n]="d\(randomNumbers[n])"}
         }
     }
     
     func startRoll() {
-        if (timer?.isValid == true) {
-            return
-        }
-        WKInterfaceDevice.current().play(.click)
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            showRollHint = false
-        }
-        if(settingsData.playAnimations && !reduceMotion && rollCount == 0) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                roll()
-                rollCount += 1
-                if (rollCount == 10) { timer.invalidate(); rollCount = 0 }
+        guard rollTask == nil else { return }
+        rollTask = Task {
+            WKInterfaceDevice.current().play(.click)
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<10 {
+                    if Task.isCancelled { return }
+                    await MainActor.run {
+                        self.roll()
+                        rollCount += 1
+                    }
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                }
+                await MainActor.run {
+                    rollCount = 0
+                    rollTask = nil
+                }
+            } else {
+                await MainActor.run {
+                    self.roll()
+                    rollTask = nil
+                }
             }
         }
-        else { roll() }
     }
     
     var body: some View {
@@ -77,6 +85,7 @@ struct DiceMode: View {
                         }
                     }
                     .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
+                    .disabled(rollTask != nil)
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {

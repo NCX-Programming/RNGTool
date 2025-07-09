@@ -119,6 +119,7 @@ struct DiceMode: View {
                     .pickerStyle(.segmented)
                     .padding(.horizontal, geometry.size.width * 0.075)
                     .padding(.bottom, 10)
+                    .disabled(rollTask != nil)
                     Button(action:{
                         startRoll()
                     }) {

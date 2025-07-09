@@ -16,10 +16,11 @@ struct CoinMode: View {
     @State private var numCoins: Int = 1
     @State private var flipCount: Int = 0
     @State private var confirmReset: Bool = false
-    @State private var timer: Timer?
+    @State private var flipTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        flipTask?.cancel()
+        flipTask = nil
         headsCount = 0
         tailsCount = 0
         coinCount = 0
@@ -38,15 +39,21 @@ struct CoinMode: View {
     }
     
     func flipCoins() {
-        if (timer?.isValid == true) {
-            return
-        }
-        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
-            self.flipCoin()
-            self.flipCount += 1
-            if (flipCount >= numCoins) {
-                timer.invalidate(); self.flipCount = 0
+        // No more spam flipping allowed!
+        guard flipTask == nil else { return }
+        flipTask = Task {
+            for _ in 0..<numCoins {
+                if Task.isCancelled { return }
+                await MainActor.run {
+                    self.flipCoin()
+                    self.flipCount += 1
+                }
+                try? await Task.sleep(nanoseconds: 50_000_000) // Why does this have to be nanoseconds? It's 0.05s.
+            }
+            await MainActor.run {
                 addHistoryEntry(settingsData: settingsData, results: "H: \(headsCount), T: \(tailsCount)", mode: "Coin Mode")
+                flipCount = 0
+                flipTask = nil
             }
         }
     }
@@ -100,6 +107,7 @@ struct CoinMode: View {
                     .frame(width: 300)
                     .padding(.horizontal, geometry.size.width * 0.075)
                     .padding(.bottom, 10)
+                    .disabled(flipTask != nil)
                     Button(action:{
                         flipCoins()
                     }) {
@@ -109,6 +117,7 @@ struct CoinMode: View {
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Flip a coin")
+                    .disabled(flipTask != nil)
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {

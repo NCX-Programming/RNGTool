@@ -19,22 +19,31 @@ struct CardMode: View {
     @State private var cardImages: [String] = Array(repeating: "c1", count: 12)
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
-    @State private var timer: Timer?
+    @State private var drawTask: Task<Void, Never>? = nil
+    
+    func clearVars() {
+        drawTask?.cancel()
+        drawTask = nil
+        cardImages = Array(repeating: "c1", count: 12)
+        confirmReset = false
+    }
     
     func resetGen() {
-        timer?.invalidate()
         pointValueStr = ""
-        if(settingsData.playAnimations && !reduceMotion) {
+        numCards = 1
+        if (settingsData.playAnimations && !reduceMotion) {
             Timer.scheduledTimer(withTimeInterval: 0.075, repeats: true) { timer in
-                if(cardsToDisplay == 1) { timer.invalidate() }
+                if(cardsToDisplay == 1) {
+                    timer.invalidate()
+                    clearVars()
+                }
                 if(cardsToDisplay > 1) { cardsToDisplay -= 1 }
             }
         }
-        else { cardsToDisplay = 1 }
-        numCards = 1
-        randomNumbers.removeAll()
-        cardImages = Array(repeating: "c1", count: 12)
-        confirmReset = false
+        else {
+            cardsToDisplay = 1
+            clearVars()
+        }
     }
     
     func getCards() {
@@ -55,46 +64,51 @@ struct CardMode: View {
     }
     
     func drawCards() {
-        if (timer?.isValid == true) {
-            return
-        }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
-            self.showDrawHint = false
-        }
-        randomNumbers.removeAll()
-        for _ in 1...12 {
-            randomNumbers.append(Int.random(in: 1...13))
-        }
-        if(settingsData.showPoints) {
-            pointValues.removeAll()
-            for n in 0..<numCards {
-                if (randomNumbers[n] == 1) {
-                    pointValues.append(settingsData.aceValue)
-                }
-                else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {
-                    pointValues.append(randomNumbers[n])
-                }
-                else {
-                    pointValues.append(10)
-                }
+        // Abort if a draw was somehow triggered while one is already ongoing. This shouldn't be possible since the draw button gets
+        // disabled during the draw, but it's here anyway.
+        guard drawTask == nil else { return }
+        drawTask = Task {
+            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                self.showDrawHint = false
             }
-            self.pointValueStr = "Point value(s): \(pointValues)"
-            pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
-        }
-        else {
-            self.pointValueStr = ""
-        }
-        cardsToDisplay = 1
-        self.getCards()
-        if(settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                if(cardsToDisplay < numCards) { cardsToDisplay += 1 }
-                self.drawCount += 1
-                if(drawCount == numCards) { timer.invalidate(); self.drawCount = 0 }
+            randomNumbers = (1...12).map { _ in Int.random(in: 1...13) }
+            if(settingsData.showPoints) {
+                pointValues.removeAll()
+                for n in 0..<numCards {
+                    if (randomNumbers[n] == 1) {
+                        pointValues.append(settingsData.aceValue)
+                    }
+                    else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {
+                        pointValues.append(randomNumbers[n])
+                    }
+                    else {
+                        pointValues.append(10)
+                    }
+                }
+                self.pointValueStr = "Point value(s): \(pointValues)"
+                pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
             }
+            else {
+                self.pointValueStr = ""
+            }
+            cardsToDisplay = 1
+            self.getCards()
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<numCards {
+                    if Task.isCancelled { return }
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                    await MainActor.run {
+                        if(cardsToDisplay < numCards) { cardsToDisplay += 1 }
+                        self.drawCount += 1
+                        if(drawCount == numCards) { self.drawCount = 0 }
+                    }
+                }
+            } else {
+                cardsToDisplay = numCards
+            }
+            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
+            drawTask = nil
         }
-        else { cardsToDisplay = numCards }
-        addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
     }
     
     var body: some View {
@@ -147,6 +161,7 @@ struct CardMode: View {
                     }
                     .frame(width: 300)
                     .padding(.bottom, 10)
+                    .disabled(drawTask != nil)
                     Button(action:{
                         drawCards()
                     }) {
@@ -156,6 +171,7 @@ struct CardMode: View {
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Draw a hand")
+                    .disabled(drawTask != nil)
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {

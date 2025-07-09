@@ -17,10 +17,11 @@ struct MarbleMode: View {
     @State private var showRollHint = true
     @State private var rollCount = 0
     @State private var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    @State private var timer: Timer?
+    @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        rollTask?.cancel()
+        rollTask = nil
         numMarbles = 1
         randomLetters = Array(repeating: "A", count: 3)
         confirmReset = false
@@ -33,21 +34,31 @@ struct MarbleMode: View {
     }
     
     func startRoll() {
-        if (timer?.isValid == true) {
-            return
-        }
-        WKInterfaceDevice.current().play(.click)
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-            showRollHint = false
-        }
-        if(settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                roll()
-                rollCount += 1
-                if (rollCount == 10) { timer.invalidate(); rollCount = 0 }
+        guard rollTask == nil else { return }
+        rollTask = Task {
+            WKInterfaceDevice.current().play(.click)
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<10 {
+                    if Task.isCancelled { return }
+                    await MainActor.run {
+                        self.roll()
+                    }
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                }
+                await MainActor.run {
+                    rollCount = 0
+                    rollTask = nil
+                }
+            } else {
+                await MainActor.run {
+                    self.roll()
+                    rollTask = nil
+                }
             }
         }
-        else { self.roll() }
     }
     
     var body: some View {
@@ -76,6 +87,7 @@ struct MarbleMode: View {
                     }
                 }
                 .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
+                .disabled(rollTask != nil)
                 Button(action:{
                     if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                 }) {

@@ -168,6 +168,7 @@ struct CardMode: View {
                     .pickerStyle(.segmented)
                     .padding(.horizontal, geometry.size.width * 0.075)
                     .padding(.bottom, 10)
+                    .disabled(drawTask != nil)
                     Button(action:{
                         drawCards()
                     }) {

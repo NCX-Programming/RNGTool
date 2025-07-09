@@ -16,12 +16,12 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
-    @State private var timer: Timer?
+    @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
-        timer?.invalidate()
+        rollTask?.cancel()
+        rollTask = nil
         numDice = 1
-        randomNumbers.removeAll()
         diceImages = Array(repeating: "d1", count: 18)
         confirmReset = false
     }
@@ -29,10 +29,7 @@ struct DiceMode: View {
     // Roll function that generates a number for every die being shown in the range 1-6, and then sets each shown die to the image that
     // corresponds with the number rolled for it.
     func roll() {
-        randomNumbers.removeAll()
-        for _ in 1...numDice {
-            randomNumbers.append(Int.random(in: 1...6))
-        }
+        randomNumbers = (1...numDice).map { _ in Int.random(in: 1...6) }
         for n in 0..<randomNumbers.count {
             if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
@@ -41,24 +38,33 @@ struct DiceMode: View {
     // Function for beginning a roll. Separated from the actual roll, because if the animation is being played, the dice need to be rolled
     // repeatedly.
     func startRoll() {
-        // Check the validity of the timer. If the timer is valid, then we shouldn't start a new roll because one is already in progress.
-        if (timer?.isValid == true) {
-            return
-        }
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
-        if (settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                self.roll()
-                self.rollCount += 1
-                if (rollCount == 10) {
-                    timer.invalidate(); self.rollCount = 0
+        // Abort if a roll was somehow triggered while one is already ongoing. This shouldn't be possible since the roll button gets
+        // disabled during the roll, but it's here anyway.
+        guard rollTask == nil else { return }
+        rollTask = Task {
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<10 {
+                    if Task.isCancelled { return }
+                    await MainActor.run {
+                        self.roll()
+                    }
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                }
+                await MainActor.run {
                     addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                    rollCount = 0
+                    rollTask = nil
+                }
+            } else {
+                await MainActor.run {
+                    self.roll()
+                    addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
+                    rollTask = nil
                 }
             }
-        }
-        else {
-            self.roll()
-            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Dice Mode")
         }
     }
     
@@ -102,6 +108,7 @@ struct DiceMode: View {
                     }
                     .frame(width: 300)
                     .padding(.bottom, 10)
+                    .disabled(rollTask != nil)
                     Button(action:{
                         startRoll()
                     }) {
@@ -111,6 +118,7 @@ struct DiceMode: View {
                     }
                     .help("Roll the dice")
                     .buttonStyle(LargeSquareAccentButton())
+                    .disabled(rollTask != nil)
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true }
                         else { resetGen() }

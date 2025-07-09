@@ -20,12 +20,14 @@ struct CardMode: View {
     @State private var drawCount: Int = 0
     @State private var showDrawHint: Bool = true
     @State private var timer: Timer?
+    @State private var drawTask: Task<Void, Never>? = nil
     
     func resetGen() {
         timer?.invalidate()
+        drawTask?.cancel()
+        drawTask = nil
         numCards = 1
         cardsToDisplay = 1
-        randomNumbers.removeAll()
         cardImages = Array(repeating: "c1", count: 3)
         confirmReset = false
     }
@@ -48,27 +50,27 @@ struct CardMode: View {
     }
     
     func drawCards() {
-        if (timer?.isValid == true) {
-            return
-        }
-        WKInterfaceDevice.current().play(.click)
-        withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
-            showDrawHint = false
-        }
-        randomNumbers.removeAll()
-        for _ in 0..<numCards{
-            randomNumbers.append(Int.random(in: 1...13))
-        }
-        cardsToDisplay = 1
-        self.getCards()
-        if(settingsData.playAnimations && !reduceMotion) {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                if (drawCount == numCards) { timer.invalidate(); drawCount = 0 }
-                if (cardsToDisplay < numCards) { cardsToDisplay += 1 }
-                drawCount += 1
+        guard drawTask == nil else { return }
+        drawTask = Task {
+            withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
+                self.showDrawHint = false
             }
+            randomNumbers = (0..<numCards).map { _ in Int.random(in: 1...13) }
+            cardsToDisplay = 1
+            self.getCards()
+            if settingsData.playAnimations && !reduceMotion {
+                for _ in 0..<numCards {
+                    if Task.isCancelled { return }
+                    try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                    await MainActor.run {
+                        if(cardsToDisplay < numCards) { cardsToDisplay += 1 }
+                        self.drawCount += 1
+                        if(drawCount == numCards) { self.drawCount = 0 }
+                    }
+                }
+            } else { cardsToDisplay = numCards }
+            drawTask = nil
         }
-        else { cardsToDisplay = numCards }
     }
     
     var body: some View {
@@ -95,6 +97,7 @@ struct CardMode: View {
                     }
                 }
                 .frame(width: geometry.size.width - 15, height: geometry.size.height / 2.5)
+                .disabled(drawTask != nil)
                 Button(action:{
                     if(settingsData.confirmGenResets){
                         confirmReset = true

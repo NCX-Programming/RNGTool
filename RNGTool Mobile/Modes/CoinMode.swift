@@ -53,7 +53,7 @@ struct CoinMode: View {
                 }
                 // Play a single haptic tap for every coin flipped. (Just like with the dice, it's more fun this way!)
                 playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
-                try? await Task.sleep(nanoseconds: 75_000_000) // Why does this have to be nanoseconds? It's 0.1s.
+                try? await Task.sleep(nanoseconds: 75_000_000) // Why does this have to be nanoseconds? It's 0.075s.
             }
             await MainActor.run {
                 addHistoryEntry(settingsData: settingsData, results: "H: \(headsCount), T: \(tailsCount)", mode: "Coin Mode")
@@ -115,6 +115,7 @@ struct CoinMode: View {
                                 Text("\(index)").tag(index)
                             }
                         }
+                        .disabled(flipTask != nil)
                     }
                     .padding(.horizontal, geometry.size.width * 0.075)
                     Button(action:{
