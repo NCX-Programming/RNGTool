@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "RNGTool128x128.png",
+      "filename" : "mac128.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "RNGTool256x256.png",
+      "filename" : "mac256.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "RNGTool512x512.png",
+      "filename" : "mac512.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

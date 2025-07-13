@@ -31,10 +31,10 @@ struct NumberMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 Text("\(randomNumber)")
                     .maxSizeText()
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .apply {
                         if #available(macOS 14.0, *) {
                             $0.contentTransition(.numericText(value: Double(randomNumber)))
@@ -52,7 +52,7 @@ struct NumberMode: View {
                         }
                     }
                 Spacer()
-                VStack() {
+                VStack(spacing: 10) {
                     HStack() {
                         Text("Maximum: ")
                             .onAppear { maxNumber = settingsData.maxNumberDefault } // Load default maximum
@@ -65,7 +65,6 @@ struct NumberMode: View {
                         TextField("Enter a number", value: $minNumber, format: .number)
                             .frame(width: 300)
                     }
-                    .padding(.bottom, 10)
                     Button(action:{
                         if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
                         if (!reduceMotion && settingsData.playAnimations) {
@@ -73,9 +72,13 @@ struct NumberMode: View {
                         else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .help("Generate a number")
                     .buttonStyle(LargeSquareAccentButton())
@@ -87,9 +90,13 @@ struct NumberMode: View {
                             resetGen()
                         }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }
                     }
                     .help("Reset custom values and output")
                     .buttonStyle(LargeSquareAccentButton())
@@ -100,9 +107,9 @@ struct NumberMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
             }
+            .padding(.bottom, 10)
         }
         .navigationTitle("Numbers")
     }

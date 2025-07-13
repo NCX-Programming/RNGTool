@@ -11,6 +11,12 @@ import Foundation
 struct History: View {
     @EnvironmentObject var settingsData: SettingsData
     @State private var selectedEntries = Set<HistoryTable.ID>()
+    @State private var confirmReset: Bool = false
+    
+    func clearHistory() {
+        settingsData.historyTable.removeAll()
+        confirmReset = false
+    }
     
     var body: some View {
         // History on macOS, now with 100% more actual table! This looks much much better.
@@ -32,6 +38,23 @@ struct History: View {
                     }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    confirmReset = true
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Clear History", isPresented: $confirmReset, actions: {
+            Button("Confirm", role: .destructive) {
+                clearHistory()
+            }
+        }, message: {
+            Text("Are you sure you want to clear your RNGTool history?")
+        })
     }
 }
 

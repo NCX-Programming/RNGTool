@@ -65,14 +65,13 @@ struct CoinMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 VStack() {
-                    Spacer()
                     Text("Heads: \(headsCount)")
                     // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
                     // the buttons, and not truncating.
                         .maxSizeText()
-                        .frame(width: geometry.size.width, height: geometry.size.height * 0.2, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .contextMenu {
                             Button(action: {
                                 copyToClipboard(item: "Heads: \(headsCount)")
@@ -85,7 +84,7 @@ struct CoinMode: View {
                     // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
                     // the buttons, and not truncating.
                         .maxSizeText()
-                        .frame(width: geometry.size.width, height: geometry.size.height * 0.2, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         .contextMenu {
                             Button(action: {
                                 copyToClipboard(item: "Tails: \(tailsCount)")
@@ -94,8 +93,8 @@ struct CoinMode: View {
                                 Image(systemName: "document.on.document")
                             }
                         }
-                    Spacer()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onAppear {
                     // Clear out remembered values if we aren't supposed to save them
                     if (settingsData.saveModeStates == false) {
@@ -104,8 +103,7 @@ struct CoinMode: View {
                         tailsCount = 0
                     }
                 }
-                Spacer()
-                VStack() {
+                VStack(spacing: 10) {
                     Text("Total Coins Flipped: \(coinCount)")
                         .font(.headline)
                     HStack() {
@@ -121,9 +119,13 @@ struct CoinMode: View {
                     Button(action:{
                         flipCoins()
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Flip some coins")
@@ -132,9 +134,13 @@ struct CoinMode: View {
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }     
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset coin flips")
@@ -145,8 +151,8 @@ struct CoinMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
+                .padding(.bottom, 10)
             }
             .onAppear { prepareHaptics(engine: &engine) }
             .navigationTitle("Coins")
@@ -156,5 +162,5 @@ struct CoinMode: View {
 }
 
 #Preview {
-    CoinMode()
+    CoinMode().environmentObject(SettingsData())
 }

@@ -70,33 +70,30 @@ struct DiceMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 VStack() {
-                    VStack() {
-                        // Draw the dice in a 6x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
-                        // for that row in it.
-                        ForEach(0..<Int((Double(numDice) / 6.0).rounded(.up)), id: \.self) { index in
-                            HStack() {
-                                ForEach((6 * index)..<(numDice > (6 * (index + 1)) ? numDice - (numDice - (6 * (index + 1))) : numDice), id: \.self) { innerIndex in
-                                    Image(diceImages[innerIndex])
-                                        .resizable()
-                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
-                                }
+                    // Draw the dice in a 6x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
+                    // for that row in it.
+                    ForEach(0..<Int((Double(numDice) / 6.0).rounded(.up)), id: \.self) { index in
+                        HStack() {
+                            ForEach((6 * index)..<(numDice > (6 * (index + 1)) ? numDice - (numDice - (6 * (index + 1))) : numDice), id: \.self) { innerIndex in
+                                Image(diceImages[innerIndex])
+                                    .resizable()
+                                    .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                             }
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
-                    .contextMenu {
-                        Button(action: {
-                            copyToClipboard(item: "\(randomNumbers)")
-                        }) {
-                            Text("Copy")
-                        }
-                    }
-                    .onTapGesture { startRoll() }
                 }
-                Spacer()
-                VStack() {
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Text("Copy")
+                    }
+                }
+                .onTapGesture { startRoll() }
+                VStack(spacing: 10) {
                     if(showRollHint && settingsData.showModeHints) {
                         Text("Click the dice to roll")
                             .foregroundColor(.secondary)
@@ -107,14 +104,17 @@ struct DiceMode: View {
                         }
                     }
                     .frame(width: 300)
-                    .padding(.bottom, 10)
                     .disabled(rollTask != nil)
                     Button(action:{
                         startRoll()
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .help("Roll the dice")
                     .buttonStyle(LargeSquareAccentButton())
@@ -123,9 +123,13 @@ struct DiceMode: View {
                         if (settingsData.confirmGenResets) { confirmReset = true }
                         else { resetGen() }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }
                     }
                     .help("Reset the dice roll")
                     .buttonStyle(LargeSquareAccentButton())
@@ -136,9 +140,9 @@ struct DiceMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
             }
+            .padding(.bottom, 10)
         }
         .navigationTitle("Dice")
     }

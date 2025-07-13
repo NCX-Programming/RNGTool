@@ -24,6 +24,12 @@ struct SettingsView: View {
     #endif
     @State private var showResetPrompt = false
     @State private var showAdvSettings = false
+    // Enum for the @FocusState used to dismiss the keyboard when the done button is pressed
+    enum Field {
+        case maxNumber
+        case minNumber
+    }
+    @FocusState private var fieldFocused: Field?
 
     var body: some View {
         Form {
@@ -32,10 +38,12 @@ struct SettingsView: View {
                 #if os(iOS)
                 Text("Default Maximum Number")
                 TextField("Required", value: $settingsData.maxNumberDefault, format: .number)
-                .keyboardType(.numberPad)
+                    .keyboardType(.numberPad)
+                    .focused($fieldFocused, equals: .maxNumber)
                 Text("Default Minimum Number")
                 TextField("Required", value: $settingsData.minNumberDefault, format: .number)
-                .keyboardType(.numberPad)
+                    .keyboardType(.numberPad)
+                    .focused($fieldFocused, equals: .minNumber)
                 #elseif os(watchOS)
                 // Use the custom watchOS number keyboard for easier number input, since the default keyboard is absolutely awful for just
                 // entering numbers.
@@ -136,6 +144,14 @@ struct SettingsView: View {
         }
         #if os(iOS)
         .onAppear { prepareHaptics(engine: &engine) }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    fieldFocused = .none // Dismisses the keyboard, since tapping away doesn't just do that on iOS
+                }
+            }
+        }
         #endif
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)

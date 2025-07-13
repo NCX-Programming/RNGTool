@@ -32,12 +32,12 @@ struct NumberMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 Text("\(randomNumber)")
                     // This code is to make the text showing the random number as big as possible while fitting the screen, fitting above
                     // the buttons, and not truncating.
                     .maxSizeText()
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.6, alignment: .center)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .onAppear { if (settingsData.saveModeStates == false) { randomNumber = 0 } } // Clear on load if we aren't meant to save
                     .apply {
                         if #available(iOS 17.0, *) {
@@ -55,8 +55,7 @@ struct NumberMode: View {
                             Image(systemName: "document.on.document")
                         }
                     }
-                Spacer()
-                VStack() {
+                VStack(spacing: 10) {
                     Text("Maximum")
                     TextField("Enter a number", value: $maxNumber, format: .number)
                         .keyboardType(.numberPad)
@@ -71,7 +70,6 @@ struct NumberMode: View {
                         .padding(.horizontal, geometry.size.width * 0.1)
                         .focused($fieldFocused, equals: .minNumber)
                         .onAppear { minNumber = settingsData.minNumberDefault } // Load default minimum
-                        .padding(.bottom, 10)
                     Button(action:{
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                         fieldFocused = .none // Dismisses the keyboard, if it's open
@@ -81,9 +79,13 @@ struct NumberMode: View {
                         else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Generate a number")
@@ -92,9 +94,13 @@ struct NumberMode: View {
                         fieldFocused = .none // Dismisses the keyboard, if it's open
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }                            
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset custom values and output")
@@ -105,18 +111,24 @@ struct NumberMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
+                .padding(.bottom, 10)
             }
             .onAppear { prepareHaptics(engine: &engine) }
             .navigationTitle("Numbers")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        fieldFocused = .none // Allows you to always dismiss the keyboard instead of needing to press generate or clear
+                    }
+                }
+            }
         }
     }
 }
 
-struct NumberMode_Previews: PreviewProvider {
-    static var previews: some View {
-        NumberMode().environmentObject(SettingsData())
-    }
+#Preview {
+    NumberMode().environmentObject(SettingsData())
 }

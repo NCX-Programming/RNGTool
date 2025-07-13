@@ -74,37 +74,33 @@ struct DiceMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 VStack() {
-                    VStack() {
-                        // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
-                        // for that row in it.
-                        ForEach(0..<Int((Double(numDice) / 3.0).rounded(.up)), id: \.self) { index in
-                            HStack() {
-                                ForEach((3 * index)..<(numDice > (3 * (index + 1)) ? numDice - (numDice - (3 * (index + 1))) : numDice), id: \.self) { innerIndex in
-                                    Image(diceImages[innerIndex])
-                                        .resizable()
-                                        .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
-                                }
+                    // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
+                    // for that row in it.
+                    ForEach(0..<Int((Double(numDice) / 3.0).rounded(.up)), id: \.self) { index in
+                        HStack() {
+                            ForEach((3 * index)..<(numDice > (3 * (index + 1)) ? numDice - (numDice - (3 * (index + 1))) : numDice), id: \.self) { innerIndex in
+                                Image(diceImages[innerIndex])
+                                    .resizable()
+                                    .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                             }
                         }
                     }
-                    .padding(.top, 10)
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
-                    .contextMenu {
-                        Button(action: {
-                            copyToClipboard(item: "\(randomNumbers)")
-                        }) {
-                            Label("Copy", systemImage: "doc.on.doc")
-                        }
-                    }
-                    // Tapping and shaking trigger the same code, but the shake gesture should only trigger a roll if motion input is
-                    // currently enabled.
-                    .onTapGesture { startRoll() }
-                    .onShake { if(settingsData.useMotionInput) { startRoll() } }
                 }
-                Spacer()
-                VStack() {
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                }
+                // Tapping and shaking trigger the same code, but the shake gesture should only trigger a roll if motion input is
+                // currently enabled.
+                .onTapGesture { startRoll() }
+                .onShake { if(settingsData.useMotionInput) { startRoll() } }
+                VStack(spacing: 10) {
                     if (showRollHint && settingsData.showModeHints) {
                         Text("Tap the die to roll")
                             .font(.title3)
@@ -118,14 +114,17 @@ struct DiceMode: View {
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal, geometry.size.width * 0.075)
-                    .padding(.bottom, 10)
                     .disabled(rollTask != nil)
                     Button(action:{
                         startRoll()
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Roll the dice")
@@ -134,9 +133,13 @@ struct DiceMode: View {
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.4)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }     
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset dice count and roll")
@@ -147,9 +150,9 @@ struct DiceMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
             }
+            .padding(.bottom, 10)
         }
         .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Dice")

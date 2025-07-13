@@ -113,9 +113,8 @@ struct CardMode: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack(spacing: 0) {
                 VStack() {
-                    Spacer()
                     VStack(alignment: .leading) {
                         ZStack(){
                             ForEach(0..<cardsToDisplay, id: \.self) { index in
@@ -134,7 +133,6 @@ struct CardMode: View {
                     }
                     .onTapGesture { drawCards() }
                     .padding(.trailing, CGFloat((geometry.size.width * 0.065) * CGFloat((cardsToDisplay - 1))))
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.65)
                     Text(pointValueStr)
                         .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
                         .apply {
@@ -145,10 +143,9 @@ struct CardMode: View {
                                 $0.animation(reduceMotion ? .none : .easeInOut(duration: 0.25), value: pointValueStr)
                             }
                         }
-                    Spacer()
                 }
-                Spacer()
-                VStack() {
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 10) {
                     if (showDrawHint && settingsData.showModeHints) {
                         Text("Tap the card to draw a hand")
                             .font(.title3)
@@ -160,14 +157,17 @@ struct CardMode: View {
                         }
                     }
                     .frame(width: 300)
-                    .padding(.bottom, 10)
                     .disabled(drawTask != nil)
                     Button(action:{
                         drawCards()
                     }) {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "play.fill")
+                            }
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Draw a hand")
@@ -175,9 +175,13 @@ struct CardMode: View {
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "clear.fill")
+                        Image(systemName: "circle")
+                            .opacity(0)
                             .padding(.horizontal, geometry.size.width * 0.2)
                             .padding(.vertical, 10)
+                            .overlay {
+                                Image(systemName: "clear.fill")
+                            }
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset drawn hand")
@@ -188,9 +192,9 @@ struct CardMode: View {
                     }, message: {
                         Text("Are you sure you want to reset the generator?")
                     })
-                    .padding(.bottom, 10)
                 }
             }
+            .padding(.bottom, 10)
         }
         .navigationTitle("Cards")
     }

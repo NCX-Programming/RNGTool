@@ -12,7 +12,6 @@ struct History: View {
     @State private var confirmReset: Bool = false
     
     func clearHistory() {
-        print("history cleared")
         settingsData.historyTable.removeAll()
         confirmReset = false
     }
