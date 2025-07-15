@@ -18,6 +18,7 @@ struct DiceMode: View {
     @State private var diceImages: [String] = Array(repeating: "d1", count: 9)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
+    @State private var showingExplainer: Bool = false
     @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
@@ -78,10 +79,10 @@ struct DiceMode: View {
                 VStack() {
                     // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
                     // for that row in it.
-                    ForEach(0..<Int((Double(numDice) / 3.0).rounded(.up)), id: \.self) { index in
+                    ForEach(getItemGrid(numItems: numDice, numCols: 3), id: \.self) { row in
                         HStack() {
-                            ForEach((3 * index)..<(numDice > (3 * (index + 1)) ? numDice - (numDice - (3 * (index + 1))) : numDice), id: \.self) { innerIndex in
-                                Image(diceImages[innerIndex])
+                            ForEach(row, id: \.self) { index in
+                                Image(diceImages[index])
                                     .resizable()
                                     .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                             }
@@ -157,6 +158,19 @@ struct DiceMode: View {
         .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Dice")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Dice Mode", isPresented: $showingExplainer, actions: {}, message: {
+            DiceExplainer()
+        })
     }
 }
 

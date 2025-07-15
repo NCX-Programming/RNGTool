@@ -50,3 +50,16 @@ extension View {
 extension View {
     func apply<V: View>(@ViewBuilder _ block: (Self) -> V) -> V { block(self) }
 }
+
+// Helper function to build a map of the item grids because the old method of having all the math in my UI code was overwhelming
+// the compiler and preventing type-checking from succeeding. Used for both dice and marbles on macOS and iOS.
+func getItemGrid(numItems: Int, numCols: Int) -> [[Int]] { // Side-note: I like Swift's Python-esque return type annotations. I feel right at home.
+    let numRows = Int((Double(numItems) / Double(numCols)).rounded(.up))
+    // And then this kinda feels like Rust's mapping. Am I doing this correctly? I hope so.
+    return (0..<numRows).map { row in
+        let startIdx = (numCols * row)
+        // This math HAS to be improvable somehow. I just kinda forgot what's happening in it.
+        let endIdx = (numItems > (numCols * (row + 1)) ? numItems - (numItems - (numCols * (row + 1))) : numItems)
+        return Array(startIdx..<endIdx)
+    }
+}

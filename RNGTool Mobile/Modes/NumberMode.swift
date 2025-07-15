@@ -16,6 +16,7 @@ struct NumberMode: View {
     @State private var minNumber: Int = 0
     @State private var engine: CHHapticEngine?
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     // Enum for the @FocusState used to dismiss the keyboard when a button is pressed
     enum Field {
         case maxNumber
@@ -125,6 +126,19 @@ struct NumberMode: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        showingExplainer = true
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.accentColor)
+                    }
+                }
+            }
+            .alert("Number Mode", isPresented: $showingExplainer, actions: {}, message: {
+                NumberExplainer()
+            })
         }
     }
 }

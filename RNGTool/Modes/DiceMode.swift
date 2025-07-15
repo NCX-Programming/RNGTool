@@ -12,6 +12,7 @@ struct DiceMode: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     @State private var randomNumbers: [Int] = [0]
     @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
     @State private var rollCount: Int = 0
@@ -74,10 +75,10 @@ struct DiceMode: View {
                 VStack() {
                     // Draw the dice in a 6x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
                     // for that row in it.
-                    ForEach(0..<Int((Double(numDice) / 6.0).rounded(.up)), id: \.self) { index in
+                    ForEach(getItemGrid(numItems: numDice, numCols: 6), id: \.self) { row in
                         HStack() {
-                            ForEach((6 * index)..<(numDice > (6 * (index + 1)) ? numDice - (numDice - (6 * (index + 1))) : numDice), id: \.self) { innerIndex in
-                                Image(diceImages[innerIndex])
+                            ForEach(row, id: \.self) { index in
+                                Image(diceImages[index])
                                     .resizable()
                                     .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                             }
@@ -145,6 +146,19 @@ struct DiceMode: View {
             .padding(.bottom, 10)
         }
         .navigationTitle("Dice")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Dice Mode", isPresented: $showingExplainer, actions: {}, message: {
+            DiceExplainer()
+        })
     }
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -163,6 +163,10 @@
 		37FC9819276FF1D20040BFB9 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		37746AFF2E24B91100394548 /* Explainers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Explainers; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		3700F27A26DD256D001BEE7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -307,6 +311,7 @@
 		37BF55B9280C92A1002425B2 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				37746AFF2E24B91100394548 /* Explainers */,
 				37B86DFB2D6E2776008821C3 /* Components */,
 				37DB700426FC03FE0079F3E7 /* Settings */,
 				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
@@ -401,6 +406,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				37746AFF2E24B91100394548 /* Explainers */,
+			);
 			name = RNGTool;
 			productName = RNGTool;
 			productReference = 3700F27D26DD256D001BEE7A /* RNGTool.app */;
@@ -420,6 +428,9 @@
 			dependencies = (
 				37F059182E1B3EEA00D5C47A /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				37746AFF2E24B91100394548 /* Explainers */,
+			);
 			name = "RNGTool Mobile";
 			productName = "RNGTool Mobile";
 			productReference = 3725BF7727697DC900A1B4E8 /* RNGTool.app */;
@@ -436,6 +447,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				37746AFF2E24B91100394548 /* Explainers */,
 			);
 			name = RNGToolWrist;
 			productName = RNGToolWrist;
@@ -622,7 +636,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 203;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -655,7 +669,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 203;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -687,7 +701,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -730,7 +744,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -895,7 +909,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -932,7 +946,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";

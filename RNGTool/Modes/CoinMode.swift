@@ -16,6 +16,7 @@ struct CoinMode: View {
     @State private var numCoins: Int = 1
     @State private var flipCount: Int = 0
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     @State private var flipTask: Task<Void, Never>? = nil
     
     func resetGen() {
@@ -140,10 +141,23 @@ struct CoinMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
-                .padding(.bottom, 10)
             }
-            .navigationTitle("Coins")
+            .padding(.bottom, 10)
         }
+        .navigationTitle("Coins")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Coin Mode", isPresented: $showingExplainer, actions: {}, message: {
+            CoinExplainer()
+        })
     }
 }
 

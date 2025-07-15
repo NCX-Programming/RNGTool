@@ -18,6 +18,7 @@ struct CardMode: View {
     @State private var numCards: Int = 1
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     @State private var cardImages: [String] = Array(repeating: "c1", count: 7)
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
@@ -207,6 +208,19 @@ struct CardMode: View {
         .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Cards")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Card Mode", isPresented: $showingExplainer, actions: {}, message: {
+            CardExplainer()
+        })
     }
 }
 

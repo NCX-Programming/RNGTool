@@ -17,6 +17,7 @@ struct MarbleMode: View {
     @State private var rollCount: Int = 0
     @State private var randomLetters: [String] = Array(repeating: "A", count: 9)
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     @State private var showRollHint: Bool = true
     @State private var letters: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     @State private var rollTask: Task<Void, Never>? = nil
@@ -74,11 +75,11 @@ struct MarbleMode: View {
                 VStack() {
                     // Same as the dice, draw the marbles in a 3x3 grid by creating a row for each multiple of 3 marbles, and then only
                     // drawing marbles intended for that row in it.
-                    ForEach(0..<Int((Double(numMarbles) / 3.0).rounded(.up)), id: \.self) { index in
+                    ForEach(getItemGrid(numItems: numMarbles, numCols: 3), id: \.self) { row in
                         HStack() {
-                            ForEach((3 * index)..<(numMarbles > (3 * (index + 1)) ? numMarbles - (numMarbles - (3 * (index + 1))) : numMarbles), id: \.self) { innerIndex in
+                            ForEach(row, id: \.self) { index in
                                 ZStack() {
-                                    Text("\(randomLetters[innerIndex])")
+                                    Text("\(randomLetters[index])")
                                         // Font calculations are split because using a larger portion of the screen width on iPhone
                                         // produces a better result compared to iPad.
                                         .font(.system(size: (UIDevice.current.userInterfaceIdiom == .pad) ? (geometry.size.width / 14) : (geometry.size.width / 10)))
@@ -165,6 +166,19 @@ struct MarbleMode: View {
         .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Marbles")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Marble Mode", isPresented: $showingExplainer, actions: {}, message: {
+            MarbleExplainer()
+        })
     }
 }
 

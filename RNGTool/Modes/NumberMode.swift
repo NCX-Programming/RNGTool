@@ -19,6 +19,7 @@ struct NumberMode: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @SceneStorage("NumberMode.randomNumber") private var randomNumber = 0
     @State private var confirmReset: Bool = false
+    @State private var showingExplainer: Bool = false
     @State private var maxNumber: Int = 0
     @State private var minNumber: Int = 0
     
@@ -112,6 +113,19 @@ struct NumberMode: View {
             .padding(.bottom, 10)
         }
         .navigationTitle("Numbers")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Number Mode", isPresented: $showingExplainer, actions: {}, message: {
+            NumberExplainer()
+        })
     }
 }
 
