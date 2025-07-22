@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "tvOS Die Foreground.svg",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

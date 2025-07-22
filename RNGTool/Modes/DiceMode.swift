@@ -99,23 +99,17 @@ struct DiceMode: View {
                         Text("Click the dice to roll")
                             .foregroundColor(.secondary)
                     }
-                    Picker("Number of dice:", selection: $numDice){
+                    Picker("Number of Dice:", selection: $numDice){
                         ForEach(1...18, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
-                    .frame(width: 300)
+                    .frame(maxWidth: .infinity)
                     .disabled(rollTask != nil)
                     Button(action:{
                         startRoll()
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .help("Roll the dice")
                     .buttonStyle(LargeSquareAccentButton())
@@ -124,13 +118,7 @@ struct DiceMode: View {
                         if (settingsData.confirmGenResets) { confirmReset = true }
                         else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .help("Reset the dice roll")
                     .buttonStyle(LargeSquareAccentButton())
@@ -142,9 +130,10 @@ struct DiceMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
+                .frame(width: geometry.size.width * 0.4)
             }
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
         .navigationTitle("Dice")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "tvOS Icon Background (No Transparency).png",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

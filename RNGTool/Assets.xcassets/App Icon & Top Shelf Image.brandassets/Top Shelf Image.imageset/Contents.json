@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "tvOS Top Shelf (No Transparency).png",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

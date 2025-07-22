@@ -98,24 +98,17 @@ struct CoinMode: View {
                 VStack(spacing: 10) {
                     Text("Total Coins Flipped: \(coinCount)")
                         .font(.headline)
-                    Picker("Number of coins:", selection: $numCoins){
+                    Picker("Number of Coins:", selection: $numCoins){
                         ForEach(1...100, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
-                    .frame(width: 300)
-                    .padding(.horizontal, geometry.size.width * 0.075)
+                    .frame(maxWidth: .infinity)
                     .disabled(flipTask != nil)
                     Button(action:{
                         flipCoins()
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Flip a coin")
@@ -123,13 +116,7 @@ struct CoinMode: View {
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset coin flips")
@@ -141,9 +128,10 @@ struct CoinMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
+                .frame(width: geometry.size.width * 0.4)
             }
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
         .navigationTitle("Coins")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

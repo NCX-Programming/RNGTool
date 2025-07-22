@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "tvOS Top Shelf Wide.png",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

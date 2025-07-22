@@ -58,13 +58,13 @@ struct NumberMode: View {
                         Text("Maximum: ")
                             .onAppear { maxNumber = settingsData.maxNumberDefault } // Load default maximum
                         TextField("Enter a number", value: $maxNumber, format: .number)
-                            .frame(width: 300)
+                            .frame(maxWidth: .infinity)
                     }
                     HStack() {
                         Text("Minimum: ")
                             .onAppear { minNumber = settingsData.minNumberDefault } // Load default minimum
                         TextField("Enter a number", value: $minNumber, format: .number)
-                            .frame(width: 300)
+                            .frame(maxWidth: .infinity)
                     }
                     Button(action:{
                         if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
@@ -73,13 +73,7 @@ struct NumberMode: View {
                         else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .help("Generate a number")
                     .buttonStyle(LargeSquareAccentButton())
@@ -91,13 +85,7 @@ struct NumberMode: View {
                             resetGen()
                         }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .help("Reset custom values and output")
                     .buttonStyle(LargeSquareAccentButton())
@@ -109,9 +97,10 @@ struct NumberMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
+                .frame(width: geometry.size.width * 0.4)
             }
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
         .navigationTitle("Numbers")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

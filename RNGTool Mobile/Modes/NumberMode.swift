@@ -61,14 +61,14 @@ struct NumberMode: View {
                     TextField("Enter a number", value: $maxNumber, format: .number)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
-                        .padding(.horizontal, geometry.size.width * 0.1)
+                        .frame(maxWidth: .infinity)
                         .focused($fieldFocused, equals: .maxNumber)
                         .onAppear { maxNumber = settingsData.maxNumberDefault } // Load default maximum
                     Text("Minimum")
                     TextField("Enter a number", value: $minNumber, format: .number)
                         .keyboardType(.numberPad)
                         .textFieldStyle(.roundedBorder)
-                        .padding(.horizontal, geometry.size.width * 0.1)
+                        .frame(maxWidth: .infinity)
                         .focused($fieldFocused, equals: .minNumber)
                         .onAppear { minNumber = settingsData.minNumberDefault } // Load default minimum
                     Button(action:{
@@ -80,13 +80,7 @@ struct NumberMode: View {
                         else { randomNumber = Int.random(in: minNumber...maxNumber) }
                         addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Generate a number")
@@ -95,13 +89,7 @@ struct NumberMode: View {
                         fieldFocused = .none // Dismisses the keyboard, if it's open
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }                            
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset custom values and output")
@@ -113,33 +101,34 @@ struct NumberMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
-                .padding(.bottom, 10)
+                .frame(width: geometry.size.width * 0.8)
             }
-            .onAppear { prepareHaptics(engine: &engine) }
-            .navigationTitle("Numbers")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") {
-                        fieldFocused = .none // Allows you to always dismiss the keyboard instead of needing to press generate or clear
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        showingExplainer = true
-                    }) {
-                        Image(systemName: "info.circle")
-                            .foregroundColor(.accentColor)
-                    }
-                }
-            }
-            .alert("Number Mode", isPresented: $showingExplainer, actions: {}, message: {
-                NumberExplainer()
-            })
         }
+        .padding(.bottom, 10)
+        .onAppear { prepareHaptics(engine: &engine) }
+        .navigationTitle("Numbers")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    fieldFocused = .none // Allows you to always dismiss the keyboard instead of needing to press generate or clear
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .alert("Number Mode", isPresented: $showingExplainer, actions: {}, message: {
+            NumberExplainer()
+        })
     }
 }
 

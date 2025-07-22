@@ -152,23 +152,17 @@ struct CardMode: View {
                             .font(.title3)
                             .foregroundColor(.secondary)
                     }
-                    Picker("Number of cards:", selection: $numCards) {
+                    Picker("Number of Cards:", selection: $numCards) {
                         ForEach(1...12, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
-                    .frame(width: 300)
+                    .frame(maxWidth: .infinity)
                     .disabled(drawTask != nil)
                     Button(action:{
                         drawCards()
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Draw a hand")
@@ -176,13 +170,7 @@ struct CardMode: View {
                     Button(action:{
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.2)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset drawn hand")
@@ -194,9 +182,10 @@ struct CardMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
+                .frame(width: geometry.size.width * 0.4)
             }
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
         .navigationTitle("Cards")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {

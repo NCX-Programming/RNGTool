@@ -157,25 +157,19 @@ struct CardMode: View {
                             .font(.title3)
                             .foregroundColor(.secondary)
                     }
-                    Text("Number of cards")
-                    Picker("Number of cards", selection: $numCards){
+                    Text("Number of Cards")
+                    Picker("Number of Cards", selection: $numCards){
                         ForEach(1...7, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
                     .pickerStyle(.segmented)
-                    .padding(.horizontal, geometry.size.width * 0.075)
+                    .frame(maxWidth: .infinity)
                     .disabled(drawTask != nil)
                     Button(action:{
                         drawCards()
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Draw a hand")
@@ -184,13 +178,7 @@ struct CardMode: View {
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }     
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset drawn hand")
@@ -202,9 +190,10 @@ struct CardMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
+                .frame(width: geometry.size.width * 0.8)
             }
-            .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
         .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Cards")
         .navigationBarTitleDisplayMode(.inline)

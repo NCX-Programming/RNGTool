@@ -11,20 +11,90 @@ import SwiftUI
 
 // This is the large button style originally used in the number mode redesign
 struct LargeSquareAccentButton: ButtonStyle {
+    // Need to check if the button is enabled so that it can be styled appropriately when disabled on macOS.
+    @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.isFocused) private var isFocused
+    
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.system(size: 20, weight:.bold, design: .rounded))
-            .foregroundColor(.white)
-            // Apply a tasteful gradient, but unfortunately only on iOS 16.0+ (sorry).
-            .apply {
-                if #available(iOS 16.0, macOS 13.0, watchOS 9.0, *) {
-                    $0.background(Color.accentColor.gradient)
+        Group() {
+            configuration.label
+                .font(.system(size: 20, weight:.bold, design: .rounded))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .foregroundColor(foregroundColor)
+                #if os(tvOS)
+                .foregroundColor(isFocused ? .black : .white)
+                .background(isFocused ? Color.white.gradient : Color.accentColor.gradient)
+                #else
+                // Apply a tasteful gradient, but unfortunately only on iOS 16.0+/macOS 13.0+/watchOS 9.0+ (sorry).
+                .apply {
+                    if #available(iOS 16.0, macOS 13.0, watchOS 9.0, *) {
+                        $0.background(Color.accentColor.gradient)
+                    }
+                    else {
+                        $0.background(Color.accentColor)
+                    }
                 }
-                else {
-                    $0.background(Color.accentColor)
-                }
+                #endif
+        }
+        .cornerRadius(10)
+        .opacity(opacity)
+        .scaleEffect(scale(configuration))
+        .shadow(color: shadowColor, radius: 20)
+        .animation(.easeInOut(duration: 0.2), value: isFocused)
+        #if os(tvOS)
+        .focusable(true)
+        #endif
+    }
+    
+    // This creates a custom disabled effect for the buttons on macOS only.
+    private var opacity: Double {
+        #if os(macOS)
+        return isEnabled ? 1.0 : 0.5
+        #else
+        return 1.0
+        #endif
+    }
+
+    // Makes the foreground black while focused on tvOS.
+    private var foregroundColor: Color {
+        #if os(tvOS)
+        isFocused ? .black : .white
+        #else
+        .white
+        #endif
+    }
+
+    // Applies the correct scaling for focused and then pressed on tvOS.
+    private func scale(_ configuration: Configuration) -> CGFloat {
+        #if os(tvOS)
+        return (configuration.isPressed ? 0.9 : 1.0) * (isFocused ? 1.05 : 1.0)
+        #else
+        return 1.0
+        #endif
+    }
+
+    // Adds a shadow while the button is focused on tvOS.
+    private var shadowColor: Color {
+        #if os(tvOS)
+        return .black.opacity(isFocused ? 0.8 : 0)
+        #else
+        return .clear
+        #endif
+    }
+}
+
+// Custom view that allows me to show monospace symbols in places like the generate/reset buttons. For some reason there isn't a way to
+// do this directly, so this view uses the full-size circle symbol and then overlays the intended symbol over it.
+struct MonospaceSymbol: View {
+    let symbol: String
+    
+    var body: some View {
+        Image(systemName: "circle")
+            .opacity(0)
+            .overlay {
+                Image(systemName: symbol)
             }
-            .cornerRadius(10)
     }
 }
 

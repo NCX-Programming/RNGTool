@@ -15,15 +15,17 @@
 		3707EC452788711200E48CFA /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707EC442788711200E48CFA /* History.swift */; };
 		3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
 		371A2FF12777A7A500B94F66 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A2FF02777A7A500B94F66 /* History.swift */; };
+		371F01602E2B456600B710EE /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
+		371F01662E2B482E00B710EE /* GlobalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DFC2D6E277C008821C3 /* GlobalViews.swift */; };
+		371F01672E2B487500B710EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
 		3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */; };
 		3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
 		3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		3729936628B5BA3600EDF9DE /* NumKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729936528B5BA3600EDF9DE /* NumKeyboard.swift */; };
-		3735F61F280FA003009EA45F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3735F61E280FA003009EA45F /* Haptics.swift */; };
 		374B0EE527001749006CCD69 /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		374B0EE727001761006CCD69 /* NumberSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE627001761006CCD69 /* NumberSettings.swift */; };
-		374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EEB27001995006CCD69 /* MarbleMode.swift */; };
+		37515D472E2A0A8D00C9D13B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759793D27E568BF0013D365 /* UpdateCheck.swift */; };
 		375C2A0B2778055E00904A03 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375C2A0A2778055E00904A03 /* Launch Screen.storyboard */; };
 		37688CDD27713837003B64CB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
@@ -35,9 +37,6 @@
 		37A8B4D6278A8EF600A4D08F /* DevMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B4D5278A8EF600A4D08F /* DevMode.swift */; };
 		37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
 		37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB3276FCFC700F753FC /* SettingsData.swift */; };
-		37AB5BB8276FE46D00F753FC /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AB5BB7276FE46D00F753FC /* NumberMode.swift */; };
-		37B86DF22D6E244B008821C3 /* CoinMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DF12D6E244B008821C3 /* CoinMode.swift */; };
-		37B86DFA2D6E2741008821C3 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DF92D6E273F008821C3 /* Views.swift */; };
 		37B86DFD2D6E277E008821C3 /* GlobalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DFC2D6E277C008821C3 /* GlobalViews.swift */; };
 		37B86DFE2D6E277E008821C3 /* GlobalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DFC2D6E277C008821C3 /* GlobalViews.swift */; };
 		37B86DFF2D6E277E008821C3 /* GlobalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B86DFC2D6E277C008821C3 /* GlobalViews.swift */; };
@@ -45,18 +44,12 @@
 		37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B0EE427001749006CCD69 /* CardSettings.swift */; };
 		37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37010B962702697B00E32C35 /* MarbleSettings.swift */; };
 		37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371301692719165A0061D344 /* AdvancedSettings.swift */; };
-		37D7771626E56F31005B2C45 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7771526E56F31005B2C45 /* CardMode.swift */; };
 		37D8BF6828C2BF8700EFC2DC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */; };
 		37D8BF6928C2BF8700EFC2DC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */; };
 		37D8BF6A28C2BF8700EFC2DC /* GeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700226FC03F90079F3E7 /* DiceSettings.swift */; };
 		37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B7182D61347F007A91C5 /* ContentView.swift */; };
-		37E7DC5B2D6177E80054D341 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DC5A2D6177E80054D341 /* Views.swift */; };
-		37E7DC5E2D619ABC0054D341 /* CoinMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DC5C2D619ABC0054D341 /* CoinMode.swift */; };
-		37E7DC612D62AEB20054D341 /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DC602D62AEAD0054D341 /* Motion.swift */; };
-		37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9726DD719A000BF61B /* NumberMode.swift */; };
-		37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97B9F26DD75C6000BF61B /* DiceMode.swift */; };
 		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		37E9F43C28C0265E0098037D /* RNGToolWrist-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */; };
 		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
@@ -75,9 +68,6 @@
 		37F5723427A8C583007D29FB /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723327A8C583007D29FB /* CardMode.swift */; };
 		37F5723627A8C58D007D29FB /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723527A8C58D007D29FB /* MarbleMode.swift */; };
 		37F5723827A8C59B007D29FB /* NumberMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F5723727A8C59B007D29FB /* NumberMode.swift */; };
-		37FC9815276FEAD20040BFB9 /* DiceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9814276FEAD20040BFB9 /* DiceMode.swift */; };
-		37FC9818276FEE600040BFB9 /* CardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9817276FEE600040BFB9 /* CardMode.swift */; };
-		37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC9819276FF1D20040BFB9 /* MarbleMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,10 +111,9 @@
 		3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3729936528B5BA3600EDF9DE /* NumKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumKeyboard.swift; sourceTree = "<group>"; };
 		3731BC1F2829E90D00E5F9D2 /* RNGTool Mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RNGTool Mobile.entitlements"; sourceTree = "<group>"; };
-		3735F61E280FA003009EA45F /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		374B0EE427001749006CCD69 /* CardSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSettings.swift; sourceTree = "<group>"; };
 		374B0EE627001761006CCD69 /* NumberSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberSettings.swift; sourceTree = "<group>"; };
-		374B0EEB27001995006CCD69 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
+		37515D3C2E2A0A3300C9D13B /* RNGTool TV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RNGTool TV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3759793D27E568BF0013D365 /* UpdateCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheck.swift; sourceTree = "<group>"; };
 		3759793F27E56AF30013D365 /* RNGToolWrist WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RNGToolWrist WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		375C2A0A2778055E00904A03 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -133,21 +122,12 @@
 		377D1E352D70A722005CB600 /* CoinMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMode.swift; sourceTree = "<group>"; };
 		37A8B4D5278A8EF600A4D08F /* DevMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevMode.swift; sourceTree = "<group>"; };
 		37AB5BB3276FCFC700F753FC /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
-		37AB5BB7276FE46D00F753FC /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
-		37B86DF12D6E244B008821C3 /* CoinMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMode.swift; sourceTree = "<group>"; };
-		37B86DF92D6E273F008821C3 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
 		37B86DFC2D6E277C008821C3 /* GlobalViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViews.swift; sourceTree = "<group>"; };
-		37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RNGTool-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
-		37D7771526E56F31005B2C45 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
+		37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "RNGTool-Mobile-Info.plist"; path = "../RNGTool-Mobile-Info.plist"; sourceTree = "<group>"; };
 		37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettings.swift; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37DB700226FC03F90079F3E7 /* DiceSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSettings.swift; sourceTree = "<group>"; };
 		37E2B7182D61347F007A91C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		37E7DC5A2D6177E80054D341 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		37E7DC5C2D619ABC0054D341 /* CoinMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoinMode.swift; path = "RNGTool Mobile/Modes/CoinMode.swift"; sourceTree = SOURCE_ROOT; };
-		37E7DC602D62AEAD0054D341 /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
-		37E97B9726DD719A000BF61B /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
-		37E97B9F26DD75C6000BF61B /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
 		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
 		37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RNGToolWrist-Info.plist"; sourceTree = "<group>"; };
 		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -158,13 +138,15 @@
 		37F5723327A8C583007D29FB /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
 		37F5723527A8C58D007D29FB /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 		37F5723727A8C59B007D29FB /* NumberMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberMode.swift; sourceTree = "<group>"; };
-		37FC9814276FEAD20040BFB9 /* DiceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceMode.swift; sourceTree = "<group>"; };
-		37FC9817276FEE600040BFB9 /* CardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMode.swift; sourceTree = "<group>"; };
-		37FC9819276FF1D20040BFB9 /* MarbleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarbleMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		37515D3D2E2A0A3300C9D13B /* RNGTool TV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "RNGTool TV"; sourceTree = "<group>"; };
 		37746AFF2E24B91100394548 /* Explainers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Explainers; sourceTree = "<group>"; };
+		37E20E102E2F2BF200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
+		37E20E192E2F2BF800E8C2A7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		37E20E222E2F3B9200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
+		37E20E292E2F3B9600E8C2A7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +158,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3725BF7427697DC900A1B4E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37515D392E2A0A3300C9D13B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -195,8 +184,8 @@
 		3700F27E26DD256D001BEE7A /* RNGTool */ = {
 			isa = PBXGroup;
 			children = (
-				37B86DF82D6E2738008821C3 /* Components */,
-				37E97B9926DD71A2000BF61B /* Modes */,
+				37E20E292E2F3B9600E8C2A7 /* Components */,
+				37E20E222E2F3B9200E8C2A7 /* Modes */,
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				371A2FF02777A7A500B94F66 /* History.swift */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
@@ -220,8 +209,8 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
-				37E7DC5F2D62AE4C0054D341 /* Components */,
-				37AB5BB6276FE42400F753FC /* Modes */,
+				37E20E192E2F2BF800E8C2A7 /* Components */,
+				37E20E102E2F2BF200E8C2A7 /* Modes */,
 				37688CDC27713837003B64CB /* About.swift */,
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
 				37A8B4D5278A8EF600A4D08F /* DevMode.swift */,
@@ -250,6 +239,7 @@
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
 				37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */,
+				37515D3D2E2A0A3300C9D13B /* RNGTool TV */,
 				379A29ED2D5EB0C000A90C5C /* Frameworks */,
 				3794433226D912B500900842 /* Products */,
 			);
@@ -261,6 +251,7 @@
 				3700F27D26DD256D001BEE7A /* RNGTool.app */,
 				3725BF7727697DC900A1B4E8 /* RNGTool.app */,
 				37F571F827A8BA7A007D29FB /* RNGTool.app */,
+				37515D3C2E2A0A3300C9D13B /* RNGTool TV.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -272,30 +263,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		37AB5BB6276FE42400F753FC /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				37AB5BB7276FE46D00F753FC /* NumberMode.swift */,
-				37E7DC5C2D619ABC0054D341 /* CoinMode.swift */,
-				37FC9814276FEAD20040BFB9 /* DiceMode.swift */,
-				37FC9817276FEE600040BFB9 /* CardMode.swift */,
-				37FC9819276FF1D20040BFB9 /* MarbleMode.swift */,
-			);
-			path = Modes;
-			sourceTree = "<group>";
-		};
 		37B08FD52D6FEFA2003FBBBF /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				3729936528B5BA3600EDF9DE /* NumKeyboard.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		37B86DF82D6E2738008821C3 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				37B86DF92D6E273F008821C3 /* Views.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -333,28 +304,6 @@
 				37D8BF6728C2BF8700EFC2DC /* GeneralSettings.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		37E7DC5F2D62AE4C0054D341 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				37E7DC602D62AEAD0054D341 /* Motion.swift */,
-				3735F61E280FA003009EA45F /* Haptics.swift */,
-				37E7DC5A2D6177E80054D341 /* Views.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		37E97B9926DD71A2000BF61B /* Modes */ = {
-			isa = PBXGroup;
-			children = (
-				37E97B9726DD719A000BF61B /* NumberMode.swift */,
-				37B86DF12D6E244B008821C3 /* CoinMode.swift */,
-				37E97B9F26DD75C6000BF61B /* DiceMode.swift */,
-				37D7771526E56F31005B2C45 /* CardMode.swift */,
-				374B0EEB27001995006CCD69 /* MarbleMode.swift */,
-			);
-			path = Modes;
 			sourceTree = "<group>";
 		};
 		37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
@@ -408,6 +357,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				37746AFF2E24B91100394548 /* Explainers */,
+				37E20E222E2F3B9200E8C2A7 /* Modes */,
+				37E20E292E2F3B9600E8C2A7 /* Components */,
 			);
 			name = RNGTool;
 			productName = RNGTool;
@@ -430,10 +381,35 @@
 			);
 			fileSystemSynchronizedGroups = (
 				37746AFF2E24B91100394548 /* Explainers */,
+				37E20E102E2F2BF200E8C2A7 /* Modes */,
+				37E20E192E2F2BF800E8C2A7 /* Components */,
 			);
 			name = "RNGTool Mobile";
 			productName = "RNGTool Mobile";
 			productReference = 3725BF7727697DC900A1B4E8 /* RNGTool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		37515D3B2E2A0A3300C9D13B /* RNGTool TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37515D462E2A0A3400C9D13B /* Build configuration list for PBXNativeTarget "RNGTool TV" */;
+			buildPhases = (
+				37515D382E2A0A3300C9D13B /* Sources */,
+				37515D392E2A0A3300C9D13B /* Frameworks */,
+				37515D3A2E2A0A3300C9D13B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				37515D3D2E2A0A3300C9D13B /* RNGTool TV */,
+				37746AFF2E24B91100394548 /* Explainers */,
+			);
+			name = "RNGTool TV";
+			packageProductDependencies = (
+			);
+			productName = "RNGTool TV";
+			productReference = 37515D3C2E2A0A3300C9D13B /* RNGTool TV.app */;
 			productType = "com.apple.product-type.application";
 		};
 		37F571F727A8BA7A007D29FB /* RNGToolWrist */ = {
@@ -463,7 +439,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					3700F27C26DD256D001BEE7A = {
@@ -471,6 +447,9 @@
 					};
 					3725BF7627697DC900A1B4E8 = {
 						CreatedOnToolsVersion = 13.2;
+					};
+					37515D3B2E2A0A3300C9D13B = {
+						CreatedOnToolsVersion = 16.4;
 					};
 					37F571F727A8BA7A007D29FB = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -493,6 +472,7 @@
 				3700F27C26DD256D001BEE7A /* RNGTool */,
 				3725BF7627697DC900A1B4E8 /* RNGTool Mobile */,
 				37F571F727A8BA7A007D29FB /* RNGToolWrist */,
+				37515D3B2E2A0A3300C9D13B /* RNGTool TV */,
 			);
 		};
 /* End PBXProject section */
@@ -517,6 +497,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		37515D3A2E2A0A3300C9D13B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37515D472E2A0A8D00C9D13B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37F571F627A8BA7A007D29FB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -534,17 +522,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B86DF22D6E244B008821C3 /* CoinMode.swift in Sources */,
 				371A2FF12777A7A500B94F66 /* History.swift in Sources */,
 				3700F28226DD256D001BEE7A /* ContentView.swift in Sources */,
 				37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */,
 				3713016A2719165A0061D344 /* AdvancedSettings.swift in Sources */,
 				37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */,
-				37D7771626E56F31005B2C45 /* CardMode.swift in Sources */,
 				374B0EE527001749006CCD69 /* CardSettings.swift in Sources */,
-				37B86DFA2D6E2741008821C3 /* Views.swift in Sources */,
-				37E97BA026DD75C6000BF61B /* DiceMode.swift in Sources */,
-				37E97B9826DD719A000BF61B /* NumberMode.swift in Sources */,
 				37AB5BB4276FCFC700F753FC /* SettingsData.swift in Sources */,
 				37DB700326FC03F90079F3E7 /* DiceSettings.swift in Sources */,
 				3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */,
@@ -552,7 +535,6 @@
 				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
 				37D8BF6828C2BF8700EFC2DC /* GeneralSettings.swift in Sources */,
 				37B86DFF2D6E277E008821C3 /* GlobalViews.swift in Sources */,
-				374B0EEC27001995006CCD69 /* MarbleMode.swift in Sources */,
 				37010B972702697B00E32C35 /* MarbleSettings.swift in Sources */,
 				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
 			);
@@ -562,29 +544,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3735F61F280FA003009EA45F /* Haptics.swift in Sources */,
 				37AB5BB5276FCFC700F753FC /* SettingsData.swift in Sources */,
-				37FC9815276FEAD20040BFB9 /* DiceMode.swift in Sources */,
 				376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */,
 				37B86DFE2D6E277E008821C3 /* GlobalViews.swift in Sources */,
 				3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */,
-				37E7DC5E2D619ABC0054D341 /* CoinMode.swift in Sources */,
 				37D00E25276AE0F000968BEE /* AdvancedSettings.swift in Sources */,
 				37D00E23276ADEAC00968BEE /* CardSettings.swift in Sources */,
 				37D00E22276ADD6600968BEE /* DiceSettings.swift in Sources */,
-				37FC9818276FEE600040BFB9 /* CardMode.swift in Sources */,
 				37A8B4D6278A8EF600A4D08F /* DevMode.swift in Sources */,
 				37D00E24276ADF5C00968BEE /* MarbleSettings.swift in Sources */,
-				37FC981A276FF1D20040BFB9 /* MarbleMode.swift in Sources */,
 				3707EC452788711200E48CFA /* History.swift in Sources */,
 				37688CDD27713837003B64CB /* About.swift in Sources */,
-				37E7DC612D62AEB20054D341 /* Motion.swift in Sources */,
 				37D8BF6928C2BF8700EFC2DC /* GeneralSettings.swift in Sources */,
 				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
 				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
-				37E7DC5B2D6177E80054D341 /* Views.swift in Sources */,
 				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
-				37AB5BB8276FE46D00F753FC /* NumberMode.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37515D382E2A0A3300C9D13B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371F01672E2B487500B710EE /* Utilities.swift in Sources */,
+				371F01662E2B482E00B710EE /* GlobalViews.swift in Sources */,
+				371F01602E2B456600B710EE /* SettingsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,7 +620,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 203;
+				CURRENT_PROJECT_VERSION = 204;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -650,7 +634,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -669,7 +653,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 203;
+				CURRENT_PROJECT_VERSION = 204;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -683,7 +667,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -701,7 +685,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -722,7 +706,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -744,7 +728,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -765,7 +749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -774,6 +758,76 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		37515D442E2A0A3400C9D13B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95J8WZ4TN8;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RNGTool;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 3.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
+			};
+			name = Debug;
+		};
+		37515D452E2A0A3400C9D13B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95J8WZ4TN8;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RNGTool;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 3.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -909,7 +963,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -924,7 +978,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -946,7 +1000,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -961,7 +1015,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.1.0;
+				MARKETING_VERSION = 3.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -991,6 +1045,15 @@
 			buildConfigurations = (
 				3725BF8227697DCC00A1B4E8 /* Debug */,
 				3725BF8327697DCC00A1B4E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37515D462E2A0A3400C9D13B /* Build configuration list for PBXNativeTarget "RNGTool TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37515D442E2A0A3400C9D13B /* Debug */,
+				37515D452E2A0A3400C9D13B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

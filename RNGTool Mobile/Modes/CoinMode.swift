@@ -108,8 +108,8 @@ struct CoinMode: View {
                     Text("Total Coins Flipped: \(coinCount)")
                         .font(.headline)
                     HStack() {
-                        Text("Number of coins")
-                        Picker("Number of coins", selection: $numCoins){
+                        Text("Number of Coins")
+                        Picker("Number of Coins", selection: $numCoins){
                             ForEach(1...50, id: \.self) { index in
                                 Text("\(index)").tag(index)
                             }
@@ -120,13 +120,7 @@ struct CoinMode: View {
                     Button(action:{
                         flipCoins()
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "play.fill")
-                            }
+                        MonospaceSymbol(symbol: "play.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Flip some coins")
@@ -135,13 +129,7 @@ struct CoinMode: View {
                         playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
-                        Image(systemName: "circle")
-                            .opacity(0)
-                            .padding(.horizontal, geometry.size.width * 0.4)
-                            .padding(.vertical, 10)
-                            .overlay {
-                                Image(systemName: "clear.fill")
-                            }     
+                        MonospaceSymbol(symbol: "clear.fill")
                     }
                     .buttonStyle(LargeSquareAccentButton())
                     .help("Reset coin flips")
@@ -153,25 +141,26 @@ struct CoinMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
-                .padding(.bottom, 10)
+                .frame(width: geometry.size.width * 0.8)
             }
-            .onAppear { prepareHaptics(engine: &engine) }
-            .navigationTitle("Coins")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        showingExplainer = true
-                    }) {
-                        Image(systemName: "info.circle")
-                            .foregroundColor(.accentColor)
-                    }
+        }
+        .padding(.bottom, 10)
+        .onAppear { prepareHaptics(engine: &engine) }
+        .navigationTitle("Coins")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: {
+                    showingExplainer = true
+                }) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.accentColor)
                 }
             }
-            .alert("Coin Mode", isPresented: $showingExplainer, actions: {}, message: {
-                CoinExplainer()
-            })
         }
+        .alert("Coin Mode", isPresented: $showingExplainer, actions: {}, message: {
+            CoinExplainer()
+        })
     }
 }
 
