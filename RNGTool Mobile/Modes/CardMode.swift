@@ -18,7 +18,7 @@ struct CardMode: View {
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
     @State private var showingExplainer: Bool = false
-    @State private var cardImages: [String] = Array(repeating: "joker", count: 7)
+    @State private var cardImages: [String] = Array(repeating: "ace-spades", count: 7)
     @State private var deck: [String] = []
     @State private var handString: String = ""
     @State private var showDrawHint: Bool = true
@@ -28,7 +28,7 @@ struct CardMode: View {
     func clearVars() {
         drawTask?.cancel()
         drawTask = nil
-        cardImages = Array(repeating: "joker", count: 7)
+        cardImages = Array(repeating: "ace-spades", count: 7)
         confirmReset = false
     }
     

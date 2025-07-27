@@ -12,7 +12,6 @@ struct HistoryRow: View {
     var modeUsed: String
     var result: String
     var index: Int
-    var geometry: GeometryProxy
     
     // The contraints in here are my personal hell but it makes a really nice pseudo-table so I guess they're here to stay.
     // Seriously though it kills me that I need to recreate the look of a table from scratch here, because tables in SwiftUI will only
@@ -51,39 +50,36 @@ struct History: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                VStack(spacing: 0) {
-                    HStack {
-                        VStack {
-                            Text("Mode Used")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.secondary)
-                            Divider()
-                        }
-                        VStack {
-                            Text("Result(s)")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(.secondary)
-                            Divider()
-                        }
+        ScrollView {
+            VStack(spacing: 0) {
+                HStack {
+                    VStack {
+                        Text("Mode Used")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.secondary)
+                        Divider()
                     }
-                    .padding(.horizontal, 6)
-                    if(settingsData.historyTable.count == 0) {
-                        Text("No history yet! Get generating!")
-                            .padding(.top, 10)
+                    VStack {
+                        Text("Result(s)")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.secondary)
+                        Divider()
                     }
-                    // Actual entries are shown here
-                    ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                        HistoryRow(modeUsed: settingsData.historyTable[index].modeUsed,
-                                   result: settingsData.historyTable[index].numbers,
-                                   index: index, geometry: geometry)
-                        .frame(maxWidth: geometry.size.width - 6)
-                    }
+                }
+                .padding(.horizontal, 3)
+                if(settingsData.historyTable.count == 0) {
+                    Text("No history yet! Get generating!")
+                        .padding(.top, 10)
+                }
+                // Actual entries are shown here
+                ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                    HistoryRow(modeUsed: settingsData.historyTable[index].modeUsed,
+                               result: settingsData.historyTable[index].numbers,
+                               index: index)
                 }
             }
         }
-        .padding(.horizontal, 3)
+        .padding(.horizontal, 6)
         .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

@@ -14,7 +14,7 @@ struct DiceMode: View {
     @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
     @State private var randomNumbers: [Int] = [0]
-    @State private var diceImages: [String] = Array(repeating: "d1", count: 2)
+    @State private var diceImages: [String] = Array(repeating: "d1", count: 3)
     @State private var rollCount: Int = 0
     @State private var showRollHint: Bool = true
     @State private var rollTask: Task<Void, Never>? = nil
@@ -23,7 +23,7 @@ struct DiceMode: View {
         rollTask?.cancel()
         rollTask = nil
         numDice = 1
-        diceImages = Array(repeating: "d1", count: 2)
+        diceImages = Array(repeating: "d1", count: 3)
         confirmReset = false
     }
     
@@ -71,7 +71,7 @@ struct DiceMode: View {
                         ForEach(0..<numDice, id: \.self) { index in
                           Image(diceImages[index])
                             .resizable()
-                            .frame(width: (geometry.size.width / 2.5) - 10, height: (geometry.size.width / 2.5) - 10)
+                            .frame(width: (geometry.size.width / 3) - 10, height: (geometry.size.width / 3) - 10)
                         }
                     }
                     .onTapGesture { startRoll() }
@@ -80,7 +80,7 @@ struct DiceMode: View {
                             .foregroundColor(.secondary)
                     }
                     Picker("Number of Dice", selection: $numDice){
-                        ForEach(1...2, id: \.self) { index in
+                        ForEach(1...3, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }

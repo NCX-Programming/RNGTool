@@ -15,7 +15,7 @@ struct CardMode: View {
     @State private var numCards: Int = 1
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
-    @State private var cardImages: [String] = Array(repeating: "joker", count: 3)
+    @State private var cardImages: [String] = Array(repeating: "ace-spades", count: 3)
     @State private var deck: [String] = []
     @State private var drawCount: Int = 0
     @State private var showDrawHint: Bool = true
@@ -28,7 +28,7 @@ struct CardMode: View {
         drawTask = nil
         numCards = 1
         cardsToDisplay = 1
-        cardImages = Array(repeating: "joker", count: 3)
+        cardImages = Array(repeating: "ace-spades", count: 3)
         confirmReset = false
     }
     
