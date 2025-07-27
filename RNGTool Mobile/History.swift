@@ -7,6 +7,40 @@
 
 import SwiftUI
 
+// View to handle each row in the history table, because the compiler didn't like it when this was inlined.
+struct HistoryRow: View {
+    var modeUsed: String
+    var result: String
+    var index: Int
+    var geometry: GeometryProxy
+    
+    // The contraints in here are my personal hell but it makes a really nice pseudo-table so I guess they're here to stay.
+    // Seriously though it kills me that I need to recreate the look of a table from scratch here, because tables in SwiftUI will only
+    // ever show the first column on iOS. What's even the point of a table if it can't have headers and can only show one column??
+    var body: some View {
+        HStack(alignment: .center) {
+            HStack() {
+                VStack {
+                    Text(modeUsed)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity)
+                VStack {
+                    Text(result)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .textSelection(.enabled)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .padding(.all, 6)
+        }
+        .background (
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.secondary.opacity(index % 2 == 0 ? 0.0 : 0.3))
+        )
+    }
+}
+
 struct History: View {
     @EnvironmentObject var settingsData: SettingsData
     @State private var confirmReset: Bool = false
@@ -19,36 +53,33 @@ struct History: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                HStack {
-                    VStack {
-                        Text("Mode Used")
-                            .foregroundColor(.secondary)
-                        Divider()
-                    }
-                    VStack {
-                        Text("Result(s)")
-                            .foregroundColor(.secondary)
-                        Divider()
-                    }
-                }
-                if(settingsData.historyTable.count == 0) {
-                    Text("No history yet! Get generating!")
-                }
-                // Actual entries are shown here
-                ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                    HStack(alignment: .center) {
+                VStack(spacing: 0) {
+                    HStack {
                         VStack {
-                            Text("\(settingsData.historyTable[index].modeUsed)")
-                                .multilineTextAlignment(.leading)
+                            Text("Mode Used")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.secondary)
+                            Divider()
                         }
-                        .frame(width: (geometry.size.width * 0.5) - 6)
                         VStack {
-                            Text("\(settingsData.historyTable[index].numbers)")
-                                .multilineTextAlignment(.leading)
+                            Text("Result(s)")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(.secondary)
+                            Divider()
                         }
-                        .frame(width: (geometry.size.width * 0.5) - 6)
                     }
-                    .padding(.bottom, 3)
+                    .padding(.horizontal, 6)
+                    if(settingsData.historyTable.count == 0) {
+                        Text("No history yet! Get generating!")
+                            .padding(.top, 10)
+                    }
+                    // Actual entries are shown here
+                    ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                        HistoryRow(modeUsed: settingsData.historyTable[index].modeUsed,
+                                   result: settingsData.historyTable[index].numbers,
+                                   index: index, geometry: geometry)
+                        .frame(maxWidth: geometry.size.width - 6)
+                    }
                 }
             }
         }

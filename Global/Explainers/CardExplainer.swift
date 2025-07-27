@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardExplainer: View {
     var body: some View {
-        Text("Draw some cards! Currently does not support suits, so unfortunately it isn't going to help you play poker on short notice when nobody brought a deck of cards. Suit support is coming soon, however!")
+        Text("Draw some cards! Simulates a full deck of 52 cards each hand, so you'll only ever gets hands that are possible to draw from a real deck of cards. Spontaneous game of \"go fish\", anyone? ...anyone?\n\nThe point values commonly assigned to each card can be displayed by enabling \"Show card point values\" in settings.")
     }
 }
 

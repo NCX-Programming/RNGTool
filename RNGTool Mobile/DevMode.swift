@@ -34,6 +34,17 @@ struct DevMode: View {
                     Text("Append")
                 }
             }
+            Section(footer: Text("This will add 5 sample card mode results to the history table.")) {
+                Button(action: {
+                    addHistoryEntry(settingsData: settingsData, results: "6♣️, Q♣️, 2♦️, 8♥️, 7♠️, 4♣️, K♥️", mode: "Card Mode")
+                    addHistoryEntry(settingsData: settingsData, results: "10♦️, 5♥️, 4♥️, K♣️, J♦️, J♠️, 2♠️", mode: "Card Mode")
+                    addHistoryEntry(settingsData: settingsData, results: "10♣️, 2♦️, K♦️, Q♠️, 9♣️, 8♠️, 2♠️", mode: "Card Mode")
+                    addHistoryEntry(settingsData: settingsData, results: "5♥️, 5♦️, 10♣️, 10♠️, 5♠️, 4♦️, 6♦️", mode: "Card Mode")
+                    addHistoryEntry(settingsData: settingsData, results: "3♣️, 8♦️, K♣️, Q♣️, 2♦️, A♦️, K♥️", mode: "Card Mode")
+                }) {
+                    Text("Card Spam")
+                }
+            }
             Section(footer: Text("This will erase all entries in the table.")) {
                 Text("Entries: \(settingsData.historyTable.count)")
                 Button(action:{
