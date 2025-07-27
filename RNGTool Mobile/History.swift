@@ -17,32 +17,39 @@ struct History: View {
     }
     
     var body: some View {
-        ScrollView {
-            HStack {
-                VStack {
-                    Text("Mode Used")
-                        .foregroundColor(.secondary)
-                    Divider()
-                    ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                        Text("\(settingsData.historyTable[index].modeUsed)")
-                            .padding(.bottom, 3)
+        GeometryReader { geometry in
+            ScrollView {
+                HStack {
+                    VStack {
+                        Text("Mode Used")
+                            .foregroundColor(.secondary)
+                        Divider()
                     }
-                    Spacer()
-                }
-                VStack {
-                    Text("Result(s)")
-                        .foregroundColor(.secondary)
-                    Divider()
-                    ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
-                        Text("\(settingsData.historyTable[index].numbers)")
-                            .padding(.bottom, 3)
-                            .textSelection(.enabled)
+                    VStack {
+                        Text("Result(s)")
+                            .foregroundColor(.secondary)
+                        Divider()
                     }
-                    Spacer()
                 }
-            }
-            if(settingsData.historyTable.count == 0) {
-                Text("No history yet! Get generating!")
+                if(settingsData.historyTable.count == 0) {
+                    Text("No history yet! Get generating!")
+                }
+                // Actual entries are shown here
+                ForEach(0..<settingsData.historyTable.count, id: \.self) { index in
+                    HStack(alignment: .center) {
+                        VStack {
+                            Text("\(settingsData.historyTable[index].modeUsed)")
+                                .multilineTextAlignment(.leading)
+                        }
+                        .frame(width: (geometry.size.width * 0.5) - 6)
+                        VStack {
+                            Text("\(settingsData.historyTable[index].numbers)")
+                                .multilineTextAlignment(.leading)
+                        }
+                        .frame(width: (geometry.size.width * 0.5) - 6)
+                    }
+                    .padding(.bottom, 3)
+                }
             }
         }
         .padding(.horizontal, 3)

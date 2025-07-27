@@ -38,6 +38,7 @@ struct NumberMode: View {
                         withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)){
                             self.showHint = false
                         }
+                        if (maxNumber <= minNumber) { minNumber = maxNumber - 1 }
                         randomNumber = Int.random(in: minNumber...maxNumber)
                     }
                 if(showHint && settingsData.showModeHints) {

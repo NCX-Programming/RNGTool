@@ -11,12 +11,12 @@ import WatchKit
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var randomNumbers: [Int] = [0]
     @State private var showCards: Bool = false
     @State private var numCards: Int = 1
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
-    @State private var cardImages: [String] = Array(repeating: "c1", count: 3)
+    @State private var cardImages: [String] = Array(repeating: "joker", count: 3)
+    @State private var deck: [String] = []
     @State private var drawCount: Int = 0
     @State private var showDrawHint: Bool = true
     @State private var timer: Timer?
@@ -28,23 +28,18 @@ struct CardMode: View {
         drawTask = nil
         numCards = 1
         cardsToDisplay = 1
-        cardImages = Array(repeating: "c1", count: 3)
+        cardImages = Array(repeating: "joker", count: 3)
         confirmReset = false
     }
     
-    func getCards() {
-        for n in 0..<numCards{
-            switch randomNumbers[n]{
-            case 1:
-                cardImages[n] = "cA"
-            case 11:
-                cardImages[n] = "cJ"
-            case 12:
-                cardImages[n] = "cQ"
-            case 13:
-                cardImages[n] = "cK"
-            default:
-                cardImages[n] = "c\(randomNumbers[n])"
+    func buildDeck() {
+        deck.removeAll()
+        for suit in ["spades", "clubs", "diamonds", "hearts"] {
+            for i in 2...10 {
+                deck.append("\(i)-\(suit)")
+            }
+            for faceCard in ["ace", "jack", "queen", "king"] {
+                deck.append("\(faceCard)-\(suit)")
             }
         }
     }
@@ -55,9 +50,11 @@ struct CardMode: View {
             withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                 self.showDrawHint = false
             }
-            randomNumbers = (0..<numCards).map { _ in Int.random(in: 1...13) }
+            buildDeck()
+            for i in 0..<numCards {
+                cardImages[i] = deck.remove(at: Int.random(in: 0..<deck.count))
+            }
             cardsToDisplay = 1
-            self.getCards()
             if settingsData.playAnimations && !reduceMotion {
                 for _ in 0..<numCards {
                     if Task.isCancelled { return }

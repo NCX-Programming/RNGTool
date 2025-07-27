@@ -10,14 +10,15 @@ import SwiftUI
 struct CardMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var randomNumbers: [Int] = [0]
     @State private var pointValueStr: String = ""
     @State private var pointValues: [Int] = [0]
     @State private var numCards: Int = 1
     @State private var cardsToDisplay: Int = 1
     @State private var confirmReset: Bool = false
     @State private var showingExplainer: Bool = false
-    @State private var cardImages: [String] = Array(repeating: "c1", count: 12)
+    @State private var cardImages: [String] = Array(repeating: "joker", count: 12)
+    @State private var deck: [String] = []
+    @State private var handString: String = ""
     @State private var showDrawHint: Bool = true
     @State private var drawCount: Int = 0
     @State private var drawTask: Task<Void, Never>? = nil
@@ -25,7 +26,7 @@ struct CardMode: View {
     func clearVars() {
         drawTask?.cancel()
         drawTask = nil
-        cardImages = Array(repeating: "c1", count: 12)
+        cardImages = Array(repeating: "joker", count: 12)
         confirmReset = false
     }
     
@@ -47,19 +48,14 @@ struct CardMode: View {
         }
     }
     
-    func getCards() {
-        for n in 0..<numCards {
-            switch randomNumbers[n] {
-                case 1:
-                    cardImages[n]="cA"
-                case 11:
-                    cardImages[n]="cJ"
-                case 12:
-                    cardImages[n]="cQ"
-                case 13:
-                    cardImages[n]="cK"
-                default:
-                    cardImages[n]="c\(randomNumbers[n])"
+    func buildDeck() {
+        deck.removeAll()
+        for suit in ["spades", "clubs", "diamonds", "hearts"] {
+            for i in 2...10 {
+                deck.append("\(i)-\(suit)")
+            }
+            for faceCard in ["ace", "jack", "queen", "king"] {
+                deck.append("\(faceCard)-\(suit)")
             }
         }
     }
@@ -72,28 +68,22 @@ struct CardMode: View {
             withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) {
                 self.showDrawHint = false
             }
-            randomNumbers = (1...12).map { _ in Int.random(in: 1...13) }
-            if(settingsData.showPoints) {
-                pointValues.removeAll()
-                for n in 0..<numCards {
-                    if (randomNumbers[n] == 1) {
-                        pointValues.append(settingsData.aceValue)
-                    }
-                    else if (randomNumbers[n] > 1 && randomNumbers[n] < 11) {
-                        pointValues.append(randomNumbers[n])
-                    }
-                    else {
-                        pointValues.append(10)
-                    }
+            buildDeck()
+            pointValues.removeAll()
+            for i in 0..<numCards {
+                cardImages[i] = deck.remove(at: Int.random(in: 0..<deck.count))
+                let cardDrawn = cardImages[i].split(separator: "-")[0]
+                if cardDrawn == "ace" {
+                    pointValues.append(settingsData.aceValue)
+                } else if Int(cardDrawn) != nil {
+                    pointValues.append(Int(cardDrawn)!)
+                } else {
+                    pointValues.append(10)
                 }
-                self.pointValueStr = "Point value(s): \(pointValues)"
-                pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
             }
-            else {
-                self.pointValueStr = ""
-            }
+            self.pointValueStr = "Point value(s): \(pointValues)"
+            pointValueStr.removeAll(where: { removeCharacters.contains($0) } )
             cardsToDisplay = 1
-            self.getCards()
             if settingsData.playAnimations && !reduceMotion {
                 for _ in 0..<numCards {
                     if Task.isCancelled { return }
@@ -107,7 +97,37 @@ struct CardMode: View {
             } else {
                 cardsToDisplay = numCards
             }
-            addHistoryEntry(settingsData: settingsData, results: "\(randomNumbers)", mode: "Card Mode")
+            handString = ""
+            for i in 0..<numCards {
+                let cardValue = cardImages[i].split(separator: "-")[0]
+                let cardSuit = cardImages[i].split(separator: "-")[1]
+                switch cardValue {
+                    case "ace":
+                        handString += "A"
+                    case "jack":
+                        handString += "J"
+                    case "queen":
+                        handString += "Q"
+                    case "king":
+                        handString += "K"
+                    default:
+                        handString += cardValue
+                }
+                switch cardSuit {
+                    case "spades":
+                        handString += "♠️, "
+                    case "clubs":
+                        handString += "♣️, "
+                    case "diamonds":
+                        handString += "♦️, "
+                    case "hearts":
+                        handString += "♥️, "
+                    default:
+                        continue
+                }
+            }
+            handString.removeLast(2)
+            addHistoryEntry(settingsData: settingsData, results: handString, mode: "Card Mode")
             drawTask = nil
         }
     }
@@ -127,23 +147,25 @@ struct CardMode: View {
                     }
                     .contextMenu {
                         Button(action: {
-                            copyToClipboard(item: "\(randomNumbers)")
+                            copyToClipboard(item: handString)
                         }) {
                             Label("Copy", systemImage: "doc.on.doc")
                         }
                     }
                     .onTapGesture { drawCards() }
                     .padding(.trailing, CGFloat((geometry.size.width * 0.065) * CGFloat((cardsToDisplay - 1))))
-                    Text(pointValueStr)
-                        .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
-                        .apply {
-                            if #available(macOS 13.0, *) {
-                                $0.contentTransition(.numericText())
+                    if settingsData.showPoints {
+                        Text(pointValueStr)
+                            .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
+                            .apply {
+                                if #available(macOS 13.0, *) {
+                                    $0.contentTransition(.numericText())
+                                }
+                                else {
+                                    $0.animation(reduceMotion ? .none : .easeInOut(duration: 0.25), value: pointValueStr)
+                                }
                             }
-                            else {
-                                $0.animation(reduceMotion ? .none : .easeInOut(duration: 0.25), value: pointValueStr)
-                            }
-                        }
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 VStack(spacing: 10) {

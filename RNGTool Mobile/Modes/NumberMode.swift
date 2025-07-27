@@ -101,7 +101,7 @@ struct NumberMode: View {
                         Text("Are you sure you want to reset the generator?")
                     })
                 }
-                .frame(width: geometry.size.width * 0.8)
+                .frame(width: geometry.size.width * 0.85)
             }
         }
         .padding(.bottom, 10)

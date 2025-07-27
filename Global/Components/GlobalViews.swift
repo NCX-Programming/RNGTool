@@ -25,6 +25,24 @@ struct LargeSquareAccentButton: ButtonStyle {
                 #if os(tvOS)
                 .foregroundColor(isFocused ? .black : .white)
                 .background(isFocused ? Color.white.gradient : Color.accentColor.gradient)
+                #elseif os(macOS)
+                .apply {
+                    if #available(macOS 13.0, *) {
+                        if isEnabled {
+                            $0.background(Color.accentColor.gradient)
+                        } else {
+                            $0.background(Color.gray.gradient)
+                        }
+                    }
+                    else {
+                        if isEnabled {
+                            $0.background(Color.accentColor)
+                            
+                        } else {
+                            $0.background(Color.gray)
+                        }
+                    }
+                }
                 #else
                 // Apply a tasteful gradient, but unfortunately only on iOS 16.0+/macOS 13.0+/watchOS 9.0+ (sorry).
                 .apply {
@@ -38,7 +56,7 @@ struct LargeSquareAccentButton: ButtonStyle {
                 #endif
         }
         .cornerRadius(10)
-        .opacity(opacity)
+        .opacity(opacity(configuration))
         .scaleEffect(scale(configuration))
         .shadow(color: shadowColor, radius: 20)
         .animation(.easeInOut(duration: 0.2), value: isFocused)
@@ -48,9 +66,18 @@ struct LargeSquareAccentButton: ButtonStyle {
     }
     
     // This creates a custom disabled effect for the buttons on macOS only.
-    private var opacity: Double {
+    private func opacity(_ configuration: Configuration) -> Double {
         #if os(macOS)
-        return isEnabled ? 1.0 : 0.5
+        if !isEnabled {
+            return 0.5
+        } else if configuration.isPressed {
+            return 0.7
+        } else {
+            return 1.0
+        }
+        //return isEnabled ? 1.0 : 0.5
+        #elseif os(iOS)
+        return configuration.isPressed ? 0.7 : 1.0
         #else
         return 1.0
         #endif
