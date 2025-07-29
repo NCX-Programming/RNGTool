@@ -57,26 +57,14 @@ struct NumberMode: View {
                             else { randomNumber = Int.random(in: minNumber...maxNumber) }
                             addHistoryEntry(settingsData: settingsData, results: "\(randomNumber)", mode: "Number Mode")
                         }) {
-                            Image(systemName: "circle")
-                                .opacity(0)
-                                .padding(.horizontal)
-                                .padding(.vertical, 20)
-                                .overlay {
-                                    Image(systemName: "play.fill")
-                                }
+                            MonospaceSymbol(symbol: "play.fill")
                         }
                         .buttonStyle(LargeSquareAccentButton())
                         .help("Generate a number")
                         Button(action:{
                             if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                         }) {
-                            Image(systemName: "circle")
-                                .opacity(0)
-                                .padding(.horizontal)
-                                .padding(.vertical, 20)
-                                .overlay {
-                                    Image(systemName: "clear.fill")
-                                }
+                            MonospaceSymbol(symbol: "clear.fill")
                         }
                         .buttonStyle(LargeSquareAccentButton())
                         .help("Reset custom values and output")

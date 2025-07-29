@@ -1,28 +1,31 @@
 //
-//  DiceMode.swift
-//  RNGTool TV
+//  AdvDiceMode.swift
+//  RNGTool Mobile
 //
-//  Created by Campbell on 7/19/25.
+//  Created by Campbell on 7/29/25.
 //
 
 import SwiftUI
+import CoreHaptics
 
-struct DiceMode: View {
+struct AdvDiceMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+    @State private var engine: CHHapticEngine?
     @State private var numDice: Int = 1
     @State private var confirmReset: Bool = false
-    @State private var showingExplainer: Bool = false
     @State private var randomNumbers: [Int] = [0]
-    @State private var diceImages: [String] = Array(repeating: "d1", count: 18)
+    @State private var diceImages: [String] = Array(repeating: "d1", count: 12)
     @State private var rollCount: Int = 0
+    @State private var showRollHint: Bool = true
+    @State private var showingExplainer: Bool = false
     @State private var rollTask: Task<Void, Never>? = nil
     
     func resetGen() {
         rollTask?.cancel()
         rollTask = nil
         numDice = 1
-        diceImages = Array(repeating: "d1", count: 18)
+        diceImages = Array(repeating: "d1", count: 12)
         confirmReset = false
     }
     
@@ -30,7 +33,7 @@ struct DiceMode: View {
     // corresponds with the number rolled for it.
     func roll() {
         randomNumbers = (1...numDice).map { _ in Int.random(in: 1...6) }
-        for n in 0..<randomNumbers.count {
+        for n in 0..<randomNumbers.count{
             if(numDice > n) { diceImages[n] = "d\(randomNumbers[n])" }
         }
     }
@@ -42,12 +45,17 @@ struct DiceMode: View {
         // disabled during the roll, but it's here anyway.
         guard rollTask == nil else { return }
         rollTask = Task {
+            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
+            await MainActor.run {
+                withAnimation(reduceMotion ? .none : .easeInOut(duration: 0.5)) { self.showRollHint = false }
+            }
             if settingsData.playAnimations && !reduceMotion {
                 for _ in 0..<10 {
                     if Task.isCancelled { return }
                     await MainActor.run {
                         self.roll()
                     }
+                    playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                     try? await Task.sleep(nanoseconds: 100_000_000) // Why does this have to be nanoseconds? It's 0.1s.
                 }
                 await MainActor.run {
@@ -69,57 +77,76 @@ struct DiceMode: View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 VStack() {
-                    // Draw the dice in a 6x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
+                    // Draw the dice in a 3x3 grid by creating a row for each multiple of 3 dice, and then only drawing dice intended
                     // for that row in it.
-                    ForEach(getItemGrid(numItems: numDice, numCols: 6), id: \.self) { row in
+                    ForEach(getItemGrid(numItems: numDice, numCols: 3), id: \.self) { row in
                         HStack() {
                             ForEach(row, id: \.self) { index in
                                 Image(diceImages[index])
                                     .resizable()
-                                    .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
+                                    .frame(width: getDieSize(geometry: geometry), height: getDieSize(geometry: geometry))
                             }
                         }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contextMenu {
+                    Button(action: {
+                        copyToClipboard(item: "\(randomNumbers)")
+                    }) {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                }
+                // Tapping and shaking trigger the same code, but the shake gesture should only trigger a roll if motion input is
+                // currently enabled.
+                .onTapGesture { startRoll() }
+                .onShake { if(settingsData.useMotionInput) { startRoll() } }
                 VStack(spacing: 10) {
-                    Picker("Number of Dice:", selection: $numDice){
-                        ForEach(1...18, id: \.self) { index in
+                    if (showRollHint && settingsData.showModeHints) {
+                        Text("Tap the die to roll")
+                            .font(.title3)
+                            .foregroundColor(.secondary)
+                    }
+                    Text("Number of Dice")
+                    Picker("Number of Dice", selection: $numDice){
+                        ForEach(1...12, id: \.self) { index in
                             Text("\(index)").tag(index)
                         }
                     }
+                    .pickerStyle(.segmented)
                     .frame(maxWidth: .infinity)
                     .disabled(rollTask != nil)
-                    HStack() {
-                        Button(action:{
-                            startRoll()
-                        }) {
-                            MonospaceSymbol(symbol: "play.fill")
-                        }
-                        .help("Roll the dice")
-                        .buttonStyle(LargeSquareAccentButton())
-                        .disabled(rollTask != nil)
-                        Button(action:{
-                            if (settingsData.confirmGenResets) { confirmReset = true }
-                            else { resetGen() }
-                        }) {
-                            MonospaceSymbol(symbol: "clear.fill")
-                        }
-                        .help("Reset the dice roll")
-                        .buttonStyle(LargeSquareAccentButton())
-                        .alert("Confirm Reset", isPresented: $confirmReset, actions: {
-                            Button("Confirm", role: .destructive) {
-                                resetGen()
-                            }
-                        }, message: {
-                            Text("Are you sure you want to reset the generator?")
-                        })
+                    Button(action:{
+                        startRoll()
+                    }) {
+                        MonospaceSymbol(symbol: "play.fill")
                     }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Roll the dice")
+                    .disabled(rollTask != nil)
+                    Button(action:{
+                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
+                        if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
+                    }) {
+                        MonospaceSymbol(symbol: "clear.fill")
+                    }
+                    .buttonStyle(LargeSquareAccentButton())
+                    .help("Reset dice count and roll")
+                    .alert("Confirm Reset", isPresented: $confirmReset, actions: {
+                        Button("Confirm", role: .destructive) {
+                            resetGen()
+                        }
+                    }, message: {
+                        Text("Are you sure you want to reset the generator?")
+                    })
                 }
-                .frame(width: geometry.size.width * 0.8)
+                .frame(width: geometry.size.width * 0.85)
             }
         }
+        .padding(.bottom, 10)
+        .onAppear { prepareHaptics(engine: &engine) }
         .navigationTitle("Dice")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {
@@ -137,5 +164,5 @@ struct DiceMode: View {
 }
 
 #Preview {
-    DiceMode().environmentObject(SettingsData())
+    AdvDiceMode()
 }

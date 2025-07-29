@@ -27,7 +27,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Modes")) {
+                // All of RNGTool's basic modes.
+                Section(header: Text("Basic Modes")) {
                     NavigationLink(destination: NumberMode()) {
                         Image(systemName: "number")
                             .foregroundColor(.accentColor)
@@ -54,7 +55,22 @@ struct ContentView: View {
                         Text("Marbles")
                     }
                 }
-                
+                // All of RNGTool's advanced modes.
+                Section(header: Text("Advanded Modes")) {
+                    if settingsData.featureUnlock {
+                        NavigationLink(destination: AdvDiceMode()) {
+                            Image(systemName: "dice")
+                                .foregroundColor(.accentColor)
+                            Text("Dice+")
+                        }
+                    }
+                    NavigationLink(destination: AdvCardMode()) {
+                        Image(systemName: "rectangle.grid.3x2")
+                            .foregroundColor(.accentColor)
+                        Text("Cards+")
+                    }
+                }
+                // Other stuff, basically just history and dev mode.
                 Section(header: Text("More")) {
                     NavigationLink(destination: History()) {
                         Image(systemName: "clock.arrow.circlepath")

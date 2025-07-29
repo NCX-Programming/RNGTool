@@ -125,6 +125,7 @@
 		370483432E35838100A5F2C4 /* Settings */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3704835A2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3704835B2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3704835C2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Settings; sourceTree = "<group>"; };
 		370483622E35839000A5F2C4 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
 		370483692E35839300A5F2C4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
+		371023492E38772A0023EB6C /* Advanced Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Advanced Modes"; sourceTree = "<group>"; };
 		37515D3D2E2A0A3300C9D13B /* RNGTool TV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "RNGTool TV"; sourceTree = "<group>"; };
 		37746AFF2E24B91100394548 /* Explainers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Explainers; sourceTree = "<group>"; };
 		37E20E102E2F2BF200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		3725BF7827697DC900A1B4E8 /* RNGTool Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				371023492E38772A0023EB6C /* Advanced Modes */,
 				37E20E192E2F2BF800E8C2A7 /* Components */,
 				37E20E102E2F2BF200E8C2A7 /* Modes */,
 				37688CDC27713837003B64CB /* About.swift */,
@@ -326,6 +328,7 @@
 			fileSystemSynchronizedGroups = (
 				370483372E35837E00A5F2C4 /* Components */,
 				370483432E35838100A5F2C4 /* Settings */,
+				371023492E38772A0023EB6C /* Advanced Modes */,
 				37746AFF2E24B91100394548 /* Explainers */,
 				37E20E102E2F2BF200E8C2A7 /* Modes */,
 				37E20E192E2F2BF800E8C2A7 /* Components */,
@@ -541,7 +544,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 207;
+				CURRENT_PROJECT_VERSION = 208;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -555,7 +558,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -574,7 +577,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 207;
+				CURRENT_PROJECT_VERSION = 208;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
@@ -588,7 +591,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -606,7 +609,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -627,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -649,7 +652,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -670,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = RNGTool;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -706,7 +709,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -741,7 +744,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -884,7 +887,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -899,7 +902,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;
@@ -921,7 +924,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -936,7 +939,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ncxprogramming.RNGTool.watchextension;
 				PRODUCT_NAME = RNGTool;
 				SDKROOT = watchos;

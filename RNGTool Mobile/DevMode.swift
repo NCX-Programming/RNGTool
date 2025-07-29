@@ -85,6 +85,9 @@ struct DevMode: View {
                 TextField("Enter a number", value: $coinTailsCount, format: .number)
                 .keyboardType(.numberPad)
             }
+            Section(header: Text("Enable Feature Unlock"), footer: Text("Enables access to untested and potentially entirely broken features.")) {
+                Toggle("Feature Unlock", isOn: $settingsData.featureUnlock)
+            }
         }
         .padding(.horizontal, 3)
         .navigationTitle("Developer Mode")

@@ -26,6 +26,7 @@ class SettingsData : ObservableObject {
     @AppStorage("saveModeStates") var saveModeStates: Bool = true
     @AppStorage("checkUpdatesOnStartup") var checkUpdatesOnStartup: Bool = true // macOS-only key
     @AppStorage("showDevMode") var showDevMode: Bool = false
+    @AppStorage("featureUnlock") var featureUnlock: Bool = false
     // Number Settings
     @AppStorage("maxNumberDefault") var maxNumberDefault: Int = 100
     @AppStorage("minNumberDefault") var minNumberDefault: Int = 0
