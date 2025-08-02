@@ -123,9 +123,10 @@
 		371023492E38772A0023EB6C /* Advanced Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Advanced Modes"; sourceTree = "<group>"; };
 		37515D3D2E2A0A3300C9D13B /* RNGTool TV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "RNGTool TV"; sourceTree = "<group>"; };
 		379EBF8E2E3DA49100899970 /* Global */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (379EBFC72E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 379EBFC82E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 379EBFC92E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Global; sourceTree = "<group>"; };
-		37E20E102E2F2BF200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
+		37D7E6552E3E9B930057A24F /* Advanced Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Advanced Modes"; sourceTree = "<group>"; };
+		37E20E102E2F2BF200E8C2A7 /* Basic Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Basic Modes"; sourceTree = "<group>"; };
 		37E20E192E2F2BF800E8C2A7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		37E20E222E2F3B9200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
+		37E20E222E2F3B9200E8C2A7 /* Basic Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Basic Modes"; sourceTree = "<group>"; };
 		37E20E292E2F3B9600E8C2A7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -164,8 +165,9 @@
 		3700F27E26DD256D001BEE7A /* RNGTool */ = {
 			isa = PBXGroup;
 			children = (
+				37D7E6552E3E9B930057A24F /* Advanced Modes */,
 				37E20E292E2F3B9600E8C2A7 /* Components */,
-				37E20E222E2F3B9200E8C2A7 /* Modes */,
+				37E20E222E2F3B9200E8C2A7 /* Basic Modes */,
 				3700F28126DD256D001BEE7A /* ContentView.swift */,
 				371A2FF02777A7A500B94F66 /* History.swift */,
 				37DB700026FC01EE0079F3E7 /* SettingsView.swift */,
@@ -191,7 +193,7 @@
 			children = (
 				371023492E38772A0023EB6C /* Advanced Modes */,
 				37E20E192E2F2BF800E8C2A7 /* Components */,
-				37E20E102E2F2BF200E8C2A7 /* Modes */,
+				37E20E102E2F2BF200E8C2A7 /* Basic Modes */,
 				37688CDC27713837003B64CB /* About.swift */,
 				3725BF7B27697DC900A1B4E8 /* ContentView.swift */,
 				37A8B4D5278A8EF600A4D08F /* DevMode.swift */,
@@ -283,7 +285,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				379EBF8E2E3DA49100899970 /* Global */,
-				37E20E222E2F3B9200E8C2A7 /* Modes */,
+				37D7E6552E3E9B930057A24F /* Advanced Modes */,
+				37E20E222E2F3B9200E8C2A7 /* Basic Modes */,
 				37E20E292E2F3B9600E8C2A7 /* Components */,
 			);
 			name = RNGTool;
@@ -308,7 +311,7 @@
 			fileSystemSynchronizedGroups = (
 				371023492E38772A0023EB6C /* Advanced Modes */,
 				379EBF8E2E3DA49100899970 /* Global */,
-				37E20E102E2F2BF200E8C2A7 /* Modes */,
+				37E20E102E2F2BF200E8C2A7 /* Basic Modes */,
 				37E20E192E2F2BF800E8C2A7 /* Components */,
 			);
 			name = "RNGTool Mobile";
@@ -574,7 +577,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -617,7 +620,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;

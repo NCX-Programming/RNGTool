@@ -1,19 +1,18 @@
 //
 //  DealerMode.swift
-//  RNGTool Mobile
+//  RNGTool
 //
-//  Created by Campbell on 8/1/25.
+//  Created by Campbell on 8/2/25.
 //
 
 import SwiftUI
-import CoreHaptics
 
 struct DealerHand: View {
     let handIndex: Int
     let hand: [String]
     let geometry: GeometryProxy
-    let engine: CHHapticEngine?
     let drawCard: (Int) -> Void
+    let deleteHand: (Int) -> Void
     let drawDisabled: Bool
     
     var body: some View {
@@ -21,35 +20,39 @@ struct DealerHand: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text("Hand \(handIndex)")
-                        .frame(maxWidth: .infinity, alignment: .leading)
                     Text("\(hand.count)/12")
-                        .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(.secondary)
+                    Button(action: {
+                        deleteHand(handIndex - 1)
+                    }) {
+                        Image(systemName: "trash")
+                    }
+                    .buttonStyle(.borderless)
+                    Spacer()
+                        .frame(maxWidth: .infinity)
                 }
                 ZStack {
                     ForEach(0..<hand.count, id: \.self) { index in
                         Image(hand[index]).resizable()
-                            .frame(width: 68, height: 95)
+                            .frame(width: 90, height: 126)
                             .offset(x: CGFloat(20 * index), y: 0)
                     }
                     if hand.isEmpty {
                         Text("No Cards")
                             .foregroundStyle(.secondary)
-                            .frame(height: 95)
+                            .frame(height: 126)
                     }
                 }
             }
             Button(action: {
-                playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                 drawCard(handIndex - 1)
             }) {
                 MonospaceSymbol(symbol: "plus")
                     .font(.title)
-                    //.frame(maxHeight: .infinity)
             }
-            //.buttonStyle(LargeSquareAccentButton())
+            .buttonStyle(.borderless)
+            .foregroundStyle(Color.accentColor)
             .disabled(drawDisabled)
-            //.frame(maxWidth: geometry.size.width * 0.15, maxHeight: geometry.size.width * 0.15)
         }
     }
 }
@@ -57,7 +60,6 @@ struct DealerHand: View {
 struct DealerMode: View {
     @EnvironmentObject var settingsData: SettingsData
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State private var engine: CHHapticEngine?
     @State private var numCards: Int = 2
     @State private var confirmReset: Bool = false
     @State private var showingExplainer: Bool = false
@@ -77,8 +79,8 @@ struct DealerMode: View {
         confirmReset = false
     }
     
-    func deleteHands(at offsets: IndexSet) {
-        hands.remove(atOffsets: offsets)
+    func deleteHand(index: Int) {
+        hands.remove(at: index)
     }
     
     func buildDeck() {
@@ -128,9 +130,10 @@ struct DealerMode: View {
                     }) {
                         Text("New Hand")
                     }
+                    Text("\(deck.count) Cards Remaining")
+                        .foregroundStyle(.secondary)
                     Spacer()
                         .frame(maxWidth: .infinity)
-                    EditButton()
                 }
                 .padding(.all, 8)
                 .padding(.horizontal, 4)
@@ -140,29 +143,23 @@ struct DealerMode: View {
                             handIndex: index + 1,
                             hand: hands[index],
                             geometry: geometry,
-                            engine: engine,
                             drawCard: drawCard,
+                            deleteHand: deleteHand,
                             drawDisabled: deck.count < 1)
                     }
-                    .onDelete(perform: deleteHands)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 VStack(spacing: 10) {
-                    Text("\(deck.count) Cards Remaining")
-                        .foregroundStyle(.secondary)
-                    Text("Hand Size")
-                    Picker("Hand Size", selection: $numCards){
+                    Picker("Hand Size:", selection: $numCards){
                         Text("2").tag(2)
                         Text("3").tag(3)
                         Text("5").tag(5)
                         Text("7").tag(7)
                     }
-                    .pickerStyle(.segmented)
                     .frame(maxWidth: .infinity)
                     .disabled(drawTask != nil)
                     HStack {
                         Button(action:{
-                            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                             drawCards()
                         }) {
                             MonospaceSymbol(symbol: "play.fill")
@@ -172,7 +169,6 @@ struct DealerMode: View {
                         .disabled(drawTask != nil)
                         .disabled(numCards * hands.count > 52)
                         Button(action:{
-                            playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.1)
                             for i in 0..<hands.count {
                                 drawCard(index: i)
                             }
@@ -183,10 +179,9 @@ struct DealerMode: View {
                         .help("Draw one card for all hands")
                         .disabled(drawTask != nil)
                         .disabled(hands.count > deck.count)
-                        .frame(maxWidth: geometry.size.width * 0.25)
+                        .frame(maxWidth: geometry.size.width * 0.1)
                     }
                     Button(action:{
-                        playHaptics(engine: engine, intensity: 1, sharpness: 0.75, count: 0.2)
                         if (settingsData.confirmGenResets) { confirmReset = true } else { resetGen() }
                     }) {
                         MonospaceSymbol(symbol: "clear.fill")
@@ -202,16 +197,12 @@ struct DealerMode: View {
                     })
                 }
                 .padding(.top, 10)
-                .frame(width: geometry.size.width * 0.85)
+                .frame(width: geometry.size.width * 0.4)
             }
         }
         .padding(.bottom, 10)
-        .onAppear {
-            prepareHaptics(engine: &engine)
-            buildDeck()
-        }
+        .onAppear { buildDeck() }
         .navigationTitle("Dealer")
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: {

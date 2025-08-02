@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List() {
-                Section(header: Text("Modes")) {
+                Section(header: Text("Basic Modes")) {
                     NavigationLink(destination: NumberMode()) {
                         Label("Numbers", systemImage: "number")
                             .tint(.accentColor)
@@ -39,6 +39,12 @@ struct ContentView: View {
                     }
                     NavigationLink(destination: MarbleMode()) {
                         Label("Marbles", systemImage: "a.circle")
+                            .tint(.accentColor)
+                    }
+                }
+                Section(header: Text("Advanced Modes")) {
+                    NavigationLink(destination: DealerMode()) {
+                        Label("Dealer", systemImage: "hand.wave")
                             .tint(.accentColor)
                     }
                 }
