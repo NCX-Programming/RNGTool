@@ -57,17 +57,22 @@ struct ContentView: View {
                 }
                 // All of RNGTool's advanced modes.
                 Section(header: Text("Advanded Modes")) {
-                    if settingsData.featureUnlock {
+                    if settingsData.showDevMode {
                         NavigationLink(destination: AdvDiceMode()) {
                             Image(systemName: "dice")
                                 .foregroundColor(.accentColor)
                             Text("Dice+")
                         }
+                        NavigationLink(destination: AdvCardMode()) {
+                            Image(systemName: "rectangle.grid.3x2")
+                                .foregroundColor(.accentColor)
+                            Text("Cards+")
+                        }
                     }
-                    NavigationLink(destination: AdvCardMode()) {
-                        Image(systemName: "rectangle.grid.3x2")
+                    NavigationLink(destination: DealerMode()) {
+                        Image(systemName: "hand.wave")
                             .foregroundColor(.accentColor)
-                        Text("Cards+")
+                        Text("Dealer")
                     }
                 }
                 // Other stuff, basically just history and dev mode.
@@ -77,7 +82,7 @@ struct ContentView: View {
                             .foregroundColor(.accentColor)
                         Text("History")
                     }
-                    if(settingsData.showDevMode) {
+                    if settingsData.showDevMode {
                         NavigationLink(destination: DevMode()) {
                             Image(systemName: "hammer")
                                 .foregroundColor(.accentColor)

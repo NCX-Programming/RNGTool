@@ -190,7 +190,7 @@ struct AdvCardMode: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 VStack(spacing: 10) {
-                    if settingsData.showPoints && settingsData.featureUnlock {
+                    if settingsData.showPoints {
                         Text(pointValueStr)
                             .animation(.linear, value: pointValueStr) // Enables the use of .contentTransition()
                             .apply {
@@ -285,8 +285,8 @@ struct AdvCardMode: View {
                 }
             }
         }
-        .alert("Card Mode", isPresented: $showingExplainer, actions: {}, message: {
-            CardExplainer()
+        .alert("Card+ Mode", isPresented: $showingExplainer, actions: {}, message: {
+            Text("Advanced version of card mode featuring a persistent deck! Can you tell that this is primarily filler text?")
         })
     }
 }

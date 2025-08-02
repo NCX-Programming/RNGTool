@@ -145,7 +145,7 @@ struct AdvDiceMode: View {
         }
         .padding(.bottom, 10)
         .onAppear { prepareHaptics(engine: &engine) }
-        .navigationTitle("Dice")
+        .navigationTitle("Dice+")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -157,12 +157,12 @@ struct AdvDiceMode: View {
                 }
             }
         }
-        .alert("Dice Mode", isPresented: $showingExplainer, actions: {}, message: {
-            DiceExplainer()
+        .alert("Dice+ Mode", isPresented: $showingExplainer, actions: {}, message: {
+            Text("Whoa, you found the super secret mode! Good on you.")
         })
     }
 }
 
 #Preview {
-    AdvDiceMode()
+    AdvDiceMode().environmentObject(SettingsData())
 }

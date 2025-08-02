@@ -7,37 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
 		3700F28226DD256D001BEE7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F28126DD256D001BEE7A /* ContentView.swift */; };
 		3700F28426DD2573001BEE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		3700F28726DD2573001BEE7A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28626DD2573001BEE7A /* Preview Assets.xcassets */; };
 		3707EC452788711200E48CFA /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3707EC442788711200E48CFA /* History.swift */; };
 		371A2FF12777A7A500B94F66 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A2FF02777A7A500B94F66 /* History.swift */; };
-		371F01672E2B487500B710EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		3725BF7C27697DC900A1B4E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725BF7B27697DC900A1B4E8 /* ContentView.swift */; };
 		3725BF8127697DCC00A1B4E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3725BF8027697DCC00A1B4E8 /* Preview Assets.xcassets */; };
-		3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
-		3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		37515D472E2A0A8D00C9D13B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
 		3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759793D27E568BF0013D365 /* UpdateCheck.swift */; };
 		375C2A0B2778055E00904A03 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 375C2A0A2778055E00904A03 /* Launch Screen.storyboard */; };
 		37688CDD27713837003B64CB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
 		376FEADF276980B700571A78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
-		376FEAE52769843500571A78 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		376FEAEF27698D1600571A78 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
 		3780887A2D76859F00C32D35 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376FEAEE27698D1600571A78 /* SettingsView.swift */; };
 		37A8B4D6278A8EF600A4D08F /* DevMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A8B4D5278A8EF600A4D08F /* DevMode.swift */; };
 		37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DB700026FC01EE0079F3E7 /* SettingsView.swift */; };
 		37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E2B7182D61347F007A91C5 /* ContentView.swift */; };
-		37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E97BA126DD7747000BF61B /* RNGToolCommands.swift */; };
 		37E9F43C28C0265E0098037D /* RNGToolWrist-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */; };
-		37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 		37F5720F27A8BA7F007D29FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */; };
 		37F5721327A8BA7F007D29FB /* RNGTool.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37F571F827A8BA7A007D29FB /* RNGTool.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37F5721D27A8BB7F007D29FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3700F28326DD2573001BEE7A /* Assets.xcassets */; };
-		37F5721E27A8C294007D29FB /* RNGToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3700F27F26DD256D001BEE7A /* RNGToolApp.swift */; };
 		37F5722727A8C3CD007D29FB /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37688CDC27713837003B64CB /* About.swift */; };
-		37F5722827A8C3E5007D29FB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2027274F3B5800FD62BD /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		3700F27D26DD256D001BEE7A /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3700F27F26DD256D001BEE7A /* RNGToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolApp.swift; sourceTree = "<group>"; };
 		3700F28126DD256D001BEE7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3700F28326DD2573001BEE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3700F28626DD2573001BEE7A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -88,46 +78,51 @@
 		37BF55BC280C949F002425B2 /* RNGTool-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "RNGTool-Mobile-Info.plist"; path = "../RNGTool-Mobile-Info.plist"; sourceTree = "<group>"; };
 		37DB700026FC01EE0079F3E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37E2B7182D61347F007A91C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		37E97BA126DD7747000BF61B /* RNGToolCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNGToolCommands.swift; sourceTree = "<group>"; };
 		37E9F43B28C0223C0098037D /* RNGToolWrist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RNGToolWrist-Info.plist"; sourceTree = "<group>"; };
-		37EF2027274F3B5800FD62BD /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		37F571F827A8BA7A007D29FB /* RNGTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNGTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F5720E27A8BA7F007D29FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37F5721027A8BA7F007D29FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		3704835A2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		379EBFC72E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				NumberSettings.swift,
+				Settings/NumberSettings.swift,
 			);
 			target = 3725BF7627697DC900A1B4E8 /* RNGTool Mobile */;
 		};
-		3704835B2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		379EBFC82E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				NumberSettings.swift,
+				RNGToolCommands.swift,
+				Settings/NumberSettings.swift,
 			);
 			target = 37F571F727A8BA7A007D29FB /* RNGToolWrist */;
 		};
-		3704835C2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		379EBFC92E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				SettingsData.swift,
+				"Advanced Explainers/DealerExplainer.swift",
+				"Basic Explainers/CardExplainer.swift",
+				"Basic Explainers/CoinExplainer.swift",
+				"Basic Explainers/DiceExplainer.swift",
+				"Basic Explainers/MarbleExplainer.swift",
+				"Basic Explainers/NumberExplainer.swift",
+				Components/GlobalViews.swift,
+				Settings/SettingsData.swift,
+				Utilities.swift,
 			);
 			target = 37515D3B2E2A0A3300C9D13B /* RNGTool TV */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		370483372E35837E00A5F2C4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
-		370483432E35838100A5F2C4 /* Settings */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3704835A2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3704835B2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 3704835C2E35838100A5F2C4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Settings; sourceTree = "<group>"; };
 		370483622E35839000A5F2C4 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
 		370483692E35839300A5F2C4 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		371023492E38772A0023EB6C /* Advanced Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Advanced Modes"; sourceTree = "<group>"; };
 		37515D3D2E2A0A3300C9D13B /* RNGTool TV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "RNGTool TV"; sourceTree = "<group>"; };
-		37746AFF2E24B91100394548 /* Explainers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Explainers; sourceTree = "<group>"; };
+		379EBF8E2E3DA49100899970 /* Global */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (379EBFC72E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 379EBFC82E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 379EBFC92E3DA49100899970 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Global; sourceTree = "<group>"; };
 		37E20E102E2F2BF200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
 		37E20E192E2F2BF800E8C2A7 /* Components */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Components; sourceTree = "<group>"; };
 		37E20E222E2F3B9200E8C2A7 /* Modes */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modes; sourceTree = "<group>"; };
@@ -221,7 +216,7 @@
 		3794432826D912B500900842 = {
 			isa = PBXGroup;
 			children = (
-				37BF55B9280C92A1002425B2 /* Global */,
+				379EBF8E2E3DA49100899970 /* Global */,
 				3700F27E26DD256D001BEE7A /* RNGTool */,
 				3725BF7827697DC900A1B4E8 /* RNGTool Mobile */,
 				37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */,
@@ -247,19 +242,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		37BF55B9280C92A1002425B2 /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				37746AFF2E24B91100394548 /* Explainers */,
-				370483372E35837E00A5F2C4 /* Components */,
-				370483432E35838100A5F2C4 /* Settings */,
-				3700F27F26DD256D001BEE7A /* RNGToolApp.swift */,
-				37E97BA126DD7747000BF61B /* RNGToolCommands.swift */,
-				37EF2027274F3B5800FD62BD /* Utilities.swift */,
-			);
-			path = Global;
 			sourceTree = "<group>";
 		};
 		37F5720427A8BA7D007D29FB /* RNGToolWrist WatchKit Extension */ = {
@@ -300,9 +282,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				370483372E35837E00A5F2C4 /* Components */,
-				370483432E35838100A5F2C4 /* Settings */,
-				37746AFF2E24B91100394548 /* Explainers */,
+				379EBF8E2E3DA49100899970 /* Global */,
 				37E20E222E2F3B9200E8C2A7 /* Modes */,
 				37E20E292E2F3B9600E8C2A7 /* Components */,
 			);
@@ -326,10 +306,8 @@
 				37F059182E1B3EEA00D5C47A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				370483372E35837E00A5F2C4 /* Components */,
-				370483432E35838100A5F2C4 /* Settings */,
 				371023492E38772A0023EB6C /* Advanced Modes */,
-				37746AFF2E24B91100394548 /* Explainers */,
+				379EBF8E2E3DA49100899970 /* Global */,
 				37E20E102E2F2BF200E8C2A7 /* Modes */,
 				37E20E192E2F2BF800E8C2A7 /* Components */,
 			);
@@ -351,9 +329,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				370483372E35837E00A5F2C4 /* Components */,
 				37515D3D2E2A0A3300C9D13B /* RNGTool TV */,
-				37746AFF2E24B91100394548 /* Explainers */,
 			);
 			name = "RNGTool TV";
 			packageProductDependencies = (
@@ -375,11 +351,9 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				370483372E35837E00A5F2C4 /* Components */,
-				370483432E35838100A5F2C4 /* Settings */,
 				370483622E35839000A5F2C4 /* Modes */,
 				370483692E35839300A5F2C4 /* Components */,
-				37746AFF2E24B91100394548 /* Explainers */,
+				379EBF8E2E3DA49100899970 /* Global */,
 			);
 			name = RNGToolWrist;
 			productName = RNGToolWrist;
@@ -479,10 +453,7 @@
 				371A2FF12777A7A500B94F66 /* History.swift in Sources */,
 				3700F28226DD256D001BEE7A /* ContentView.swift in Sources */,
 				37DB700126FC01EE0079F3E7 /* SettingsView.swift in Sources */,
-				37EF2028274F3B5800FD62BD /* Utilities.swift in Sources */,
 				3759793E27E568BF0013D365 /* UpdateCheck.swift in Sources */,
-				3700F28026DD256D001BEE7A /* RNGToolApp.swift in Sources */,
-				37E97BA226DD7747000BF61B /* RNGToolCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,9 +466,6 @@
 				37A8B4D6278A8EF600A4D08F /* DevMode.swift in Sources */,
 				3707EC452788711200E48CFA /* History.swift in Sources */,
 				37688CDD27713837003B64CB /* About.swift in Sources */,
-				3725BF8627697F1100A1B4E8 /* RNGToolCommands.swift in Sources */,
-				376FEAE52769843500571A78 /* Utilities.swift in Sources */,
-				3725BF8527697E9A00A1B4E8 /* RNGToolApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +473,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				371F01672E2B487500B710EE /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,8 +483,6 @@
 				3780887A2D76859F00C32D35 /* SettingsView.swift in Sources */,
 				37E2B7192D61347F007A91C5 /* ContentView.swift in Sources */,
 				37F5722727A8C3CD007D29FB /* About.swift in Sources */,
-				37F5722827A8C3E5007D29FB /* Utilities.swift in Sources */,
-				37F5721E27A8C294007D29FB /* RNGToolApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,7 +574,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -652,7 +617,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGTool Mobile/RNGTool Mobile.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"RNGTool Mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				ENABLE_PREVIEWS = YES;
@@ -887,7 +852,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
@@ -924,7 +889,7 @@
 				CODE_SIGN_ENTITLEMENTS = "RNGToolWrist WatchKit Extension/RNGToolWrist WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 95J8WZ4TN8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "RNGToolWrist-Info.plist";
